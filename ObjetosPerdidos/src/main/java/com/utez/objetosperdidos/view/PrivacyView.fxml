@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.utez.objetosperdidos.view.PrivacyController"
+            prefWidth="600" prefHeight="400">
+
+    <VBox spacing="20" alignment="CENTER" layoutX="100" layoutY="50"
+          prefWidth="400" prefHeight="300"
+          style="-fx-background-color: white; -fx-padding: 20;">
+        
+        <Label wrapText="true" style="-fx-font-size: 14;" textAlignment="JUSTIFY">
+            <text>
+                Este aviso de privacidad explica cómo se manejarán los datos de los usuarios en la plataforma de objetos perdidos. Al continuar, aceptas los términos.
+            </text>
+        </Label>
+
+        <CheckBox fx:id="agreeCheck" text="Acepto el aviso de privacidad" />
+
+        <HBox spacing="15" alignment="CENTER">
+            <Button text="Cancelar" onAction="#onCancel" />
+            <Button text="Continuar" onAction="#onContinue" />
+        </HBox>
+    </VBox>
+</AnchorPane>

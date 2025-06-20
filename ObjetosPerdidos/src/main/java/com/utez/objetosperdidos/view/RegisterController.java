@@ -50,6 +50,8 @@ public class RegisterController {
         return;
     }
 
+        User nuevo = new User(nombre, email, password, telefono, matricula);
+        Session.users.add(nuevo);
         messageLabel.setText("Registro válido.");
         Main.switchScene("PrivacyView.fxml");
     }

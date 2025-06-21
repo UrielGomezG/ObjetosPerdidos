@@ -13,14 +13,15 @@ public class LoginController {
     @FXML CheckBox rememberCheck;
     @FXML Label messageLabel;
 
-    @FXML public void onSignIn() {
+    @FXML public void onSignIn() throws Exception {
         String email = emailField.getText(), pwd = passwordField.getText();
         User found = Session.users.stream()
             .filter(u -> u.getEmail().equalsIgnoreCase(email) && u.getPassword().equals(pwd))
             .findFirst().orElse(null);
 
         if (found != null) {
-            messageLabel.setText("Login correcto: " + found.getName());
+            Session.currentUser = found;
+            Main.switchScene("HomeView.fxml");
         } else {
             messageLabel.setText("Credenciales inválidas.");
         }

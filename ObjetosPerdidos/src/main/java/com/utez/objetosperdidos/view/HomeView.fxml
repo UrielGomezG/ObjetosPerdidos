@@ -1,13 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.utez.objetosperdidos.view.HomeController">
+            fx:controller="com.utez.objetosperdidos.view.HomeController"
+            prefWidth="1000" prefHeight="700">
 
+    <!-- Barra de arriba -->
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: #f8f8f8;" BorderPane.alignment="CENTER">
+            <HBox.margin>
+                <Insets top="10" bottom="10" left="10" right="10"/>
+            </HBox.margin>
+            <Button text="🏠" style="-fx-font-size: 16px;" />
+            <Label text="Objetos Perdidos" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+            <Region HBox.hgrow="ALWAYS"/>
+            <TextField promptText="Buscar..." prefWidth="300"/>
+            <Button text="🔍" />
+            <Label fx:id="userNameLabel" text="Nombre de Usuario" style="-fx-padding: 0 10 0 10;" />
+            <ImageView fitWidth="40" fitHeight="40" preserveRatio="true"/>
+        </HBox>
+    </top>
+
+    <!-- Barra lateral -->
+    <left>
+        <VBox spacing="20" style="-fx-padding: 10; -fx-background-color: #eaeaea;">
+            <Button text="☰" style="-fx-font-size: 20px;" />
+            <Button text="👤" style="-fx-font-size: 20px;" />
+        </VBox>
+    </left>
+
+    <!-- Centro -->
     <center>
-        <Label text="Bienvenido al Home" />
+        <TilePane fx:id="objectGrid" hgap="20" vgap="20" prefColumns="3">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <VBox style="-fx-border-color: #ccc; -fx-border-width: 1; -fx-background-color: white; -fx-padding: 10; -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 4, 0.0, 2, 2);">
+                <ImageView fitWidth="150" fitHeight="150" preserveRatio="true"/>
+                <Label text="Objeto X" style="-fx-font-weight: bold;" />
+                <Label text="Marca: " />
+                <Label text="Modelo: " />
+                <Label text="Núm. Serie: " />
+                <Label text="Descripción: " />
+            </VBox>
+        </TilePane>
     </center>
+
+    <!-- Paginación inferior -->
+    <bottom>
+        <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10;">
+            <Button text="≪"/>
+            <Button text="&lt;"/>
+            <Button text="1" style="-fx-font-weight: bold;"/>
+            <Button text="2"/>
+            <Button text="3"/>
+            <Button text="&gt;"/>
+            <Button text="≫"/>
+        </HBox>
+    </bottom>
+
 </BorderPane>

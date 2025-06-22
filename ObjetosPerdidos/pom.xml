@@ -11,29 +11,34 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<junit.version>5.10.2</junit.version>  </properties>
+    <junit.version>5.10.2</junit.version>
+    <javafx.version>20.0.1</javafx.version>
+    <maven.compiler.source>20</maven.compiler.source>
+    <maven.compiler.target>20</maven.compiler.target>
+  </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>20.0.1</version>
+      <version>${javafx.version}</version>
     </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
-      <version>20.0.1</version>
+      <version>${javafx.version}</version>
     </dependency>
-<dependency>
+    <dependency>
       <groupId>org.controlsfx</groupId>
       <artifactId>controlsfx</artifactId>
       <version>11.2.1</version>
-    </dependency><dependency>
+    </dependency>
+    <dependency>
       <groupId>org.kordamp.bootstrapfx</groupId>
       <artifactId>bootstrapfx-core</artifactId>
       <version>0.4.0</version>
     </dependency>
-<dependency>
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>${junit.version}</version>
@@ -44,29 +49,40 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>  </dependencies>
+    </dependency>
+  </dependencies>
 
   <build>
+    <resources>
+      <!-- Incluir los .fxml que están en src/main/java -->
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.fxml</include>
+        </includes>
+      </resource>
+    </resources>
+
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
         <configuration>
-          <source>20</source>
-          <target>20</target>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
         <executions>
           <execution>
-            <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>com.utez.objetosperdidos/com.utez.objetosperdidos.HelloApplication</mainClass>
+              <mainClass>com.utez.objetosperdidos.Main</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
@@ -77,6 +93,7 @@
           </execution>
         </executions>
       </plugin>
+
     </plugins>
   </build>
 </project>

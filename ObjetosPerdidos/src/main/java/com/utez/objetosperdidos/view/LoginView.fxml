@@ -1,25 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.utez.objetosperdidos.view.LoginController">
-
-    <center>
-        <VBox spacing="10" alignment="CENTER" style="-fx-padding: 20;">
-            <Label text="Iniciar sesión" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
-            <TextField fx:id="emailField" promptText="Correo institucional" />
-            <PasswordField fx:id="passwordField" promptText="Contraseña" />
-            <CheckBox fx:id="rememberCheck" text="Recuérdame" />
-            <Button text="Ingresar" onAction="#onSignIn" />
-            <Label fx:id="messageLabel" textFill="red" />
-            <HBox spacing="5">
-                <Label text="¿No tienes cuenta?" />
-                <Hyperlink text="Registrarse" onAction="#onSignUpLink" />
-            </HBox>
-            <Hyperlink text="Aviso de privacidad" onAction="#onPrivacy" />
+<AnchorPane prefHeight="400.0" prefWidth="600.0"
+            style="-fx-background-color: linear-gradient(to bottom right, #4CAF50, #8BC34A); -fx-background-radius: 10;"
+            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.utez.objetosperdidos.view.LoginController">
+    <children>
+        <VBox alignment="CENTER" layoutX="175.0" layoutY="50.0" prefHeight="300.0" prefWidth="250.0" spacing="15.0"
+              style="-fx-background-color: #FFFFFF; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 5);"
+              AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="50.0">
+            <children>
+                <Label text="Bienvenido"
+                       style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #333333; -fx-padding: 0 0 5px 0;">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Label text="Inicia sesión en tu cuenta"
+                       style="-fx-font-size: 14px; -fx-text-fill: #666666; -fx-padding: 0 0 10px 0;" />
+                <TextField fx:id="emailField" promptText="Correo institucional"
+                           style="-fx-pref-height: 40px; -fx-border-color: #CCCCCC; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-font-size: 14px; -fx-padding: 0 10px;" />
+                <PasswordField fx:id="passwordField" promptText="Contraseña"
+                               style="-fx-pref-height: 40px; -fx-border-color: #CCCCCC; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-font-size: 14px; -fx-padding: 0 10px;" />
+                <HBox alignment="CENTER_LEFT" spacing="5.0">
+                    <children>
+                        <CheckBox fx:id="rememberCheck" text="Recuérdame"
+                                  style="-fx-font-size: 13px; -fx-text-fill: #555555;" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Hyperlink onAction="#onPrivacy" text="Aviso de privacidad"
+                                   style="-fx-text-fill: #1976D2; -fx-underline: true; -fx-font-size: 13px; -fx-cursor: hand;" />
+                    </children>
+                    <VBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                    </VBox.margin>
+                </HBox>
+                <Button onAction="#onSignIn" prefHeight="35.0" prefWidth="200.0" text="Ingresar"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 5px; -fx-cursor: hand;" />
+                <Label fx:id="messageLabel"
+                       style="-fx-text-fill: #D32F2F; -fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 5px 0;" />
+                <HBox alignment="CENTER" spacing="5.0">
+                    <children>
+                        <Label text="¿No tienes cuenta?" />
+                        <Hyperlink onAction="#onSignUpLink" text="Regístrate aquí"
+                                   style="-fx-text-fill: #1976D2; -fx-underline: true; -fx-font-size: 13px; -fx-cursor: hand;" />
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
         </VBox>
-    </center>
-</BorderPane>
+    </children>
+</AnchorPane>

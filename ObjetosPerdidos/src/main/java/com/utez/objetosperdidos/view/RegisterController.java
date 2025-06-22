@@ -5,20 +5,19 @@ import com.utez.objetosperdidos.model.User;
 import com.utez.objetosperdidos.util.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color; // Importamos Color para los mensajes
-import javafx.animation.PauseTransition; // Para un pequeño retraso visual
-import javafx.util.Duration; // Para Duración en PauseTransition
+import javafx.scene.paint.Color;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 public class RegisterController {
     @FXML TextField nameField, matriculaField, phoneField, emailField;
     @FXML PasswordField passwordField;
-    // @FXML CheckBox rememberCheck; // Eliminado: no es común en registro
     @FXML Label messageLabel;
 
     @FXML public void onSignUp() throws Exception {
         // Limpiamos el mensaje anterior al iniciar un nuevo intento
         messageLabel.setText("");
-        messageLabel.setTextFill(Color.RED); // Color por defecto para errores
+        messageLabel.setTextFill(Color.RED); // Color por defecto para errores para que se vea mejor creo yo
 
         String nombre = nameField.getText().trim();
         String matricula = matriculaField.getText().trim();
@@ -26,14 +25,14 @@ public class RegisterController {
         String email = emailField.getText().trim();
         String password = passwordField.getText();
 
-        // 1. Validaciones de campos vacíos
+        // 1. Validaciones de campos vacíos porque luego hay chistosos que no los llenan
         if (nombre.isEmpty() || matricula.isEmpty() || telefono.isEmpty() || email.isEmpty() || password.isEmpty()) {
             messageLabel.setText("Todos los campos son obligatorios.");
             return;
         }
 
-        // 2. Validaciones de formato
-        if (!nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$")) { // Permite espacios y tildes
+        // 2. Validaciones de formato como anteriormente dije por los alumnos
+        if (!nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$")) {
             messageLabel.setText("El nombre solo debe contener letras y espacios.");
             return;
         }
@@ -53,39 +52,36 @@ public class RegisterController {
             return;
         }
 
-        if (password.length() < 8) { // Contraseña más robusta (mín. 8 caracteres)
+        if (password.length() < 8) {
             messageLabel.setText("La contraseña debe tener al menos 8 caracteres.");
             return;
         }
 
-        // 3. Validación de existencia de usuario (Opcional, pero muy recomendado)
-        // Antes de crear un nuevo usuario, verifica si el email o matrícula ya existen
+        // 3. Validación de existencia de usuario para que no se duplique el registro y evitar problemas futuros
         boolean emailExists = Session.users.stream().anyMatch(u -> u.getEmail().equalsIgnoreCase(email));
         if (emailExists) {
             messageLabel.setText("Este correo electrónico ya está registrado.");
             return;
         }
 
-        // Si la matrícula es un identificador único, también deberías validarla
         boolean matriculaExists = Session.users.stream().anyMatch(u -> u.getMatricula().equalsIgnoreCase(matricula));
         if (matriculaExists) {
             messageLabel.setText("Esta matrícula ya está registrada.");
             return;
         }
 
-
-        // Si todas las validaciones pasan:
+        // Si todas las validaciones pasan o no xd
         User nuevo = new User(nombre, email, password, telefono, matricula);
         Session.users.add(nuevo);
 
+        // ¡Aquí es donde va la línea y muestra nuestra privacidad
         messageLabel.setText("Registro exitoso. Redirigiendo al Aviso de Privacidad...");
-        messageLabel.setTextFill(Color.web("#2ECC71")); // Un verde vibrante para éxito
+        messageLabel.setTextFill(Color.web("#62C070"));
 
-        // Pequeño retraso para que el usuario vea el mensaje de éxito
+
         PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
         pause.setOnFinished(event -> {
             try {
-                // Redirigir al Aviso de Privacidad
                 Main.switchScene("PrivacyView.fxml");
             } catch (Exception e) {
                 e.printStackTrace();

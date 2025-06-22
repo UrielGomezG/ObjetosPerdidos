@@ -42,13 +42,13 @@
 
             <HBox spacing="15" alignment="CENTER_RIGHT" style="-fx-padding: 20px 0 0 0;">
                 <Button text="Cancelar" onAction="#onCancel"
-                        style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand; -fx-padding: 10px 25px;">
+                        style="-fx-background-color: #E74C3C; -fx-text-fill: #ddc3c3; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand; -fx-padding: 10px 25px;">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Button>
                 <Button text="Continuar" onAction="#onContinue"
-                        style="-fx-background-color: #62C070; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand; -fx-padding: 10px 25px;">
+                        style="-fx-background-color: #62C070; -fx-text-fill: #dfe4dc; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand; -fx-padding: 10px 25px;">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>

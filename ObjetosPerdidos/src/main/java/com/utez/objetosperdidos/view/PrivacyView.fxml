@@ -1,28 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.utez.objetosperdidos.view.PrivacyController"
-            prefWidth="600" prefHeight="400">
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.utez.objetosperdidos.view.PrivacyController"
+           prefWidth="700" prefHeight="500"
+           style="-fx-background-color: linear-gradient(to bottom right, #ADD8E6, #87CEEB);">
 
-    <VBox spacing="20" alignment="CENTER" layoutX="100" layoutY="50"
-          prefWidth="400" prefHeight="300"
-          style="-fx-background-color: white; -fx-padding: 20;">
-        
-        <Label wrapText="true" style="-fx-font-size: 14;" textAlignment="JUSTIFY">
-            <text>
-                Este aviso de privacidad explica cómo se manejarán los datos de los usuarios en la plataforma de objetos perdidos. Al continuar, aceptas los términos.
-            </text>
-        </Label>
+    <VBox alignment="CENTER"
+          prefWidth="550" prefHeight="400"
+          style="-fx-background-color: #FFFFFF; -fx-padding: 30; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 20, 0, 0, 10);">
+        <children>
+            <Label text="Aviso de Privacidad de Datos"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2C3E50; -fx-padding: 0 0 20px 0;">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+            </Label>
 
-        <CheckBox fx:id="agreeCheck" text="Acepto el aviso de privacidad" />
+            <TextArea fx:id="privacyTextArea" editable="false" wrapText="true"
+                      prefHeight="200" prefWidth="500"
+                      style="-fx-font-size: 14px; -fx-text-fill: #34495E; -fx-control-inner-background: #F8F8F8; -fx-border-color: #BDC3C7; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 15;">
+                <text>
+                    Este aviso de privacidad explica cómo se manejarán los datos de los usuarios en la plataforma de objetos perdidos. Al continuar, aceptas los términos y condiciones de uso de la aplicación, incluyendo la recopilación y uso de tu información personal de acuerdo con lo descrito en este documento. Es importante que leas y entiendas completamente este aviso antes de proceder.&#10;&#10;**Detalles Adicionales:**&#10;1.  **Recopilación de Datos:** Recopilamos información necesaria para la gestión de objetos perdidos y encontrados, incluyendo datos de contacto y detalles del objeto.&#10;2.  **Uso de la Información:** Sus datos serán utilizados exclusivamente para facilitar la comunicación entre usuarios y la administración de la plataforma.&#10;3.  **Seguridad:** Implementamos medidas de seguridad robustas para proteger su información contra accesos no autorizados o divulgación.&#10;4.  **Sus Derechos:** Usted tiene derecho a acceder, rectificar y eliminar sus datos personales en cualquier momento.&#10;5.  **Cambios:** Este aviso puede ser actualizado periódicamente. Le notificaremos sobre cualquier cambio significativo.
+                </text>
+                <VBox.margin>
+                    <Insets top="15.0" bottom="15.0" />
+                </VBox.margin>
+            </TextArea>
 
-        <HBox spacing="15" alignment="CENTER">
-            <Button text="Cancelar" onAction="#onCancel" />
-            <Button text="Continuar" onAction="#onContinue" />
-        </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                <CheckBox fx:id="agreeCheck" text="He leído y acepto el aviso de privacidad"
+                          style="-fx-font-size: 15px; -fx-text-fill: #34495E; -fx-cursor: hand;" />
+            </HBox>
+
+            <Label fx:id="messageLabel" textFill="#E74C3C" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 10px 0 0 0;" />
+
+            <HBox spacing="15" alignment="CENTER_RIGHT" style="-fx-padding: 20px 0 0 0;">
+                <Button text="Cancelar" onAction="#onCancel"
+                        style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand; -fx-padding: 10px 25px;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button text="Continuar" onAction="#onContinue"
+                        style="-fx-background-color: #62C070; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand; -fx-padding: 10px 25px;">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+            </HBox>
+        </children>
     </VBox>
-</AnchorPane>
+</StackPane>

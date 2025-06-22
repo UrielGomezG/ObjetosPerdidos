@@ -1,27 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.utez.objetosperdidos.view.RegisterController">
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.utez.objetosperdidos.view.RegisterController"
+           prefWidth="700" prefHeight="650"
+           style="-fx-background-color: linear-gradient(to bottom right, #ADD8E6, #87CEEB);"> <VBox alignment="CENTER"
+                                                                                                    prefWidth="450" prefHeight="580"
+                                                                                                    style="-fx-background-color: #FFFFFF; -fx-padding: 35; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 20, 0, 0, 10);">
+    <children>
+        <Label text="Crear Cuenta"
+               style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #2C3E50; -fx-padding: 0 0 25px 0;">
+            <font>
+                <Font name="System Bold" size="30.0" />
+            </font>
+        </Label>
 
-    <center>
-        <VBox spacing="10" alignment="CENTER" style="-fx-padding: 20;">
-            <Label text="Registro" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
-            <TextField fx:id="nameField" promptText="Nombre completo" />
-            <TextField fx:id="matriculaField" promptText="Matrícula" />
-            <TextField fx:id="phoneField" promptText="Teléfono" />
-            <TextField fx:id="emailField" promptText="Correo institucional" />
-            <PasswordField fx:id="passwordField" promptText="Contraseña" />
-            <CheckBox fx:id="rememberCheck" text="Recuérdame" />
-            <Button text="Registrarse" onAction="#onSignUp" />
-            <Label fx:id="messageLabel" textFill="red" />
-            <HBox spacing="5">
-                <Label text="¿Ya tienes cuenta?" />
-                <Hyperlink text="Inicia sesión" onAction="#onSignInLink" />
-            </HBox>
-        </VBox>
-    </center>
-</BorderPane>
+        <TextField fx:id="nameField" promptText="Nombre Completo"
+                   style="-fx-pref-height: 45px; -fx-border-color: #BDC3C7; -fx-border-width: 1px; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-font-size: 15px; -fx-padding: 0 15px; -fx-background-color: #F8F8F8;">
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </TextField>
+        <TextField fx:id="matriculaField" promptText="Matrícula"
+                   style="-fx-pref-height: 45px; -fx-border-color: #BDC3C7; -fx-border-width: 1px; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-font-size: 15px; -fx-padding: 0 15px; -fx-background-color: #F8F8F8;">
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </TextField>
+        <TextField fx:id="phoneField" promptText="Teléfono (10 dígitos)"
+                   style="-fx-pref-height: 45px; -fx-border-color: #BDC3C7; -fx-border-width: 1px; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-font-size: 15px; -fx-padding: 0 15px; -fx-background-color: #F8F8F8;">
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </TextField>
+        <TextField fx:id="emailField" promptText="Correo Institucional (@utez.edu.mx)"
+                   style="-fx-pref-height: 45px; -fx-border-color: #BDC3C7; -fx-border-width: 1px; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-font-size: 15px; -fx-padding: 0 15px; -fx-background-color: #F8F8F8;">
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </TextField>
+        <PasswordField fx:id="passwordField" promptText="Contraseña (mín. 5 caracteres)"
+                       style="-fx-pref-height: 45px; -fx-border-color: #BDC3C7; -fx-border-width: 1px; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-font-size: 15px; -fx-padding: 0 15px; -fx-background-color: #F8F8F8;">
+            <VBox.margin>
+                <Insets bottom="20.0" />
+            </VBox.margin>
+        </PasswordField>
+
+        <Button text="Registrarse" onAction="#onSignUp"
+                prefHeight="50.0" prefWidth="250.0"
+                style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold; -fx-background-radius: 10px; -fx-cursor: hand;">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+            <VBox.margin>
+                <Insets bottom="15.0" />
+            </VBox.margin>
+        </Button>
+
+        <Label fx:id="messageLabel" textFill="#E74C3C" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 0;" />
+
+        <HBox spacing="5" alignment="CENTER" VBox.vgrow="ALWAYS" style="-fx-padding: 15px 0 0 0;">
+            <Label text="¿Ya tienes cuenta?" style="-fx-font-size: 14px; -fx-text-fill: #555555;" />
+            <Hyperlink text="Inicia sesión aquí" onAction="#onSignInLink"
+                       style="-fx-text-fill: #3498DB; -fx-underline: true; -fx-font-size: 14px; -fx-cursor: hand;" />
+        </HBox>
+    </children>
+</VBox>
+</StackPane>

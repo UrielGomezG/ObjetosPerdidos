@@ -15,9 +15,9 @@ public class RegisterController {
     @FXML Label messageLabel;
 
     @FXML public void onSignUp() throws Exception {
-        // Limpiamos el mensaje anterior al iniciar un nuevo intento
+        // Reinicia el mensaje al inicio de cada intento de registro
         messageLabel.setText("");
-        messageLabel.setTextFill(Color.RED); // Color por defecto para errores para que se vea mejor creo yo
+        messageLabel.setTextFill(Color.RED); // Establece color predeterminado para errores
 
         String nombre = nameField.getText().trim();
         String matricula = matriculaField.getText().trim();
@@ -25,13 +25,13 @@ public class RegisterController {
         String email = emailField.getText().trim();
         String password = passwordField.getText();
 
-        // 1. Validaciones de campos vacíos porque luego hay chistosos que no los llenan
+        // 1. Validaciones de campos obligatorios
         if (nombre.isEmpty() || matricula.isEmpty() || telefono.isEmpty() || email.isEmpty() || password.isEmpty()) {
             messageLabel.setText("Todos los campos son obligatorios.");
             return;
         }
 
-        // 2. Validaciones de formato como anteriormente dije por los alumnos
+        // 2. Validaciones de formato de los campos
         if (!nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$")) {
             messageLabel.setText("El nombre solo debe contener letras y espacios.");
             return;
@@ -57,7 +57,7 @@ public class RegisterController {
             return;
         }
 
-        // 3. Validación de existencia de usuario para que no se duplique el registro y evitar problemas futuros
+        // 3. Validación de existencia de usuario para evitar duplicados
         boolean emailExists = Session.users.stream().anyMatch(u -> u.getEmail().equalsIgnoreCase(email));
         if (emailExists) {
             messageLabel.setText("Este correo electrónico ya está registrado.");
@@ -70,15 +70,15 @@ public class RegisterController {
             return;
         }
 
-        // Si todas las validaciones pasan o no xd
+        // Si todas las validaciones pasan, procede con el registro
         User nuevo = new User(nombre, email, password, telefono, matricula);
         Session.users.add(nuevo);
 
-        // ¡Aquí es donde va la línea y muestra nuestra privacidad
+        // Muestra mensaje de éxito y redirige
         messageLabel.setText("Registro exitoso. Redirigiendo al Aviso de Privacidad...");
-        messageLabel.setTextFill(Color.web("#62C070"));
+        messageLabel.setTextFill(Color.web("#62C070")); // Color verde para mensaje de éxito
 
-
+        // Pequeño retraso para mejorar la experiencia del usuario antes de la redirección
         PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
         pause.setOnFinished(event -> {
             try {

@@ -26,7 +26,7 @@
                       prefHeight="200" prefWidth="500"
                       style="-fx-font-size: 14px; -fx-text-fill: #34495E; -fx-control-inner-background: #F8F8F8; -fx-border-color: #BDC3C7; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 15;">
                 <text>
-                    Este aviso de privacidad explica cómo se manejarán los datos de los usuarios en la plataforma de objetos perdidos. Al continuar, aceptas los términos y condiciones de uso de la aplicación, incluyendo la recopilación y uso de tu información personal de acuerdo con lo descrito en este documento. Es importante que leas y entiendas completamente este aviso antes de proceder.&#10;&#10;**Detalles Adicionales:**&#10;1.  **Recopilación de Datos:** Recopilamos información necesaria para la gestión de objetos perdidos y encontrados, incluyendo datos de contacto y detalles del objeto.&#10;2.  **Uso de la Información:** Sus datos serán utilizados exclusivamente para facilitar la comunicación entre usuarios y la administración de la plataforma.&#10;3.  **Seguridad:** Implementamos medidas de seguridad robustas para proteger su información contra accesos no autorizados o divulgación.&#10;4.  **Sus Derechos:** Usted tiene derecho a acceder, rectificar y eliminar sus datos personales en cualquier momento.&#10;5.  **Cambios:** Este aviso puede ser actualizado periódicamente. Le notificaremos sobre cualquier cambio significativo.
+                    Este aviso de privacidad explica cómo se manejarán los datos de los usuarios en la plataforma de objetos perdidos. Al continuar, aceptas los términos y condiciones de uso de la aplicación, incluyendo la recopilación y uso de tu información personal de acuerdo con lo descrito en este documento. Es importante que leas y entiendas completamente este aviso antes de proceder.&#10;&#10;**Detalles Adicionales :**&#10;1.  **Recopilación de Datos:** Recopilamos información necesaria para la gestión de objetos perdidos y encontrados, incluyendo datos de contacto y detalles del objeto.&#10;2.  **Uso de la Información:** Sus datos serán utilizados exclusivamente para facilitar la comunicación entre usuarios y la administración de la plataforma.&#10;3.  **Seguridad:** Implementamos medidas de seguridad robustas para proteger su información contra accesos no autorizados o divulgación.&#10;4.  **Sus Derechos:** Usted tiene derecho a acceder, rectificar y eliminar sus datos personales en cualquier momento.&#10;5.  **Cambios:** Este aviso puede ser actualizado periódicamente. Le notificaremos sobre cualquier cambio significativo.
                 </text>
                 <VBox.margin>
                     <Insets top="15.0" bottom="15.0" />
@@ -42,13 +42,13 @@
 
             <HBox spacing="15" alignment="CENTER_RIGHT" style="-fx-padding: 20px 0 0 0;">
                 <Button text="Cancelar" onAction="#onCancel"
-                        style="-fx-background-color: #E74C3C; -fx-text-fill: #ddc3c3; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand; -fx-padding: 10px 25px;">
+                        style="-fx-background-color: #E74C3C; -fx-text-fill: #ffffff; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand; -fx-padding: 10px 25px;">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Button>
                 <Button text="Continuar" onAction="#onContinue"
-                        style="-fx-background-color: #62C070; -fx-text-fill: #dfe4dc; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand; -fx-padding: 10px 25px;">
+                        style="-fx-background-color: #62C070; -fx-text-fill: #ffffff; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand; -fx-padding: 10px 25px;">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>

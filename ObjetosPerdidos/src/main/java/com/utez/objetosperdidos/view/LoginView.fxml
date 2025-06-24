@@ -27,9 +27,7 @@
                     <Label text="Contraseña" style="-fx-font-weight: bold;"/>
                     <PasswordField fx:id="passwordField"
                                  style="-fx-pref-width: 300px; -fx-pref-height: 35px;"/>
-                    
-                    <CheckBox text="Recuerdame" style="-fx-padding: 5px 0;"/>
-                    
+                                        
                     
                     
                     <Button text="Iniciar Sesión" onAction="#onSignIn"

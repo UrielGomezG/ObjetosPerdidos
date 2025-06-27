@@ -10,7 +10,6 @@
             fx:controller="com.utez.objetosperdidos.view.HomeController"
             prefWidth="1000" prefHeight="700">
 
-    <!-- Barra de arriba -->
     <top>
         <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: #f8f8f8;" BorderPane.alignment="CENTER">
             <HBox.margin>
@@ -26,7 +25,6 @@
         </HBox>
     </top>
 
-    <!-- Barra lateral -->
     <left>
         <VBox spacing="20" style="-fx-padding: 10; -fx-background-color: #eaeaea;">
             <Button text="☰" style="-fx-font-size: 20px;" />
@@ -34,7 +32,7 @@
         </VBox>
     </left>
 
-    <!-- Centro -->
+
     <center>
         <TilePane fx:id="objectGrid" hgap="20" vgap="20" prefColumns="3">
             <padding>
@@ -51,7 +49,6 @@
         </TilePane>
     </center>
 
-    <!-- Paginación inferior -->
     <bottom>
         <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10;">
             <Button text="≪"/>

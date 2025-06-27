@@ -3,10 +3,13 @@ package com.utez.objetosperdidos.view;
 import com.utez.objetosperdidos.Main;
 import com.utez.objetosperdidos.model.User;
 import com.utez.objetosperdidos.util.Session;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.paint.Color;
+
 import javafx.animation.PauseTransition;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class RegisterController {
@@ -15,9 +18,9 @@ public class RegisterController {
     @FXML Label messageLabel;
 
     @FXML public void onSignUp() throws Exception {
-        // Reinicia el mensaje al inicio de cada intento de registro
+        
         messageLabel.setText("");
-        messageLabel.setTextFill(Color.RED); // Establece color predeterminado para errores
+        messageLabel.setTextFill(Color.RED); 
 
         String nombre = nameField.getText().trim();
         String matricula = matriculaField.getText().trim();
@@ -25,13 +28,13 @@ public class RegisterController {
         String email = emailField.getText().trim();
         String password = passwordField.getText();
 
-        // 1. Validaciones de campos obligatorios
+        
         if (nombre.isEmpty() || matricula.isEmpty() || telefono.isEmpty() || email.isEmpty() || password.isEmpty()) {
             messageLabel.setText("Todos los campos son obligatorios.");
             return;
         }
 
-        // 2. Validaciones de formato de los campos
+    
         if (!nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$")) {
             messageLabel.setText("El nombre solo debe contener letras y espacios.");
             return;
@@ -57,7 +60,7 @@ public class RegisterController {
             return;
         }
 
-        // 3. Validación de existencia de usuario para evitar duplicados
+       
         boolean emailExists = Session.users.stream().anyMatch(u -> u.getEmail().equalsIgnoreCase(email));
         if (emailExists) {
             messageLabel.setText("Este correo electrónico ya está registrado.");
@@ -70,15 +73,13 @@ public class RegisterController {
             return;
         }
 
-        // Si todas las validaciones pasan, procede con el registro
         User nuevo = new User(nombre, email, password, telefono, matricula);
         Session.users.add(nuevo);
 
-        // Muestra mensaje de éxito y redirige
         messageLabel.setText("Registro exitoso. Redirigiendo al Aviso de Privacidad...");
-        messageLabel.setTextFill(Color.web("#62C070")); // Color verde para mensaje de éxito
+        messageLabel.setTextFill(Color.web("#62C070"));
 
-        // Pequeño retraso para mejorar la experiencia del usuario antes de la redirección
+
         PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
         pause.setOnFinished(event -> {
             try {

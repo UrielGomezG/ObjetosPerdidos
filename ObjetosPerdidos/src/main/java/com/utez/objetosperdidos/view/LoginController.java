@@ -18,13 +18,23 @@ public class LoginController {
     @FXML CheckBox rememberCheck;
     @FXML Label messageLabel;
 
+    @FXML public void initialize() {
+        messageLabel.setText("");
+        messageLabel.getStyleClass().add("message-label");
+    }
+
     @FXML public void onSignIn() throws Exception {
-        String email = emailField.getText().trim(); // Trim spaces
+        String email = emailField.getText().trim();
         String pwd = passwordField.getText();
+
+        messageLabel.setText("");
+        messageLabel.getStyleClass().remove("success");
+        messageLabel.getStyleClass().remove("error");
 
         if (email.isEmpty() || pwd.isEmpty()) {
             messageLabel.setText("Por favor, ingresa tu correo y contraseña.");
-            return; // Exit if fields are empty
+            messageLabel.getStyleClass().add("error");
+            return;
         }
 
         User found = Session.users.stream()
@@ -34,9 +44,8 @@ public class LoginController {
         if (found != null) {
             Session.currentUser = found;
             messageLabel.setText("Inicio de sesión exitoso. Redirigiendo...");
-            messageLabel.setStyle("-fx-text-fill: #388E3C;"); // Green color for success
-
-            // Short delay before switching scene for better UX
+            messageLabel.getStyleClass().add("success");
+            
             PauseTransition pause = new PauseTransition(Duration.seconds(1));
             pause.setOnFinished(event -> {
                 try {
@@ -44,15 +53,14 @@ public class LoginController {
                 } catch (Exception e) {
                     e.printStackTrace();
                     messageLabel.setText("Error al cargar la siguiente vista.");
-                    messageLabel.setStyle("-fx-text-fill: #D32F2F;"); // Red for error
+                    messageLabel.getStyleClass().add("error");
                 }
             });
             pause.play();
 
         } else {
             messageLabel.setText("Credenciales inválidas. Intenta de nuevo.");
-            messageLabel.setStyle("-fx-text-fill: #D32F2F;"); // Red color for error
-            // Clear password field for security
+            messageLabel.getStyleClass().add("error");
             passwordField.clear();
         }
     }

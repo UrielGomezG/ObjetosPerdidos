@@ -18,23 +18,21 @@ public class RegisterController {
     @FXML Label messageLabel;
 
     @FXML public void onSignUp() throws Exception {
-        
         messageLabel.setText("");
-        messageLabel.setTextFill(Color.RED); 
+        messageLabel.setTextFill(Color.RED);
 
         String nombre = nameField.getText().trim();
         String matricula = matriculaField.getText().trim();
         String telefono = phoneField.getText().trim();
         String email = emailField.getText().trim();
         String password = passwordField.getText();
+        String rol = "estuiante";
 
-        
         if (nombre.isEmpty() || matricula.isEmpty() || telefono.isEmpty() || email.isEmpty() || password.isEmpty()) {
             messageLabel.setText("Todos los campos son obligatorios.");
             return;
         }
 
-    
         if (!nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$")) {
             messageLabel.setText("El nombre solo debe contener letras y espacios.");
             return;
@@ -60,7 +58,6 @@ public class RegisterController {
             return;
         }
 
-       
         boolean emailExists = Session.users.stream().anyMatch(u -> u.getEmail().equalsIgnoreCase(email));
         if (emailExists) {
             messageLabel.setText("Este correo electrónico ya está registrado.");
@@ -73,12 +70,11 @@ public class RegisterController {
             return;
         }
 
-        User nuevo = new User(nombre, email, password, telefono, matricula);
+        User nuevo = new User(nombre, email, password, telefono, matricula, rol);
         Session.users.add(nuevo);
 
         messageLabel.setText("Registro exitoso. Redirigiendo al Aviso de Privacidad...");
         messageLabel.setTextFill(Color.web("#62C070"));
-
 
         PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
         pause.setOnFinished(event -> {

@@ -1,5 +1,7 @@
 package com.utez.objetosperdidos;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,12 +11,13 @@ public class Main extends Application {
     private static Stage primary;
 
     @Override
-    public void start(Stage stage) throws Exception {
-        primary = stage;
-        stage.setTitle("Objetos Perdidos");
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/com/utez/objetosperdidos/view/LoginView.fxml"))));
-        stage.show();
-    }
+public void start(Stage stage) throws IOException {
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/LoginView.fxml"));
+    Scene scene = new Scene(fxmlLoader.load());
+    stage.setTitle("Objetos Perdidos");
+    stage.setScene(scene);
+    stage.show();
+}
 
     public static void switchScene(String fxml) throws Exception {
         primary.getScene().setRoot(

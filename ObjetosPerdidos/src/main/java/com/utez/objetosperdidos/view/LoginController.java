@@ -1,5 +1,7 @@
 package com.utez.objetosperdidos.view;
 
+import java.net.URL;
+
 import com.utez.objetosperdidos.Main;
 import com.utez.objetosperdidos.model.User;
 import com.utez.objetosperdidos.util.Session;
@@ -10,17 +12,46 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 public class LoginController {
+
     @FXML TextField emailField;
     @FXML PasswordField passwordField;
     @FXML CheckBox rememberCheck;
     @FXML Label messageLabel;
 
+    @FXML AnchorPane anchorImage;
+
     @FXML public void initialize() {
         messageLabel.setText("");
         messageLabel.getStyleClass().add("message-label");
+
+        try {
+            
+            URL url = getClass().getResource("/images/Vacio2.png");
+            if (url != null) {
+                Image image = new Image(url.toExternalForm());
+                ImageView imageView = new ImageView(image);
+                imageView.setFitWidth(500);
+                imageView.setPreserveRatio(true);
+                anchorImage.getChildren().add(imageView);
+                System.out.println("Imagen cargada desde resources correctamente.");
+            } else {
+                String localPath = "file:/C:/Users/jorge/OneDrive/Escritorio/ObjetosPerdidos/ObjetosPerdidos/src/main/resources/images/Vacio2.png";
+                Image image = new Image(localPath);
+                ImageView imageView = new ImageView(image);
+                imageView.setFitWidth(500);
+                imageView.setPreserveRatio(true);
+                anchorImage.getChildren().add(imageView);
+                System.out.println("Imagen cargada desde ruta absoluta.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al cargar la imagen: " + e.getMessage());
+        }
     }
 
     @FXML public void onSignIn() throws Exception {
@@ -45,7 +76,7 @@ public class LoginController {
             Session.currentUser = found;
             messageLabel.setText("Inicio de sesión exitoso. Redirigiendo...");
             messageLabel.getStyleClass().add("success");
-            
+
             PauseTransition pause = new PauseTransition(Duration.seconds(1));
             pause.setOnFinished(event -> {
                 try {
@@ -73,3 +104,4 @@ public class LoginController {
         Main.switchScene("PrivacyView.fxml");
     }
 }
+

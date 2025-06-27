@@ -24,6 +24,7 @@ public class RegisterController {
         String telefono = phoneField.getText().trim();
         String email = emailField.getText().trim();
         String password = passwordField.getText();
+        String rol = "estuiante";
 
         // 1. Validaciones de campos vacíos porque luego hay chistosos que no los llenan
         if (nombre.isEmpty() || matricula.isEmpty() || telefono.isEmpty() || email.isEmpty() || password.isEmpty()) {
@@ -71,7 +72,7 @@ public class RegisterController {
         }
 
         // Si todas las validaciones pasan o no xd
-        User nuevo = new User(nombre, email, password, telefono, matricula);
+        User nuevo = new User(nombre, email, password, telefono, matricula, rol);
         Session.users.add(nuevo);
 
         // ¡Aquí es donde va la línea y muestra nuestra privacidad

@@ -10,7 +10,7 @@ public class Session {
     
     static {
 
-        users.add(new User("Admin", "Mauro@utez.edu", "12345", "77711223344", "20233tn117"));
+        users.add(new User("Admin", "Mauro@utez.edu", "12345", "77711223344", "20233tn117","admin"));
     }
 
 }

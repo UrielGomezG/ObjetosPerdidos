@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.utez.objetosperdidos.controller.LoginController"
-            prefWidth="1000.0" prefHeight="600.0" stylesheets="@Login.css">
+            prefWidth="1000.0" prefHeight="600.0" stylesheets="@../css/Login.css">
     <left>
         <VBox spacing="20" alignment="CENTER" styleClass="login-pane" prefWidth="500.0">
             <Label text="Iniciar Sesión" styleClass="titulo"/>

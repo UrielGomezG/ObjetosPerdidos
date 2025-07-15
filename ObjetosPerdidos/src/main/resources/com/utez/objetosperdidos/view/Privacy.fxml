@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.utez.objetosperdidos.controller.PrivacyController"
+            stylesheets="@Privacy.css" prefWidth="1000.0" prefHeight="600.0">
+
+    <!-- Lado izquierdo: contenido y formulario -->
+    <left>
+        <VBox spacing="20" alignment="CENTER" styleClass="left-pane" prefWidth="500.0" prefHeight="600.0">
+            <Label text="Aviso de Privacidad" styleClass="titulo"/>
+            <Label text="Recopilamos datos personales únicamente para la recuperación de objetos perdidos. Al continuar, aceptas el uso responsable de tu información conforme a nuestro aviso de privacidad."
+                   wrapText="true" maxWidth="400.0" styleClass="texto-aviso"/>
+
+            <CheckBox fx:id="agreeCheck" text="Acepto los términos y el aviso de privacidad" styleClass="check-aviso"/>
+            <Label fx:id="messageLabel" styleClass="mensaje"/>
+
+            <HBox spacing="15" alignment="CENTER">
+                <Button text="Cancelar" onAction="#onCancel" styleClass="boton-cancelar"/>
+                <Button text="Continuar" onAction="#onContinue" styleClass="boton-continuar"/>
+            </HBox>
+        </VBox>
+    </left>
+    <center>
+        <StackPane styleClass="right-pane">
+            <ImageView fitWidth="500.0" preserveRatio="true">
+                <image>
+                    <Image url="/com/utez/objetosperdidos/imagenes/Vacio2.png"/>
+                </image>
+            </ImageView>
+        </StackPane>
+    </center>
+</BorderPane>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.utez.objetosperdidos.controller.LoginController"
+            prefWidth="1000.0" prefHeight="600.0" stylesheets="@Login.css">
+    <left>
+        <VBox spacing="20" alignment="CENTER" styleClass="login-pane" prefWidth="500.0">
+            <Label text="Iniciar Sesión" styleClass="titulo"/>
+            <TextField fx:id="emailField" promptText="Correo electrónico" styleClass="campo-texto"/>
+            <PasswordField fx:id="passwordField" promptText="Contraseña" styleClass="campo-texto"/>
+            <Label fx:id="messageLabel" styleClass="mensaje"/>
+            <Button text="Ingresar" onAction="#onSignIn" styleClass="boton-ingresar"/>
+            <HBox spacing="10" alignment="CENTER">
+                <Hyperlink text="Registrarse" onAction="#onSignUpLink"/>
+                <Hyperlink text="Privacidad" onAction="#onPrivacy"/>
+            </HBox>
+        </VBox>
+    </left>
+    <center>
+        <StackPane styleClass="imagen-pane">
+            <ImageView fx:id="imagenDecorativa" fitWidth="500.0" preserveRatio="true">
+                <image>
+                    <Image url="/com/utez/objetosperdidos/imagenes/Vacio2.png"/>
+                </image>
+            </ImageView>
+        </StackPane>
+    </center>
+</BorderPane>

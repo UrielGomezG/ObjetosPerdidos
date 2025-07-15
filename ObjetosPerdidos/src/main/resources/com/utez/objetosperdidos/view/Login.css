@@ -1,0 +1,41 @@
+.login-pane {
+    -fx-background-color: #ffffff;
+    -fx-padding: 40px;
+}
+
+.imagen-pane {
+    -fx-background-color: #e8f5e9;
+    -fx-alignment: center;
+}
+
+.titulo {
+    -fx-font-size: 28px;
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+}
+
+.campo-texto {
+    -fx-pref-width: 300px;
+    -fx-font-size: 14px;
+    -fx-background-color: #f1f8e9;
+    -fx-text-fill: #000000;
+    -fx-background-radius: 6;
+    -fx-padding: 10px;
+}
+
+.check-estilo {
+    -fx-text-fill: #2e7d32;
+}
+
+.boton-ingresar {
+    -fx-background-color: #66bb6a;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 10px 20px;
+}
+
+.mensaje {
+    -fx-font-size: 12px;
+    -fx-text-fill: #e53935;
+}

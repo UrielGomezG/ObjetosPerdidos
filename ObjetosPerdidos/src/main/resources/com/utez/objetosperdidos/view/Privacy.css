@@ -1,0 +1,45 @@
+.left-pane {
+    -fx-background-color: #ffffff;
+    -fx-padding: 50px;
+}
+
+.right-pane {
+    -fx-background-color: #e8f5e9;
+    -fx-alignment: center;
+}
+
+.titulo {
+    -fx-font-size: 26px;
+    -fx-text-fill: #2e7d32;
+    -fx-font-weight: bold;
+}
+
+.texto-aviso {
+    -fx-font-size: 14px;
+    -fx-text-fill: #4e4e4e;
+}
+
+.check-aviso {
+    -fx-text-fill: #2e7d32;
+    -fx-font-size: 13px;
+}
+
+.boton-continuar {
+    -fx-background-color: #66bb6a;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-padding: 8px 20px;
+}
+
+.boton-cancelar {
+    -fx-background-color: #c8e6c9;
+    -fx-text-fill: #2e7d32;
+    -fx-background-radius: 10px;
+    -fx-padding: 8px 20px;
+}
+
+.mensaje {
+    -fx-font-size: 13px;
+    -fx-text-fill: #e53935;
+}

@@ -26,15 +26,6 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/utez/objetosperdidos/view/" + fxmlName));
         Scene scene = new Scene(root);
         mainStage.setScene(scene);
-
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/com/utez/objetosperdidos/view/LoginView.fxml"))));
-        stage.show();
-    }
-
-    public static void switchScene(String fxml) throws Exception {
-        primary.getScene().setRoot(
-            FXMLLoader.load(Main.class.getResource("/com/utez/objetosperdidos/view/" + fxml))
-        );
     }
 
     public static void main(String[] args) {

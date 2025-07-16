@@ -3,6 +3,7 @@ package com.utez.objetosperdidos.controller;
 import com.utez.objetosperdidos.Main;
 import com.utez.objetosperdidos.model.User;
 import com.utez.objetosperdidos.util.Session;
+import com.utez.objetosperdidos.util.ConexionOracle;
 
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
@@ -12,8 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import java.sql.*;
+
 public class RegisterController {
-    @FXML private TextField nameField, matriculaField, phoneField, emailField;
+    @FXML private TextField nameField, apellidosField, matriculaField, phoneField, emailField;
     @FXML private PasswordField passwordField, confirmPasswordField;
     @FXML private Label messageLabel;
 
@@ -23,14 +26,14 @@ public class RegisterController {
         messageLabel.setTextFill(Color.RED);
 
         String nombre = nameField.getText().trim();
+        String apellidos = apellidosField.getText().trim();
         String matricula = matriculaField.getText().trim();
         String telefono = phoneField.getText().trim();
         String email = emailField.getText().trim();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
-        String rol = "estudiante";
 
-        if (nombre.isEmpty() || matricula.isEmpty() || telefono.isEmpty() ||
+        if (nombre.isEmpty() || apellidos.isEmpty() ||matricula.isEmpty() || telefono.isEmpty() ||
                 email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             messageLabel.setText("Todos los campos son obligatorios.");
             return;
@@ -66,39 +69,66 @@ public class RegisterController {
             return;
         }
 
-        boolean emailExists = Session.users.stream()
-                .anyMatch(u -> u.getEmail().equalsIgnoreCase(email));
-        if (emailExists) {
-            messageLabel.setText("Este correo ya está registrado.");
-            return;
-        }
-
-        boolean matriculaExists = Session.users.stream()
-                .anyMatch(u -> u.getMatricula().equalsIgnoreCase(matricula));
-        if (matriculaExists) {
-            messageLabel.setText("Esta matrícula ya está registrada.");
-            return;
-        }
-
-    
-        User nuevo = new User(nombre, email, password, telefono, matricula, rol);
-        Session.users.add(nuevo);
-
-        messageLabel.setText("Registro exitoso. Redirigiendo...");
-        messageLabel.setTextFill(Color.web("#62C070"));
-
-        PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
-        pause.setOnFinished(e -> {
-            try {
-            
-                PrivacyController.setOrigen("registro");
-                Main.switchScene("Privacy.fxml");
-            } catch (Exception ex) {
-                messageLabel.setText("Error al cargar la vista.");
-                messageLabel.setTextFill(Color.RED);
+        try (Connection conn = ConexionOracle.getConnection()) {        
+            PreparedStatement checkEmail = conn.prepareStatement("SELECT COUNT(*) FROM USUARIOS WHERE correo = ?");
+            checkEmail.setString(1, email);
+            ResultSet rsEmail = checkEmail.executeQuery();
+            if (rsEmail.next() && rsEmail.getInt(1) > 0) {
+                messageLabel.setText("Este correo ya está registrado.");
+                return;
             }
-        });
-        pause.play();
+
+            PreparedStatement checkMatricula = conn.prepareStatement("SELECT COUNT(*) FROM ALUMNOS WHERE matricula = ?");
+            checkMatricula.setString(1, matricula);
+            ResultSet rsMatricula = checkMatricula.executeQuery();
+            if (rsMatricula.next() && rsMatricula.getInt(1) > 0) {
+                messageLabel.setText("Esta matrícula ya está registrada.");
+                return;
+            }
+ // Insertar usuario y obtener ID
+        String[] returnColumns = { "ID" }; // ← PARA OBTENER LA PK
+        PreparedStatement insertUser = conn.prepareStatement(
+            "INSERT INTO USUARIOS (nombre, apellidos, correo, contrasena, rol_id) VALUES (?, ?, ?, ?, 2)",
+            returnColumns
+        );
+        insertUser.setString(1, nombre);
+        insertUser.setString(2, apellidos);
+        insertUser.setString(3, email);
+        insertUser.setString(4, password);
+        insertUser.executeUpdate();
+
+        ResultSet generatedKeys = insertUser.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int userId = generatedKeys.getInt(1); 
+
+            PreparedStatement insertAlumno = conn.prepareStatement(
+                "INSERT INTO ALUMNOS (matricula, telefono, usuario_id) VALUES (?, ?, ?)"
+            );
+            insertAlumno.setString(1, matricula);
+            insertAlumno.setString(2, telefono);
+            insertAlumno.setInt(3, userId);
+            insertAlumno.executeUpdate();
+
+            messageLabel.setText("Registro exitoso. Redirigiendo...");
+            messageLabel.setTextFill(Color.web("#62C070"));
+
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+            pause.setOnFinished(e -> {
+                try {
+                    PrivacyController.setOrigen("registro");
+                    Main.switchScene("Privacy.fxml");
+                } catch (Exception ex) {
+                    messageLabel.setText("Error al cargar la vista.");
+                    messageLabel.setTextFill(Color.RED);
+                }
+            });
+            pause.play();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            messageLabel.setText("Error al registrar usuario.");
+        }
     }
 
     @FXML

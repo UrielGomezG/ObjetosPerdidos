@@ -1,7 +1,13 @@
 package com.utez.objetosperdidos.controller;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import com.utez.objetosperdidos.Main;
 import com.utez.objetosperdidos.model.User;
+import com.utez.objetosperdidos.util.ConexionOracle;
 import com.utez.objetosperdidos.util.Session;
 
 import javafx.animation.PauseTransition;
@@ -32,29 +38,33 @@ public class LoginController {
         }
     }
 
-    @FXML
-    public void onSignIn() throws Exception {
-        String email = emailField.getText().trim();
-        String pwd = passwordField.getText();
+@FXML
+public void onSignIn() throws Exception {
+    String email = emailField.getText().trim();
+    String pwd = passwordField.getText();
 
-        if (email.isEmpty() || pwd.isEmpty()) {
-            messageLabel.setText("Por favor, ingresa tu correo y contraseña.");
-            return;
-        }
+    if (email.isEmpty() || pwd.isEmpty()) {
+        messageLabel.setText("Por favor, ingresa tu correo y contraseña.");
+        return;
+    }
 
-        User found = Session.users.stream()
-                .filter(u -> u.getEmail().equalsIgnoreCase(email) && u.getPassword().equals(pwd))
-                .findFirst().orElse(null);
+    try (Connection conn = ConexionOracle.getConnection()) {
+        PreparedStatement stmt = conn.prepareStatement(
+            "SELECT COUNT(*) FROM USUARIOS WHERE correo = ? AND contrasena = ?"
+        );
+        stmt.setString(1, email);
+        stmt.setString(2, pwd);
+        ResultSet rs = stmt.executeQuery();
 
-        if (found != null) {
-            Session.currentUser = found;
+        if (rs.next() && rs.getInt(1) > 0) {
             messageLabel.setText("Inicio de sesión exitoso. Redirigiendo...");
             messageLabel.setStyle("-fx-text-fill: #388E3C;");
 
             PauseTransition pause = new PauseTransition(Duration.seconds(1));
             pause.setOnFinished(event -> {
                 try {
-                    Main.switchScene("Home.fxml");
+                    PrivacyController.setOrigen("login");
+                    Main.switchScene("Privacy.fxml");
                 } catch (Exception e) {
                     e.printStackTrace();
                     messageLabel.setText("Error al cargar la siguiente vista.");
@@ -67,7 +77,13 @@ public class LoginController {
             messageLabel.setStyle("-fx-text-fill: #D32F2F;");
             passwordField.clear();
         }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        messageLabel.setText("Error de conexión.");
+        messageLabel.setStyle("-fx-text-fill: #D32F2F;");
     }
+}
+
 
     @FXML
     public void onSignUpLink() throws Exception {

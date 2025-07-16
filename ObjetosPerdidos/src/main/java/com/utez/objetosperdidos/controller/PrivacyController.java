@@ -1,6 +1,7 @@
 package com.utez.objetosperdidos.controller;
 
 import com.utez.objetosperdidos.Main;
+import com.utez.objetosperdidos.util.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -8,6 +9,7 @@ import javafx.stage.Stage;
 
 public class PrivacyController {
     private static String origen = "login";
+
     public static void setOrigen(String desdeDondeVengo) {
         origen = desdeDondeVengo;
     }
@@ -23,24 +25,26 @@ public class PrivacyController {
             messageLabel.setText("Debes aceptar las políticas para continuar.");
             return;
         }
-        if (origen.equals("registro")) {
-            Main.switchScene("Register.fxml");
-        } else {
-            Main.switchScene("Login.fxml");
-        }
+
         Stage currentStage = (Stage) acceptCheck.getScene().getWindow();
         currentStage.close();
+
+        if (Session.currentUser != null) {
+            if (Session.currentUser.getRole() == 1) {
+                Main.switchScene("AdminHomeView.fxml");
+            } else {
+                Main.switchScene("HomeView.fxml");
+            }
+        } else {
+            Main.switchScene(origen.equals("registro") ? "Register.fxml" : "Login.fxml");
+        }
     }
 
     @FXML
     public void onCancel() throws Exception {
         Stage currentStage = (Stage) acceptCheck.getScene().getWindow();
         currentStage.close();
-        if (origen.equals("registro")) {
-            Main.switchScene("Register.fxml");
-        } else {
-            Main.switchScene("Login.fxml");
-        }
+        Main.switchScene(origen.equals("registro") ? "Register.fxml" : "Login.fxml");
         origen = "";
     }
 }

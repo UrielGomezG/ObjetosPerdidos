@@ -115,12 +115,11 @@ public class RegisterController {
             PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
             pause.setOnFinished(e -> {
                 try {
-                    PrivacyController.setOrigen("registro");
-                    Main.switchScene("Privacy.fxml");
-                } catch (Exception ex) {
-                    messageLabel.setText("Error al cargar la vista.");
-                    messageLabel.setTextFill(Color.RED);
-                }
+                Main.switchScene("Login.fxml");
+            } catch (Exception ex) {
+            messageLabel.setText("Error al cargar la vista de inicio de sesión.");
+            messageLabel.setTextFill(Color.RED);
+            }
             });
             pause.play();
             }

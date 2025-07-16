@@ -3,11 +3,15 @@ package com.utez.objetosperdidos.controller;
 import com.utez.objetosperdidos.Main;
 import com.utez.objetosperdidos.model.User;
 import com.utez.objetosperdidos.util.Session;
+
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
 public class LoginController {
@@ -50,7 +54,7 @@ public class LoginController {
             PauseTransition pause = new PauseTransition(Duration.seconds(1));
             pause.setOnFinished(event -> {
                 try {
-                    Main.switchScene("HomeView.fxml");
+                    Main.switchScene("Home.fxml");
                 } catch (Exception e) {
                     e.printStackTrace();
                     messageLabel.setText("Error al cargar la siguiente vista.");
@@ -67,11 +71,13 @@ public class LoginController {
 
     @FXML
     public void onSignUpLink() throws Exception {
-        Main.switchScene("RegisterView.fxml");
+        Main.switchScene("Register.fxml");
     }
 
     @FXML
     public void onPrivacy() throws Exception {
+    
+        PrivacyController.setOrigen("login");
         Main.switchScene("Privacy.fxml");
     }
 }

@@ -13,46 +13,46 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class RegisterController {
-    @FXML TextField nameField, matriculaField, phoneField, emailField;
-    @FXML PasswordField passwordField;
-    @FXML Label messageLabel;
+    @FXML private TextField nameField, matriculaField, phoneField, emailField;
+    @FXML private PasswordField passwordField, confirmPasswordField;
+    @FXML private Label messageLabel;
 
-    @FXML public void onSignUp() throws Exception {
-        // Limpiamos el mensaje anterior al iniciar un nuevo intento
+    @FXML
+    public void onSignUp() {
         messageLabel.setText("");
-        messageLabel.setTextFill(Color.RED); // Color por defecto para errores para que se vea mejor creo yo
+        messageLabel.setTextFill(Color.RED);
 
         String nombre = nameField.getText().trim();
         String matricula = matriculaField.getText().trim();
         String telefono = phoneField.getText().trim();
         String email = emailField.getText().trim();
         String password = passwordField.getText();
-        String rol = "estuiante";
+        String confirmPassword = confirmPasswordField.getText();
+        String rol = "estudiante";
 
-        // 1. Validaciones de campos vacíos porque luego hay chistosos que no los llenan
-        if (nombre.isEmpty() || matricula.isEmpty() || telefono.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (nombre.isEmpty() || matricula.isEmpty() || telefono.isEmpty() ||
+                email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             messageLabel.setText("Todos los campos son obligatorios.");
             return;
         }
 
-        // 2. Validaciones de formato como anteriormente dije por los alumnos
         if (!nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$")) {
-            messageLabel.setText("El nombre solo debe contener letras y espacios.");
+            messageLabel.setText("El nombre solo debe contener letras.");
             return;
         }
 
         if (!matricula.matches("^[a-zA-Z0-9]+$")) {
-            messageLabel.setText("La matrícula solo debe contener letras y números.");
+            messageLabel.setText("La matrícula debe ser alfanumérica.");
             return;
         }
 
         if (!telefono.matches("^\\d{10}$")) {
-            messageLabel.setText("El teléfono debe tener exactamente 10 dígitos numéricos.");
+            messageLabel.setText("El teléfono debe tener 10 dígitos.");
             return;
         }
 
         if (!email.matches("^[\\w.-]+@utez\\.edu\\.mx$")) {
-            messageLabel.setText("El correo debe ser institucional (@utez.edu.mx).");
+            messageLabel.setText("Usa un correo institucional válido.");
             return;
         }
 
@@ -61,42 +61,54 @@ public class RegisterController {
             return;
         }
 
-        // 3. Validación de existencia de usuario para que no se duplique el registro y evitar problemas futuros
-        boolean emailExists = Session.users.stream().anyMatch(u -> u.getEmail().equalsIgnoreCase(email));
-        if (emailExists) {
-            messageLabel.setText("Este correo electrónico ya está registrado.");
+        if (!password.equals(confirmPassword)) {
+            messageLabel.setText("Las contraseñas no coinciden.");
             return;
         }
 
-        boolean matriculaExists = Session.users.stream().anyMatch(u -> u.getMatricula().equalsIgnoreCase(matricula));
+        boolean emailExists = Session.users.stream()
+                .anyMatch(u -> u.getEmail().equalsIgnoreCase(email));
+        if (emailExists) {
+            messageLabel.setText("Este correo ya está registrado.");
+            return;
+        }
+
+        boolean matriculaExists = Session.users.stream()
+                .anyMatch(u -> u.getMatricula().equalsIgnoreCase(matricula));
         if (matriculaExists) {
             messageLabel.setText("Esta matrícula ya está registrada.");
             return;
         }
 
-        // Si todas las validaciones pasan o no xd
+    
         User nuevo = new User(nombre, email, password, telefono, matricula, rol);
         Session.users.add(nuevo);
 
-        // ¡Aquí es donde va la línea y muestra nuestra privacidad
-        messageLabel.setText("Registro exitoso. Redirigiendo al Aviso de Privacidad...");
+        messageLabel.setText("Registro exitoso. Redirigiendo...");
         messageLabel.setTextFill(Color.web("#62C070"));
 
-
         PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
-        pause.setOnFinished(event -> {
+        pause.setOnFinished(e -> {
             try {
-                Main.switchScene("PrivacyView.fxml");
-            } catch (Exception e) {
-                e.printStackTrace();
-                messageLabel.setText("Error al cargar la siguiente vista.");
+            
+                PrivacyController.setOrigen("registro");
+                Main.switchScene("Privacy.fxml");
+            } catch (Exception ex) {
+                messageLabel.setText("Error al cargar la vista.");
                 messageLabel.setTextFill(Color.RED);
             }
         });
         pause.play();
     }
 
-    @FXML public void onSignInLink() throws Exception {
-        Main.switchScene("LoginView.fxml");
+    @FXML
+    public void onSignInLink() throws Exception {
+        Main.switchScene("Login.fxml");
+    }
+
+    @FXML
+    public void onPrivacyLink() throws Exception {
+        PrivacyController.setOrigen("registro");
+        Main.switchScene("Privacy.fxml");
     }
 }

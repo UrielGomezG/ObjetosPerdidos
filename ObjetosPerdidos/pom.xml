@@ -74,7 +74,6 @@
           <mainClass>com.utez.objetosperdidos.Main</mainClass>
         </configuration>
       </plugin>
-
     </plugins>
   </build>
 </project>

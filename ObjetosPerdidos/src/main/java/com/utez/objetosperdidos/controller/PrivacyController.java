@@ -1,37 +1,38 @@
-
 package com.utez.objetosperdidos.controller;
 
 import com.utez.objetosperdidos.Main;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label; 
-import javafx.scene.paint.Color;
+import javafx.scene.control.Label;
 
 public class PrivacyController {
-    @FXML CheckBox agreeCheck;
-    @FXML Label messageLabel; 
+    private static String origen = "login"; 
 
-    
-    @FXML public void initialize() {
-       
+    public static void setOrigen(String desdeDondeVengo) {
+        origen = desdeDondeVengo;
     }
 
-    @FXML public void onCancel() throws Exception {
-        Main.switchScene("Login.fxml");
-    }
+    @FXML private CheckBox acceptCheck;
+    @FXML private Label messageLabel;
 
-    @FXML public void onContinue() throws Exception {
-        if (!agreeCheck.isSelected()) {
-            
-            messageLabel.setText("Debes aceptar el aviso de privacidad para continuar.");
-            messageLabel.setTextFill(Color.RED); 
-            return; 
+    @FXML
+    public void onContinue() throws Exception {
+        messageLabel.setText("");
+
+        if (!acceptCheck.isSelected()) {
+            messageLabel.setText("Debes aceptar las políticas para continuar.");
+            return;
         }
-        messageLabel.setText("Aviso aceptado. Redirigiendo...");
-        messageLabel.setTextFill(Color.GREEN);
 
+       
         Main.switchScene("Login.fxml");
-        
+        origen = "login"; 
+    }
+
+    @FXML
+    public void onCancel() throws Exception {
+        Main.switchScene(origen.equals("registro") ? "Register.fxml" : "Login.fxml");
+        origen = "login";
     }
 }

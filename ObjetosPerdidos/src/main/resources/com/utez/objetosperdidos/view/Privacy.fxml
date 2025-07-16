@@ -1,34 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.utez.objetosperdidos.controller.PrivacyController"
-            stylesheets="@Privacy.css" prefWidth="1000.0" prefHeight="600.0">
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.utez.objetosperdidos.controller.PrivacyController"
+           stylesheets="@../css/Privacy.css" prefWidth="1000" prefHeight="600">
 
-    <!-- Lado izquierdo: contenido y formulario -->
-    <left>
-        <VBox spacing="20" alignment="CENTER" styleClass="left-pane" prefWidth="500.0" prefHeight="600.0">
-            <Label text="Aviso de Privacidad" styleClass="titulo"/>
-            <Label text="Recopilamos datos personales únicamente para la recuperación de objetos perdidos. Al continuar, aceptas el uso responsable de tu información conforme a nuestro aviso de privacidad."
-                   wrapText="true" maxWidth="400.0" styleClass="texto-aviso"/>
+    
+    <Pane styleClass="fondo-privacidad"/>
 
-            <CheckBox fx:id="agreeCheck" text="Acepto los términos y el aviso de privacidad" styleClass="check-aviso"/>
-            <Label fx:id="messageLabel" styleClass="mensaje"/>
+    <VBox spacing="20" alignment="CENTER" styleClass="modal-centrado" maxWidth="450" maxHeight="350">
+        <Label text="Políticas de Privacidad" styleClass="titulo"/>
+        
+        <TextArea editable="false" wrapText="true" styleClass="contenido"
+                  text="Esta aplicación únicamente utiliza tus datos con fines de recuperación de objetos perdidos. Para continuar, acepta el aviso de privacidad." 
+                  prefWidth="400" prefHeight="130"/>
 
-            <HBox spacing="15" alignment="CENTER">
-                <Button text="Cancelar" onAction="#onCancel" styleClass="boton-cancelar"/>
-                <Button text="Continuar" onAction="#onContinue" styleClass="boton-continuar"/>
-            </HBox>
-        </VBox>
-    </left>
-    <center>
-        <StackPane styleClass="right-pane">
-            <ImageView fitWidth="500.0" preserveRatio="true">
-                <image>
-                    <Image url="/com/utez/objetosperdidos/imagenes/Vacio2.png"/>
-                </image>
-            </ImageView>
-        </StackPane>
-    </center>
-</BorderPane>
+        <CheckBox fx:id="acceptCheck" text="Acepto" styleClass="check"/>
+        <Label fx:id="messageLabel" styleClass="mensaje"/>
+
+        <HBox spacing="15" alignment="CENTER">
+            <Button text="Cancelar" onAction="#onCancel" styleClass="boton-cancelar"/>
+            <Button text="Continuar" onAction="#onContinue" styleClass="boton-continuar"/>
+        </HBox>
+    </VBox>
+</StackPane>

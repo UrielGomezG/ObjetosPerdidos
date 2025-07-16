@@ -2,9 +2,9 @@ package com.utez.objetosperdidos;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.Parent;
 
 public class Main extends Application {
 
@@ -19,8 +19,6 @@ public class Main extends Application {
 
         stage.setScene(scene);
         stage.setTitle("Objetos Perdidos");
-        stage.setMaximized(true);
-        stage.setFullScreen(false);
         stage.show();
     }
 
@@ -28,8 +26,6 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/utez/objetosperdidos/view/" + fxmlName));
         Scene scene = new Scene(root);
         mainStage.setScene(scene);
-        mainStage.setMaximized(true);
-        mainStage.setFullScreen(false);
     }
 
     public static void main(String[] args) {

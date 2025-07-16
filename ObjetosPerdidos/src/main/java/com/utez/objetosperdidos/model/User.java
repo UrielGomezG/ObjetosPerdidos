@@ -6,9 +6,9 @@ public class User {
     private String password;
     private String phoneNumber;
     private String matricula;
-    private String rol;
+    private int rol;
 
-    public User(String name, String email, String password, String phoneNumber, String matricula, String rol) {
+    public User(String name, String email, String password, String phoneNumber, String matricula, int rol) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -57,11 +57,11 @@ public class User {
         this.matricula = matricula;
     }
 
-    public String getRole() {
+    public int getRole() {
         return rol;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.rol = rol;
     }
     

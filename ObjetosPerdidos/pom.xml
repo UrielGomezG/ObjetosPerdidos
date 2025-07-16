@@ -18,6 +18,7 @@
   </properties>
 
   <dependencies>
+
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
@@ -28,6 +29,7 @@
       <artifactId>javafx-fxml</artifactId>
       <version>${javafx.version}</version>
     </dependency>
+
     <dependency>
       <groupId>org.controlsfx</groupId>
       <artifactId>controlsfx</artifactId>
@@ -38,6 +40,7 @@
       <artifactId>bootstrapfx-core</artifactId>
       <version>0.4.0</version>
     </dependency>
+
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -51,14 +54,11 @@
       <scope>test</scope>
     </dependency>
 
-
-
     <dependency>
       <groupId>com.oracle.database.jdbc</groupId>
       <artifactId>ojdbc8</artifactId>
       <version>19.8.0.0</version>
     </dependency>
-
     <dependency>
       <groupId>com.oracle.database.security</groupId>
       <artifactId>oraclepki</artifactId>
@@ -74,17 +74,18 @@
       <artifactId>osdt_cert</artifactId>
       <version>19.8.0.0</version>
     </dependency>
-
-
   </dependencies>
 
   <build>
     <resources>
-      <!-- Incluir los .fxml que están en src/main/java -->
+      <!-- Copia fxml y recursos desde src/main/resources -->
       <resource>
-        <directory>src/main/java</directory>
+        <directory>src/main/resources</directory>
         <includes>
           <include>**/*.fxml</include>
+          <include>**/*.css</include>
+          <include>**/*.png</include>
+          <include>**/*.jpg</include>
         </includes>
       </resource>
     </resources>
@@ -119,7 +120,6 @@
           </execution>
         </executions>
       </plugin>
-
     </plugins>
   </build>
 </project>

@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "ConexionOracle",
+      "request": "launch",
+      "mainClass": "com.utez.objetosperdidos.util.ConexionOracle",
+      "projectName": "ObjetosPerdidos"
+    },
+    {
+      "type": "java",
       "name": "Current File",
       "request": "launch",
       "mainClass": "${file}",

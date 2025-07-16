@@ -1,14 +1,13 @@
 package com.utez.objetosperdidos.controller;
 
 import com.utez.objetosperdidos.Main;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 public class PrivacyController {
-    private static String origen = "login"; 
-
+    private static String origen = "login";
     public static void setOrigen(String desdeDondeVengo) {
         origen = desdeDondeVengo;
     }
@@ -24,15 +23,24 @@ public class PrivacyController {
             messageLabel.setText("Debes aceptar las políticas para continuar.");
             return;
         }
-
-       
-        Main.switchScene("Login.fxml");
-        origen = "login"; 
+        if (origen.equals("registro")) {
+            Main.switchScene("Register.fxml");
+        } else {
+            Main.switchScene("Login.fxml");
+        }
+        Stage currentStage = (Stage) acceptCheck.getScene().getWindow();
+        currentStage.close();
     }
 
     @FXML
     public void onCancel() throws Exception {
-        Main.switchScene(origen.equals("registro") ? "Register.fxml" : "Login.fxml");
-        origen = "login";
+        Stage currentStage = (Stage) acceptCheck.getScene().getWindow();
+        currentStage.close();
+        if (origen.equals("registro")) {
+            Main.switchScene("Register.fxml");
+        } else {
+            Main.switchScene("Login.fxml");
+        }
+        origen = "";
     }
 }

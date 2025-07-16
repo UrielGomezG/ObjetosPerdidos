@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.utez.objetosperdidos.controller.RegisterController"
+            stylesheets="@../css/Register.css" prefWidth="1000" prefHeight="600">
+
+    <left>
+        <VBox alignment="CENTER" spacing="12" styleClass="form-pane" prefWidth="500">
+            <Label text="Iniciar" styleClass="titulo"/>
+            <Label text="Registro Objetos Perdidos" styleClass="subtitulo"/>
+
+            <TextField fx:id="nameField" promptText="Nombre completo" styleClass="campo"/>
+            <HBox spacing="8">
+                <TextField fx:id="matriculaField" promptText="Matrícula" styleClass="campo"/>
+                <TextField fx:id="phoneField" promptText="Teléfono" styleClass="campo"/>
+            </HBox>
+            <TextField fx:id="emailField" promptText="Correo institucional" styleClass="campo"/>
+            <PasswordField fx:id="passwordField" promptText="Contraseña" styleClass="campo"/>
+            <PasswordField fx:id="confirmPasswordField" promptText="Confirmar contraseña" styleClass="campo"/>
+
+            <Label fx:id="messageLabel" styleClass="mensaje"/>
+            <Button text="Registrarse" onAction="#onSignUp" styleClass="boton"/>
+
+            <HBox spacing="5" alignment="CENTER">
+                <Label text="¿Tienes una cuenta?" styleClass="label-link"/>
+                <Hyperlink text="Iniciar sesión" onAction="#onSignInLink" styleClass="link"/>
+            </HBox>
+            <Hyperlink text="Leer Políticas de privacidad" onAction="#onPrivacyLink" styleClass="link"/>
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane styleClass="imagen-pane">
+            <ImageView fitWidth="500.0" preserveRatio="true">
+                <image>
+                    <Image url="/com/utez/objetosperdidos/imagenes/Vacio2.png"/>
+                </image>
+            </ImageView>
+        </StackPane>
+    </center>
+</BorderPane>

@@ -1,30 +1,30 @@
 package com.utez.objetosperdidos.util;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConexionOracle {
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
-    private static final String USER = "system";
-    private static final String PASSWORD = "12345";
+    private static final String URL      = "jdbc:oracle:thin:@"; //Copiar desde tnsnames y pegarlo despues de thin:
+    private static final String USER     = "ADMIN";
+    private static final String PASSWORD = ""; // Colocar la password
 
-    public static Connection conectar() {
-        try {
-            Class.forName("oracle.jdbc.OracleDriver");
-
-            Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Conexión exitosa");
-            return conn;
-        } catch (ClassNotFoundException e) {
-            System.out.println("Driver no encontrado: " + e.getMessage());
-        } catch (SQLException e) {
-            System.out.println("Error de conexión: " + e.getMessage());
-        }
-        return null;
+    // Obtiene una conexión nueva
+    public static Connection getConnection() throws SQLException {
+        // 1. Apunta al directorio donde descomprimiste el wallet
+        System.setProperty("oracle.net.tns_admin", ""); //Colocar la ruta de tu Wallet
+        // 2. (Opcional) fuerza la validación de nombre de servidor en el certificado
+        System.setProperty("oracle.net.ssl_server_dn_match", "true");
+        // 3. Obtiene la conexión usando alias, user y pass
+        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    public static void main(String[] args) {
-        conectar();
-    }
+ public static void main(String[] args) throws SQLException {
+      try (Connection conn = getConnection()) {
+           System.out.println("¡Conexión exitosa!");
+     } catch (SQLException e) {
+            e.printStackTrace();
+       } 
+     }
+
+    //Prueba la conexión de la base de datos
 }

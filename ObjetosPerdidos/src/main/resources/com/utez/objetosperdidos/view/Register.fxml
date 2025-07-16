@@ -12,7 +12,8 @@
             <Label text="Iniciar" styleClass="titulo"/>
             <Label text="Registro Objetos Perdidos" styleClass="subtitulo"/>
 
-            <TextField fx:id="nameField" promptText="Nombre completo" styleClass="campo"/>
+            <TextField fx:id="nameField" promptText="Nombre(S)" styleClass="campo"/>
+            <TextField fx:id="apellidosField" promptText="Apellidos" styleClass="campo"/>
             <HBox spacing="8">
                 <TextField fx:id="matriculaField" promptText="Matrícula" styleClass="campo"/>
                 <TextField fx:id="phoneField" promptText="Teléfono" styleClass="campo"/>

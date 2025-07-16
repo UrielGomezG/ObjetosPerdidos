@@ -55,13 +55,24 @@ public void onSignIn() throws Exception {
 
     try (Connection conn = ConexionOracle.getConnection()) {
         PreparedStatement stmt = conn.prepareStatement(
-            "SELECT COUNT(*) FROM USUARIOS WHERE correo = ? AND contrasena = ?"
+            "SELECT nombre, correo, contrasena, rol_id FROM USUARIOS WHERE correo = ? AND contrasena = ?"
         );
         stmt.setString(1, email);
         stmt.setString(2, pwd);
         ResultSet rs = stmt.executeQuery();
 
-        if (rs.next() && rs.getInt(1) > 0) {
+        if (rs.next()) {
+            int rol = rs.getInt("rol_id");
+            User user = new User(
+                rs.getString("nombre"),
+                rs.getString("correo"),
+                rs.getString("contrasena"),
+                null,
+                null, 
+                rs.getInt("rol_id")
+            );
+            Session.currentUser = user;
+
             messageLabel.setText("Inicio de sesión exitoso. Mostrando aviso...");
             messageLabel.setStyle("-fx-text-fill: #388E3C;");
 

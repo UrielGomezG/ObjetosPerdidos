@@ -22,13 +22,13 @@
                 <Insets bottom="10" left="10" right="10" top="10" />
             </HBox.margin>
          <Region prefHeight="40.0" prefWidth="4.0" />
-            <Button prefHeight="36.0" prefWidth="37.0" style="-fx-font-size: 16px;" text="Casita pa diferenciar ahora" />
+            <Button prefHeight="36.0" prefWidth="37.0" style="-fx-font-size: 16px;" text="" />
          <Region prefHeight="40.0" prefWidth="8.0" />
             <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Objetos Perdidos" />
          <Region prefHeight="40.0" prefWidth="129.0" />
          <StackPane prefHeight="40.0" prefWidth="380.0">
             <children>
-                  <TextField prefHeight="25.0" prefWidth="232.0" promptText="Buscar..." />
+                  <TextField prefHeight="25.0" prefWidth="232.0" promptText="Casita pa diferenciar ahora" />
                   <Button text="🔍" StackPane.alignment="CENTER_RIGHT" />
             </children>
          </StackPane>

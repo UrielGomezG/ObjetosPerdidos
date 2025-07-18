@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.utez.objetosperdidos.controller.PrivacyController"
+           stylesheets="@../css/Privacy.css" prefWidth="1000" prefHeight="600">
+
+    
+    <Pane styleClass="fondo-privacidad"/>
+
+    <VBox spacing="20" alignment="CENTER" styleClass="modal-centrado" maxWidth="450" maxHeight="350">
+        <Label text="Políticas de Privacidad" styleClass="titulo"/>
+        
+        <TextArea editable="false" wrapText="true" styleClass="contenido"
+                  text="Esta aplicación únicamente utiliza tus datos con fines de recuperación de objetos perdidos. Para continuar, acepta el aviso de privacidad." 
+                  prefWidth="200" prefHeight="130"/>
+
+        <CheckBox fx:id="acceptCheck" text="Acepto" styleClass="check"/>
+        <Label fx:id="messageLabel" styleClass="mensaje"/>
+
+        <HBox spacing="15" alignment="CENTER">
+            <Button text="Cancelar" onAction="#onCancel" styleClass="boton-cancelar"/>
+            <Button text="Continuar" onAction="#onContinue" styleClass="boton-continuar"/>
+        </HBox>
+    </VBox>
+</StackPane>

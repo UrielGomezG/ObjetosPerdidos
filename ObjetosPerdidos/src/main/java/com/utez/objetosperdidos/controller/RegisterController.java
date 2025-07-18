@@ -43,6 +43,10 @@ public class RegisterController {
             messageLabel.setText("El nombre solo debe contener letras.");
             return;
         }
+        if (!apellidos.matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$")) {
+            messageLabel.setText("El nombre solo debe contener letras.");
+            return;
+        }
 
         if (!matricula.matches("^[a-zA-Z0-9]+$")) {
             messageLabel.setText("La matrícula debe ser alfanumérica.");

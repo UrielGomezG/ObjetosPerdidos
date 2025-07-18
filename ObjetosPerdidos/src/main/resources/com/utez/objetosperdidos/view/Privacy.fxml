@@ -4,7 +4,7 @@
 
 <StackPane xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.utez.objetosperdidos.controller.PrivacyController"
-           stylesheets="@../css/Privacy.css" prefWidth="1000" prefHeight="600">
+           stylesheets="@../css/Privacy.css" prefWidth="300" prefHeight="300">
 
     
     <Pane styleClass="fondo-privacidad"/>

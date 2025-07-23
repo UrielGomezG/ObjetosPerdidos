@@ -1,0 +1,65 @@
+package com.utez.objetosperdidos.model.dao;
+
+import com.utez.objetosperdidos.model.ObjetoPerdido;
+import com.utez.objetosperdidos.util.ConexionOracle;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ObjetoDAO {
+
+    public List<ObjetoPerdido> obtenerObjetosConInfo(int offset, int limit) {
+        List<ObjetoPerdido> lista = new ArrayList<>();
+
+        String query = """
+            SELECT o.ID, o.NOMBRE_EN_OBJETO, o.DESCRIPCION, o.FOTO_URL, o.AULA,
+                   e.NOMBRE AS edificio, s.NOMBRE AS estado
+            FROM OBJETOS_PERDIDOS o
+            JOIN EDIFICIOS e ON o.EDIFICIO_ID = e.ID
+            JOIN ESTADOS s ON o.ESTADO_ID = s.ID
+            ORDER BY o.FECHA_REPORTE DESC
+            """;
+
+        try (Connection conn = ConexionOracle.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                ObjetoPerdido obj = new ObjetoPerdido(
+                    rs.getInt("ID"),
+                    rs.getString("NOMBRE_EN_OBJETO"),
+                    rs.getString("DESCRIPCION"),
+                    rs.getString("FOTO_URL"),
+                    rs.getString("AULA"),
+                    rs.getString("edificio"),
+                    rs.getString("estado")
+                );
+                lista.add(obj);
+            }
+
+            System.out.println("Objetos encontrados en DAO: " + lista.size());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    public static void main(String[] args) {
+    ObjetoDAO dao = new ObjetoDAO();
+    List<ObjetoPerdido> objetos = dao.obtenerObjetosConInfo(0, 6);
+
+    System.out.println("Total de objetos encontrados: " + objetos.size());
+    for (ObjetoPerdido obj : objetos) {
+        System.out.println("ID: " + obj.getId());
+        System.out.println("Nombre: " + obj.getNombreObjeto());
+        System.out.println("Descripción: " + obj.getDescripcion());
+        System.out.println("Edificio: " + obj.getEdificio());
+        System.out.println("Estado: " + obj.getEstado());
+        System.out.println("-----------------------------");
+    }
+}
+
+}

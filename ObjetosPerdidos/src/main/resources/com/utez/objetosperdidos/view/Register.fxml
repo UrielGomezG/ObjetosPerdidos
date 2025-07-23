@@ -11,17 +11,42 @@
         <VBox alignment="CENTER" spacing="12" styleClass="form-pane" prefWidth="500">
             <Label text="Iniciar" styleClass="titulo"/>
             <Label text="Registro Objetos Perdidos" styleClass="subtitulo"/>
-
-            <TextField fx:id="nameField" promptText="Nombre(S)" styleClass="campo"/>
+            <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
+                <Label style="-fx-font-weight: bold;" text="Nombre" StackPane.alignment="TOP_LEFT" />
+                <TextField fx:id="nameField" promptText="Nombre(S)" styleClass="campo"/>
+            </VBox>
+                
+            <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
+            <Label style="-fx-font-weight: bold;" text="Apellidos" />
             <TextField fx:id="apellidosField" promptText="Apellidos" styleClass="campo"/>
-            <HBox spacing="8">
+            </VBox>
+            
+            <VBox>
+                <HBox spacing="160">
+                <Label style="-fx-font-weight: bold;" text="Matricula" />
+                <Label style="-fx-font-weight: bold;" text="Telefono" />
+            </HBox>
+                <HBox spacing="8">
                 <TextField fx:id="matriculaField" promptText="Matrícula" styleClass="campo"/>
                 <TextField fx:id="phoneField" promptText="Teléfono" styleClass="campo"/>
             </HBox>
-            <TextField fx:id="emailField" promptText="Correo institucional" styleClass="campo"/>
-            <PasswordField fx:id="passwordField" promptText="Contraseña" styleClass="campo"/>
-            <PasswordField fx:id="confirmPasswordField" promptText="Confirmar contraseña" styleClass="campo"/>
-
+            </VBox>
+    
+            <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
+                <Label style="-fx-font-weight: bold;" text="Correo Institucional" StackPane.alignment="TOP_LEFT" />
+                <TextField fx:id="emailField" promptText="Correo institucional" styleClass="campo"/>
+            </VBox>
+            
+            <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
+                 <Label style="-fx-font-weight: bold;" text="Contraseña" StackPane.alignment="TOP_LEFT" />
+                <PasswordField fx:id="passwordField" promptText="Contraseña" styleClass="campo"/>
+            </VBox>
+           
+            <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
+                 <Label style="-fx-font-weight: bold;" text="Confirmar" StackPane.alignment="TOP_LEFT" />
+                <PasswordField fx:id="confirmPasswordField" promptText="Confirmar contraseña" styleClass="campo"/>
+            </VBox>
+               
             <Label fx:id="messageLabel" styleClass="mensaje"/>
             <Button text="Registrarse" onAction="#onSignUp" styleClass="boton"/>
 

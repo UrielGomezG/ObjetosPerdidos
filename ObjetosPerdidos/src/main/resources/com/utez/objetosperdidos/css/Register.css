@@ -8,6 +8,12 @@
     -fx-alignment: center;
 }
 
+.label {
+    -fx-font-weight: bold; 
+    -fx-padding: -10 0 0 0;
+    -fx-text-fill: #555;
+}
+
 .titulo {
     -fx-font-size: 28px;
     -fx-text-fill: #2e7d32;

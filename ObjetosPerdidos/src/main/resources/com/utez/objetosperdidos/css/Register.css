@@ -31,7 +31,6 @@
 .subtitulo {
     -fx-font-size: 28px;
     -fx-text-fill: black;
-    
 }
 
 .campo {
@@ -41,6 +40,8 @@
     -fx-padding: 8px;
     -fx-border-color: #5A777D;
     -fx-background-radius: 6;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
 }
 
 .boton {

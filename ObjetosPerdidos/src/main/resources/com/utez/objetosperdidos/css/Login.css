@@ -1,21 +1,19 @@
 .login-pane {
     -fx-background-color: #E2E9EF;
-    -fx-padding: 40px;
 }
 
-.imagen-pane {
-    -fx-background-color: #E2E9EF;
-    -fx-alignment: center;
-}
+/*.imagen-pane {*/
+/*    -fx-background-color: #E2E9EF;*/
+/*    -fx-alignment: center;*/
+/*}*/
 
 .titulo {
     -fx-font-size: 18px;
-    -fx-text-fill: black;
-    -fx-font-weight: bold;
+    -fx-text-fill: #5A777D;
 }
 
 .subtitulo {
-    -fx-font-size: 28px;
+    -fx-font-size: 24px;
     -fx-text-fill: black;
 }
 
@@ -30,35 +28,42 @@
     -fx-background-radius: 10px;
 }
 
-.headers {
-    -fx-flex-align: left;
-    -fx-padding: 50px 20px;
-}
+/*.headers {*/
+/*    -fx-flex-align: left;*/
+/*    -fx-padding: 50px 20px;*/
+/*}*/
 
 
 
-.campo-texto {
-    -fx-pref-width: 300px;
-    -fx-font-size: 14px;
-    -fx-background-color: #E2E9EF;
-    -fx-text-fill: #000000;
-    -fx-background-radius: 6;
-    -fx-padding: 10px;
-}
+/*.campo-texto {*/
+/*    -fx-pref-width: 300px;*/
+/*    -fx-font-size: 14px;*/
+/*    -fx-background-color: #E2E9EF;*/
+/*    -fx-text-fill: #000000;*/
+/*    -fx-background-radius: 6;*/
+/*    -fx-padding: 10px;*/
+/*}*/
 
-.check-estilo {
-    -fx-text-fill: #2e7d32;
-}
+/*.check-estilo {*/
+/*    -fx-text-fill: #2e7d32;*/
+/*}*/
 
-.boton-ingresar {
+.btnIngresar {
     -fx-background-color: #66bb6a;
     -fx-text-fill: #E2E9EF;
     -fx-font-weight: bold;
     -fx-background-radius: 10;
     -fx-padding: 10px 20px;
+    -fx-pref-width: 350px;
 }
 
 .mensaje {
     -fx-font-size: 12px;
     -fx-text-fill: #e53935;
+}
+
+.lbl-titulo{
+    -fx-text-fill: black;
+    -fx-background-color: #E2E9EF;
+    -fx-font-weight: bold;
 }

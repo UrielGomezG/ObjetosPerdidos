@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../css/Registrar_Objeto.css" styleClass="background">
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="900.0" BorderPane.alignment="CENTER" styleClass="boxStyle">
          <children>
             <Region prefHeight="55.0" prefWidth="12.0" />
             <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Home" />
@@ -30,7 +30,7 @@
       </HBox>
    </top>
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="61.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="61.0" BorderPane.alignment="CENTER" styleClass="boxStyle">
          <children>
             <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Button" />
             <Region prefHeight="20.0" prefWidth="50.0" />
@@ -46,76 +46,52 @@
             <Region prefHeight="550.0" prefWidth="45.0" />
             <VBox prefHeight="550.0" prefWidth="797.0">
                <children>
-                  <Label text="Agregar Objeto">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Label>
+                  <Label text="Agregar Objeto" styleClass="Titulo-style"/>
                   <HBox alignment="CENTER_LEFT" prefHeight="511.0" prefWidth="797.0">
                      <children>
-                        <ImageView fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" styleClass="img-style"/>
                         <VBox prefHeight="511.0" prefWidth="578.0">
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
                                  <children>
-                                    <Label text="Titulo:">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
+                                    <Label text="Título:" styleClass="etiqueta-style"/>
                                     <Region prefHeight="47.0" prefWidth="65.0" />
-                                    <TextField prefHeight="35.0" prefWidth="410.0" />
+                                    <TextField prefHeight="35.0" prefWidth="410.0" styleClass="textField"/>
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="578.0">
                                  <children>
-                                    <Label text="Marca:">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
+                                    <Label text="Marca:" styleClass="etiqueta-style"/>
                                     <Region prefHeight="62.0" prefWidth="63.0" />
-                                    <TextField prefHeight="35.0" prefWidth="410.0" />
+                                    <TextField prefHeight="35.0" prefWidth="410.0" styleClass="textField"/>
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="578.0">
                                  <children>
-                                    <Label text="Modelo:">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
+                                    <Label text="Modelo:" styleClass="etiqueta-style"/>
                                     <Region prefHeight="45.0" prefWidth="51.0" />
-                                    <TextField prefHeight="35.0" prefWidth="410.0" />
+                                    <TextField prefHeight="35.0" prefWidth="410.0" styleClass="textField"/>
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="578.0">
                                  <children>
-                                    <Label text="No.Serial:">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
+                                    <Label text="No.Serial:" styleClass="etiqueta-style"/>
                                     <Region prefHeight="57.0" prefWidth="39.0" />
-                                    <TextField prefHeight="35.0" prefWidth="410.0" />
+                                    <TextField prefHeight="35.0" prefWidth="410.0" styleClass="textField"/>
                                  </children>
                               </HBox>
                               <HBox prefHeight="228.0" prefWidth="578.0">
                                  <children>
-                                    <Label text="Descripción:">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
+                                    <Label text="Descripción:" styleClass="etiqueta-style"/>
                                     <Region prefHeight="228.0" prefWidth="15.0" />
-                                    <TextArea prefHeight="200.0" prefWidth="410.0" />
+                                    <TextArea prefHeight="200.0" prefWidth="410.0" styleClass="textArea"/>
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="578.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Cancelar" />
+                                    <Button mnemonicParsing="false" text="Cancelar" styleClass="btnCancelar"/>
                                     <Region prefHeight="53.0" prefWidth="20.0" />
-                                    <Button mnemonicParsing="false" text="Guardar" />
+                                    <Button mnemonicParsing="false" text="Guardar" styleClass="btnGuardar"/>
                                     <Region prefHeight="53.0" prefWidth="49.0" />
                                  </children>
                               </HBox>

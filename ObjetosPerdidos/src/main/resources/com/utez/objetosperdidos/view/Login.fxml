@@ -20,7 +20,7 @@
             <children>
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_LEFT">
                     <image>
-                        <Image url="/com/utez/objetosperdidos/imagenes/Logo_UTEZ.png" />
+                        <Image url="@../imagenes/Logo_UTEZ.png" />
                     </image>
                 </ImageView>
                 <HBox alignment="CENTER" prefHeight="589.0" prefWidth="700.0" style="-fx-alignment: center;">
@@ -66,12 +66,12 @@
                                 <children>
                                     <ImageView fitHeight="608.0" fitWidth="488.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                                         <image>
-                                            <Image url="/com/utez/objetosperdidos/imagenes/Vacio2.png" />
+                                            <Image url="@../imagenes/Vacio2.png" />
                                         </image>
                                     </ImageView>
                                     <ImageView fitHeight="82.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
                                         <image>
-                                            <Image url="/com/utez/objetosperdidos/imagenes/Logo_BitForge_Black.png" />
+                                            <Image url="@../imagenes/Logo_BitForge_Black.png" />
                                         </image>
                                     </ImageView>
                                 </children>

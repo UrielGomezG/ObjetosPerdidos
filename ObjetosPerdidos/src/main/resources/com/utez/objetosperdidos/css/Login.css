@@ -60,6 +60,9 @@
 .mensaje {
     -fx-font-size: 12px;
     -fx-text-fill: #e53935;
+    -fx-pref-height: 19px;
+    -fx-pref-width: 101px;
+    -fx-padding: 5px 0 0 0;
 }
 
 .lbl-titulo{

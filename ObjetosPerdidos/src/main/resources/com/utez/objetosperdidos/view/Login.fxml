@@ -71,7 +71,7 @@
                                                         <Button mnemonicParsing="false" onAction="#onSignIn" text="Iniciar Sesión" styleClass="btnIngresar"/>
                                                     </children>
                                                 </VBox>
-                                                <Label  styleClass="mensaje"/>
+                                                <Label fx:id="messageLabel" styleClass="mensaje" text="" wrapText="true"/>
                                                 <Separator prefWidth="200.0" />
                                                 <HBox alignment="CENTER" prefHeight="40.0" prefWidth="343.0">
                                                     <children>

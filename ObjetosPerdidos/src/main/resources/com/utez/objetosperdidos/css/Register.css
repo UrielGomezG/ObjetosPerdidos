@@ -1,6 +1,7 @@
 .form-pane {
     -fx-background-color: #E2E9EF;
-    -fx-padding: 40px;
+    -fx-padding: 50px;
+    
 }
 
 .imagen-pane {
@@ -8,29 +9,38 @@
     -fx-alignment: center;
 }
 
+.headers {
+    -fx-flex-align: left;
+    -fx-padding: 30px 20px;
+}
+
 .label {
+    -fx-background-color: #E2E9EF;
     -fx-font-weight: bold; 
-    -fx-padding: -10 0 0 0;
-    -fx-text-fill: #555;
+    -fx-padding: -10 5 0 2;
+    -fx-text-fill: #5A777D;
+    -fx-background-radius: 10px; 
 }
 
 .titulo {
-    -fx-font-size: 28px;
-    -fx-text-fill: #2e7d32;
+    -fx-font-size: 18px;
+    -fx-text-fill: black;
     -fx-font-weight: bold;
 }
 
 .subtitulo {
-    -fx-font-size: 18px;
-    -fx-text-fill: #1b5e20;
+    -fx-font-size: 28px;
+    -fx-text-fill: black;
+    
 }
 
 .campo {
     -fx-pref-width: 350px;
     -fx-font-size: 14px;
-    -fx-background-radius: 8px;
-    -fx-background-color: #f1f8e9;
+    -fx-background-color: #E2E9EF;
     -fx-padding: 8px;
+    -fx-border-color: #5A777D;
+    -fx-background-radius: 6;
 }
 
 .boton {

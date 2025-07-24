@@ -8,11 +8,15 @@
             stylesheets="@../css/Register.css" prefWidth="1000" prefHeight="600">
 
     <left>
-        <VBox alignment="CENTER" spacing="12" styleClass="form-pane" prefWidth="500">
-            <Label text="Iniciar" styleClass="titulo"/>
-            <Label text="Registro Objetos Perdidos" styleClass="subtitulo"/>
+        <VBox alignment="CENTER" spacing="8" styleClass="form-pane" prefWidth="500">
 
-            <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
+            <VBox alignment="CENTER" spacing= "10" styleClass="headers">
+                <Label text="Iniciar" styleClass="titulo"/>
+                <Label text="Registro Objetos Perdidos" styleClass="subtitulo"/>
+            </VBox>
+                
+        <HBox spacing="6">
+                <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
                 <StackPane>
                 <TextField fx:id="nameField" promptText="Nombre(S)" styleClass="campo"/>
                 <Label style="label" text="Nombre" StackPane.alignment="TOP_LEFT" />
@@ -20,11 +24,20 @@
             </VBox>
                 
             <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
-            <StackPane>
-            <TextField fx:id="apellidosField" promptText="Apellidos" styleClass="campo"/>
-            <Label style="label" text="Apellidos" StackPane.alignment="TOP_LEFT" />
-            </StackPane>
+                <StackPane>
+                <TextField fx:id="apellidosField" promptText="Apellido Paterno" styleClass="campo"/>
+                <Label style="label" text="Apellido Paterno" StackPane.alignment="TOP_LEFT" />
+                </StackPane>
             </VBox>
+
+            <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
+                <StackPane>
+                <TextField fx:id="apellidosField" promptText="Apellido Materno" styleClass="campo"/>
+                <Label style="label" text="Apellido Materno" StackPane.alignment="TOP_LEFT" />
+                </StackPane>
+            </VBox>
+            
+        </HBox>
             
             <VBox>
             <HBox spacing="8">

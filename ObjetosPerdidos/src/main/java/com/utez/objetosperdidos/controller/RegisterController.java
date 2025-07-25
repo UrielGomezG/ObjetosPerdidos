@@ -16,7 +16,7 @@ import javafx.util.Duration;
 import java.sql.*;
 
 public class RegisterController {
-    @FXML private TextField nameField, apellidosField, matriculaField, phoneField, emailField;
+    @FXML private TextField nameField, apellidoPaternoField, apellidoMaternoField ,matriculaField, phoneField, emailField;
     @FXML private PasswordField passwordField, confirmPasswordField;
     @FXML private Label messageLabel;
 
@@ -26,14 +26,15 @@ public class RegisterController {
         messageLabel.setTextFill(Color.RED);
 
         String nombre = nameField.getText().trim();
-        String apellidos = apellidosField.getText().trim();
+        String apellidoPaterno = apellidoPaternoField.getText().trim();
+        String apellidoMaterno = apellidoMaternoField.getText().trim();
         String matricula = matriculaField.getText().trim();
         String telefono = phoneField.getText().trim();
         String email = emailField.getText().trim();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        if (nombre.isEmpty() || apellidos.isEmpty() ||matricula.isEmpty() || telefono.isEmpty() ||
+        if (nombre.isEmpty() || apellidoPaterno.isEmpty() || apellidoMaterno.isEmpty()||matricula.isEmpty() || telefono.isEmpty() ||
                 email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             messageLabel.setText("Todos los campos son obligatorios.");
             return;
@@ -43,11 +44,14 @@ public class RegisterController {
             messageLabel.setText("El nombre solo debe contener letras.");
             return;
         }
-        if (!apellidos.matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$")) {
+        if (!apellidoPaterno.matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$")) {
             messageLabel.setText("El nombre solo debe contener letras.");
             return;
         }
-
+        if (!apellidoMaterno.matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$")) {
+            messageLabel.setText("El nombre solo debe contener letras.");
+            return;
+        }
         if (!matricula.matches("^[a-zA-Z0-9]+$")) {
             messageLabel.setText("La matrícula debe ser alfanumérica.");
             return;
@@ -92,13 +96,15 @@ public class RegisterController {
  // Insertar usuario y obtener ID
         String[] returnColumns = { "ID" }; // ← PARA OBTENER LA PK
         PreparedStatement insertUser = conn.prepareStatement(
-            "INSERT INTO USUARIOS (nombre, apellidos, correo, contrasena, rol_id) VALUES (?, ?, ?, ?, 2)",
+            "INSERT INTO USUARIOS (nombre, apellidoPaterno, apellidoMaterno, correo, contrasena, rol_id) VALUES (?, ?, ?, ?, ?, 2)",
             returnColumns
-        );
+        );  
         insertUser.setString(1, nombre);
-        insertUser.setString(2, apellidos);
-        insertUser.setString(3, email);
-        insertUser.setString(4, password);
+        insertUser.setString(2, apellidoPaterno);
+        insertUser.setString(3, apellidoMaterno);
+        insertUser.setString(4, email);
+        insertUser.setString(5, password);
+        
         insertUser.executeUpdate();
 
         ResultSet generatedKeys = insertUser.getGeneratedKeys();

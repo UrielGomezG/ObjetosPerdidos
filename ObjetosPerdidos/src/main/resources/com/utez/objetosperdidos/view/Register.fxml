@@ -8,8 +8,17 @@
             stylesheets="@../css/Register.css" prefWidth="1000" prefHeight="600">
 
     <left>
-        <VBox alignment="CENTER" spacing="8" styleClass="form-pane" prefWidth="500">
-
+        
+        <VBox alignment="CENTER" spacing="10" styleClass="form-pane" prefWidth="500">
+            <HBox prefHeight="74.0" prefWidth="390.0">
+                <children>
+                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                    <Image url="@../imagenes/Logo_UTEZ.png" />
+                    </image>
+                    </ImageView>
+                </children>
+            </HBox>
             <VBox alignment="CENTER" spacing= "10" styleClass="headers">
                 <Label text="Iniciar" styleClass="titulo"/>
                 <Label text="Registro Objetos Perdidos" styleClass="subtitulo"/>
@@ -86,12 +95,19 @@
     </left>
 
     <center>
-        <StackPane styleClass="imagen-pane">
-            <ImageView fitWidth="500.0" preserveRatio="true">
-                <image>
-                    <Image url="@../imagenes/Vacio2.png"/>
-                </image>
-            </ImageView>
+        <StackPane alignment="TOP_RIGHT" prefHeight="150.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="690.0" fitWidth="500.0" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../imagenes/Vacio2.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="77.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../imagenes/Logo_BitForge_Black.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
         </StackPane>
     </center>
 </BorderPane>

@@ -41,7 +41,7 @@
     <left>
         <VBox prefHeight="615.0" prefWidth="69.0" spacing="20" style="-fx-padding: 10; -fx-background-color: #eaeaea;">
             <Button style="-fx-font-size: 20px;" text="☰" />
-            <Button prefHeight="43.0" prefWidth="47.0" style="-fx-font-size: 20px;" text="👤" />
+            <Button prefHeight="43.0" prefWidth="47.0" onAction="#onPerfil" style="-fx-font-size: 20px;" text="👤" />
         </VBox>
     </left>
 

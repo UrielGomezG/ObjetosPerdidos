@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="700" prefWidth="1000" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.HomeController">
+<BorderPane fx:id="mainContainer" prefHeight="700" prefWidth="1000" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.AdminHomeController">
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: #f8f8f8;" BorderPane.alignment="CENTER">
@@ -33,7 +33,7 @@
             </children>
          </StackPane>
          <Region prefHeight="40.0" prefWidth="32.0" />
-            <Label fx:id="userNameLabel" style="-fx-padding: 0 10 0 10;" text="Nombre de Usuario" />
+            <Label fx:id="userNameLabel" style="-fx-padding: 0 10 0 10;" />
             <ImageView fitHeight="40" fitWidth="40" preserveRatio="true" />
         </HBox>
     </top>
@@ -41,7 +41,7 @@
     <left>
         <VBox prefHeight="615.0" prefWidth="69.0" spacing="20" style="-fx-padding: 10; -fx-background-color: #eaeaea;">
             <Button style="-fx-font-size: 20px;" text="☰" />
-            <Button prefHeight="43.0" prefWidth="47.0" style="-fx-font-size: 20px;" text="👤" />
+            <Button prefHeight="43.0" prefWidth="47.0" onAction="#onPerfil" style="-fx-font-size: 20px;" text="👤" />
         </VBox>
     </left>
 

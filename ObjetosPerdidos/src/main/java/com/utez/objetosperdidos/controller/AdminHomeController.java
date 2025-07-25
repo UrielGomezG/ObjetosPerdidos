@@ -7,12 +7,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class HomeController {
-@FXML
+public class AdminHomeController {
+    @FXML
 private BorderPane mainContainer;
 
 @FXML
@@ -43,5 +44,6 @@ public void onPerfil(ActionEvent event) throws Exception {
         System.out.println("Error al cargar modal editar perfil");
     }
 }
+
 
 }

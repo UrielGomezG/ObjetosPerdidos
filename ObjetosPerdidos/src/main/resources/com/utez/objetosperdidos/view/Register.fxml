@@ -25,14 +25,14 @@
                 
             <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
                 <StackPane>
-                <TextField fx:id="apellidosField" promptText="Apellido Paterno" styleClass="campo"/>
+                <TextField fx:id="apellidoPaternoField" promptText="Apellido Paterno" styleClass="campo"/>
                 <Label style="label" text="Apellido Paterno" StackPane.alignment="TOP_LEFT" />
                 </StackPane>
             </VBox>
 
             <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
                 <StackPane>
-                <TextField fx:id="apellidosField" promptText="Apellido Materno" styleClass="campo"/>
+                <TextField fx:id="apellidoMaternoField" promptText="Apellido Materno" styleClass="campo"/>
                 <Label style="label" text="Apellido Materno" StackPane.alignment="TOP_LEFT" />
                 </StackPane>
             </VBox>

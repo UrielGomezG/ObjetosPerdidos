@@ -47,6 +47,66 @@ public class ObjetoDAO {
         return lista;
     }
 
+     public boolean eliminarObjeto(int idObjeto) {
+        String sql = "DELETE FROM OBJETOS_PERDIDOS WHERE ID = ?";
+        try (Connection conn = ConexionOracle.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idObjeto);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+     public boolean marcarComoEntregadoPorAlumno(int idObjeto, int idAlumno) {
+        String sql = """
+            UPDATE OBJETOS_PERDIDOS
+            SET ESTADO_ID = 21,
+                ALUMNO_ID = ?
+            WHERE ID = ?
+        """;
+
+        try (Connection conn = ConexionOracle.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idAlumno);
+            stmt.setInt(2, idObjeto);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+public boolean actualizarObjeto(ObjetoPerdido obj) {
+    String sql = """
+        UPDATE OBJETOS_PERDIDOS
+        SET NOMBRE_EN_OBJETO = ?, 
+            DESCRIPCION = ?, 
+            FOTO_URL = ?, 
+            AULA = ?, 
+            EDIFICIO_ID = ?, 
+            ESTADO_ID = ?
+        WHERE ID = ?
+    """;
+
+    try (Connection conn = ConexionOracle.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, obj.getNombreObjeto());
+        stmt.setString(2, obj.getDescripcion());
+        stmt.setString(3, obj.getFotoUrl());
+        stmt.setString(4, obj.getAula());
+        stmt.setInt(5, obj.getEdificioId());
+        stmt.setInt(6, obj.getEstadoId());
+        stmt.setInt(7, obj.getId());
+
+        return stmt.executeUpdate() > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+
     public static void main(String[] args) {
     ObjetoDAO dao = new ObjetoDAO();
     List<ObjetoPerdido> objetos = dao.obtenerObjetosConInfo(0, 6);

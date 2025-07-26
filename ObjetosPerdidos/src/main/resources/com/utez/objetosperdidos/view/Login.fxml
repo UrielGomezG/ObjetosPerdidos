@@ -70,7 +70,7 @@
                                                             </children>
                                                         </StackPane>
                                                         <Region prefHeight="25.0" prefWidth="343.0" />
-                                                        <Button mnemonicParsing="false" onAction="#onSignIn" text="Iniciar Sesión" styleClass="btnIngresar"/>
+                                                        <Button fx:id="btnSignIn" mnemonicParsing="false" onAction="#onSignIn" text="Iniciar Sesión" styleClass="btnIngresar"/>
                                                     </children>
                                                 </VBox>
                                                 <Label fx:id="messageLabel" styleClass="mensaje" text="" wrapText="true"/>

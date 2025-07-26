@@ -46,5 +46,19 @@ public void onPerfil(ActionEvent event) throws Exception {
     }
 }
 
+public void onLogout(ActionEvent event) throws Exception{
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/LogOut.fxml"));
+                    Parent root = loader.load();
+                    Stage modal = new Stage();
+                    modal.setTitle("¿Cerrar sesión?");
+                    modal.setScene(new Scene(root));
+                    modal.initModality(Modality.APPLICATION_MODAL);
+                    modal.show();
+    } catch (Exception e) {
+        System.out.println("Error al cargar modal Salir");
+        e.printStackTrace();
+    }
+}
 
 }

@@ -1,6 +1,7 @@
 package com.utez.objetosperdidos.model;
 
 public class User {
+    private int id;
     private String name;
     private String email;
     private String password;
@@ -8,13 +9,22 @@ public class User {
     private String matricula;
     private int rol;
 
-    public User(String name, String email, String password, String phoneNumber, String matricula, int rol) {
+    public User(int id, String name, String email, String password, String phoneNumber, String matricula, int rol) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.matricula = matricula;
         this.rol = rol;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -64,5 +74,4 @@ public class User {
     public void setRole(int rol) {
         this.rol = rol;
     }
-    
 }

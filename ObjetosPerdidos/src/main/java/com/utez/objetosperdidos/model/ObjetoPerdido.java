@@ -6,13 +6,16 @@ public class ObjetoPerdido {
     private String descripcion;
     private String fotoUrl;
     private String aula;
-    private String edificio;
-    private String estado;
+    private String edificio;  
+    private String estado;     
+    private int edificioId;   
+    private int estadoId;      
 
     public ObjetoPerdido() {
     }
 
-    public ObjetoPerdido(int id, String nombreObjeto, String descripcion, String fotoUrl, String aula, String edificio, String estado) {
+    public ObjetoPerdido(int id, String nombreObjeto, String descripcion, String fotoUrl, String aula,
+                         String edificio, String estado) {
         this.id = id;
         this.nombreObjeto = nombreObjeto;
         this.descripcion = descripcion;
@@ -76,5 +79,21 @@ public class ObjetoPerdido {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public int getEdificioId() {
+        return edificioId;
+    }
+
+    public void setEdificioId(int edificioId) {
+        this.edificioId = edificioId;
+    }
+
+    public int getEstadoId() {
+        return estadoId;
+    }
+
+    public void setEstadoId(int estadoId) {
+        this.estadoId = estadoId;
     }
 }

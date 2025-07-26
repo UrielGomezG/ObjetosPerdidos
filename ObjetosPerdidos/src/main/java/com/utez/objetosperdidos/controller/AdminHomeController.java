@@ -23,13 +23,14 @@ public void initialize() {
 
 public void mostrarVistaObjetos() {
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/objetos.fxml"));
-        Parent vista = loader.load();
-        mainContainer.setCenter(vista);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/objetos.admin.fxml"));
+        Parent root = loader.load();
+        mainContainer.setCenter(root); 
     } catch (IOException e) {
         e.printStackTrace();
     }
 }
+
 
 public void onPerfil(ActionEvent event) throws Exception {
     try {

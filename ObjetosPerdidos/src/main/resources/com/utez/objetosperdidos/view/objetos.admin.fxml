@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.utez.objetosperdidos.controller.ObjetosAdminController"
+            fitToWidth="true">
+    <FlowPane fx:id="contenedorTarjetas" hgap="15" vgap="15">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+    </FlowPane>
+</ScrollPane>

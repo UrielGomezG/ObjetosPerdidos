@@ -1,0 +1,53 @@
+.login-fondo {
+    -fx-background-color: linear-gradient(to bottom right, #E2E9EF, #f1f8e9);
+}
+
+.modal {
+    -fx-background-color: #ffffff;
+    -fx-padding: 30;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0.3, 0, 5);
+    -fx-border-color: #a5d6a7;
+    -fx-border-width: 2;
+    -fx-border-radius: 15;
+}
+
+.titulo {
+    -fx-font-size: 22px;
+    -fx-text-fill: #2e7d32;
+    -fx-font-weight: bold;
+}
+
+.contenido {
+    -fx-font-size: 13px;
+    -fx-text-fill: #4e4e4e;
+    -fx-background-color: #f9fbe7;
+    -fx-border-color: #c5e1a5;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.check {
+    -fx-font-size: 13px;
+    -fx-text-fill: #2e7d32;
+}
+
+.mensaje {
+    -fx-text-fill: #e53935;
+    -fx-font-size: 12px;
+}
+
+.boton-cancelar {
+    -fx-background-color: #c8e6c9;
+    -fx-text-fill: #2e7d32;
+    -fx-padding: 8 20;
+    -fx-background-radius: 8;
+}
+
+.boton-continuar {
+    -fx-background-color: #66bb6a;
+    -fx-text-fill: white;
+    -fx-padding: 8 20;
+    -fx-background-radius: 8;
+    -fx-font-weight: bold;
+}

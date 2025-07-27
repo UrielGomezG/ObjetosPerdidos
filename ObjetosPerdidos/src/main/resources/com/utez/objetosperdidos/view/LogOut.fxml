@@ -2,19 +2,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
+
+
+
 <StackPane xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.utez.objetosperdidos.controller.LogOutController"
-           stylesheets="@../css/Privacy.css" prefWidth="300" prefHeight="300">
+           stylesheets="@../css/LogOut.css" prefWidth="300" prefHeight="300">
 
     
     <Pane styleClass="fondo-privacidad"/>
-
     <VBox spacing="20" alignment="CENTER" styleClass="modal-centrado" maxWidth="450" maxHeight="350">
-        <Label text="Cerrar sesión" styleClass="titulo"/>
+        <Label text="¿Cerrar sesión?" styleClass="titulo"/>
         
         <HBox spacing="15" alignment="CENTER">
-            <Button fx:id="btnCancelar" mnemonicParsing="false" text="No" onAction="#onCancel" />
-            <Button fx:id="btnAceptar" text="Continuar" onAction="#onContinue" styleClass="boton-continuar"/>
+            <Button fx:id="btnCancelar" mnemonicParsing="false" text="No" onAction="#onCancel" styleClass="boton-cancelar" />
+            <Button fx:id="btnAceptar" text="Si" onAction="#onContinue" styleClass="boton-continuar"/>
         </HBox>
     </VBox>
 </StackPane>

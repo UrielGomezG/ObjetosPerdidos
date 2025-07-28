@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -42,12 +43,12 @@
                                                 <Region prefHeight="30.0" prefWidth="343.0" />
                                                 <VBox prefHeight="50.0" prefWidth="342.0">
                                                     <children>
-                                                        <Label text="¡Bienvenido!" styleClass="titulo">
+                                                        <Label styleClass="titulo" text="¡Bienvenido!">
                                                             <font>
                                                                 <Font size="18.0" />
                                                             </font>
                                                         </Label>
-                                                        <Label text="Iniciar sesión Objetos Perdidos" styleClass="subtitulo">
+                                                        <Label styleClass="subtitulo" text="Iniciar sesión Objetos Perdidos">
                                                             <font>
                                                                 <Font size="24.0" />
                                                             </font>
@@ -73,7 +74,7 @@
                                                         <Button fx:id="btnSignIn" mnemonicParsing="false" onAction="#onSignIn" text="Iniciar Sesión" styleClass="btnIngresar"/>
                                                     </children>
                                                 </VBox>
-                                                <Label fx:id="messageLabel" styleClass="mensaje" text="" wrapText="true"/>
+                                                <Label fx:id="messageLabel" prefHeight="19" prefWidth="300" styleClass="mensaje" text="" wrapText="true" />
                                                 <Separator prefWidth="200.0" />
                                                 <HBox alignment="CENTER" prefHeight="40.0" prefWidth="343.0">
                                                     <children>

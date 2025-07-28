@@ -8,14 +8,14 @@
             stylesheets="@../css/Register.css" prefWidth="1000" prefHeight="600">
 
     <left>
-        
+
         <VBox alignment="CENTER" spacing="10" styleClass="form-pane" prefWidth="500">
             <HBox prefHeight="74.0" prefWidth="390.0">
                 <children>
                     <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                    <Image url="@../imagenes/Logo_UTEZ.png" />
-                    </image>
+                        <image>
+                            <Image url="@../imagenes/Logo_UTEZ.png" />
+                        </image>
                     </ImageView>
                 </children>
             </HBox>
@@ -23,66 +23,66 @@
                 <Label text="Iniciar" styleClass="titulo"/>
                 <Label text="Registro Objetos Perdidos" styleClass="subtitulo"/>
             </VBox>
-                
-        <HBox spacing="6">
+
+            <HBox spacing="6">
                 <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
-                <StackPane>
-                <TextField fx:id="nameField" promptText="Nombre(S)" styleClass="campo"/>
-                <Label style="label" text="Nombre" StackPane.alignment="TOP_LEFT" />
-                </StackPane>
-            </VBox>
-                
-            <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
-                <StackPane>
-                <TextField fx:id="apellidoPaternoField" promptText="Apellido Paterno" styleClass="campo"/>
-                <Label style="label" text="Apellido Paterno" StackPane.alignment="TOP_LEFT" />
-                </StackPane>
-            </VBox>
+                    <StackPane>
+                        <TextField fx:id="nameField" promptText="Nombre(S)" styleClass="campo"/>
+                        <Label style="label" text="Nombre" StackPane.alignment="TOP_LEFT" />
+                    </StackPane>
+                </VBox>
 
-            <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
-                <StackPane>
-                <TextField fx:id="apellidoMaternoField" promptText="Apellido Materno" styleClass="campo"/>
-                <Label style="label" text="Apellido Materno" StackPane.alignment="TOP_LEFT" />
-                </StackPane>
-            </VBox>
-            
-        </HBox>
-            
-            <VBox>
-            <HBox spacing="8">
-                <StackPane>
-                <TextField fx:id="matriculaField" promptText="Matrícula" styleClass="campo"/>
-                <Label style="label" text="Matricula" StackPane.alignment="TOP_LEFT" />
-                </StackPane>
+                <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
+                    <StackPane>
+                        <TextField fx:id="apellidoPaternoField" promptText="Apellido Paterno" styleClass="campo"/>
+                        <Label style="label" text="Apellido Paterno" StackPane.alignment="TOP_LEFT" />
+                    </StackPane>
+                </VBox>
 
-                <StackPane>
-                <TextField fx:id="phoneField" promptText="Teléfono" styleClass="campo"/>
-                <Label style="label" text="Telefono" StackPane.alignment="TOP_LEFT" />
-                </StackPane>
+                <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
+                    <StackPane>
+                        <TextField fx:id="apellidoMaternoField" promptText="Apellido Materno" styleClass="campo"/>
+                        <Label style="label" text="Apellido Materno" StackPane.alignment="TOP_LEFT" />
+                    </StackPane>
+                </VBox>
+
             </HBox>
+
+            <VBox>
+                <HBox spacing="8">
+                    <StackPane>
+                        <TextField fx:id="matriculaField" promptText="Matrícula" styleClass="campo"/>
+                        <Label style="label" text="Matricula" StackPane.alignment="TOP_LEFT" />
+                    </StackPane>
+
+                    <StackPane>
+                        <TextField fx:id="phoneField" promptText="Teléfono" styleClass="campo"/>
+                        <Label style="label" text="Telefono" StackPane.alignment="TOP_LEFT" />
+                    </StackPane>
+                </HBox>
             </VBox>
-    
+
             <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
                 <StackPane>
-                <TextField fx:id="emailField" promptText="Correo institucional" styleClass="campo"/>
-                <Label style="label" text="Correo Institucional" StackPane.alignment="TOP_LEFT" />
+                    <TextField fx:id="emailField" promptText="Correo institucional" styleClass="campo"/>
+                    <Label style="label" text="Correo Institucional" StackPane.alignment="TOP_LEFT" />
                 </StackPane>
             </VBox>
-            
+
             <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
                 <StackPane>
-                <PasswordField fx:id="passwordField" promptText="Contraseña" styleClass="campo"/>
-                <Label style="label" text="Contraseña" StackPane.alignment="TOP_LEFT" />
+                    <PasswordField fx:id="passwordField" promptText="Contraseña" styleClass="campo"/>
+                    <Label style="label" text="Contraseña" StackPane.alignment="TOP_LEFT" />
                 </StackPane>
             </VBox>
-           
+
             <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
                 <StackPane>
-                <PasswordField fx:id="confirmPasswordField" promptText="Confirmar contraseña" styleClass="campo"/>
-                <Label style="label" text="Confirmar" StackPane.alignment="TOP_LEFT" />
+                    <PasswordField fx:id="confirmPasswordField" promptText="Confirmar contraseña" styleClass="campo"/>
+                    <Label style="label" text="Confirmar" StackPane.alignment="TOP_LEFT" />
                 </StackPane>
             </VBox>
-               
+
             <Label fx:id="messageLabel" styleClass="mensaje"/>
             <Button text="Registrarse" onAction="#onSignUp" styleClass="boton"/>
 
@@ -96,18 +96,18 @@
 
     <center>
         <StackPane alignment="TOP_RIGHT" prefHeight="150.0" prefWidth="200.0">
-                            <children>
-                                <ImageView fitHeight="690.0" fitWidth="500.0" pickOnBounds="true">
-                                    <image>
-                                        <Image url="@../imagenes/Vacio2.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fitHeight="77.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../imagenes/Logo_BitForge_Black.png" />
-                                    </image>
-                                </ImageView>
-                            </children>
+            <children>
+                <ImageView fitHeight="690.0" fitWidth="500.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@../imagenes/Vacio2.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="77.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../imagenes/Logo_BitForge_Black.png" />
+                    </image>
+                </ImageView>
+            </children>
         </StackPane>
     </center>
 </BorderPane>

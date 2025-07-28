@@ -1,8 +1,11 @@
 package com.utez.objetosperdidos.controller;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import com.utez.objetosperdidos.Main;
-import com.utez.objetosperdidos.model.User;
-import com.utez.objetosperdidos.util.Session;
 import com.utez.objetosperdidos.util.ConexionOracle;
 
 import javafx.animation.PauseTransition;
@@ -12,8 +15,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-
-import java.sql.*;
 
 public class RegisterController {
     @FXML private TextField nameField, apellidoPaternoField, apellidoMaternoField ,matriculaField, phoneField, emailField;

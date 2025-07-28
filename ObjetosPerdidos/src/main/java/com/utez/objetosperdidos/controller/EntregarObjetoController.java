@@ -11,9 +11,10 @@ import javafx.stage.Stage;
 public class EntregarObjetoController {
 
     @FXML private Label lblTitulo;
+    @FXML private Label lblMarca;
+    @FXML private Label lblModelo;
+    @FXML private Label lblNoSerie;
     @FXML private Label lblDescripcion;
-    @FXML private Label lblUbicacion;
-    @FXML private Label lblEstado;
 
     private ObjetoPerdido objeto;
     private final ObjetoDAO dao = new ObjetoDAO();
@@ -21,14 +22,15 @@ public class EntregarObjetoController {
     public void setObjeto(ObjetoPerdido objeto) {
         this.objeto = objeto;
         lblTitulo.setText(objeto.getNombreObjeto());
+        lblMarca.setText(objeto.getMarca());
+        lblModelo.setText(objeto.getModelo());
+        lblNoSerie.setText(objeto.getNo_serial());
         lblDescripcion.setText(objeto.getDescripcion());
-        lblUbicacion.setText("📍 " + objeto.getEdificio() + " - Aula " + objeto.getAula());
-        lblEstado.setText("Estado actual: " + objeto.getEstado());
     }
 
     @FXML
     public void confirmarEntrega() {
-        int idAlumno = Session.currentUser.getId();  
+        int idAlumno = Session.currentUser.getId();
 
         boolean ok = dao.marcarComoEntregadoPorAlumno(objeto.getId(), idAlumno);
 

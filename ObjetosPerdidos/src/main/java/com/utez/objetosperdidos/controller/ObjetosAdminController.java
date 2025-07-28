@@ -4,15 +4,21 @@ import com.utez.objetosperdidos.model.ObjetoPerdido;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class ObjetosAdminController {
@@ -24,6 +30,11 @@ public class ObjetosAdminController {
 
     @FXML
     public void initialize() {
+        if (contenedorTarjetas == null) {
+            System.out.println("❌ Error: contenedorTarjetas no está vinculado. Revisa el fx:id en el FXML.");
+        } else {
+            System.out.println("✅ Inicializando vista de objetos perdidos...");
+        }
         cargarObjetos();
     }
 
@@ -38,29 +49,59 @@ public class ObjetosAdminController {
     }
 
     private VBox crearTarjetaAdmin(ObjetoPerdido obj) {
-        VBox tarjeta = new VBox(5);
-        tarjeta.setPadding(new javafx.geometry.Insets(10));
-        tarjeta.setStyle("-fx-border-color: #aaa; -fx-background-color: #f8f8f8;");
-        tarjeta.setPrefWidth(250);
+        VBox tarjeta = new VBox(10);
+        tarjeta.setPadding(new Insets(10));
+        tarjeta.setStyle("-fx-background-color: white; -fx-background-radius: 8; -fx-border-radius: 8; "
+                + "-fx-border-color: #ccc; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.3, 0, 2);");
+        tarjeta.setPrefWidth(270);
 
-        Label lblNombre = new Label("📦 " + obj.getNombreObjeto());
+        // 🔍 Imagen del objeto
+        ImageView imagenObjeto = new ImageView();
+        imagenObjeto.setFitWidth(80);
+        imagenObjeto.setFitHeight(80);
+        imagenObjeto.setPreserveRatio(true);
+        imagenObjeto.setSmooth(true);
+
+        if (obj.getFotoUrl() != null && !obj.getFotoUrl().trim().isEmpty()) {
+            Path rutaImagen = Paths.get(System.getProperty("user.home"), "objetos-imagenes", obj.getFotoUrl().trim());
+
+            if (Files.exists(rutaImagen)) {
+                imagenObjeto.setImage(new Image(rutaImagen.toUri().toString()));
+                System.out.println("🖼️ Imagen cargada: " + rutaImagen.getFileName());
+            } else {
+                System.out.println("⚠️ Imagen no encontrada: " + rutaImagen.toAbsolutePath());
+            }
+        } else {
+            System.out.println("ℹ️ No se proporcionó imagen para: " + obj.getNombreObjeto());
+        }
+
+        // 📄 Información textual
+        VBox infoTexto = new VBox(4);
+        infoTexto.getChildren().addAll(
+                new Label("📦 " + obj.getNombreObjeto()),
+                new Label("📍 " + obj.getEdificio() + " - Aula " + obj.getAula()),
+                new Label("🔖 Estado: " + obj.getEstado())
+        );
+
+        HBox encabezado = new HBox(12);
+        encabezado.setAlignment(Pos.CENTER_LEFT);
+        encabezado.getChildren().addAll(imagenObjeto, infoTexto);
+
         Label lblDescripcion = new Label(obj.getDescripcion());
-        Label lblUbicacion = new Label("📍 " + obj.getEdificio() + " - Aula " + obj.getAula());
-        Label lblEstado = new Label("Estado: " + obj.getEstado());
+        lblDescripcion.setWrapText(true);
 
         Button btnEditar = new Button("✏️ Editar");
         Button btnEliminar = new Button("❌ Eliminar");
         Button btnEntregar = new Button("📦 Marcar como entregado");
 
-        lblDescripcion.setWrapText(true);
-
         btnEditar.setOnAction(e -> abrirEdicion(obj));
         btnEliminar.setOnAction(e -> eliminarObjeto(obj));
         btnEntregar.setOnAction(e -> abrirEntrega(obj));
 
-        tarjeta.getChildren().addAll(lblNombre, lblDescripcion, lblUbicacion, lblEstado,
-                btnEditar, btnEliminar, btnEntregar);
+        VBox botones = new VBox(5, btnEditar, btnEliminar, btnEntregar);
+        botones.setPadding(new Insets(5, 0, 0, 0));
 
+        tarjeta.getChildren().addAll(encabezado, lblDescripcion, botones);
         return tarjeta;
     }
 
@@ -78,7 +119,7 @@ public class ObjetosAdminController {
             modal.initModality(Modality.APPLICATION_MODAL);
             modal.showAndWait();
 
-            cargarObjetos(); 
+            cargarObjetos();
         } catch (IOException e) {
             e.printStackTrace();
         }

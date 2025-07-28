@@ -4,12 +4,22 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-<ScrollPane xmlns:fx="http://javafx.com/fxml"
+<ScrollPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.utez.objetosperdidos.controller.ObjetosAdminController"
-            fitToWidth="true">
-    <FlowPane fx:id="contenedorTarjetas" hgap="15" vgap="15">
-        <padding>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-        </padding>
-    </FlowPane>
+            fitToWidth="true"
+            style="-fx-background-color: #f4f4f4;"
+            prefViewportWidth="900.0" prefViewportHeight="600.0">
+
+    <content>
+        <FlowPane fx:id="contenedorTarjetas"
+                  hgap="15" vgap="15"
+                  prefWrapLength="880"
+                  alignment="CENTER"
+                  style="-fx-padding: 20;">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+        </FlowPane>
+    </content>
 </ScrollPane>

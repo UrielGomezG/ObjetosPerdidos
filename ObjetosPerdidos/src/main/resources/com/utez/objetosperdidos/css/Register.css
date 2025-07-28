@@ -1,7 +1,7 @@
 .form-pane {
     -fx-background-color: #E2E9EF;
     -fx-padding: 50px;
-    
+
 }
 
 .imagen-pane {
@@ -16,10 +16,10 @@
 
 .label {
     -fx-background-color: #E2E9EF;
-    -fx-font-weight: bold; 
+    -fx-font-weight: bold;
     -fx-padding: -10 5 0 2;
     -fx-text-fill: black;
-    -fx-background-radius: 10px; 
+    -fx-background-radius: 10px;
 }
 
 .titulo {

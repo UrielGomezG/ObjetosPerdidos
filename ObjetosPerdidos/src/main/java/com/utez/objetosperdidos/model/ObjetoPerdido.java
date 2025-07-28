@@ -7,22 +7,54 @@ public class ObjetoPerdido {
     private String fotoUrl;
     private String aula;
     private String edificio;  
-    private String estado;     
+    private String estado;
+    private String marca;
+    private String modelo;
+    private String no_serial;     
     private int edificioId;   
     private int estadoId;      
 
     public ObjetoPerdido() {
     }
 
-    public ObjetoPerdido(int id, String nombreObjeto, String descripcion, String fotoUrl, String aula,
-                         String edificio, String estado) {
-        this.id = id;
-        this.nombreObjeto = nombreObjeto;
-        this.descripcion = descripcion;
-        this.fotoUrl = fotoUrl;
-        this.aula = aula;
-        this.edificio = edificio;
-        this.estado = estado;
+public ObjetoPerdido(int id, String nombreObjeto, String descripcion, String fotoUrl, String aula,
+                     String edificio, String estado,
+                     String marca, String modelo, String no_serial) {
+    this.id = id;
+    this.nombreObjeto = nombreObjeto;
+    this.descripcion = descripcion;
+    this.fotoUrl = fotoUrl;
+    this.aula = aula;
+    this.edificio = edificio;
+    this.estado = estado;
+    this.marca = marca;
+    this.modelo = modelo;
+    this.no_serial = no_serial;
+}
+
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getNo_serial() {
+        return no_serial;
+    }
+
+    public void setNo_serial(String no_serial) {
+        this.no_serial = no_serial;
     }
 
     public int getId() {

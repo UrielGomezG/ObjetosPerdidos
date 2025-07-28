@@ -14,12 +14,13 @@ public class ObjetoDAO {
 
         String query = """
             SELECT o.ID, o.NOMBRE_EN_OBJETO, o.DESCRIPCION, o.FOTO_URL, o.AULA,
+                   o.MARCA, o.MODELO, o.NO_SERIAL,
                    e.NOMBRE AS edificio, s.NOMBRE AS estado
             FROM OBJETOS_PERDIDOS o
             JOIN EDIFICIOS e ON o.EDIFICIO_ID = e.ID
             JOIN ESTADOS s ON o.ESTADO_ID = s.ID
             ORDER BY o.FECHA_REPORTE DESC
-            """;
+        """;
 
         try (Connection conn = ConexionOracle.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
@@ -33,7 +34,10 @@ public class ObjetoDAO {
                     rs.getString("FOTO_URL"),
                     rs.getString("AULA"),
                     rs.getString("edificio"),
-                    rs.getString("estado")
+                    rs.getString("estado"),
+                    rs.getString("MARCA"),
+                    rs.getString("MODELO"),
+                    rs.getString("NO_SERIAL")
                 );
                 lista.add(obj);
             }
@@ -47,7 +51,7 @@ public class ObjetoDAO {
         return lista;
     }
 
-     public boolean eliminarObjeto(int idObjeto) {
+    public boolean eliminarObjeto(int idObjeto) {
         String sql = "DELETE FROM OBJETOS_PERDIDOS WHERE ID = ?";
         try (Connection conn = ConexionOracle.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -59,7 +63,7 @@ public class ObjetoDAO {
         }
     }
 
-     public boolean marcarComoEntregadoPorAlumno(int idObjeto, int idAlumno) {
+    public boolean marcarComoEntregadoPorAlumno(int idObjeto, int idAlumno) {
         String sql = """
             UPDATE OBJETOS_PERDIDOS
             SET ESTADO_ID = 21,
@@ -78,48 +82,56 @@ public class ObjetoDAO {
         }
     }
 
-public boolean actualizarObjeto(ObjetoPerdido obj) {
-    String sql = """
-        UPDATE OBJETOS_PERDIDOS
-        SET NOMBRE_EN_OBJETO = ?, 
-            DESCRIPCION = ?, 
-            FOTO_URL = ?, 
-            AULA = ?, 
-            EDIFICIO_ID = ?, 
-            ESTADO_ID = ?
-        WHERE ID = ?
-    """;
+    public boolean actualizarObjeto(ObjetoPerdido obj) {
+        String sql = """
+            UPDATE OBJETOS_PERDIDOS
+            SET NOMBRE_EN_OBJETO = ?, 
+                DESCRIPCION = ?, 
+                FOTO_URL = ?, 
+                AULA = ?, 
+                MARCA = ?,
+                MODELO = ?,
+                NO_SERIAL = ?,
+                EDIFICIO_ID = ?, 
+                ESTADO_ID = ?
+            WHERE ID = ?
+        """;
 
-    try (Connection conn = ConexionOracle.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
-        stmt.setString(1, obj.getNombreObjeto());
-        stmt.setString(2, obj.getDescripcion());
-        stmt.setString(3, obj.getFotoUrl());
-        stmt.setString(4, obj.getAula());
-        stmt.setInt(5, obj.getEdificioId());
-        stmt.setInt(6, obj.getEstadoId());
-        stmt.setInt(7, obj.getId());
+        try (Connection conn = ConexionOracle.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, obj.getNombreObjeto());
+            stmt.setString(2, obj.getDescripcion());
+            stmt.setString(3, obj.getFotoUrl());
+            stmt.setString(4, obj.getAula());
+            stmt.setString(5, obj.getMarca());
+            stmt.setString(6, obj.getModelo());
+            stmt.setString(7, obj.getNo_serial());
+            stmt.setInt(8, obj.getEdificioId());
+            stmt.setInt(9, obj.getEstadoId());
+            stmt.setInt(10, obj.getId());
 
-        return stmt.executeUpdate() > 0;
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return false;
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
-}
 
     public static void main(String[] args) {
-    ObjetoDAO dao = new ObjetoDAO();
-    List<ObjetoPerdido> objetos = dao.obtenerObjetosConInfo(0, 6);
+        ObjetoDAO dao = new ObjetoDAO();
+        List<ObjetoPerdido> objetos = dao.obtenerObjetosConInfo(0, 6);
 
-    System.out.println("Total de objetos encontrados: " + objetos.size());
-    for (ObjetoPerdido obj : objetos) {
-        System.out.println("ID: " + obj.getId());
-        System.out.println("Nombre: " + obj.getNombreObjeto());
-        System.out.println("Descripción: " + obj.getDescripcion());
-        System.out.println("Edificio: " + obj.getEdificio());
-        System.out.println("Estado: " + obj.getEstado());
-        System.out.println("-----------------------------");
+        System.out.println("Total de objetos encontrados: " + objetos.size());
+        for (ObjetoPerdido obj : objetos) {
+            System.out.println("ID: " + obj.getId());
+            System.out.println("Nombre: " + obj.getNombreObjeto());
+            System.out.println("Marca: " + obj.getMarca());
+            System.out.println("Modelo: " + obj.getModelo());
+            System.out.println("No. Serie: " + obj.getNo_serial());
+            System.out.println("Descripción: " + obj.getDescripcion());
+            System.out.println("Edificio: " + obj.getEdificio());
+            System.out.println("Estado: " + obj.getEstado());
+            System.out.println("-----------------------------");
+        }
     }
-}
-
 }

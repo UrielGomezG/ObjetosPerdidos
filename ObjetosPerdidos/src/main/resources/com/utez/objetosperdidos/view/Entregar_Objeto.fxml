@@ -69,7 +69,7 @@
                                                     </font>
                                                 </Label>
                                                 <Region prefHeight="47.0" prefWidth="65.0" />
-                                    <Label prefHeight="35.0" prefWidth="410.0" text="Nombre Objeto" />
+                                    <Label fx:id = "lblTitulo" prefHeight="35.0" prefWidth="410.0" text="Nombre Objeto" />
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="578.0">
@@ -80,7 +80,7 @@
                                                     </font>
                                                 </Label>
                                                 <Region prefHeight="62.0" prefWidth="63.0" />
-                                    <Label prefHeight="35.0" prefWidth="410.0" text="Marca Objeto" />
+                                    <Label fx:id = "lblMarca" prefHeight="35.0" prefWidth="410.0" text="Marca Objeto" />
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="578.0">
@@ -91,7 +91,7 @@
                                                     </font>
                                                 </Label>
                                                 <Region prefHeight="45.0" prefWidth="51.0" />
-                                    <Label prefHeight="35.0" prefWidth="410.0" text="Modelo Objeto" />
+                                    <Label fx:id = "lblModelo" prefHeight="35.0" prefWidth="410.0" text="Modelo Objeto" />
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="578.0">
@@ -102,7 +102,7 @@
                                                     </font>
                                                 </Label>
                                                 <Region prefHeight="57.0" prefWidth="39.0" />
-                                    <Label prefHeight="35.0" prefWidth="410.0" text="No. Serial Objeto" />
+                                    <Label fx:id = "lblNoSerie" prefHeight="35.0" prefWidth="410.0" text="No. Serial Objeto" />
                                             </children>
                                         </HBox>
                                         <HBox prefHeight="138.0" prefWidth="576.0">
@@ -113,7 +113,7 @@
                                                     </font>
                                                 </Label>
                                                 <Region prefHeight="228.0" prefWidth="15.0" />
-                                    <Label prefHeight="160.0" prefWidth="410.0" text="Descripción Objeto" />
+                                    <Label fx:id ="lblDescripcion" prefHeight="160.0" prefWidth="410.0" text="Descripción Objeto" />
                                             </children>
                                         </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="576.0">

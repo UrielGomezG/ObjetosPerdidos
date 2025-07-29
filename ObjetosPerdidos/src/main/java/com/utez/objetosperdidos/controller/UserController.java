@@ -12,6 +12,7 @@ public class UserController {
     @FXML private TextField txtApellidoMaterno;
     @FXML private TextField txtEmail;
     @FXML private TextField txtPassword;
+    @FXML private TextField txtTelefono;
 
     private final UserDAO dao = new UserDAO();
 
@@ -23,8 +24,9 @@ public class UserController {
         String apellidoMaterno = txtApellidoMaterno.getText();
         String email = txtEmail.getText();
         String password = txtPassword.getText();
+        String telefono = txtTelefono.getText();
 
-        boolean actualizado = dao.updateUsuario(id, nombre, apellidoPaterno, apellidoMaterno, email, password);
+        boolean actualizado = dao.updateUsuario(id, nombre, apellidoPaterno, apellidoMaterno, email, password, telefono);
 
         if (actualizado) {
             System.out.println("✅ Usuario actualizado.");

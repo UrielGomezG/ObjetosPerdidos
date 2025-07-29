@@ -65,7 +65,7 @@ public class LoginController {
 
         try (Connection conn = ConexionOracle.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(
-                    "SELECT id, nombre, correo, contrasena, rol_id FROM USUARIOS WHERE correo = ? AND contrasena = ?");
+                    "SELECT id, nombre, correo, contrasena, rol_id, apellidopaterno, apellidomaterno FROM USUARIOS WHERE correo = ? AND contrasena = ?");
             stmt.setString(1, email);
             stmt.setString(2, pwd);
             ResultSet rs = stmt.executeQuery();
@@ -78,7 +78,9 @@ public class LoginController {
                         rs.getString("CONTRASENA"),
                         null,
                         null,
-                        rs.getInt("ROL_ID") 
+                        rs.getInt("ROL_ID"),
+                        rs.getString("APELLIDOPATERNO"),
+                        rs.getString("APELLIDOMATERNO") 
                 );
                 Session.currentUser = user;
 

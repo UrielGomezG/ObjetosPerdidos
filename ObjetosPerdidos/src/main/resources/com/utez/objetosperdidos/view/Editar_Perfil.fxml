@@ -83,14 +83,14 @@
                      <children>
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="txtPhone" prefHeight="35.0" StackPane.alignment="CENTER" />
+                              <TextField fx:id="txtTelefono" prefHeight="35.0" StackPane.alignment="CENTER" />
                               <Label text="Teléfono" />
                            </children>
                         </StackPane>
                         <Region prefHeight="200.0" prefWidth="60.0" />
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="txtMatricula" prefHeight="35.0" StackPane.alignment="CENTER" />
+                              <TextField fx:id="txtMatricula" editable= "false" prefHeight="35.0" StackPane.alignment="CENTER" />
                               <Label text="Matrícula" />
                            </children>
                         </StackPane>

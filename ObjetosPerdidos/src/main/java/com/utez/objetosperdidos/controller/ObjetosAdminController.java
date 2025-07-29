@@ -1,25 +1,31 @@
 package com.utez.objetosperdidos.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
 import com.utez.objetosperdidos.model.ObjetoPerdido;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 
 public class ObjetosAdminController {
 
@@ -91,13 +97,15 @@ public class ObjetosAdminController {
 
         Button btnEditar = new Button("✏️ Editar");
         Button btnEliminar = new Button("❌ Eliminar");
+        Button btnEnviarBodega = new Button("🏢 Enviar a Bodega");
         Button btnEntregar = new Button("📦 Marcar como entregado");
 
         btnEditar.setOnAction(e -> abrirEdicion(obj));
         btnEliminar.setOnAction(e -> eliminarObjeto(obj));
+        btnEnviarBodega.setOnAction(e -> enviarABodega(obj));
         btnEntregar.setOnAction(e -> abrirEntrega(obj));
 
-        VBox botones = new VBox(5, btnEditar, btnEliminar, btnEntregar);
+        VBox botones = new VBox(5, btnEditar, btnEliminar, btnEnviarBodega, btnEntregar);
         botones.setPadding(new Insets(5, 0, 0, 0));
 
         tarjeta.getChildren().addAll(encabezado, lblDescripcion, botones);
@@ -152,6 +160,19 @@ public class ObjetosAdminController {
         }
     }
 
+    private void enviarABodega(ObjetoPerdido obj) {
+        boolean confirmado = mostrarConfirmacion("¿Enviar el objeto '" + obj.getNombreObjeto() + "' a bodega?");
+        if (confirmado) {
+            // Enviar objeto a bodega usando el método correcto del DAO
+            if (dao.enviarObjetoABodega(obj.getId())) {
+                mostrarInfo("Objeto enviado a bodega correctamente.");
+                cargarObjetos();
+            } else {
+                mostrarError("Error al enviar el objeto a bodega.");
+            }
+        }
+    }
+
     private boolean mostrarConfirmacion(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmación");
@@ -162,6 +183,14 @@ public class ObjetosAdminController {
 
     private void mostrarInfo(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private void mostrarError(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();

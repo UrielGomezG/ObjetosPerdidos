@@ -1,11 +1,14 @@
 package com.utez.objetosperdidos.model.dao;
 
-import com.utez.objetosperdidos.model.ObjetoPerdido;
-import com.utez.objetosperdidos.util.ConexionOracle;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.utez.objetosperdidos.model.ObjetoPerdido;
+import com.utez.objetosperdidos.util.ConexionOracle;
 
 public class ObjetoDAO {
 
@@ -114,6 +117,67 @@ public class ObjetoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public boolean cambiarEstadoObjeto(int idObjeto, int nuevoEstadoId) {
+        String sql = "UPDATE OBJETOS_PERDIDOS SET ESTADO_ID = ? WHERE ID = ?";
+        try (Connection conn = ConexionOracle.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, nuevoEstadoId);
+            stmt.setInt(2, idObjeto);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean enviarObjetoABodega(int idObjeto) {
+        Connection conn = null;
+        try {
+            conn = ConexionOracle.getConnection();
+            conn.setAutoCommit(false); // Iniciar transacción
+            
+            // 1. Insertar registro en OBJETOS_ALMACEN
+            String sqlInsert = "INSERT INTO OBJETOS_ALMACEN (FECHA_ENVIO, OBSERVACIONES, OBJETO_PERDIDO_ID, ESTADO_ID) VALUES (SYSDATE, ?, ?, ?)";
+            try (PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert)) {
+                stmtInsert.setString(1, "Enviado a bodega por administrador");
+                stmtInsert.setInt(2, idObjeto);
+                stmtInsert.setInt(3, 3); // Estado "Disponible para Reclamar"
+                stmtInsert.executeUpdate();
+            }
+            
+            // 2. Actualizar estado en OBJETOS_PERDIDOS
+            String sqlUpdate = "UPDATE OBJETOS_PERDIDOS SET ESTADO_ID = ? WHERE ID = ?";
+            try (PreparedStatement stmtUpdate = conn.prepareStatement(sqlUpdate)) {
+                stmtUpdate.setInt(1, 3); // Estado "Disponible para Reclamar"
+                stmtUpdate.setInt(2, idObjeto);
+                stmtUpdate.executeUpdate();
+            }
+            
+            conn.commit(); // Confirmar transacción
+            return true;
+            
+        } catch (SQLException e) {
+            if (conn != null) {
+                try {
+                    conn.rollback(); // Revertir en caso de error
+                } catch (SQLException rollbackEx) {
+                    rollbackEx.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.setAutoCommit(true);
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

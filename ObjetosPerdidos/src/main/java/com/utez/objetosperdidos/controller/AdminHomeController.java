@@ -46,6 +46,20 @@ public void onPerfil(ActionEvent event) throws Exception {
     }
 }
 
+@FXML
+private void onAgregarObjeto(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/Registrar_Objeto.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Agregar nuevo objeto perdido");
+        stage.setScene(new Scene(root));
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
 public void onLogout(ActionEvent event) throws Exception{
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/LogOut.fxml"));

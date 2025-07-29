@@ -43,6 +43,7 @@
             <VBox>
                <Button style="-fx-font-size: 20px;" text="☰" />
                <Button prefHeight="43.0" prefWidth="47.0" onAction="#onPerfil" style="-fx-font-size: 20px;" text="👤" />
+            <Button fx:id="btnAgregarObjeto" prefHeight="43.0" prefWidth="47.0" onAction="#onAgregarObjeto" style="-fx-font-size: 20px; -fx-background-color: #2ecc71; -fx-text-fill: white;" text="➕" />
             </VBox>
             <VBox>
                <Button prefHeight="43.0" prefWidth="47.0" onAction="#onLogout" style="-fx-font-size: 20px;" text="🔚" />
@@ -78,17 +79,5 @@
          </children>
         </TilePane>
     </center>
-
-    <bottom>
-        <HBox alignment="CENTER" spacing="10" style="-fx-padding: 10;">
-            <Button text="≪" />
-            <Button text="&lt;" />
-            <Button style="-fx-font-weight: bold;" text="1" />
-            <Button text="2" />
-            <Button text="3" />
-            <Button text="&gt;" />
-            <Button text="≫" />
-        </HBox>
-    </bottom>
 
 </BorderPane>

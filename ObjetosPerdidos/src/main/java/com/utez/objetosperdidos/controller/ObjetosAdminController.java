@@ -63,16 +63,15 @@ public class ObjetosAdminController {
         imagenObjeto.setSmooth(true);
 
         if (obj.getFotoUrl() != null && !obj.getFotoUrl().trim().isEmpty()) {
-            Path rutaImagen = Paths.get(System.getProperty("user.home"), "objetos-imagenes", obj.getFotoUrl().trim());
-
+            Path rutaImagen = Paths.get(System.getProperty("user.home"),  "Downloads", obj.getFotoUrl().trim());
             if (Files.exists(rutaImagen)) {
                 imagenObjeto.setImage(new Image(rutaImagen.toUri().toString()));
-                System.out.println("🖼️ Imagen cargada: " + rutaImagen.getFileName());
+                System.out.println("Imagen cargada: " + rutaImagen.getFileName());
             } else {
-                System.out.println("⚠️ Imagen no encontrada: " + rutaImagen.toAbsolutePath());
+                System.out.println("Imagen no encontrada: " + rutaImagen.toAbsolutePath());
             }
         } else {
-            System.out.println("ℹ️ No se proporcionó imagen para: " + obj.getNombreObjeto());
+            System.out.println("ℹNo se proporcionó imagen para: " + obj.getNombreObjeto());
         }
 
         // 📄 Información textual

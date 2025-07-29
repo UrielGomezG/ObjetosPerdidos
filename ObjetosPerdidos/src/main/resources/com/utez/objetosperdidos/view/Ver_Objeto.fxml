@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane styleClass="background" stylesheets="@../css/Ver_Objeto.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="900.0" styleClass="boxesColor" BorderPane.alignment="CENTER">
+            <children>
+                <Region prefHeight="55.0" prefWidth="12.0" />
+                <Button mnemonicParsing="false" styleClass="btns">
+                    <graphic>
+                        <FontIcon iconLiteral="fa-home" iconSize="40" />
+                    </graphic></Button>
+                <Region prefHeight="55.0" prefWidth="22.0" />
+                <Label text="Objetos Perdidos">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Region prefHeight="43.0" prefWidth="473.0" />
+                <Label text="Administrador" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+            </children>
+        </HBox>
+    </top>
+    <left>
+        <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="61.0" styleClass="boxesColor" BorderPane.alignment="CENTER">
+            <children>
+                <Region prefHeight="20.0" prefWidth="200.0" />
+                <Button mnemonicParsing="false" styleClass="btns">
+                    <graphic>
+                        <FontIcon iconLiteral="fa-list-ul" iconSize="35" />
+                    </graphic></Button>
+                <Region prefHeight="20.0" prefWidth="50.0" />
+                <Button mnemonicParsing="false" styleClass="btns">
+                    <graphic>
+                        <FontIcon iconLiteral="fa-history" iconSize="40" />
+                    </graphic></Button>
+                <Region prefHeight="20.0" prefWidth="50.0" />
+                <Button mnemonicParsing="false" styleClass="btns">
+                    <graphic>
+                        <FontIcon iconLiteral="fa-plus-circle" iconSize="40" />
+                    </graphic></Button>
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <Region prefHeight="550.0" prefWidth="45.0" />
+                <VBox prefHeight="550.0" prefWidth="797.0">
+                    <children>
+                        <Label text="Ver Objeto">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" prefHeight="511.0" prefWidth="797.0">
+                            <children>
+                                <ImageView fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
+                                <VBox prefHeight="511.0" prefWidth="578.0">
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
+                                            <children>
+                                                <Label text="Titulo:">
+                                                    <font>
+                                                        <Font name="System Bold" size="18.0" />
+                                                    </font>
+                                                </Label>
+                                                <Region prefHeight="47.0" prefWidth="65.0" />
+                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="labelStyle" />
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="578.0">
+                                            <children>
+                                                <Label text="Marca:">
+                                                    <font>
+                                                        <Font name="System Bold" size="18.0" />
+                                                    </font>
+                                                </Label>
+                                                <Region prefHeight="62.0" prefWidth="63.0" />
+                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="labelStyle" />
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="578.0">
+                                            <children>
+                                                <Label text="Modelo:">
+                                                    <font>
+                                                        <Font name="System Bold" size="18.0" />
+                                                    </font>
+                                                </Label>
+                                                <Region prefHeight="45.0" prefWidth="51.0" />
+                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="labelStyle" />
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="578.0">
+                                            <children>
+                                                <Label text="No.Serial:">
+                                                    <font>
+                                                        <Font name="System Bold" size="18.0" />
+                                                    </font>
+                                                </Label>
+                                                <Region prefHeight="57.0" prefWidth="39.0" />
+                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="labelStyle" />
+                                            </children>
+                                        </HBox>
+                                        <HBox prefHeight="228.0" prefWidth="578.0">
+                                            <children>
+                                                <Label text="Descripción:">
+                                                    <font>
+                                                        <Font name="System Bold" size="18.0" />
+                                                    </font>
+                                                </Label>
+                                                <Region prefHeight="228.0" prefWidth="15.0" />
+                                                <Label alignment="TOP_LEFT" prefHeight="210.0" prefWidth="410.0" styleClass="labelStyle" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </center>
+</BorderPane>

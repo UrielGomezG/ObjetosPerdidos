@@ -1,0 +1,29 @@
+.background {
+    -fx-min-height: 600;
+    -fx-max-height: 600;
+    -fx-min-width: 900;
+    -fx-max-width: 900;
+    -fx-background-color: #E2E9EF;
+}
+.boxesColor {
+    -fx-background-color: #F8FCFF;
+    -fx-border-color: #E2E9EF;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+}
+.labelStyle{
+    -fx-padding: 0 0 0 5;
+    -fx-background-color: #E2E9EF;
+    -fx-border-radius: 6px;
+    -fx-border-width: 1px;
+    -fx-border-color: #5A777D;
+}
+.btns{
+    -fx-background-color: transparent;
+    -fx-min-height: 40;
+    -fx-max-height: 40;
+    -fx-min-width: 40;
+    -fx-max-height: 40;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+}

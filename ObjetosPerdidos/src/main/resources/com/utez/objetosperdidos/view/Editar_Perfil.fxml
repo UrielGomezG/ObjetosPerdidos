@@ -59,21 +59,21 @@
                      <children>
                         <StackPane alignment="TOP_LEFT" prefHeight="71.0" prefWidth="200.0">
                            <children>
-                              <TextField prefHeight="35.0" prefWidth="200.0" StackPane.alignment="CENTER" />
+                              <TextField fx:id="txtNombre" prefHeight="35.0" prefWidth="200.0" StackPane.alignment="CENTER" />
                               <Label text="Nombre" />
                            </children>
                         </StackPane>
                         <Region prefHeight="200.0" prefWidth="60.0" />
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField prefHeight="35.0" StackPane.alignment="CENTER" />
+                              <TextField fx:id="txtApellidoPaterno" prefHeight="35.0" StackPane.alignment="CENTER" />
                               <Label text="Apellido paterno" />
                            </children>
                         </StackPane>
                         <Region prefHeight="200.0" prefWidth="60.0" />
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField prefHeight="35.0" StackPane.alignment="CENTER" />
+                              <TextField fx:id="txtApellidoMaterno" prefHeight="35.0" StackPane.alignment="CENTER" />
                               <Label text="Apellido materno" />
                            </children>
                         </StackPane>
@@ -83,21 +83,21 @@
                      <children>
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField prefHeight="35.0" StackPane.alignment="CENTER" />
+                              <TextField fx:id="txtPhone" prefHeight="35.0" StackPane.alignment="CENTER" />
                               <Label text="Teléfono" />
                            </children>
                         </StackPane>
                         <Region prefHeight="200.0" prefWidth="60.0" />
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField prefHeight="35.0" StackPane.alignment="CENTER" />
+                              <TextField fx:id="txtMatricula" prefHeight="35.0" StackPane.alignment="CENTER" />
                               <Label text="Matrícula" />
                            </children>
                         </StackPane>
                         <Region prefHeight="200.0" prefWidth="60.0" />
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField prefHeight="35.0" StackPane.alignment="CENTER" />
+                              <TextField fx:id="txtEmail" prefHeight="35.0" StackPane.alignment="CENTER" />
                               <Label text="Correo" />
                            </children>
                         </StackPane>
@@ -107,7 +107,7 @@
                      <children>
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField prefHeight="35.0" StackPane.alignment="CENTER" />
+                              <TextField fx:id="txtPassword" prefHeight="35.0" StackPane.alignment="CENTER" />
                               <Label text="Contraseña" />
                            </children>
                         </StackPane>
@@ -117,7 +117,7 @@
                      <children>
                         <Button fx:id="btnCancelar" mnemonicParsing="false" text="Cancelar" onAction="#onCancel" />
                         <Region prefHeight="200.0" prefWidth="30.0" />
-                        <Button mnemonicParsing="false" text="Guardar" />
+                        <Button mnemonicParsing="false" text="Guardar" onAction="#onActualizarUsuario" />
                      </children>
                   </HBox>
                </children>

@@ -124,7 +124,7 @@
                                        </font>
                                     </Label>
                                     <Region prefHeight="89.0" prefWidth="47.0" />
-                                    <TextField prefHeight="35.0" prefWidth="410.0" />
+                                    <TextField fx:id="txtAlumno" prefHeight="35.0" prefWidth="410.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="200.0">
@@ -135,14 +135,14 @@
                                        </font>
                                     </Label>
                                     <Region prefHeight="45.0" prefWidth="33.0" />
-                                    <TextField prefHeight="35.0" prefWidth="410.0" />
+                                    <TextField fx:id="txtMatricula" prefHeight="35.0" prefWidth="410.0" />
                                  </children>
                               </HBox>
                                         <HBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="578.0">
                                             <children>
-                                                <Button mnemonicParsing="false" text="Cancelar" />
+                                                <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
                                                 <Region prefHeight="53.0" prefWidth="20.0" />
-                                                <Button mnemonicParsing="false" text="Guardar" />
+                                                <Button mnemonicParsing="false" onAction="#confirmarEntrega" text="Guardar" />
                                                 <Region prefHeight="53.0" prefWidth="49.0" />
                                             </children>
                                         </HBox>

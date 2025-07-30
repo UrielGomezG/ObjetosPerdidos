@@ -82,6 +82,22 @@ public class ObjetoDAO {
         return categorias;
     }
 
+   public boolean eliminarRelacionesCategoriaObjeto(int objetoId) {
+    
+    String sql = "DELETE FROM CATEGORIA_OBJETO WHERE OBJETO_ID = ?";
+    try (Connection conn = ConexionOracle.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, objetoId);
+        ps.executeUpdate(); // Puede devolver 0 si no hay relaciones
+        return true;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+        }
+    }
+
+
+
     public boolean eliminarObjeto(int idObjeto) {
         String sql = "DELETE FROM OBJETOS_PERDIDOS WHERE ID = ?";
         try (Connection conn = ConexionOracle.getConnection();

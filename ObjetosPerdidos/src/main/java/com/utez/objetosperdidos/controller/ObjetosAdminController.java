@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import com.utez.objetosperdidos.model.Categoria;
 import com.utez.objetosperdidos.model.ObjetoPerdido;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
 
@@ -16,7 +15,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -29,69 +31,22 @@ public class ObjetosAdminController {
 
     @FXML
     private FlowPane contenedorTarjetas;
-    @FXML
-    private ComboBox<String> comboCategoria;
-    @FXML
-    private TextField txtBuscar;
-    @FXML
-    private Button btnBuscar;
 
     private final ObjetoDAO dao = new ObjetoDAO();
-    private List<ObjetoPerdido> listaOriginal;
 
     @FXML
     public void initialize() {
         if (contenedorTarjetas == null) {
-            System.out.println("Error en contenedorTarjetas no está vinculado. Revisa el fx:id en el FXML.");
+            System.out.println("❌ Error: contenedorTarjetas no está vinculado. Revisa el fx:id en el FXML.");
         } else {
-            System.out.println("Inicializando vista de objetos perdidos...");
+            System.out.println("✅ Inicializando vista de objetos perdidos...");
         }
-
-        listaOriginal = dao.obtenerObjetosConInfo(0, 100);
-        mostrarObjetos(listaOriginal);
-        cargarCategorias();
-
-        if (btnBuscar != null) {
-            btnBuscar.setOnAction(e -> filtrarPorNombreYCategoria());
-        }
-
-        if (txtBuscar != null) {
-            txtBuscar.textProperty().addListener((obs, oldVal, newVal) -> filtrarPorNombreYCategoria());
-        }
+        cargarObjetos();
     }
 
-    private void cargarCategorias() {
-        comboCategoria.getItems().clear();
-        comboCategoria.getItems().add("Todas");
-        List<Categoria> categorias = dao.obtenerCategorias();
-
-        for (Categoria cat : categorias) {
-            comboCategoria.getItems().add(cat.getNombre());
-        }
-
-        comboCategoria.getSelectionModel().selectFirst();
-        comboCategoria.setOnAction(e -> filtrarPorNombreYCategoria());
-    }
-
-    private void filtrarPorNombreYCategoria() {
-        String texto = txtBuscar.getText().toLowerCase();
-        String categoriaSeleccionada = comboCategoria.getValue();
-
-        List<ObjetoPerdido> filtrados = listaOriginal.stream()
-                .filter(obj -> {
-                    boolean coincideTexto = obj.getNombreObjeto().toLowerCase().contains(texto);
-                    boolean coincideCategoria = categoriaSeleccionada == null || categoriaSeleccionada.equals("Todas")
-                            || (obj.getCategoria() != null
-                                    && obj.getCategoria().getNombre().equalsIgnoreCase(categoriaSeleccionada));
-                    return coincideTexto && coincideCategoria;
-                })
-                .toList();
-
-        mostrarObjetos(filtrados);
-    }
-
-    private void mostrarObjetos(List<ObjetoPerdido> objetos) {
+    private void cargarObjetos() {
         contenedorTarjetas.getChildren().clear();
+        List<ObjetoPerdido> objetos = dao.obtenerObjetosConInfo(0, 100);
 
         for (ObjetoPerdido obj : objetos) {
             VBox tarjeta = crearTarjetaAdmin(obj);
@@ -106,6 +61,7 @@ public class ObjetosAdminController {
                 + "-fx-border-color: #ccc; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.3, 0, 2);");
         tarjeta.setPrefWidth(270);
 
+        // 🔍 Imagen del objeto
         ImageView imagenObjeto = new ImageView();
         imagenObjeto.setFitWidth(80);
         imagenObjeto.setFitHeight(80);
@@ -113,7 +69,7 @@ public class ObjetosAdminController {
         imagenObjeto.setSmooth(true);
 
         if (obj.getFotoUrl() != null && !obj.getFotoUrl().trim().isEmpty()) {
-            Path rutaImagen = Paths.get(System.getProperty("user.home"), "Downloads", obj.getFotoUrl().trim());
+            Path rutaImagen = Paths.get(System.getProperty("user.home"),  "Downloads", obj.getFotoUrl().trim());
             if (Files.exists(rutaImagen)) {
                 imagenObjeto.setImage(new Image(rutaImagen.toUri().toString()));
                 System.out.println("Imagen cargada: " + rutaImagen.getFileName());
@@ -121,14 +77,16 @@ public class ObjetosAdminController {
                 System.out.println("Imagen no encontrada: " + rutaImagen.toAbsolutePath());
             }
         } else {
-            System.out.println("No se proporcionó imagen para: " + obj.getNombreObjeto());
+            System.out.println("ℹNo se proporcionó imagen para: " + obj.getNombreObjeto());
         }
 
+        // 📄 Información textual
         VBox infoTexto = new VBox(4);
         infoTexto.getChildren().addAll(
                 new Label("📦 " + obj.getNombreObjeto()),
                 new Label("📍 " + obj.getEdificio() + " - Aula " + obj.getAula()),
-                new Label("🔖 Estado: " + obj.getEstado()));
+                new Label("🔖 Estado: " + obj.getEstado())
+        );
 
         HBox encabezado = new HBox(12);
         encabezado.setAlignment(Pos.CENTER_LEFT);
@@ -156,8 +114,7 @@ public class ObjetosAdminController {
 
     private void abrirEdicion(ObjetoPerdido obj) {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/utez/objetosperdidos/view/Editar_Objeto.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/Editar_Objeto.fxml"));
             Parent root = loader.load();
 
             EditarObjetoController controller = loader.getController();
@@ -169,25 +126,38 @@ public class ObjetosAdminController {
             modal.initModality(Modality.APPLICATION_MODAL);
             modal.showAndWait();
 
-            mostrarObjetos(listaOriginal);
+            cargarObjetos();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void eliminarObjeto(ObjetoPerdido obj) {
-        boolean confirmado = mostrarConfirmacion("¿Eliminar el objeto '" + obj.getNombreObjeto() + "'?");
-        if (confirmado && dao.eliminarObjeto(obj.getId())) {
-            mostrarInfo("Objeto eliminado.");
-            listaOriginal = dao.obtenerObjetosConInfo(0, 100);
-            mostrarObjetos(listaOriginal);
+   private void eliminarObjeto(ObjetoPerdido obj) {
+    boolean confirmado = mostrarConfirmacion("¿Eliminar el objeto '" + obj.getNombreObjeto() + "'?");
+    if (confirmado) {
+        // Primero elimina relaciones con categorías
+        boolean relacionesEliminadas = dao.eliminarRelacionesCategoriaObjeto(obj.getId());
+
+        if (!relacionesEliminadas) {
+            mostrarError("No se pudieron eliminar las relaciones del objeto con sus categorías.");
+            return;
+        }
+
+        // Ahora sí se puede eliminar el objeto
+        boolean objetoEliminado = dao.eliminarObjeto(obj.getId());
+        if (objetoEliminado) {
+            mostrarInfo("Objeto eliminado correctamente.");
+            cargarObjetos(); // refresca la vista
+        } else {
+            mostrarError("No se pudo eliminar el objeto.");
         }
     }
+}
+
 
     private void abrirEntrega(ObjetoPerdido obj) {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/utez/objetosperdidos/view/Entregar_Objeto.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/Entregar_Objeto.fxml"));
             Parent root = loader.load();
 
             EntregarObjetoController controller = loader.getController();
@@ -199,8 +169,7 @@ public class ObjetosAdminController {
             modal.initModality(Modality.APPLICATION_MODAL);
             modal.showAndWait();
 
-            listaOriginal = dao.obtenerObjetosConInfo(0, 100);
-            mostrarObjetos(listaOriginal);
+            cargarObjetos();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -209,10 +178,10 @@ public class ObjetosAdminController {
     private void enviarABodega(ObjetoPerdido obj) {
         boolean confirmado = mostrarConfirmacion("¿Enviar el objeto '" + obj.getNombreObjeto() + "' a bodega?");
         if (confirmado) {
+            // Enviar objeto a bodega usando el método correcto del DAO
             if (dao.enviarObjetoABodega(obj.getId())) {
                 mostrarInfo("Objeto enviado a bodega correctamente.");
-                listaOriginal = dao.obtenerObjetosConInfo(0, 100);
-                mostrarObjetos(listaOriginal);
+                cargarObjetos();
             } else {
                 mostrarError("Error al enviar el objeto a bodega.");
             }

@@ -15,10 +15,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -32,7 +29,14 @@ public class ObjetosAdminController {
     @FXML
     private FlowPane contenedorTarjetas;
 
+    @FXML
+    private TextField txtBuscar;
+
+    @FXML
+    private Button btnBuscar;
+
     private final ObjetoDAO dao = new ObjetoDAO();
+    private List<ObjetoPerdido> listaOriginal;
 
     @FXML
     public void initialize() {
@@ -41,12 +45,34 @@ public class ObjetosAdminController {
         } else {
             System.out.println("✅ Inicializando vista de objetos perdidos...");
         }
-        cargarObjetos();
+
+        listaOriginal = dao.obtenerObjetosConInfo(0, 100);
+        mostrarObjetos(listaOriginal);
+
+        if (btnBuscar != null) {
+            btnBuscar.setOnAction(e -> buscarPorNombre(txtBuscar.getText()));
+        }
+
+        if (txtBuscar != null) {
+            txtBuscar.textProperty().addListener((obs, oldVal, newVal) -> buscarPorNombre(newVal));
+        }
     }
 
-    private void cargarObjetos() {
+    private void buscarPorNombre(String filtro) {
+        if (filtro == null || filtro.isBlank()) {
+            mostrarObjetos(listaOriginal);
+            return;
+        }
+
+        List<ObjetoPerdido> filtrados = listaOriginal.stream()
+            .filter(obj -> obj.getNombreObjeto().toLowerCase().contains(filtro.toLowerCase()))
+            .toList();
+
+        mostrarObjetos(filtrados);
+    }
+
+    private void mostrarObjetos(List<ObjetoPerdido> objetos) {
         contenedorTarjetas.getChildren().clear();
-        List<ObjetoPerdido> objetos = dao.obtenerObjetosConInfo(0, 100);
 
         for (ObjetoPerdido obj : objetos) {
             VBox tarjeta = crearTarjetaAdmin(obj);
@@ -61,7 +87,6 @@ public class ObjetosAdminController {
                 + "-fx-border-color: #ccc; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.3, 0, 2);");
         tarjeta.setPrefWidth(270);
 
-        // 🔍 Imagen del objeto
         ImageView imagenObjeto = new ImageView();
         imagenObjeto.setFitWidth(80);
         imagenObjeto.setFitHeight(80);
@@ -69,7 +94,7 @@ public class ObjetosAdminController {
         imagenObjeto.setSmooth(true);
 
         if (obj.getFotoUrl() != null && !obj.getFotoUrl().trim().isEmpty()) {
-            Path rutaImagen = Paths.get(System.getProperty("user.home"),  "Downloads", obj.getFotoUrl().trim());
+            Path rutaImagen = Paths.get(System.getProperty("user.home"), "Downloads", obj.getFotoUrl().trim());
             if (Files.exists(rutaImagen)) {
                 imagenObjeto.setImage(new Image(rutaImagen.toUri().toString()));
                 System.out.println("Imagen cargada: " + rutaImagen.getFileName());
@@ -77,10 +102,9 @@ public class ObjetosAdminController {
                 System.out.println("Imagen no encontrada: " + rutaImagen.toAbsolutePath());
             }
         } else {
-            System.out.println("ℹNo se proporcionó imagen para: " + obj.getNombreObjeto());
+            System.out.println("No se proporcionó imagen para: " + obj.getNombreObjeto());
         }
 
-        // 📄 Información textual
         VBox infoTexto = new VBox(4);
         infoTexto.getChildren().addAll(
                 new Label("📦 " + obj.getNombreObjeto()),
@@ -126,7 +150,7 @@ public class ObjetosAdminController {
             modal.initModality(Modality.APPLICATION_MODAL);
             modal.showAndWait();
 
-            cargarObjetos();
+            mostrarObjetos(listaOriginal);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -136,7 +160,8 @@ public class ObjetosAdminController {
         boolean confirmado = mostrarConfirmacion("¿Eliminar el objeto '" + obj.getNombreObjeto() + "'?");
         if (confirmado && dao.eliminarObjeto(obj.getId())) {
             mostrarInfo("Objeto eliminado.");
-            cargarObjetos();
+            listaOriginal = dao.obtenerObjetosConInfo(0, 100);
+            mostrarObjetos(listaOriginal);
         }
     }
 
@@ -154,7 +179,8 @@ public class ObjetosAdminController {
             modal.initModality(Modality.APPLICATION_MODAL);
             modal.showAndWait();
 
-            cargarObjetos();
+            listaOriginal = dao.obtenerObjetosConInfo(0, 100);
+            mostrarObjetos(listaOriginal);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -163,10 +189,10 @@ public class ObjetosAdminController {
     private void enviarABodega(ObjetoPerdido obj) {
         boolean confirmado = mostrarConfirmacion("¿Enviar el objeto '" + obj.getNombreObjeto() + "' a bodega?");
         if (confirmado) {
-            // Enviar objeto a bodega usando el método correcto del DAO
             if (dao.enviarObjetoABodega(obj.getId())) {
                 mostrarInfo("Objeto enviado a bodega correctamente.");
-                cargarObjetos();
+                listaOriginal = dao.obtenerObjetosConInfo(0, 100);
+                mostrarObjetos(listaOriginal);
             } else {
                 mostrarError("Error al enviar el objeto a bodega.");
             }

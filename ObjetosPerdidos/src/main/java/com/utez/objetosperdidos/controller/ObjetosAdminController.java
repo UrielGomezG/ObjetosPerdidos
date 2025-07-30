@@ -27,10 +27,14 @@ import javafx.stage.Stage;
 
 public class ObjetosAdminController {
 
-    @FXML private FlowPane contenedorTarjetas;
-    @FXML private ComboBox<String> comboCategoria;
-    @FXML private TextField txtBuscar;
-    @FXML private Button btnBuscar;
+    @FXML
+    private FlowPane contenedorTarjetas;
+    @FXML
+    private ComboBox<String> comboCategoria;
+    @FXML
+    private TextField txtBuscar;
+    @FXML
+    private Button btnBuscar;
 
     private final ObjetoDAO dao = new ObjetoDAO();
     private List<ObjetoPerdido> listaOriginal;
@@ -74,13 +78,14 @@ public class ObjetosAdminController {
         String categoriaSeleccionada = comboCategoria.getValue();
 
         List<ObjetoPerdido> filtrados = listaOriginal.stream()
-            .filter(obj -> {
-                boolean coincideTexto = obj.getNombreObjeto().toLowerCase().contains(texto);
-                boolean coincideCategoria = categoriaSeleccionada == null || categoriaSeleccionada.equals("Todas")
-                        || (obj.getCategoria() != null && obj.getCategoria().getNombre().equalsIgnoreCase(categoriaSeleccionada));
-                return coincideTexto && coincideCategoria;
-            })
-            .toList();
+                .filter(obj -> {
+                    boolean coincideTexto = obj.getNombreObjeto().toLowerCase().contains(texto);
+                    boolean coincideCategoria = categoriaSeleccionada == null || categoriaSeleccionada.equals("Todas")
+                            || (obj.getCategoria() != null
+                                    && obj.getCategoria().getNombre().equalsIgnoreCase(categoriaSeleccionada));
+                    return coincideTexto && coincideCategoria;
+                })
+                .toList();
 
         mostrarObjetos(filtrados);
     }
@@ -123,8 +128,7 @@ public class ObjetosAdminController {
         infoTexto.getChildren().addAll(
                 new Label("📦 " + obj.getNombreObjeto()),
                 new Label("📍 " + obj.getEdificio() + " - Aula " + obj.getAula()),
-                new Label("🔖 Estado: " + obj.getEstado())
-        );
+                new Label("🔖 Estado: " + obj.getEstado()));
 
         HBox encabezado = new HBox(12);
         encabezado.setAlignment(Pos.CENTER_LEFT);
@@ -152,7 +156,8 @@ public class ObjetosAdminController {
 
     private void abrirEdicion(ObjetoPerdido obj) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/Editar_Objeto.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/utez/objetosperdidos/view/Editar_Objeto.fxml"));
             Parent root = loader.load();
 
             EditarObjetoController controller = loader.getController();
@@ -181,7 +186,8 @@ public class ObjetosAdminController {
 
     private void abrirEntrega(ObjetoPerdido obj) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/Entregar_Objeto.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/utez/objetosperdidos/view/Entregar_Objeto.fxml"));
             Parent root = loader.load();
 
             EntregarObjetoController controller = loader.getController();
@@ -235,4 +241,4 @@ public class ObjetosAdminController {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-} 
+}

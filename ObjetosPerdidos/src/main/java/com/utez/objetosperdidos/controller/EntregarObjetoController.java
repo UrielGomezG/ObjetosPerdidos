@@ -10,11 +10,16 @@ import javafx.stage.Stage;
 
 public class EntregarObjetoController {
 
-    @FXML private Label lblTitulo;
-    @FXML private Label lblMarca;
-    @FXML private Label lblModelo;
-    @FXML private Label lblNoSerie;
-    @FXML private Label lblDescripcion;
+    @FXML
+    private Label lblTitulo;
+    @FXML
+    private Label lblMarca;
+    @FXML
+    private Label lblModelo;
+    @FXML
+    private Label lblNoSerie;
+    @FXML
+    private Label lblDescripcion;
 
     private ObjetoPerdido objeto;
     private final ObjetoDAO dao = new ObjetoDAO();

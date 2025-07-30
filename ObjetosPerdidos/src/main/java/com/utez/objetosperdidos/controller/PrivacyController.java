@@ -14,8 +14,10 @@ public class PrivacyController {
         origen = desdeDondeVengo;
     }
 
-    @FXML private CheckBox acceptCheck;
-    @FXML private Label messageLabel;
+    @FXML
+    private CheckBox acceptCheck;
+    @FXML
+    private Label messageLabel;
 
     @FXML
     public void onContinue() throws Exception {

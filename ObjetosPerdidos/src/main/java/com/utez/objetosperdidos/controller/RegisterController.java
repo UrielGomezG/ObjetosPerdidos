@@ -17,9 +17,12 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class RegisterController {
-    @FXML private TextField nameField, apellidoPaternoField, apellidoMaternoField ,matriculaField, phoneField, emailField;
-    @FXML private PasswordField passwordField, confirmPasswordField;
-    @FXML private Label messageLabel;
+    @FXML
+    private TextField nameField, apellidoPaternoField, apellidoMaternoField, matriculaField, phoneField, emailField;
+    @FXML
+    private PasswordField passwordField, confirmPasswordField;
+    @FXML
+    private Label messageLabel;
 
     @FXML
     public void onSignUp() {
@@ -35,7 +38,8 @@ public class RegisterController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        if (nombre.isEmpty() || apellidoPaterno.isEmpty() || apellidoMaterno.isEmpty()||matricula.isEmpty() || telefono.isEmpty() ||
+        if (nombre.isEmpty() || apellidoPaterno.isEmpty() || apellidoMaterno.isEmpty() || matricula.isEmpty()
+                || telefono.isEmpty() ||
                 email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             messageLabel.setText("Todos los campos son obligatorios.");
             return;
@@ -78,7 +82,7 @@ public class RegisterController {
             return;
         }
 
-        try (Connection conn = ConexionOracle.getConnection()) {        
+        try (Connection conn = ConexionOracle.getConnection()) {
             PreparedStatement checkEmail = conn.prepareStatement("SELECT COUNT(*) FROM USUARIOS WHERE correo = ?");
             checkEmail.setString(1, email);
             ResultSet rsEmail = checkEmail.executeQuery();
@@ -87,52 +91,51 @@ public class RegisterController {
                 return;
             }
 
-            PreparedStatement checkMatricula = conn.prepareStatement("SELECT COUNT(*) FROM ALUMNOS WHERE matricula = ?");
+            PreparedStatement checkMatricula = conn
+                    .prepareStatement("SELECT COUNT(*) FROM ALUMNOS WHERE matricula = ?");
             checkMatricula.setString(1, matricula);
             ResultSet rsMatricula = checkMatricula.executeQuery();
             if (rsMatricula.next() && rsMatricula.getInt(1) > 0) {
                 messageLabel.setText("Esta matrícula ya está registrada.");
                 return;
             }
- // Insertar usuario y obtener ID
-        String[] returnColumns = { "ID" }; // ← PARA OBTENER LA PK
-        PreparedStatement insertUser = conn.prepareStatement(
-            "INSERT INTO USUARIOS (nombre, apellidoPaterno, apellidoMaterno, correo, contrasena, rol_id) VALUES (?, ?, ?, ?, ?, 2)",
-            returnColumns
-        );  
-        insertUser.setString(1, nombre);
-        insertUser.setString(2, apellidoPaterno);
-        insertUser.setString(3, apellidoMaterno);
-        insertUser.setString(4, email);
-        insertUser.setString(5, password);
-        
-        insertUser.executeUpdate();
+            // Insertar usuario y obtener ID
+            String[] returnColumns = { "ID" }; // ← PARA OBTENER LA PK
+            PreparedStatement insertUser = conn.prepareStatement(
+                    "INSERT INTO USUARIOS (nombre, apellidoPaterno, apellidoMaterno, correo, contrasena, rol_id) VALUES (?, ?, ?, ?, ?, 2)",
+                    returnColumns);
+            insertUser.setString(1, nombre);
+            insertUser.setString(2, apellidoPaterno);
+            insertUser.setString(3, apellidoMaterno);
+            insertUser.setString(4, email);
+            insertUser.setString(5, password);
 
-        ResultSet generatedKeys = insertUser.getGeneratedKeys();
-        if (generatedKeys.next()) {
-            int userId = generatedKeys.getInt(1); 
+            insertUser.executeUpdate();
 
-            PreparedStatement insertAlumno = conn.prepareStatement(
-                "INSERT INTO ALUMNOS (matricula, telefono, usuario_id) VALUES (?, ?, ?)"
-            );
-            insertAlumno.setString(1, matricula);
-            insertAlumno.setString(2, telefono);
-            insertAlumno.setInt(3, userId);
-            insertAlumno.executeUpdate();
+            ResultSet generatedKeys = insertUser.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int userId = generatedKeys.getInt(1);
 
-            messageLabel.setText("Registro exitoso. Redirigiendo...");
-            messageLabel.setTextFill(Color.web("#62C070"));
+                PreparedStatement insertAlumno = conn.prepareStatement(
+                        "INSERT INTO ALUMNOS (matricula, telefono, usuario_id) VALUES (?, ?, ?)");
+                insertAlumno.setString(1, matricula);
+                insertAlumno.setString(2, telefono);
+                insertAlumno.setInt(3, userId);
+                insertAlumno.executeUpdate();
 
-            PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
-            pause.setOnFinished(e -> {
-                try {
-                Main.switchScene("Login.fxml");
-            } catch (Exception ex) {
-            messageLabel.setText("Error al cargar la vista de inicio de sesión.");
-            messageLabel.setTextFill(Color.RED);
-            }
-            });
-            pause.play();
+                messageLabel.setText("Registro exitoso. Redirigiendo...");
+                messageLabel.setTextFill(Color.web("#62C070"));
+
+                PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+                pause.setOnFinished(e -> {
+                    try {
+                        Main.switchScene("Login.fxml");
+                    } catch (Exception ex) {
+                        messageLabel.setText("Error al cargar la vista de inicio de sesión.");
+                        messageLabel.setTextFill(Color.RED);
+                    }
+                });
+                pause.play();
             }
 
         } catch (SQLException e) {

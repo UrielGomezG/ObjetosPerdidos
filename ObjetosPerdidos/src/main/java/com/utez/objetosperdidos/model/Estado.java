@@ -9,8 +9,13 @@ public class Estado {
         this.nombre = nombre;
     }
 
-    public int getId() { return id; }
-    public String getNombre() { return nombre; }
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
 
     @Override
     public String toString() {

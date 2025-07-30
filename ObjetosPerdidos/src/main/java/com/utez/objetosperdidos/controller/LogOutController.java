@@ -12,31 +12,31 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class LogOutController{
+public class LogOutController {
 
-     @FXML
+    @FXML
     private Button btnCancelar;
 
-    private void closeWindow(){
-        Stage stage=(Stage) btnCancelar.getScene().getWindow();
+    private void closeWindow() {
+        Stage stage = (Stage) btnCancelar.getScene().getWindow();
         stage.close();
     }
-    
+
     @FXML
-    private void onCancel(){
+    private void onCancel() {
         closeWindow();
     }
 
-     @FXML
+    @FXML
     private Button btnAceptar;
 
     @FXML
-    private void onContinue(){
+    private void onContinue() {
         try {
-            Main.switchScene("Login.fxml"); 
+            Main.switchScene("Login.fxml");
             closeWindow();
         } catch (Exception e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
     }
 }

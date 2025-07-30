@@ -12,18 +12,24 @@ import java.util.List;
 import com.utez.objetosperdidos.model.dao.UserDAO;
 import com.utez.objetosperdidos.util.Session;
 
-
-
 public class Editar_Perfil_Controller {
 
-    @FXML private TextField txtNombre;
-    @FXML private TextField txtApellidoPaterno;
-    @FXML private TextField txtApellidoMaterno;
-    @FXML private TextField txtEmail;
-    @FXML private TextField txtPassword;
-    @FXML private TextField txtTelefono;
-    @FXML private TextField txtMatricula;
-    @FXML private Button btnCancelar;
+    @FXML
+    private TextField txtNombre;
+    @FXML
+    private TextField txtApellidoPaterno;
+    @FXML
+    private TextField txtApellidoMaterno;
+    @FXML
+    private TextField txtEmail;
+    @FXML
+    private TextField txtPassword;
+    @FXML
+    private TextField txtTelefono;
+    @FXML
+    private TextField txtMatricula;
+    @FXML
+    private Button btnCancelar;
 
     private final UserDAO dao = new UserDAO();
 
@@ -46,15 +52,20 @@ public class Editar_Perfil_Controller {
 
         // Si el campo está vacío, se mantiene el valor original
         String nombre = txtNombre.getText().isEmpty() ? Session.currentUser.getName() : txtNombre.getText();
-        String apellidoPaterno = txtApellidoPaterno.getText().isEmpty() ? Session.currentUser.getApellidoPaterno() : txtApellidoPaterno.getText();
-        String apellidoMaterno = txtApellidoMaterno.getText().isEmpty() ? Session.currentUser.getApellidoMaterno() : txtApellidoMaterno.getText();
+        String apellidoPaterno = txtApellidoPaterno.getText().isEmpty() ? Session.currentUser.getApellidoPaterno()
+                : txtApellidoPaterno.getText();
+        String apellidoMaterno = txtApellidoMaterno.getText().isEmpty() ? Session.currentUser.getApellidoMaterno()
+                : txtApellidoMaterno.getText();
         String email = txtEmail.getText().isEmpty() ? Session.currentUser.getEmail() : txtEmail.getText();
         String password = txtPassword.getText().isEmpty() ? Session.currentUser.getPassword() : txtPassword.getText();
-        String telefono = txtTelefono.getText().isEmpty() ? Session.currentUser.getPhoneNumber() : txtTelefono.getText();
-        String matricula = txtMatricula.getText().isEmpty() ? Session.currentUser.getMatricula() : txtMatricula.getText();
+        String telefono = txtTelefono.getText().isEmpty() ? Session.currentUser.getPhoneNumber()
+                : txtTelefono.getText();
+        String matricula = txtMatricula.getText().isEmpty() ? Session.currentUser.getMatricula()
+                : txtMatricula.getText();
 
         // Llamamos al método DAO para actualizar
-        boolean actualizado = dao.updateUsuario(id, nombre, apellidoPaterno, apellidoMaterno, email, password, telefono, matricula);
+        boolean actualizado = dao.updateUsuario(id, nombre, apellidoPaterno, apellidoMaterno, email, password, telefono,
+                matricula);
 
         if (actualizado) {
             System.out.println("Usuario actualizado.");

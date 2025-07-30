@@ -28,12 +28,18 @@ import javafx.util.Duration;
 
 public class LoginController {
 
-    @FXML private TextField emailField;
-    @FXML private PasswordField passwordField;
-    @FXML private CheckBox rememberCheck;
-    @FXML private Label messageLabel;
-    @FXML private ImageView imagenDecorativa;
-    @FXML private Button btnSignIn;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private CheckBox rememberCheck;
+    @FXML
+    private Label messageLabel;
+    @FXML
+    private ImageView imagenDecorativa;
+    @FXML
+    private Button btnSignIn;
 
     @FXML
     public void initialize() {
@@ -59,10 +65,10 @@ public class LoginController {
         try (Connection conn = ConexionOracle.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(
                     "SELECT u.id, u.nombre, u.correo, u.contrasena, u.rol_id, " +
-                    "u.apellidopaterno, u.apellidomaterno, a.telefono, a.matricula " +
-                    "FROM USUARIOS u " +
-                    "LEFT JOIN ALUMNOS a ON a.usuario_id = u.id " +
-                    "WHERE u.correo = ? AND u.contrasena = ?");
+                            "u.apellidopaterno, u.apellidomaterno, a.telefono, a.matricula " +
+                            "FROM USUARIOS u " +
+                            "LEFT JOIN ALUMNOS a ON a.usuario_id = u.id " +
+                            "WHERE u.correo = ? AND u.contrasena = ?");
             stmt.setString(1, email);
             stmt.setString(2, pwd);
             ResultSet rs = stmt.executeQuery();
@@ -77,8 +83,7 @@ public class LoginController {
                         rs.getString("MATRICULA"),
                         rs.getInt("ROL_ID"),
                         rs.getString("APELLIDOPATERNO"),
-                        rs.getString("APELLIDOMATERNO")
-                );
+                        rs.getString("APELLIDOMATERNO"));
                 Session.currentUser = user;
 
                 messageLabel.setText("Inicio de sesión exitoso. Mostrando aviso...");

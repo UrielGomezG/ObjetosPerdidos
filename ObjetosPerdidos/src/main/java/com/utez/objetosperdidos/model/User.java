@@ -11,27 +11,28 @@ public class User {
     private String matricula;
     private int rol;
 
-   public User(int id, String name, String email, String password, String phoneNumber, String matricula, int rol, String apellidoPaterno, String apellidoMaterno) {
-    this.id = id;
-    this.name = name;
-    this.email = email;
-    this.password = password;
-    this.phoneNumber = phoneNumber;
-    this.matricula = matricula;
-    this.rol = rol;
-    this.apellidoPaterno = apellidoPaterno;
-    this.apellidoMaterno = apellidoMaterno;
-}
+    public User(int id, String name, String email, String password, String phoneNumber, String matricula, int rol,
+            String apellidoPaterno, String apellidoMaterno) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.matricula = matricula;
+        this.rol = rol;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+    }
 
-public User(int id, String name, String email, String password, String phoneNumber, String matricula, int rol) {
-    this.id = id;
-    this.name = name;
-    this.email = email;
-    this.password = password;
-    this.phoneNumber = phoneNumber;
-    this.matricula = matricula;
-    this.rol = rol;
-}
+    public User(int id, String name, String email, String password, String phoneNumber, String matricula, int rol) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.matricula = matricula;
+        this.rol = rol;
+    }
 
     public int getId() {
         return id;
@@ -48,8 +49,7 @@ public User(int id, String name, String email, String password, String phoneNumb
     public void setName(String name) {
         this.name = name;
     }
-    
-    
+
     public String getApellidoPaterno() {
         return apellidoPaterno;
     }

@@ -42,7 +42,6 @@ public class EditarObjetoController {
     private String nombreArchivoImagen;
     private ObjetoPerdido objetoEditando;
 
-
     public void setObjeto(ObjetoPerdido obj) {
         this.objetoEditando = obj;
 
@@ -52,12 +51,13 @@ public class EditarObjetoController {
             fotoUrlField.setText(objetoEditando.getFotoUrl());
             descripcionArea.setText(objetoEditando.getDescripcion());
 
-            Path rutaImagen = Paths.get(System.getProperty("user.home"), "objetos-imagenes", objetoEditando.getFotoUrl());
+            Path rutaImagen = Paths.get(System.getProperty("user.home"), "objetos-imagenes",
+                    objetoEditando.getFotoUrl());
             if (Files.exists(rutaImagen)) {
                 Image imagen = new Image(rutaImagen.toUri().toString());
                 imgPreview.setImage(imagen);
             } else {
-                System.out.println("⚠️ No se encontró imagen: " + rutaImagen.toAbsolutePath());
+                System.out.println("No se encontró imagen: " + rutaImagen.toAbsolutePath());
             }
         }
     }
@@ -67,8 +67,7 @@ public class EditarObjetoController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar imagen");
         fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg")
-        );
+                new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg"));
 
         File archivoSeleccionado = fileChooser.showOpenDialog(new Stage());
         if (archivoSeleccionado != null) {
@@ -86,7 +85,7 @@ public class EditarObjetoController {
             try {
                 Files.createDirectories(destino.getParent());
                 Files.copy(archivoSeleccionado.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("✅ Imagen copiada: " + destino);
+                System.out.println("Imagen copiada: " + destino);
 
                 Image imagen = new Image(destino.toUri().toString());
                 imgPreview.setImage(imagen);
@@ -115,8 +114,7 @@ public class EditarObjetoController {
         objetoEditando.setDescripcion(descripcionArea.getText());
         objetoEditando.setFotoUrl(fotoUrlField.getText());
 
-        // Aquí podrías llamar a ObjetoDAO.actualizarObjeto(objetoEditando)
-        System.out.println("💾 Cambios guardados en objeto: " + objetoEditando.getNombreObjeto());
+        System.out.println("Cambios guardados en objeto: " + objetoEditando.getNombreObjeto());
 
         Stage stage = (Stage) btnGuardar.getScene().getWindow();
         stage.close();

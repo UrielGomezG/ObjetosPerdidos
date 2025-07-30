@@ -10,14 +10,13 @@ import java.util.List;
 import com.utez.objetosperdidos.model.Categoria;
 import com.utez.objetosperdidos.util.ConexionOracle;
 
-
 public class CategoriaDAO {
-public List<Categoria> obtenerCategorias() {
+    public List<Categoria> obtenerCategorias() {
         List<Categoria> lista = new ArrayList<>();
         String sql = "SELECT ID, NOMBRE FROM CATEGORIAS ORDER BY NOMBRE";
         try (Connection conn = ConexionOracle.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 lista.add(new Categoria(rs.getInt("ID"), rs.getString("NOMBRE")));
             }
@@ -30,7 +29,7 @@ public List<Categoria> obtenerCategorias() {
     public boolean guardarRelacionObjetoCategoria(int objetoId, int categoriaId) {
         String sql = "INSERT INTO CATEGORIA_OBJETO (OBJETO_ID, CATEGORIA_ID) VALUES (?, ?)";
         try (Connection conn = ConexionOracle.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, objetoId);
             ps.setInt(2, categoriaId);
             return ps.executeUpdate() > 0;

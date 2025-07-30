@@ -1,12 +1,12 @@
 package com.utez.objetosperdidos.model.dao;
 
-import com.utez.objetosperdidos.model.User;
-import com.utez.objetosperdidos.util.ConexionOracle;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.utez.objetosperdidos.model.User;
+import com.utez.objetosperdidos.util.ConexionOracle;
 
 public class UserDAO {
 
@@ -29,6 +29,38 @@ public class UserDAO {
                         rs.getString("NOMBRE"),
                         rs.getString("CORREO"),
                         rs.getString("CONTRASENA"),
+                        rs.getString("TELEFONO"),
+                        rs.getString("MATRICULA"),
+                        rs.getInt("ROL_ID"),
+                        rs.getString("APELLIDOPATERNO"),
+                        rs.getString("APELLIDOMATERNO"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public User obtenerAlumnoPorMatricula(String matricula) {
+        String sql = "SELECT u.ID, u.NOMBRE, u.APELLIDOPATERNO, u.APELLIDOMATERNO, u.CORREO, " +
+                "a.TELEFONO, a.MATRICULA, u.ROL_ID " +
+                "FROM USUARIOS u " +
+                "JOIN ALUMNOS a ON u.ID = a.USUARIO_ID " +
+                "WHERE a.MATRICULA = ?";
+
+        try (Connection conn = ConexionOracle.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, matricula);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new User(
+                        rs.getInt("ID"),
+                        rs.getString("NOMBRE"),
+                        rs.getString("CORREO"),
+                        "", // No necesitamos la contraseña para esta validación
                         rs.getString("TELEFONO"),
                         rs.getString("MATRICULA"),
                         rs.getInt("ROL_ID"),

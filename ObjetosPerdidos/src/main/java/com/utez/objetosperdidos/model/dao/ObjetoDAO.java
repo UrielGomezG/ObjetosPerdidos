@@ -97,16 +97,19 @@ public class ObjetoDAO {
     public boolean marcarComoEntregadoPorAlumno(int idObjeto, int idAlumno) {
         String sql = """
                     UPDATE OBJETOS_PERDIDOS
-                    SET ESTADO_ID = 21,
-                        ALUMNO_ID = ?
+                    SET ESTADO_ID = 21
                     WHERE ID = ?
                 """;
 
         try (Connection conn = ConexionOracle.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, idAlumno);
-            stmt.setInt(2, idObjeto);
-            return stmt.executeUpdate() > 0;
+            stmt.setInt(1, idObjeto);
+            boolean resultado = stmt.executeUpdate() > 0;
+            
+            // Aquí podrías agregar lógica adicional para registrar la entrega
+            // Por ejemplo, insertar en una tabla de entregas con fecha, objeto_id, alumno_id, etc.
+            
+            return resultado;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

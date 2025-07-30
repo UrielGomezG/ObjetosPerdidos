@@ -70,8 +70,8 @@ public void onLogout(ActionEvent event) throws Exception{
                     modal.initModality(Modality.APPLICATION_MODAL);
                     modal.show();
     } catch (Exception e) {
-        System.out.println("Error al cargar modal Salir");
         e.printStackTrace();
+        System.out.println("Error al cargar modal Salir");
     }
 }
 

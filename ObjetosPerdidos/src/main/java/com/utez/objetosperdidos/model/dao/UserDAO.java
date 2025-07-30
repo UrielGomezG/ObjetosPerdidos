@@ -11,7 +11,12 @@ import java.sql.SQLException;
 public class UserDAO {
 
     public User obtenerUsuarioPorId(int id) {
-        String sql = "SELECT * FROM USUARIOS WHERE ID = ?";
+        String sql = "SELECT u.ID, u.NOMBRE, u.CORREO, u.CONTRASENA, " +
+                 "a.TELEFONO, a.MATRICULA, u.ROL_ID, u.APELLIDOPATERNO, u.APELLIDOMATERNO " +
+                 "FROM USUARIOS u " +
+                 "LEFT JOIN ALUMNOS a ON u.ID = a.USUARIO_ID " +
+                 "WHERE u.ID = ?";
+
         try (Connection conn = ConexionOracle.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -37,26 +42,38 @@ public class UserDAO {
         }
         return null;
     }
-public boolean updateUsuario(int id, String nombre, String apellidoPaterno, String apellidoMaterno, String email, String password, String telefono) {
-    String sql = "UPDATE USUARIOS SET NOMBRE = ?, APELLIDOPATERNO = ?, APELLIDOMATERNO = ?, CORREO = ?, CONTRASENA = ?, TELEFONO = ? WHERE ID = ?";
 
-    try (Connection conn = ConexionOracle.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+public boolean updateUsuario(int id, String nombre, String apellidoPaterno, String apellidoMaterno, String email, String password, String telefono, String matricula) {
+    String sqlUsuarios = "UPDATE USUARIOS SET NOMBRE = ?, APELLIDOPATERNO = ?, APELLIDOMATERNO = ?, CORREO = ?, CONTRASENA = ? WHERE ID = ?";
+    String sqlAlumnos = "UPDATE ALUMNOS SET TELEFONO = ?, MATRICULA = ? WHERE USUARIO_ID = ?";
 
-        stmt.setString(1, nombre);
-        stmt.setString(2, apellidoPaterno);
-        stmt.setString(3, apellidoMaterno);
-        stmt.setString(4, email);
-        stmt.setString(5, password);
-        stmt.setString(6, telefono);
-        stmt.setInt(7, id);
+    try (Connection conn = ConexionOracle.getConnection()) {
+        conn.setAutoCommit(false); // ⚠️ Para asegurar transacción completa
 
-        int filas = stmt.executeUpdate();
-        return filas > 0;
+        // Actualizar USUARIOS
+        try (PreparedStatement stmt1 = conn.prepareStatement(sqlUsuarios)) {
+            stmt1.setString(1, nombre);
+            stmt1.setString(2, apellidoPaterno);
+            stmt1.setString(3, apellidoMaterno);
+            stmt1.setString(4, email);
+            stmt1.setString(5, password);
+            stmt1.setInt(6, id);
+            stmt1.executeUpdate();
+        }
 
+        // Actualizar ALUMNOS
+        try (PreparedStatement stmt2 = conn.prepareStatement(sqlAlumnos)) {
+            stmt2.setString(1, telefono);
+            stmt2.setString(2, matricula);
+            stmt2.setInt(3, id);
+            stmt2.executeUpdate();
+        }
+
+        conn.commit();
+        return true;
     } catch (SQLException e) {
         e.printStackTrace();
         return false;
-    }
+        }
     }
 }

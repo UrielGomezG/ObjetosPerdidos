@@ -1,13 +1,18 @@
 package com.utez.objetosperdidos.controller;
 
+import com.utez.objetosperdidos.model.Categoria;
 import com.utez.objetosperdidos.model.ObjetoPerdido;
+import com.utez.objetosperdidos.model.dao.CategoriaDAO;
+
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -15,6 +20,7 @@ import javafx.scene.control.Alert;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.List;
 
 public class EditarObjetoController {
 
@@ -31,6 +37,9 @@ public class EditarObjetoController {
     private TextArea descripcionArea;
 
     @FXML
+    private ComboBox<Categoria> cbCategoria;
+
+    @FXML
     private ImageView imgPreview;
 
     @FXML
@@ -41,15 +50,22 @@ public class EditarObjetoController {
 
     private String nombreArchivoImagen;
     private ObjetoPerdido objetoEditando;
+    
+    private final CategoriaDAO categoriaDAO = new CategoriaDAO();
+
 
     public void setObjeto(ObjetoPerdido obj) {
         this.objetoEditando = obj;
 
         if (objetoEditando != null) {
+
             tituloField.setText(objetoEditando.getNombreObjeto());
             aulaField.setText(objetoEditando.getAula());
             fotoUrlField.setText(objetoEditando.getFotoUrl());
+            List<Categoria> Categoria = categoriaDAO.obtenerCategorias();
+            cbCategoria.setItems(FXCollections.observableArrayList(Categoria));
             descripcionArea.setText(objetoEditando.getDescripcion());
+            
 
             Path rutaImagen = Paths.get(System.getProperty("user.home"), "objetos-imagenes",
                     objetoEditando.getFotoUrl());
@@ -104,7 +120,9 @@ public class EditarObjetoController {
 
     @FXML
     public void guardarCambios() {
-        if (tituloField.getText().isEmpty() || aulaField.getText().isEmpty() || descripcionArea.getText().isEmpty()) {
+        Categoria categoriaSelect = cbCategoria.getValue();
+
+        if (tituloField.getText().isEmpty() || aulaField.getText().isEmpty() || descripcionArea.getText().isEmpty() || categoriaSelect == null) {
             mostrarAlerta("Por favor completa todos los campos antes de guardar.");
             return;
         }
@@ -113,6 +131,7 @@ public class EditarObjetoController {
         objetoEditando.setAula(aulaField.getText());
         objetoEditando.setDescripcion(descripcionArea.getText());
         objetoEditando.setFotoUrl(fotoUrlField.getText());
+        objetoEditando.setCategoria(categoriaSelect);
 
         System.out.println("Cambios guardados en objeto: " + objetoEditando.getNombreObjeto());
 

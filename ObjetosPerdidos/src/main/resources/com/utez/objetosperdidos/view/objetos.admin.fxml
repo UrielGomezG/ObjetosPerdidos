@@ -8,6 +8,8 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.StackPane?>
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
@@ -20,6 +22,8 @@
         <Label text="Buscar por nombre:" />
         <TextField fx:id="txtBuscar" promptText="Ej. mochila, celular..." />
         <Button fx:id="btnBuscar" text="🔍" />
+        <Label text="Filtrar por categoría:" />
+        <ComboBox fx:id="comboCategoria" promptText="Categoría" />
     </HBox>
 
     <ScrollPane fitToWidth="true">

@@ -1,5 +1,6 @@
 package com.utez.objetosperdidos.controller;
 
+import com.utez.objetosperdidos.model.Categoria;
 import com.utez.objetosperdidos.model.Edificio;
 import com.utez.objetosperdidos.model.Estado;
 import com.utez.objetosperdidos.util.ConexionOracle;
@@ -38,6 +39,8 @@ public class RegistrarObjetoController {
     @FXML
     private ComboBox<Estado> cbEstado;
     @FXML
+    private ComboBox<Categoria> comboCategoria;
+    @FXML
     private Label lblNombreFoto;
     @FXML
     private Button btnCancelar;
@@ -50,91 +53,108 @@ public class RegistrarObjetoController {
     public void initialize() {
         cargarEdificios();
         cargarEstados();
+        cargarCategorias();
+    }
+
+    @FXML
+    void seleccionarFoto(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar imagen del objeto");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Imágenes", "*.jpg", "*.jpeg", "*.png"));
+
+        File archivo = fileChooser.showOpenDialog(null);
+        if (archivo != null) {
+            try {
+                File carpetaDestino = new File("src/main/resources/com/utez/objetosperdidos/imagenes");
+                if (!carpetaDestino.exists())
+                    carpetaDestino.mkdirs();
+
+                String nombreArchivo = archivo.getName();
+                Path destino = carpetaDestino.toPath().resolve(nombreArchivo);
+
+                if (Files.exists(destino)) {
+                    mostrarAlerta("Archivo duplicado",
+                            "Ya existe una imagen con el mismo nombre.\nRenómbrala y vuelve a intentarlo.",
+                            Alert.AlertType.WARNING);
+                    return;
+                }
+
+                Files.copy(archivo.toPath(), destino);
+                lblNombreFoto.setText(nombreArchivo);
+                archivoSeleccionado = destino.toFile();
+                System.out.println("✅ Imagen copiada a: " + destino);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                mostrarAlerta("Error", "No se pudo copiar la imagen.", Alert.AlertType.ERROR);
+            }
+        }
     }
 
 @FXML
-void seleccionarFoto(ActionEvent event) {
-    FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Seleccionar imagen del objeto");
-    fileChooser.getExtensionFilters().add(
-        new FileChooser.ExtensionFilter("Imágenes", "*.jpg", "*.jpeg", "*.png"));
+void guardarObjeto(ActionEvent event) {
+    String titulo = txtTitulo.getText();
+    String marca = txtMarca.getText();
+    String modelo = txtModelo.getText();
+    String noSerial = txtNoSerial.getText();
+    String descripcion = txtDescripcion.getText();
+    LocalDate fechaReporte = dpFechaReporte.getValue();
+    String aula = txtAula.getText();
+    Edificio edificio = cbEdificio.getValue();
+    Estado estado = cbEstado.getValue();
+    String fotoUrl = lblNombreFoto.getText().isEmpty() ? null : lblNombreFoto.getText();
 
-    File archivo = fileChooser.showOpenDialog(null);
-    if (archivo != null) {
-        try {
-            File carpetaDestino = new File("src/main/resources/com/utez/objetosperdidos/imagenes");
-            if (!carpetaDestino.exists())
-                carpetaDestino.mkdirs();
+    if (titulo.isEmpty() || descripcion.isEmpty() || fechaReporte == null || edificio == null || estado == null) {
+        mostrarAlerta("Campos obligatorios faltantes", "Por favor completa todos los campos obligatorios.",
+                Alert.AlertType.WARNING);
+        return;
+    }
 
-            String nombreArchivo = archivo.getName();
-            Path destino = carpetaDestino.toPath().resolve(nombreArchivo);
+    try (Connection conn = ConexionOracle.getConnection()) {
+        String sql = "INSERT INTO OBJETOS_PERDIDOS (NOMBRE_EN_OBJETO, DESCRIPCION, FECHA_REPORTE, FOTO_URL, AULA, EDIFICIO_ID, ESTADO_ID, MARCA, MODELO, NO_SERIAL, ADMINISTRADOR_ID) "
+                + 
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            if (Files.exists(destino)) {
-                mostrarAlerta("Archivo duplicado", "Ya existe una imagen con el mismo nombre.\nRenómbrala y vuelve a intentarlo.", Alert.AlertType.WARNING);
-                return;
+        PreparedStatement stmt = conn.prepareStatement(sql, new String[] {"ID"});
+        stmt.setString(1, titulo);
+        stmt.setString(2, descripcion);
+        stmt.setDate(3, Date.valueOf(fechaReporte));
+        stmt.setString(4, fotoUrl);
+        stmt.setString(5, aula);
+        stmt.setInt(6, edificio.getId());
+        stmt.setInt(7, estado.getId());
+        stmt.setString(8, marca);
+        stmt.setString(9, modelo);
+        stmt.setString(10, noSerial);
+        stmt.setInt(11, 1); 
+
+        int rows = stmt.executeUpdate();
+        if (rows > 0) {
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int objetoId = generatedKeys.getInt(1);
+
+                Categoria seleccionada = comboCategoria.getSelectionModel().getSelectedItem();
+                if (seleccionada != null) {
+                    String insertCategoria = "INSERT INTO CATEGORIA_OBJETO (OBJETO_ID, CATEGORIA_ID) VALUES (?, ?)";
+                    try (PreparedStatement catStmt = conn.prepareStatement(insertCategoria)) {
+                        catStmt.setInt(1, objetoId);
+                        catStmt.setInt(2, seleccionada.getId());
+                        catStmt.executeUpdate();
+                    }
+                }
             }
-
-            Files.copy(archivo.toPath(), destino);
-            lblNombreFoto.setText(nombreArchivo);
-            archivoSeleccionado = destino.toFile();
-            System.out.println("✅ Imagen copiada a: " + destino);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo copiar la imagen.", Alert.AlertType.ERROR);
+            mostrarAlerta("Éxito", "Objeto registrado correctamente.", Alert.AlertType.INFORMATION);
+            cerrarVentana();
+        } else {
+            mostrarAlerta("Error", "No se pudo registrar el objeto.", Alert.AlertType.ERROR);
         }
+    } catch (Exception e) {
+        e.printStackTrace();
+        mostrarAlerta("Error", "Error al guardar en la base de datos.", Alert.AlertType.ERROR);
     }
 }
-
-
-    @FXML
-    void guardarObjeto(ActionEvent event) {
-        String titulo = txtTitulo.getText();
-        String marca = txtMarca.getText();
-        String modelo = txtModelo.getText();
-        String noSerial = txtNoSerial.getText();
-        String descripcion = txtDescripcion.getText();
-        LocalDate fechaReporte = dpFechaReporte.getValue();
-        String aula = txtAula.getText();
-        Edificio edificio = cbEdificio.getValue();
-        Estado estado = cbEstado.getValue();
-        String fotoUrl = lblNombreFoto.getText().isEmpty() ? null : lblNombreFoto.getText();
-
-        if (titulo.isEmpty() || descripcion.isEmpty() || fechaReporte == null || edificio == null || estado == null) {
-            mostrarAlerta("Campos obligatorios faltantes", "Por favor completa todos los campos obligatorios.",
-                    Alert.AlertType.WARNING);
-            return;
-        }
-
-        try (Connection conn = ConexionOracle.getConnection()) {
-            String sql = "INSERT INTO OBJETOS_PERDIDOS (NOMBRE_EN_OBJETO, DESCRIPCION, FECHA_REPORTE, FOTO_URL, AULA, EDIFICIO_ID, ESTADO_ID, MARCA, MODELO, NO_SERIAL, ADMINISTRADOR_ID) "
-                    +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, titulo);
-            stmt.setString(2, descripcion);
-            stmt.setDate(3, Date.valueOf(fechaReporte));
-            stmt.setString(4, fotoUrl);
-            stmt.setString(5, aula);
-            stmt.setInt(6, edificio.getId());
-            stmt.setInt(7, estado.getId());
-            stmt.setString(8, marca);
-            stmt.setString(9, modelo);
-            stmt.setString(10, noSerial);
-            stmt.setInt(11, 1);
-
-            int rows = stmt.executeUpdate();
-            if (rows > 0) {
-                mostrarAlerta("Éxito", "Objeto registrado correctamente.", Alert.AlertType.INFORMATION);
-                cerrarVentana();
-            } else {
-                mostrarAlerta("Error", "No se pudo registrar el objeto.", Alert.AlertType.ERROR);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            mostrarAlerta("Error", "Error al guardar en la base de datos.", Alert.AlertType.ERROR);
-        }
-    }
 
     @FXML
     void cancelarRegistro(ActionEvent event) {
@@ -182,4 +202,23 @@ void seleccionarFoto(ActionEvent event) {
             e.printStackTrace();
         }
     }
+
+    private void cargarCategorias() {
+        ObservableList<Categoria> lista = FXCollections.observableArrayList();
+        String sql = "SELECT ID, NOMBRE FROM CATEGORIAS ORDER BY NOMBRE";
+
+        try (Connection conn = ConexionOracle.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(new Categoria(rs.getInt("ID"), rs.getString("NOMBRE")));
+            }
+            comboCategoria.setItems(lista);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

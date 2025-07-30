@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import com.utez.objetosperdidos.model.Categoria;
 import com.utez.objetosperdidos.model.ObjetoPerdido;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
 
@@ -26,14 +27,10 @@ import javafx.stage.Stage;
 
 public class ObjetosAdminController {
 
-    @FXML
-    private FlowPane contenedorTarjetas;
-
-    @FXML
-    private TextField txtBuscar;
-
-    @FXML
-    private Button btnBuscar;
+    @FXML private FlowPane contenedorTarjetas;
+    @FXML private ComboBox<String> comboCategoria;
+    @FXML private TextField txtBuscar;
+    @FXML private Button btnBuscar;
 
     private final ObjetoDAO dao = new ObjetoDAO();
     private List<ObjetoPerdido> listaOriginal;
@@ -41,31 +38,48 @@ public class ObjetosAdminController {
     @FXML
     public void initialize() {
         if (contenedorTarjetas == null) {
-            System.out.println("❌ Error: contenedorTarjetas no está vinculado. Revisa el fx:id en el FXML.");
+            System.out.println("Error en contenedorTarjetas no está vinculado. Revisa el fx:id en el FXML.");
         } else {
-            System.out.println("✅ Inicializando vista de objetos perdidos...");
+            System.out.println("Inicializando vista de objetos perdidos...");
         }
 
         listaOriginal = dao.obtenerObjetosConInfo(0, 100);
         mostrarObjetos(listaOriginal);
+        cargarCategorias();
 
         if (btnBuscar != null) {
-            btnBuscar.setOnAction(e -> buscarPorNombre(txtBuscar.getText()));
+            btnBuscar.setOnAction(e -> filtrarPorNombreYCategoria());
         }
 
         if (txtBuscar != null) {
-            txtBuscar.textProperty().addListener((obs, oldVal, newVal) -> buscarPorNombre(newVal));
+            txtBuscar.textProperty().addListener((obs, oldVal, newVal) -> filtrarPorNombreYCategoria());
         }
     }
 
-    private void buscarPorNombre(String filtro) {
-        if (filtro == null || filtro.isBlank()) {
-            mostrarObjetos(listaOriginal);
-            return;
+    private void cargarCategorias() {
+        comboCategoria.getItems().clear();
+        comboCategoria.getItems().add("Todas");
+        List<Categoria> categorias = dao.obtenerCategorias();
+
+        for (Categoria cat : categorias) {
+            comboCategoria.getItems().add(cat.getNombre());
         }
 
+        comboCategoria.getSelectionModel().selectFirst();
+        comboCategoria.setOnAction(e -> filtrarPorNombreYCategoria());
+    }
+
+    private void filtrarPorNombreYCategoria() {
+        String texto = txtBuscar.getText().toLowerCase();
+        String categoriaSeleccionada = comboCategoria.getValue();
+
         List<ObjetoPerdido> filtrados = listaOriginal.stream()
-            .filter(obj -> obj.getNombreObjeto().toLowerCase().contains(filtro.toLowerCase()))
+            .filter(obj -> {
+                boolean coincideTexto = obj.getNombreObjeto().toLowerCase().contains(texto);
+                boolean coincideCategoria = categoriaSeleccionada == null || categoriaSeleccionada.equals("Todas")
+                        || (obj.getCategoria() != null && obj.getCategoria().getNombre().equalsIgnoreCase(categoriaSeleccionada));
+                return coincideTexto && coincideCategoria;
+            })
             .toList();
 
         mostrarObjetos(filtrados);
@@ -221,4 +235,4 @@ public class ObjetosAdminController {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-}
+} 

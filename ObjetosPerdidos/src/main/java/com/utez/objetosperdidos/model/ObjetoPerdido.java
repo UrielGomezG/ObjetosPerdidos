@@ -1,4 +1,6 @@
 package com.utez.objetosperdidos.model;
+import com.utez.objetosperdidos.model.Categoria;
+
 
 public class ObjetoPerdido {
     private int id;
@@ -12,7 +14,8 @@ public class ObjetoPerdido {
     private String modelo;
     private String no_serial;     
     private int edificioId;   
-    private int estadoId;      
+    private int estadoId;
+    private Categoria categoria;      
 
     public ObjetoPerdido() {
     }
@@ -128,4 +131,13 @@ public ObjetoPerdido(int id, String nombreObjeto, String descripcion, String fot
     public void setEstadoId(int estadoId) {
         this.estadoId = estadoId;
     }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
 }

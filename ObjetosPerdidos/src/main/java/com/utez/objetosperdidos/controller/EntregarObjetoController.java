@@ -1,14 +1,25 @@
 package com.utez.objetosperdidos.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 import com.utez.objetosperdidos.model.ObjetoPerdido;
 import com.utez.objetosperdidos.model.User;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
 import com.utez.objetosperdidos.model.dao.UserDAO;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class EntregarObjetoController {
@@ -28,8 +39,21 @@ public class EntregarObjetoController {
     @FXML
     private TextField txtMatricula;
 
+    @FXML
+    private Label lblNombreFoto;
+
+    @FXML
+    private TextField fotoUrlField;
+
+    @FXML
+    private ImageView imgPreview;
+    private String nombreArchivoImagen;
+    private ObjetoPerdido objetoEditando;
+
     private ObjetoPerdido objeto;
+
     private final ObjetoDAO dao = new ObjetoDAO();
+
     private final UserDAO userDAO = new UserDAO();
 
     public void setObjeto(ObjetoPerdido objeto) {
@@ -37,8 +61,43 @@ public class EntregarObjetoController {
         lblTitulo.setText(objeto.getNombreObjeto());
         lblMarca.setText(objeto.getMarca());
         lblModelo.setText(objeto.getModelo());
+        fotoUrlField.setText(objeto.getFotoUrl());
         lblNoSerie.setText(objeto.getNo_serial());
         lblDescripcion.setText(objeto.getDescripcion());
+    }
+
+    @FXML
+    public void handleSubirImagen() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar imagen");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg"));
+
+        File archivoSeleccionado = fileChooser.showOpenDialog(new Stage());
+        if (archivoSeleccionado != null) {
+            nombreArchivoImagen = archivoSeleccionado.getName();
+
+            String nombre = nombreArchivoImagen.toLowerCase();
+            if (!(nombre.endsWith(".png") || nombre.endsWith(".jpg") || nombre.endsWith(".jpeg"))) {
+                mostrarAlerta("El archivo seleccionado no es una imagen válida.");
+                return;
+            }
+
+            fotoUrlField.setText(nombreArchivoImagen);
+
+            Path destino = Paths.get(System.getProperty("user.home"), "objetos-imagenes", nombreArchivoImagen);
+            try {
+                Files.createDirectories(destino.getParent());
+                Files.copy(archivoSeleccionado.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Imagen copiada: " + destino);
+
+                Image imagen = new Image(destino.toUri().toString());
+                imgPreview.setImage(imagen);
+            } catch (IOException e) {
+                e.printStackTrace();
+                mostrarAlerta("Ocurrió un error al copiar la imagen.");
+            }
+        }
     }
 
     @FXML
@@ -78,7 +137,7 @@ public class EntregarObjetoController {
         }
 
         // Marcar el objeto como entregado
-        boolean ok = dao.marcarComoEntregadoPorAlumno(objeto.getId(), alumno.getId());
+        boolean ok = dao.marcarComoEntregadoPorAlumno(objeto.getId(), alumno.getId() );
 
         Alert alert = new Alert(ok ? Alert.AlertType.INFORMATION : Alert.AlertType.ERROR);
         alert.setHeaderText(null);
@@ -93,5 +152,12 @@ public class EntregarObjetoController {
     @FXML
     public void cancelar() {
         ((Stage) lblTitulo.getScene().getWindow()).close();
+    }
+
+    private void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }

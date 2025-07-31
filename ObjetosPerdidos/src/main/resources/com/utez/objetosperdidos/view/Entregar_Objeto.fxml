@@ -1,158 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:controller="com.utez.objetosperdidos.controller.EntregarObjetoController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:controller="com.utez.objetosperdidos.controller.EntregarObjetoController"
+            prefHeight="600.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
     <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="900.0" BorderPane.alignment="CENTER">
-            <children>
-                <Region prefHeight="55.0" prefWidth="12.0" />
-                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Home" />
-                <Region prefHeight="55.0" prefWidth="22.0" />
-                <Label text="Objetos Perdidos">
-                    <font>
-                        <Font name="System Bold" size="24.0" />
-                    </font>
-                </Label>
-                <Region prefHeight="43.0" prefWidth="473.0" />
-                <Label text="Administrador" />
-                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-            </children>
+        <HBox alignment="CENTER_LEFT" prefHeight="50.0" spacing="15" style="-fx-padding: 10;">
+            <Button text="Home" prefHeight="40" prefWidth="60" />
+            <Label text="Objetos Perdidos">
+                <font><Font name="System Bold" size="24.0" /></font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Administrador"/>
+            <ImageView fitHeight="40" fitWidth="40" pickOnBounds="true" preserveRatio="true"/>
         </HBox>
     </top>
+
     <left>
-        <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="61.0" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="61.0" spacing="10.0" style="-fx-padding: 10;">
             <children>
-                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Button" />
-                <Region prefHeight="20.0" prefWidth="50.0" />
-                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Button" />
-                <Region prefHeight="20.0" prefWidth="50.0" />
-                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Button" />
+                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Btn1" />
+                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Btn2" />
+                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Btn3" />
             </children>
         </VBox>
     </left>
+
     <center>
-        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-                <Region prefHeight="550.0" prefWidth="45.0" />
-                <VBox prefHeight="550.0" prefWidth="797.0">
-                    <children>
-                        <Label text="Agregar Objeto">
-                            <font>
-                                <Font name="System Bold" size="24.0" />
-                            </font>
-                        </Label>
-                        <HBox alignment="CENTER_LEFT" prefHeight="511.0" prefWidth="797.0">
-                            <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                                      <ImageView fitHeight="240.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
-                              <Region prefHeight="61.0" prefWidth="220.0" />
-                              <ImageView fitHeight="200.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                        </VBox>
-                                <VBox prefHeight="511.0" prefWidth="578.0">
-                                    <children>
-                                        <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="578.0">
-                                            <children>
-                                                <Label text="Titulo:">
-                                                    <font>
-                                                        <Font name="System Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Region prefHeight="47.0" prefWidth="65.0" />
-                                    <Label fx:id = "lblTitulo" prefHeight="35.0" prefWidth="410.0" text="Nombre Objeto" />
-                                            </children>
-                                        </HBox>
-                                        <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="578.0">
-                                            <children>
-                                                <Label text="Marca:">
-                                                    <font>
-                                                        <Font name="System Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Region prefHeight="62.0" prefWidth="63.0" />
-                                    <Label fx:id = "lblMarca" prefHeight="35.0" prefWidth="410.0" text="Marca Objeto" />
-                                            </children>
-                                        </HBox>
-                                        <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="578.0">
-                                            <children>
-                                                <Label text="Modelo:">
-                                                    <font>
-                                                        <Font name="System Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Region prefHeight="45.0" prefWidth="51.0" />
-                                    <Label fx:id = "lblModelo" prefHeight="35.0" prefWidth="410.0" text="Modelo Objeto" />
-                                            </children>
-                                        </HBox>
-                                        <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="578.0">
-                                            <children>
-                                                <Label text="No.Serial:">
-                                                    <font>
-                                                        <Font name="System Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Region prefHeight="57.0" prefWidth="39.0" />
-                                    <Label fx:id = "lblNoSerie" prefHeight="35.0" prefWidth="410.0" text="No. Serial Objeto" />
-                                            </children>
-                                        </HBox>
-                                        <HBox prefHeight="138.0" prefWidth="576.0">
-                                            <children>
-                                                <Label text="Descripción:">
-                                                    <font>
-                                                        <Font name="System Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Region prefHeight="228.0" prefWidth="15.0" />
-                                    <Label fx:id ="lblDescripcion" prefHeight="160.0" prefWidth="410.0" text="Descripción Objeto" />
-                                            </children>
-                                        </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="576.0">
-                                 <children>
-                                    <Label text="Alumno:">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Region prefHeight="89.0" prefWidth="47.0" />
-                                    <TextField fx:id="txtAlumno" prefHeight="35.0" prefWidth="410.0" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="200.0">
-                                 <children>
-                                    <Label text="Matricula:">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Region prefHeight="45.0" prefWidth="33.0" />
-                                    <TextField fx:id="txtMatricula" prefHeight="35.0" prefWidth="410.0" />
-                                 </children>
-                              </HBox>
-                                        <HBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="578.0">
-                                            <children>
-                                                <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
-                                                <Region prefHeight="53.0" prefWidth="20.0" />
-                                                <Button mnemonicParsing="false" onAction="#confirmarEntrega" text="Guardar" />
-                                                <Region prefHeight="53.0" prefWidth="49.0" />
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                </VBox>
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
-            </children>
+        <HBox spacing="30" alignment="CENTER" style="-fx-padding: 20;">
+            <!-- Vista previa -->
+            <VBox spacing="15" alignment="TOP_CENTER">
+                <Label text="Vista previa"/>
+                <ImageView fx:id="imgPreview" fitHeight="250.0" fitWidth="220.0"
+                           style="-fx-border-color: #aaa; -fx-border-width: 1; -fx-background-color: white;
+                                  -fx-border-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0, 2);"
+                           preserveRatio="true"/>
+                <Button fx:id="btnSubirImagen" text="Subir imagen" onAction="#handleSubirImagen"
+                        style="-fx-background-color: #2980b9; -fx-text-fill: white;"/>
+            </VBox>
+
+            <!-- Formulario -->
+            <VBox spacing="15" prefWidth="600">
+                <Label text="Agregar Objeto">
+                    <font><Font name="System Bold" size="24.0"/></font>
+                </Label>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Título:">
+                        <font><Font name="System" size="14.0"/></font>
+                    </Label>
+                    <Label fx:id="lblTitulo" prefWidth="400"/>
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Marca:">
+                        <font><Font name="System" size="14.0"/></font>
+                    </Label>
+                    <Label fx:id="lblMarca" prefWidth="400"/>
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Modelo:">
+                        <font><Font name="System" size="14.0"/></font>
+                    </Label>
+                    <Label fx:id="lblModelo" prefWidth="400"/>
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="No. Serial:">
+                        <font><Font name="System" size="14.0"/></font>
+                    </Label>
+                    <Label fx:id="lblNoSerie" prefWidth="400"/>
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Archivo imagen:"/>
+                    <TextField fx:id="fotoUrlField" editable="false" prefWidth="400"
+                               style="-fx-background-radius: 5; -fx-border-radius: 5;
+                                      -fx-border-color: #ccc; -fx-border-width: 1;"/>
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Descripción:">
+                        <font><Font name="System" size="14.0"/></font>
+                    </Label>
+                    <Label fx:id="lblDescripcion" wrapText="true" prefWidth="400" />
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Alumno:">
+                        <font><Font name="System" size="14.0"/></font>
+                    </Label>
+                    <TextField fx:id="txtAlumno" prefWidth="400"/>
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Matrícula:">
+                        <font><Font name="System" size="14.0"/></font>
+                    </Label>
+                    <TextField fx:id="txtMatricula" prefWidth="400"/>
+                </HBox>
+
+                <HBox spacing="15" alignment="CENTER_RIGHT">
+                    <Button text="Cancelar" onAction="#cancelar"/>
+                    <Button text="Guardar" onAction="#confirmarEntrega"/>
+                </HBox>
+            </VBox>
         </HBox>
     </center>
 </BorderPane>

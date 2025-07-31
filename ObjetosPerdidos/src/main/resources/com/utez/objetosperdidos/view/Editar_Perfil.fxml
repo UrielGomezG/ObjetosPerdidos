@@ -9,21 +9,19 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.Editar_Perfil_Controller">
+<BorderPane styleClass="background" stylesheets="@../css/Editar_Perfil.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.Editar_Perfil_Controller">
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="900.0" BorderPane.alignment="CENTER_LEFT">
+      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="900.0" styleClass="boxesColor" BorderPane.alignment="CENTER_LEFT">
          <children>
             <Region prefHeight="50.0" prefWidth="7.0" />
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btns">
+               <graphic>
+                  <FontIcon iconLiteral="fa-home" iconSize="40" />
+               </graphic></Button>
             <Region prefHeight="50.0" prefWidth="36.0" />
-            <Label text="Objetos Perdidos">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
+            <Label styleClass="titulo" text="Objetos Perdidos" />
             <Region prefHeight="50.0" prefWidth="442.0" />
             <Label text="Nombre Usuario" />
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
@@ -31,9 +29,19 @@
       </HBox>
    </top>
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="60.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="60.0" styleClass="boxesColor" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Button" />
+            <Region prefHeight="20.0" prefWidth="200.0" />
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btns">
+               <graphic>
+                  <FontIcon iconLiteral="fa-reorder" iconSize="40" />
+               </graphic></Button>
+            <Region prefHeight="20.0" prefWidth="200.0" />
+            <Button mnemonicParsing="false" styleClass="btns">
+               <graphic>
+                  <FontIcon iconLiteral="fa-user" iconSize="40" />
+               </graphic>
+            </Button>
          </children>
       </VBox>
    </left>
@@ -44,11 +52,7 @@
             <VBox prefHeight="550.0" prefWidth="726.0">
                <children>
                   <Region prefHeight="25.0" prefWidth="200.0" />
-                  <Label text="Editar perfil">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Label>
+                  <Label styleClass="titulo" text="Editar perfil" />
                   <Region prefHeight="20.0" prefWidth="200.0" />
                   <HBox alignment="CENTER" prefHeight="170.0" prefWidth="720.0">
                      <children>
@@ -59,22 +63,22 @@
                      <children>
                         <StackPane alignment="TOP_LEFT" prefHeight="71.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="txtNombre" prefHeight="35.0" prefWidth="200.0" StackPane.alignment="CENTER" />
-                              <Label text="Nombre" />
+                              <TextField fx:id="txtNombre" prefHeight="35.0" prefWidth="200.0" styleClass="textField" StackPane.alignment="CENTER" />
+                              <Label styleClass="textStyle" text="Nombre" />
                            </children>
                         </StackPane>
                         <Region prefHeight="200.0" prefWidth="60.0" />
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="txtApellidoPaterno" prefHeight="35.0" StackPane.alignment="CENTER" />
-                              <Label text="Apellido paterno" />
+                              <TextField fx:id="txtApellidoPaterno" prefHeight="35.0" styleClass="textField" StackPane.alignment="CENTER" />
+                              <Label styleClass="textStyle" text="Apellido paterno" />
                            </children>
                         </StackPane>
                         <Region prefHeight="200.0" prefWidth="60.0" />
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="txtApellidoMaterno" prefHeight="35.0" StackPane.alignment="CENTER" />
-                              <Label text="Apellido materno" />
+                              <TextField fx:id="txtApellidoMaterno" prefHeight="35.0" styleClass="textField" StackPane.alignment="CENTER" />
+                              <Label styleClass="textStyle" text="Apellido materno" />
                            </children>
                         </StackPane>
                      </children>
@@ -83,22 +87,22 @@
                      <children>
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="txtTelefono" prefHeight="35.0" StackPane.alignment="CENTER" />
-                              <Label text="Teléfono" />
+                              <TextField fx:id="txtTelefono" prefHeight="35.0" styleClass="textField" StackPane.alignment="CENTER" />
+                              <Label styleClass="textStyle" text="Teléfono" />
                            </children>
                         </StackPane>
                         <Region prefHeight="200.0" prefWidth="60.0" />
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="txtMatricula" editable= "false" prefHeight="35.0" StackPane.alignment="CENTER" />
-                              <Label text="Matrícula" />
+                              <TextField fx:id="txtMatricula" editable="false" prefHeight="35.0" styleClass="textField" StackPane.alignment="CENTER" />
+                              <Label styleClass="textStyle" text="Matrícula" />
                            </children>
                         </StackPane>
                         <Region prefHeight="200.0" prefWidth="60.0" />
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="txtEmail" prefHeight="35.0" StackPane.alignment="CENTER" />
-                              <Label text="Correo" />
+                              <TextField fx:id="txtEmail" prefHeight="35.0" styleClass="textField" StackPane.alignment="CENTER" />
+                              <Label styleClass="textStyle" text="Correo" />
                            </children>
                         </StackPane>
                      </children>
@@ -107,17 +111,17 @@
                      <children>
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="txtPassword" prefHeight="35.0" StackPane.alignment="CENTER" />
-                              <Label text="Contraseña" />
+                              <TextField fx:id="txtPassword" prefHeight="35.0" styleClass="textField" StackPane.alignment="CENTER" />
+                              <Label styleClass="textStyle" text="Contraseña" />
                            </children>
                         </StackPane>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnCancelar" mnemonicParsing="false" text="Cancelar" onAction="#onCancel" />
+                        <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onCancel" styleClass="btnCancelar" text="Cancelar" />
                         <Region prefHeight="200.0" prefWidth="30.0" />
-                        <Button mnemonicParsing="false" text="Guardar" onAction="#onActualizarUsuario" />
+                        <Button mnemonicParsing="false" onAction="#onActualizarUsuario" styleClass="btnGuardar" text="Guardar" />
                      </children>
                   </HBox>
                </children>

@@ -18,7 +18,25 @@
   </properties>
 
   <dependencies>
+<!--    ICONOS    -->
+    <dependency>
+      <groupId>org.kordamp.ikonli</groupId>
+      <artifactId>ikonli-javafx</artifactId>
+      <version>12.3.1</version>
+    </dependency>
 
+    <dependency>
+      <groupId>org.kordamp.ikonli</groupId>
+      <artifactId>ikonli-core</artifactId>
+      <version>12.3.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.kordamp.ikonli</groupId>
+      <artifactId>ikonli-fontawesome-pack</artifactId>
+      <version>12.3.1</version>
+    </dependency>
+<!--    Fin ICONOS-->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>

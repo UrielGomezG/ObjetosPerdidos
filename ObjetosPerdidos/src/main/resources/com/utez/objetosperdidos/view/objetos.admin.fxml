@@ -1,25 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.StackPane?>
 
-<ScrollPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.utez.objetosperdidos.controller.ObjetosAdminController"
-            fitToWidth="true"
-            style="-fx-background-color: #f4f4f4;"
-            prefViewportWidth="900.0" prefViewportHeight="600.0">
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.utez.objetosperdidos.controller.ObjetosAdminController"
+      spacing="10"
+      style="-fx-background-color: #f4f4f4;"
+      prefWidth="900" prefHeight="600">
+      
+    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10;">
+        <Label text="Buscar por nombre:" />
+        <TextField fx:id="txtBuscar" promptText="Ej. mochila, celular..." />
+        <Button fx:id="btnBuscar" text="🔍" />
+        <Label text="Filtrar por categoría:" />
+        <ComboBox fx:id="comboCategoria" promptText="Categoría" />
+    </HBox>
 
-    <content>
-        <FlowPane fx:id="contenedorTarjetas"
-                  hgap="15" vgap="15"
-                  prefWrapLength="880"
-                  alignment="CENTER"
-                  style="-fx-padding: 20;">
-            <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
-            </padding>
-        </FlowPane>
-    </content>
-</ScrollPane>
+    <ScrollPane fitToWidth="true">
+        <content>
+            <FlowPane fx:id="contenedorTarjetas"
+                      hgap="15" vgap="15"
+                      prefWrapLength="880"
+                      alignment="CENTER"
+                      style="-fx-padding: 20;">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+            </FlowPane>
+        </content>
+    </ScrollPane>
+</VBox>

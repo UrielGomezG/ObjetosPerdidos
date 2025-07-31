@@ -123,11 +123,18 @@
                         <DatePicker fx:id="dpFechaReporte" prefHeight="35.0" prefWidth="410.0"/>
                       </children>
                     </HBox>
+                    <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
+                      <children>
+                        <Label text="Categoría:" styleClass="etiqueta-style"/>
+                        <Region prefHeight="47.0" prefWidth="40.0"/>
+                        <ComboBox fx:id="comboCategoria" prefHeight="35.0" prefWidth="410.0"/>
+                      </children>
+                    </HBox>
                     <HBox prefHeight="228.0" prefWidth="578.0">
                       <children>
                         <Label text="Descripción:" styleClass="etiqueta-style"/>
                         <Region prefHeight="228.0" prefWidth="15.0"/>
-                        <TextArea fx:id="txtDescripcion" prefHeight="150.0" prefWidth="410.0" styleClass="textArea"/>
+                        <TextArea fx:id="txtDescripcion" prefHeight="100.0" prefWidth="410.0" styleClass="textArea"/>
                       </children>
                     </HBox>
                     <HBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="578.0">

@@ -1,10 +1,10 @@
 package com.utez.objetosperdidos.model;
 
-public class Estado {
+public class Categoria {
     private int id;
     private String nombre;
 
-    public Estado(int id, String nombre) {
+    public Categoria(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }

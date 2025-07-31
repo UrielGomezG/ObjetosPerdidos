@@ -12,15 +12,24 @@ import java.util.List;
 import com.utez.objetosperdidos.model.dao.UserDAO;
 import com.utez.objetosperdidos.util.Session;
 
-
 public class Editar_Perfil_Controller {
 
-    @FXML private TextField txtNombre;
-    @FXML private TextField txtApellidoPaterno;
-    @FXML private TextField txtApellidoMaterno;
-    @FXML private TextField txtEmail;
-    @FXML private TextField txtPassword;
-    @FXML private TextField txtTelefono;
+    @FXML
+    private TextField txtNombre;
+    @FXML
+    private TextField txtApellidoPaterno;
+    @FXML
+    private TextField txtApellidoMaterno;
+    @FXML
+    private TextField txtEmail;
+    @FXML
+    private TextField txtPassword;
+    @FXML
+    private TextField txtTelefono;
+    @FXML
+    private TextField txtMatricula;
+    @FXML
+    private Button btnCancelar;
 
     private final UserDAO dao = new UserDAO();
 
@@ -33,45 +42,54 @@ public class Editar_Perfil_Controller {
             txtEmail.setText(Session.currentUser.getEmail());
             txtPassword.setText(Session.currentUser.getPassword());
             txtTelefono.setText(Session.currentUser.getPhoneNumber());
+            txtMatricula.setText(Session.currentUser.getMatricula());
         }
     }
 
-@FXML
-private void onActualizarUsuario(ActionEvent event) {
-    int id = Session.currentUser.getId();
-    String nombre = txtNombre.getText().isEmpty() ? Session.currentUser.getName() : txtNombre.getText();
-    String apellidoPaterno = txtApellidoPaterno.getText().isEmpty() ? Session.currentUser.getApellidoPaterno() : txtApellidoPaterno.getText();
-    String apellidoMaterno = txtApellidoMaterno.getText().isEmpty() ? Session.currentUser.getApellidoMaterno() : txtApellidoMaterno.getText();
-    String email = txtEmail.getText().isEmpty() ? Session.currentUser.getEmail() : txtEmail.getText();
-    String password = txtPassword.getText().isEmpty() ? Session.currentUser.getPassword() : txtPassword.getText();
-    String telefono = txtTelefono.getText().isEmpty() ? Session.currentUser.getPhoneNumber() : txtTelefono.getText();
+    @FXML
+    private void onActualizarUsuario(ActionEvent event) {
+        int id = Session.currentUser.getId();
 
-    boolean actualizado = dao.updateUsuario(id, nombre, apellidoPaterno, apellidoMaterno, email, password, telefono);
+        // Si el campo está vacío, se mantiene el valor original
+        String nombre = txtNombre.getText().isEmpty() ? Session.currentUser.getName() : txtNombre.getText();
+        String apellidoPaterno = txtApellidoPaterno.getText().isEmpty() ? Session.currentUser.getApellidoPaterno()
+                : txtApellidoPaterno.getText();
+        String apellidoMaterno = txtApellidoMaterno.getText().isEmpty() ? Session.currentUser.getApellidoMaterno()
+                : txtApellidoMaterno.getText();
+        String email = txtEmail.getText().isEmpty() ? Session.currentUser.getEmail() : txtEmail.getText();
+        String password = txtPassword.getText().isEmpty() ? Session.currentUser.getPassword() : txtPassword.getText();
+        String telefono = txtTelefono.getText().isEmpty() ? Session.currentUser.getPhoneNumber()
+                : txtTelefono.getText();
+        String matricula = txtMatricula.getText().isEmpty() ? Session.currentUser.getMatricula()
+                : txtMatricula.getText();
 
-    if (actualizado) {
-        System.out.println("✅ Usuario actualizado.");
-        Session.currentUser.setName(nombre);
-        Session.currentUser.setApellidoPaterno(apellidoPaterno);
-        Session.currentUser.setApellidoMaterno(apellidoMaterno);
-        Session.currentUser.setEmail(email);
-        Session.currentUser.setPassword(password);
-        Session.currentUser.setPhoneNumber(telefono);
-    } else {
-        System.out.println("❌ Error al actualizar.");
+        // Llamamos al método DAO para actualizar
+        boolean actualizado = dao.updateUsuario(id, nombre, apellidoPaterno, apellidoMaterno, email, password, telefono,
+                matricula);
+
+        if (actualizado) {
+            System.out.println("Usuario actualizado.");
+
+            // Actualizamos la sesión también
+            Session.currentUser.setName(nombre);
+            Session.currentUser.setApellidoPaterno(apellidoPaterno);
+            Session.currentUser.setApellidoMaterno(apellidoMaterno);
+            Session.currentUser.setEmail(email);
+            Session.currentUser.setPassword(password);
+            Session.currentUser.setPhoneNumber(telefono);
+            Session.currentUser.setMatricula(matricula);
+        } else {
+            System.out.println("Error al actualizar.");
+        }
     }
-}
-
 
     @FXML
-    private Button btnCancelar;
-
-    private void closeWindow(){
-        Stage stage=(Stage) btnCancelar.getScene().getWindow();
-        stage.close();
-    }
-    
-    @FXML
-    private void onCancel(){
+    private void onCancel() {
         closeWindow();
+    }
+
+    private void closeWindow() {
+        Stage stage = (Stage) btnCancelar.getScene().getWindow();
+        stage.close();
     }
 }

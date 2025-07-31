@@ -1,5 +1,6 @@
 package com.utez.objetosperdidos.controller;
 
+import com.utez.objetosperdidos.model.Categoria;
 import com.utez.objetosperdidos.model.Edificio;
 import com.utez.objetosperdidos.model.Estado;
 import com.utez.objetosperdidos.util.ConexionOracle;
@@ -38,6 +39,8 @@ public class RegistrarObjetoController {
     @FXML
     private ComboBox<Estado> cbEstado;
     @FXML
+    private ComboBox<Categoria> comboCategoria;
+    @FXML
     private Label lblNombreFoto;
     @FXML
     private Button btnCancelar;
@@ -50,42 +53,44 @@ public class RegistrarObjetoController {
     public void initialize() {
         cargarEdificios();
         cargarEstados();
+        cargarCategorias();
     }
 
-@FXML
-void seleccionarFoto(ActionEvent event) {
-    FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Seleccionar imagen del objeto");
-    fileChooser.getExtensionFilters().add(
-        new FileChooser.ExtensionFilter("Imágenes", "*.jpg", "*.jpeg", "*.png"));
+    @FXML
+    void seleccionarFoto(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar imagen del objeto");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Imágenes", "*.jpg", "*.jpeg", "*.png"));
 
-    File archivo = fileChooser.showOpenDialog(null);
-    if (archivo != null) {
-        try {
-            File carpetaDestino = new File("src/main/resources/com/utez/objetosperdidos/imagenes");
-            if (!carpetaDestino.exists())
-                carpetaDestino.mkdirs();
+        File archivo = fileChooser.showOpenDialog(null);
+        if (archivo != null) {
+            try {
+                File carpetaDestino = new File("src/main/resources/com/utez/objetosperdidos/imagenes");
+                if (!carpetaDestino.exists())
+                    carpetaDestino.mkdirs();
 
-            String nombreArchivo = archivo.getName();
-            Path destino = carpetaDestino.toPath().resolve(nombreArchivo);
+                String nombreArchivo = archivo.getName();
+                Path destino = carpetaDestino.toPath().resolve(nombreArchivo);
 
-            if (Files.exists(destino)) {
-                mostrarAlerta("Archivo duplicado", "Ya existe una imagen con el mismo nombre.\nRenómbrala y vuelve a intentarlo.", Alert.AlertType.WARNING);
-                return;
+                if (Files.exists(destino)) {
+                    mostrarAlerta("Archivo duplicado",
+                            "Ya existe una imagen con el mismo nombre.\nRenómbrala y vuelve a intentarlo.",
+                            Alert.AlertType.WARNING);
+                    return;
+                }
+
+                Files.copy(archivo.toPath(), destino);
+                lblNombreFoto.setText(nombreArchivo);
+                archivoSeleccionado = destino.toFile();
+                System.out.println("Imagen copiada a: " + destino);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                mostrarAlerta("Error", "No se pudo copiar la imagen.", Alert.AlertType.ERROR);
             }
-
-            Files.copy(archivo.toPath(), destino);
-            lblNombreFoto.setText(nombreArchivo);
-            archivoSeleccionado = destino.toFile();
-            System.out.println("✅ Imagen copiada a: " + destino);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo copiar la imagen.", Alert.AlertType.ERROR);
         }
     }
-}
-
 
     @FXML
     void guardarObjeto(ActionEvent event) {
@@ -110,7 +115,8 @@ void seleccionarFoto(ActionEvent event) {
             String sql = "INSERT INTO OBJETOS_PERDIDOS (NOMBRE_EN_OBJETO, DESCRIPCION, FECHA_REPORTE, FOTO_URL, AULA, EDIFICIO_ID, ESTADO_ID, MARCA, MODELO, NO_SERIAL, ADMINISTRADOR_ID) "
                     +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            PreparedStatement stmt = conn.prepareStatement(sql, new String[] { "ID" });
             stmt.setString(1, titulo);
             stmt.setString(2, descripcion);
             stmt.setDate(3, Date.valueOf(fechaReporte));
@@ -125,6 +131,20 @@ void seleccionarFoto(ActionEvent event) {
 
             int rows = stmt.executeUpdate();
             if (rows > 0) {
+                ResultSet generatedKeys = stmt.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int objetoId = generatedKeys.getInt(1);
+
+                    Categoria seleccionada = comboCategoria.getSelectionModel().getSelectedItem();
+                    if (seleccionada != null) {
+                        String insertCategoria = "INSERT INTO CATEGORIA_OBJETO (OBJETO_ID, CATEGORIA_ID) VALUES (?, ?)";
+                        try (PreparedStatement catStmt = conn.prepareStatement(insertCategoria)) {
+                            catStmt.setInt(1, objetoId);
+                            catStmt.setInt(2, seleccionada.getId());
+                            catStmt.executeUpdate();
+                        }
+                    }
+                }
                 mostrarAlerta("Éxito", "Objeto registrado correctamente.", Alert.AlertType.INFORMATION);
                 cerrarVentana();
             } else {
@@ -182,4 +202,23 @@ void seleccionarFoto(ActionEvent event) {
             e.printStackTrace();
         }
     }
+
+    private void cargarCategorias() {
+        ObservableList<Categoria> lista = FXCollections.observableArrayList();
+        String sql = "SELECT ID, NOMBRE FROM CATEGORIAS ORDER BY NOMBRE";
+
+        try (Connection conn = ConexionOracle.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(new Categoria(rs.getInt("ID"), rs.getString("NOMBRE")));
+            }
+            comboCategoria.setItems(lista);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

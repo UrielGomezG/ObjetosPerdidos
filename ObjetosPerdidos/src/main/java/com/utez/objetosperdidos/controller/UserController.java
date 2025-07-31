@@ -7,12 +7,21 @@ import com.utez.objetosperdidos.model.dao.UserDAO;
 import com.utez.objetosperdidos.util.Session;
 
 public class UserController {
-    @FXML private TextField txtNombre;
-    @FXML private TextField txtApellidoPaterno;
-    @FXML private TextField txtApellidoMaterno;
-    @FXML private TextField txtEmail;
-    @FXML private TextField txtPassword;
-    @FXML private TextField txtTelefono;
+
+    @FXML
+    private TextField txtNombre;
+    @FXML
+    private TextField txtApellidoPaterno;
+    @FXML
+    private TextField txtApellidoMaterno;
+    @FXML
+    private TextField txtEmail;
+    @FXML
+    private TextField txtPassword;
+    @FXML
+    private TextField txtTelefono;
+    @FXML
+    private TextField txtMatricula;
 
     private final UserDAO dao = new UserDAO();
 
@@ -25,14 +34,15 @@ public class UserController {
         String email = txtEmail.getText();
         String password = txtPassword.getText();
         String telefono = txtTelefono.getText();
+        String matricula = txtMatricula.getText();
 
-        boolean actualizado = dao.updateUsuario(id, nombre, apellidoPaterno, apellidoMaterno, email, password, telefono);
+        boolean actualizado = dao.updateUsuario(id, nombre, apellidoPaterno, apellidoMaterno, email, password, telefono,
+                matricula);
 
         if (actualizado) {
-            System.out.println("✅ Usuario actualizado.");
+            System.out.println("Usuario actualizado.");
         } else {
-            System.out.println("❌ Error al actualizar.");
+            System.out.println("Error al actualizar.");
         }
     }
-
 }

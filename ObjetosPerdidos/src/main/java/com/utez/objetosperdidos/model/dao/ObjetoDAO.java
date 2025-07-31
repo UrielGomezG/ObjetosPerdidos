@@ -88,7 +88,7 @@ public class ObjetoDAO {
     try (Connection conn = ConexionOracle.getConnection();
          PreparedStatement ps = conn.prepareStatement(sql)) {
         ps.setInt(1, objetoId);
-        ps.executeUpdate(); // Puede devolver 0 si no hay relaciones
+        ps.executeUpdate();
         return true;
     } catch (SQLException e) {
         e.printStackTrace();

@@ -133,7 +133,14 @@ public class ObjetosAdminController {
     }
 
    private void eliminarObjeto(ObjetoPerdido obj) {
+    
+    if ("Archivado".equalsIgnoreCase(obj.getEstado())) {
+        mostrarError("No se puede eliminar un objeto archivado.");
+        return;
+    }
+
     boolean confirmado = mostrarConfirmacion("¿Eliminar el objeto '" + obj.getNombreObjeto() + "'?");
+    
     if (confirmado) {
         // Primero elimina relaciones con categorías
         boolean relacionesEliminadas = dao.eliminarRelacionesCategoriaObjeto(obj.getId());

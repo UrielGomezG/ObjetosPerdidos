@@ -3,19 +3,17 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane fx:id="mainContainer" styleClass="background" stylesheets="@../css/AdminHomeView.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/24.0.1" fx:controller="com.utez.objetosperdidos.controller.AdminHomeController">
+<BorderPane fx:id="mainContainer" styleClass="background" stylesheets="@../css/AdminHomeView.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.AdminHomeController">
   <top>
     <HBox alignment="CENTER_LEFT" spacing="10" styleClass="boxStyle" BorderPane.alignment="CENTER">
       <HBox.margin>
@@ -28,15 +26,9 @@
             </graphic></Button>
       <Region prefHeight="40.0" prefWidth="8.0" />
       <Label styleClass="Titulo-style" text="Objetos Perdidos" />
-      <Region prefHeight="40.0" prefWidth="72.0" />
-      <StackPane prefHeight="40.0" prefWidth="380.0">
-        <children>
-          <TextField prefHeight="25.0" prefWidth="232.0" promptText="Casita pa diferenciar ahora" />
-          <Button text="🔍" StackPane.alignment="CENTER_RIGHT" />
-        </children>
-      </StackPane>
-      <Region prefHeight="40.0" prefWidth="32.0" />
-      <Label fx:id="userNameLabel" style="-fx-padding: 0 10 0 10;" />
+      <Region prefHeight="40.0" prefWidth="352.0" />
+      <Label fx:id="userNameLabel" prefHeight="17.0" prefWidth="133.0" style="-fx-padding: 0 10 0 10;" />
+         <Region prefHeight="40.0" prefWidth="41.0" />
       <ImageView fitHeight="40" fitWidth="40" preserveRatio="true" />
     </HBox>
   </top>
@@ -56,7 +48,10 @@
                </graphic></Button>
       </VBox>
       <VBox alignment="CENTER">
-        <Button onAction="#onLogout" prefHeight="43.0" prefWidth="47.0" style="-fx-font-size: 20px;" text="🔚" />
+        <Button onAction="#onLogout" prefHeight="43.0" prefWidth="47.0" styleClass="btns">
+               <graphic>
+                  <FontIcon iconLiteral="fa-sign-out" iconSize="40" />
+               </graphic></Button>
       </VBox>
     </VBox>
   </left>

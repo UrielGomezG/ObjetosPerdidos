@@ -1,0 +1,26 @@
+.background {
+    -fx-min-height: 600;
+    -fx-max-height: 600;
+    -fx-min-width: 900;
+    -fx-max-width: 900;
+    -fx-background-color: #E2E9EF;
+}
+.btns{
+    -fx-background-color: transparent;
+    -fx-min-height: 40;
+    -fx-max-height: 40;
+    -fx-min-width: 40;
+    -fx-max-height: 40;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+}
+.Titulo-style{
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+.boxStyle{
+    -fx-background-color: #F8FCFF;
+    -fx-border-color: #E2E9EF;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+}

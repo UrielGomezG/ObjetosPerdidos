@@ -27,6 +27,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+
 public class ObjetosAdminController {
 
     @FXML
@@ -118,7 +119,7 @@ public class ObjetosAdminController {
             Parent root = loader.load();
 
             EditarObjetoController controller = loader.getController();
-            controller.setObjeto(obj);
+            controller.setObjetoEditando(obj);
 
             Stage modal = new Stage();
             modal.setTitle("Editar Objeto");

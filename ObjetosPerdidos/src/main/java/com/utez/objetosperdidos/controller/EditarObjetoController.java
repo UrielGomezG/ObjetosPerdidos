@@ -1,21 +1,20 @@
 package com.utez.objetosperdidos.controller;
 
 import com.utez.objetosperdidos.model.Categoria;
+import com.utez.objetosperdidos.model.Edificio;
+import com.utez.objetosperdidos.model.Estado;
 import com.utez.objetosperdidos.model.ObjetoPerdido;
 import com.utez.objetosperdidos.model.dao.CategoriaDAO;
-
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
+import com.utez.objetosperdidos.model.dao.EdificioDAO;
+import com.utez.objetosperdidos.model.dao.EstadoDAO;
+import com.utez.objetosperdidos.model.dao.ObjetoDAO;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,41 +33,67 @@ public class EditarObjetoController {
     private TextField fotoUrlField;
 
     @FXML
-    private TextArea descripcionArea;
-
-    @FXML
     private ComboBox<Categoria> cbCategoria;
 
     @FXML
-    private ImageView imgPreview;
+    private ComboBox<Edificio> cbEdificio;
+
+    @FXML
+    private ComboBox<Estado> cbEstado;
+
+    @FXML
+    private TextArea descripcionArea;
+
+    @FXML
+    private Button btnGuardar;
 
     @FXML
     private Button btnCancelar;
 
     @FXML
-    private Button btnGuardar;
+    private ImageView imgPreview;
 
-    private String nombreArchivoImagen;
-    private ObjetoPerdido objetoEditando;
-    
     private final CategoriaDAO categoriaDAO = new CategoriaDAO();
+    private final EstadoDAO estadoDAO = new EstadoDAO();
+    private final EdificioDAO edificioDAO = new EdificioDAO();
+    private final ObjetoDAO objetoDAO = new ObjetoDAO();
 
+    private ObjetoPerdido objetoEditando;
+    private String nombreArchivoImagen;
 
-    public void setObjeto(ObjetoPerdido obj) {
-        this.objetoEditando = obj;
+    public void setObjetoEditando(ObjetoPerdido objeto) {
+        this.objetoEditando = objeto;
 
         if (objetoEditando != null) {
-
             tituloField.setText(objetoEditando.getNombreObjeto());
             aulaField.setText(objetoEditando.getAula());
             fotoUrlField.setText(objetoEditando.getFotoUrl());
-            List<Categoria> Categoria = categoriaDAO.obtenerCategorias();
-            cbCategoria.setItems(FXCollections.observableArrayList(Categoria));
             descripcionArea.setText(objetoEditando.getDescripcion());
-            
+            List<Categoria> categorias = categoriaDAO.obtenerCategorias();
+            cbCategoria.setItems(FXCollections.observableArrayList(categorias));
+            cbCategoria.setValue(objetoEditando.getCategoria());
 
-            Path rutaImagen = Paths.get(System.getProperty("user.home"), "objetos-imagenes",
-                    objetoEditando.getFotoUrl());
+            List<Estado> estados = estadoDAO.obtenerTodos();
+            cbEstado.setItems(FXCollections.observableArrayList(estados));
+
+            List<Edificio> edificios = edificioDAO.obtenerTodos();
+            cbEdificio.setItems(FXCollections.observableArrayList(edificios));
+
+            for (Estado e : estados) {
+                if (e.getId() == objetoEditando.getEstadoId()) {
+                    cbEstado.setValue(e);
+                    break;
+                }
+            }
+
+            for (Edificio e : edificios) {
+                if (e.getId() == objetoEditando.getEdificioId()) {
+                    cbEdificio.setValue(e);
+                    break;
+                }
+            }
+
+            Path rutaImagen = Paths.get(System.getProperty("user.home"), "objetos-imagenes", objetoEditando.getFotoUrl());
             if (Files.exists(rutaImagen)) {
                 Image imagen = new Image(rutaImagen.toUri().toString());
                 imgPreview.setImage(imagen);
@@ -121,8 +146,11 @@ public class EditarObjetoController {
     @FXML
     public void guardarCambios() {
         Categoria categoriaSelect = cbCategoria.getValue();
+        Estado estadoSeleccionado = cbEstado.getValue();
+        Edificio edificioSeleccionado = cbEdificio.getValue();
 
-        if (tituloField.getText().isEmpty() || aulaField.getText().isEmpty() || descripcionArea.getText().isEmpty() || categoriaSelect == null) {
+        if (tituloField.getText().isEmpty() || aulaField.getText().isEmpty()
+                || descripcionArea.getText().isEmpty() || categoriaSelect == null || estadoSeleccionado == null || edificioSeleccionado == null) {
             mostrarAlerta("Por favor completa todos los campos antes de guardar.");
             return;
         }
@@ -132,11 +160,19 @@ public class EditarObjetoController {
         objetoEditando.setDescripcion(descripcionArea.getText());
         objetoEditando.setFotoUrl(fotoUrlField.getText());
         objetoEditando.setCategoria(categoriaSelect);
-
-        System.out.println("Cambios guardados en objeto: " + objetoEditando.getNombreObjeto());
-
-        Stage stage = (Stage) btnGuardar.getScene().getWindow();
-        stage.close();
+        objetoEditando.setEstadoId(estadoSeleccionado.getId());
+        objetoEditando.setEstado(estadoSeleccionado.getNombre());
+        objetoEditando.setEdificioId(edificioSeleccionado.getId());
+        objetoEditando.setEdificio(edificioSeleccionado.getNombre());
+        
+        boolean actualizado = objetoDAO.actualizarObjeto(objetoEditando);
+        if (actualizado) {
+            System.out.println("Cambios guardados en objeto: " + objetoEditando.getNombreObjeto());
+            Stage stage = (Stage) btnGuardar.getScene().getWindow();
+            stage.close();
+        } else {
+            mostrarAlerta("No se pudo actualizar el objeto.");
+        }
     }
 
     private void mostrarAlerta(String mensaje) {

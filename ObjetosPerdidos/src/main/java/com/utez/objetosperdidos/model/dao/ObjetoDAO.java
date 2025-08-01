@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import com.utez.objetosperdidos.model.Estado;
+import com.utez.objetosperdidos.model.dao.EstadoDAO;
+
 
 import com.utez.objetosperdidos.model.Categoria;
 import com.utez.objetosperdidos.model.ObjetoPerdido;
@@ -95,8 +98,6 @@ public class ObjetoDAO {
         return false;
         }
     }
-
-
 
     public boolean eliminarObjeto(int idObjeto) {
         String sql = "DELETE FROM OBJETOS_PERDIDOS WHERE ID = ?";

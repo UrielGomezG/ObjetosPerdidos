@@ -34,7 +34,7 @@
   </top>
 
   <left>
-    <VBox prefHeight="615.0" prefWidth="69.0" spacing="60" styleClass="boxStyle" BorderPane.alignment="CENTER">
+    <VBox prefHeight="615.0" prefWidth="69.0" spacing="450" styleClass="boxStyle" BorderPane.alignment="CENTER">
       <VBox alignment="CENTER">
             <Region prefHeight="20.0" prefWidth="200.0" />
         <Button onAction="#onPerfil" prefHeight="43.0" prefWidth="47.0" styleClass="btns">

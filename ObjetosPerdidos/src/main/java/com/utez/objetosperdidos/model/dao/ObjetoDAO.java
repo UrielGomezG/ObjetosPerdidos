@@ -140,7 +140,8 @@ public boolean marcarComoEntregadoPorAlumno(int idObjeto, int idAlumno) {
 
     try (Connection conn = ConexionOracle.getConnection();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
-        stmt.setInt(1, idObjeto);
+        stmt.setInt(1, idAlumno);
+        stmt.setInt(2, idObjeto);
 
         boolean resultado = stmt.executeUpdate() > 0;
 
@@ -187,7 +188,7 @@ public boolean marcarComoEntregadoPorAlumno(int idObjeto, int idAlumno) {
         }
     }
 
-    /*public boolean cambiarEstadoObjeto(int idObjeto, int nuevoEstadoId) {
+    public boolean cambiarEstadoObjeto(int idObjeto, int nuevoEstadoId) {
         String sql = "UPDATE OBJETOS_PERDIDOS SET ESTADO_ID = ? WHERE ID = ?";
         try (Connection conn = ConexionOracle.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -198,7 +199,7 @@ public boolean marcarComoEntregadoPorAlumno(int idObjeto, int idAlumno) {
             e.printStackTrace();
             return false;
         }
-    }*/
+    }
 
     public boolean enviarObjetoABodega(int idObjeto) {
         Connection conn = null;

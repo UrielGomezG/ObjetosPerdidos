@@ -33,6 +33,8 @@ import javafx.stage.Stage;
 
 public class ObjetosAdminController {
 
+     @FXML
+    private FlowPane contenedorTarjetas;
     @FXML
     private ComboBox<String> cbCategoria;
     @FXML
@@ -40,8 +42,7 @@ public class ObjetosAdminController {
     @FXML
     private Button btnBuscar;
 
-    @FXML
-    private FlowPane contenedorTarjetas;
+   
 
     private final ObjetoDAO dao = new ObjetoDAO();
     private List<ObjetoPerdido> listaOriginal;
@@ -56,6 +57,7 @@ public class ObjetosAdminController {
         cargarObjetos();
         listaOriginal = dao.obtenerObjetosConInfo(0, 100);
         mostrarObjetos(listaOriginal);
+        cargarCategorias();
 
         if (btnBuscar != null) {
             btnBuscar.setOnAction(e -> buscarPorNombre(txtBuscar.getText()));
@@ -66,21 +68,7 @@ public class ObjetosAdminController {
         }
     }
 
-    private void buscarPorNombre(String filtro) {
-        if (filtro == null || filtro.isBlank()) {
-            mostrarObjetos(listaOriginal);
-            return;
-        }
-
-        List<ObjetoPerdido> filtrados = listaOriginal.stream()
-            .filter(obj -> obj.getNombreObjeto().toLowerCase().contains(filtro.toLowerCase()))
-            .toList();
-
-        mostrarObjetos(filtrados);
-    }
-
-    
-    private void cargarCategorias() {
+     private void cargarCategorias() {
         cbCategoria.getItems().clear();
         cbCategoria.getItems().add("Todas");
         List<Categoria> categorias = dao.obtenerCategorias();
@@ -104,6 +92,19 @@ public class ObjetosAdminController {
                         || (obj.getCategoria() != null && obj.getCategoria().getNombre().equalsIgnoreCase(categoriaSeleccionada));
                 return coincideTexto && coincideCategoria;
             })
+            .toList();
+
+        mostrarObjetos(filtrados);
+    }
+
+    private void buscarPorNombre(String filtro) {
+        if (filtro == null || filtro.isBlank()) {
+            mostrarObjetos(listaOriginal);
+            return;
+        }
+
+        List<ObjetoPerdido> filtrados = listaOriginal.stream()
+            .filter(obj -> obj.getNombreObjeto().toLowerCase().contains(filtro.toLowerCase()))
             .toList();
 
         mostrarObjetos(filtrados);

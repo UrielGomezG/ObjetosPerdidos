@@ -2,11 +2,9 @@ package com.utez.objetosperdidos.controller;
 
 import com.utez.objetosperdidos.model.Categoria;
 import com.utez.objetosperdidos.model.Edificio;
-import com.utez.objetosperdidos.model.Estado;
 import com.utez.objetosperdidos.model.ObjetoPerdido;
 import com.utez.objetosperdidos.model.dao.CategoriaDAO;
 import com.utez.objetosperdidos.model.dao.EdificioDAO;
-import com.utez.objetosperdidos.model.dao.EstadoDAO;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -60,6 +58,15 @@ public class EditarObjetoController {
 
     private ObjetoPerdido objetoEditando;
     private String nombreArchivoImagen;
+
+    @FXML
+    public void initialize() {
+        List<Edificio> edificios = edificioDAO.obtenerTodos();
+        cbEdificio.setItems(FXCollections.observableArrayList(edificios));
+        List<Categoria> categorias = categoriaDAO.obtenerCategorias();
+        cbCategoria.setItems(FXCollections.observableArrayList(categorias));
+    }
+
 
     public void setObjetoEditando(ObjetoPerdido objeto) {
         this.objetoEditando = objeto;

@@ -85,7 +85,7 @@
                                                 <HBox alignment="CENTER" prefHeight="40.0" prefWidth="343.0">
                                                     <children>
                                                         <Label text="Leer " />
-                                                        <Hyperlink onAction="#onPrivacy" style="-fx-text-fill: #5BBCE9; -fx-padding: 5px 0;" text="Políticas de privacidad" />
+                                                        <Hyperlink onAction="#onPrivacyFake" style="-fx-text-fill: #5BBCE9; -fx-padding: 5px 0;" text="Políticas de privacidad" />
                                                     </children>
                                                 </HBox>
                                             </children>

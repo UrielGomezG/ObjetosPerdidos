@@ -38,8 +38,8 @@ public class EditarObjetoController {
     @FXML
     private ComboBox<Edificio> cbEdificio;
 
-    @FXML
-    private ComboBox<Estado> cbEstado;
+    //@FXML
+    //private ComboBox<Estado> cbEstado;
 
     @FXML
     private TextArea descripcionArea;
@@ -54,7 +54,7 @@ public class EditarObjetoController {
     private ImageView imgPreview;
 
     private final CategoriaDAO categoriaDAO = new CategoriaDAO();
-    private final EstadoDAO estadoDAO = new EstadoDAO();
+    //private final EstadoDAO estadoDAO = new EstadoDAO();
     private final EdificioDAO edificioDAO = new EdificioDAO();
     private final ObjetoDAO objetoDAO = new ObjetoDAO();
 
@@ -73,18 +73,18 @@ public class EditarObjetoController {
             cbCategoria.setItems(FXCollections.observableArrayList(categorias));
             cbCategoria.setValue(objetoEditando.getCategoria());
 
-            List<Estado> estados = estadoDAO.obtenerTodos();
-            cbEstado.setItems(FXCollections.observableArrayList(estados));
+            //List<Estado> estados = estadoDAO.obtenerTodos();
+            //cbEstado.setItems(FXCollections.observableArrayList(estados));
 
             List<Edificio> edificios = edificioDAO.obtenerTodos();
             cbEdificio.setItems(FXCollections.observableArrayList(edificios));
 
-            for (Estado e : estados) {
+           /*  for (Estado e : estados) {
                 if (e.getId() == objetoEditando.getEstadoId()) {
                     cbEstado.setValue(e);
                     break;
                 }
-            }
+            }*/
 
             for (Edificio e : edificios) {
                 if (e.getId() == objetoEditando.getEdificioId()) {
@@ -146,11 +146,11 @@ public class EditarObjetoController {
     @FXML
     public void guardarCambios() {
         Categoria categoriaSelect = cbCategoria.getValue();
-        Estado estadoSeleccionado = cbEstado.getValue();
+        //Estado estadoSeleccionado = cbEstado.getValue();
         Edificio edificioSeleccionado = cbEdificio.getValue();
 
         if (tituloField.getText().isEmpty() || aulaField.getText().isEmpty()
-                || descripcionArea.getText().isEmpty() || categoriaSelect == null || estadoSeleccionado == null || edificioSeleccionado == null) {
+                || descripcionArea.getText().isEmpty() || categoriaSelect == null || edificioSeleccionado == null) {
             mostrarAlerta("Por favor completa todos los campos antes de guardar.");
             return;
         }
@@ -160,8 +160,8 @@ public class EditarObjetoController {
         objetoEditando.setDescripcion(descripcionArea.getText());
         objetoEditando.setFotoUrl(fotoUrlField.getText());
         objetoEditando.setCategoria(categoriaSelect);
-        objetoEditando.setEstadoId(estadoSeleccionado.getId());
-        objetoEditando.setEstado(estadoSeleccionado.getNombre());
+        //objetoEditando.setEstadoId(estadoSeleccionado.getId());
+        //objetoEditando.setEstado(estadoSeleccionado.getNombre());
         objetoEditando.setEdificioId(edificioSeleccionado.getId());
         objetoEditando.setEdificio(edificioSeleccionado.getNombre());
         

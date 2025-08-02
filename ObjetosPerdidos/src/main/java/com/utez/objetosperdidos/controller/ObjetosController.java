@@ -28,9 +28,9 @@ public class ObjetosController {
     @FXML
     public void initialize() {
         if (contenedorTarjetas == null) {
-            System.out.println("❌ Error: contenedorTarjetas no está vinculado. Revisa el fx:id en el FXML.");
+            System.out.println("Error: contenedorTarjetas no está vinculado. Revisa el fx:id en el FXML.");
         } else {
-            System.out.println("✅ Inicializando vista de objetos perdidos para usuario...");
+            System.out.println("Inicializando vista de objetos perdidos para usuario...");
         }
         cargarObjetos();
     }
@@ -52,7 +52,7 @@ public class ObjetosController {
                 + "-fx-border-color: #ccc; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.3, 0, 2);");
         tarjeta.setPrefWidth(270);
 
-        // 🔍 Imagen del objeto
+        // Imagen del objeto
         ImageView imagenObjeto = new ImageView();
         imagenObjeto.setFitWidth(80);
         imagenObjeto.setFitHeight(80);
@@ -71,7 +71,7 @@ public class ObjetosController {
             System.out.println("ℹNo se proporcionó imagen para: " + obj.getNombreObjeto());
         }
 
-        // 📄 Información textual
+        // Información textual
         VBox infoTexto = new VBox(4);
         infoTexto.getChildren().addAll(
                 new Label("📦 " + obj.getNombreObjeto()),

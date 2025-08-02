@@ -86,6 +86,27 @@ public class ObjetoDAO {
     }
 
    public boolean eliminarRelacionesCategoriaObjeto(int objetoId) {
+
+    String estadoID = null;
+    String sqlEstadoID = "SELECT ESTADO_ID FROM OBJETOS_PERDIDOS WHERE ID = ?";
+
+    try (Connection conn = ConexionOracle.getConnection(); // ← Agregado
+     PreparedStatement ps = conn.prepareStatement(sqlEstadoID)) {
+        ps.setInt(1, objetoId);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+        estadoID = rs.getString("ESTADO_ID");
+    }
+
+} catch (SQLException e) {
+    e.printStackTrace(); 
+}
+
+if ("21".equals(estadoID) ){
+    
+}
+
+
     
     String sql = "DELETE FROM CATEGORIA_OBJETO WHERE OBJETO_ID = ?";
     try (Connection conn = ConexionOracle.getConnection();
@@ -123,8 +144,7 @@ public boolean marcarComoEntregadoPorAlumno(int idObjeto, int idAlumno) {
 
         boolean resultado = stmt.executeUpdate() > 0;
 
-        // Aquí podrías agregar lógica adicional para registrar la entrega,
-        // por ejemplo, insertar en una tabla de entregas (opcional)
+        
         return resultado;
     } catch (SQLException e) {
         e.printStackTrace();
@@ -143,8 +163,7 @@ public boolean marcarComoEntregadoPorAlumno(int idObjeto, int idAlumno) {
                         MARCA = ?,
                         MODELO = ?,
                         NO_SERIAL = ?,
-                        EDIFICIO_ID = ?,
-                        ESTADO_ID = ?
+                        EDIFICIO_ID = ?
                     WHERE ID = ?
                 """;
 
@@ -158,8 +177,8 @@ public boolean marcarComoEntregadoPorAlumno(int idObjeto, int idAlumno) {
             stmt.setString(6, obj.getModelo());
             stmt.setString(7, obj.getNo_serial());
             stmt.setInt(8, obj.getEdificioId());
-            stmt.setInt(9, obj.getEstadoId());
-            stmt.setInt(10, obj.getId());
+            //stmt.setInt(9, obj.getEstadoId());
+            stmt.setInt(9, obj.getId());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -168,7 +187,7 @@ public boolean marcarComoEntregadoPorAlumno(int idObjeto, int idAlumno) {
         }
     }
 
-    public boolean cambiarEstadoObjeto(int idObjeto, int nuevoEstadoId) {
+    /*public boolean cambiarEstadoObjeto(int idObjeto, int nuevoEstadoId) {
         String sql = "UPDATE OBJETOS_PERDIDOS SET ESTADO_ID = ? WHERE ID = ?";
         try (Connection conn = ConexionOracle.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -179,7 +198,7 @@ public boolean marcarComoEntregadoPorAlumno(int idObjeto, int idAlumno) {
             e.printStackTrace();
             return false;
         }
-    }
+    }*/
 
     public boolean enviarObjetoABodega(int idObjeto) {
         Connection conn = null;

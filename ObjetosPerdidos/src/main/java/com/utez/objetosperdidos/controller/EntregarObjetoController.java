@@ -8,11 +8,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import com.utez.objetosperdidos.model.ObjetoPerdido;
-import com.utez.objetosperdidos.model.User;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
-import com.utez.objetosperdidos.model.dao.UserDAO;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -48,13 +45,9 @@ public class EntregarObjetoController {
     @FXML
     private ImageView imgPreview;
     private String nombreArchivoImagen;
-    private ObjetoPerdido objetoEditando;
-
     private ObjetoPerdido objeto;
 
     private final ObjetoDAO dao = new ObjetoDAO();
-
-    private final UserDAO userDAO = new UserDAO();
 
     public void setObjeto(ObjetoPerdido objeto) {
         this.objeto = objeto;
@@ -103,7 +96,10 @@ public class EntregarObjetoController {
     @FXML
     public void confirmarEntrega() {
         // Validar que se ingresen los datos del alumno
-        if (txtAlumno.getText().trim().isEmpty() || txtMatricula.getText().trim().isEmpty()) {
+        String nombreIngresado = txtAlumno.getText().trim();
+        String matriculaIngresada = txtMatricula.getText().trim();
+
+        if (nombreIngresado.isEmpty() || matriculaIngresada.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Error");
             alert.setContentText("Por favor, complete todos los campos del alumno.");
@@ -111,37 +107,30 @@ public class EntregarObjetoController {
             return;
         }
 
-        // Validar que el alumno exista en la base de datos
-        String matricula = txtMatricula.getText().trim();
-        User alumno = userDAO.obtenerAlumnoPorMatricula(matricula);
-        
-        if (alumno == null) {
+        // Validar que el nombre solo contenga letras (puede incluir espacios y acentos)
+        if (!nombreIngresado.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Error");
-            alert.setContentText("La matrícula ingresada no corresponde a un alumno registrado en el sistema.");
+            alert.setContentText("El nombre solo debe contener letras y espacios, sin caracteres especiales ni números.");
             alert.showAndWait();
             return;
         }
 
-        // Validar que el nombre ingresado coincida con el alumno encontrado
-        String nombreCompletoAlumno = alumno.getName() + " " + alumno.getApellidoPaterno() + " " + alumno.getApellidoMaterno();
-        String nombreIngresado = txtAlumno.getText().trim();
-        
-        if (!nombreCompletoAlumno.toLowerCase().contains(nombreIngresado.toLowerCase()) && 
-            !nombreIngresado.toLowerCase().contains(alumno.getName().toLowerCase())) {
+        // Validar que la matrícula solo contenga letras y números
+        if (!matriculaIngresada.matches("[a-zA-Z0-9]+")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Error");
-            alert.setContentText("El nombre ingresado no coincide con el alumno registrado con esa matrícula.");
+            alert.setContentText("La matrícula solo debe contener letras y números, sin caracteres especiales.");
             alert.showAndWait();
             return;
         }
 
-        // Marcar el objeto como entregado
-        boolean ok = dao.marcarComoEntregadoPorAlumno(objeto.getId(), alumno.getId() );
+        // Marcar el objeto como entregado (cambiando el estado a 21)
+        boolean ok = dao.cambiarEstadoObjeto(objeto.getId(), 21);
 
         Alert alert = new Alert(ok ? Alert.AlertType.INFORMATION : Alert.AlertType.ERROR);
         alert.setHeaderText(null);
-        alert.setContentText(ok ? "Objeto marcado como entregado al alumno: " + nombreCompletoAlumno : "No se pudo registrar la entrega.");
+        alert.setContentText(ok ? "Objeto marcado como entregado al alumno: " + nombreIngresado + " (Matrícula: " + matriculaIngresada + ")" : "No se pudo registrar la entrega.");
         alert.showAndWait();
 
         if (ok) {

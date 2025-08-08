@@ -1,5 +1,6 @@
 package com.utez.objetosperdidos.controller;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -129,5 +130,22 @@ public class LoginController {
     public void onPrivacy() throws Exception {
         PrivacyController.setOrigen("login");
         Main.switchScene("Privacy.fxml");
+    }
+
+    @FXML
+    public void onPrivacyFake() throws Exception {
+        try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/PrivacyFake.fxml"));
+        Parent root = loader.load();
+
+        Stage nuevaVentana = new Stage();
+        nuevaVentana.setTitle("Aviso de Privacidad");
+        nuevaVentana.setScene(new Scene(root));
+        nuevaVentana.setResizable(false); 
+        nuevaVentana.show();
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
     }
 }

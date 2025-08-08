@@ -78,9 +78,15 @@
                         <HBox spacing="10.0" alignment="CENTER_LEFT">
                             <Label text="Categoría" styleClass="etiqueta-style"/>
                             <Region prefHeight="47.0" prefWidth="60.0"/>
+                            <ComboBox fx:id="cbEdificio" prefHeight="35.0" prefWidth="410.0"/>
+                        </HBox>
+
+                        <HBox spacing="10.0" alignment="CENTER_LEFT">
+                            <Label text="Categoría" styleClass="etiqueta-style"/>
+                            <Region prefHeight="47.0" prefWidth="60.0"/>
                             <ComboBox fx:id="cbCategoria" prefHeight="35.0" prefWidth="410.0"/>
                         </HBox>
-                        
+ 
                         <HBox spacing="10.0" alignment="CENTER_LEFT">
                             <Label text="Archivo imagen:" />
                             <TextField fx:id="fotoUrlField" editable="false" prefWidth="450.0"

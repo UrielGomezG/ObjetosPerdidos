@@ -23,7 +23,7 @@
         <TextField fx:id="txtBuscar" promptText="Ej. mochila, celular..." />
         <Button fx:id="btnBuscar" text="🔍" />
         <Label text="Filtrar por categoría:" />
-        <ComboBox fx:id="comboCategoria" promptText="Categoría" />
+        <ComboBox fx:id="cbCategoria" promptText="Categoría" />
     </HBox>
 
     <ScrollPane fitToWidth="true">

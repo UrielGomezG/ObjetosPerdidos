@@ -56,6 +56,10 @@ public class AdminHomeController {
             Stage stage = new Stage();
             stage.setTitle("Agregar nuevo objeto perdido");
             stage.setScene(new Scene(root));
+            
+            // Refresh de la vista
+            stage.setOnHidden(e -> mostrarVistaObjetos());
+            
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

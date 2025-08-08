@@ -20,16 +20,6 @@
         </HBox>
     </top>
 
-    <left>
-        <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="61.0" spacing="10.0" style="-fx-padding: 10;">
-            <children>
-                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Btn1" />
-                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Btn2" />
-                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Btn3" />
-            </children>
-        </VBox>
-    </left>
-
     <center>
         <HBox spacing="30" alignment="CENTER" style="-fx-padding: 20;">
             <!-- Vista previa -->

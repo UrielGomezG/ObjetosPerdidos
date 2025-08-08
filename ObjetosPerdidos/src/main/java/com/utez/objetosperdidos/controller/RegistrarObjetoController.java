@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class RegistrarObjetoController {
 
@@ -49,6 +50,9 @@ public class RegistrarObjetoController {
 
     private File archivoSeleccionado;
 
+    private static final Path IMAGENES_DIR =
+        java.nio.file.Paths.get(System.getProperty("user.home"), "objetos-imagenes");
+
     @FXML
     public void initialize() {
         cargarEdificios();
@@ -56,39 +60,17 @@ public class RegistrarObjetoController {
         cargarCategorias();
     }
 
-    @FXML
+        @FXML
     void seleccionarFoto(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar imagen del objeto");
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Imágenes", "*.jpg", "*.jpeg", "*.png"));
 
-        File archivo = fileChooser.showOpenDialog(null);
+        File archivo = fileChooser.showOpenDialog(btnGuardar.getScene().getWindow());
         if (archivo != null) {
-            try {
-                File carpetaDestino = new File("src/main/resources/com/utez/objetosperdidos/imagenes");
-                if (!carpetaDestino.exists())
-                    carpetaDestino.mkdirs();
-
-                String nombreArchivo = archivo.getName();
-                Path destino = carpetaDestino.toPath().resolve(nombreArchivo);
-
-                if (Files.exists(destino)) {
-                    mostrarAlerta("Archivo duplicado",
-                            "Ya existe una imagen con el mismo nombre.\nRenómbrala y vuelve a intentarlo.",
-                            Alert.AlertType.WARNING);
-                    return;
-                }
-
-                Files.copy(archivo.toPath(), destino);
-                lblNombreFoto.setText(nombreArchivo);
-                archivoSeleccionado = destino.toFile();
-                System.out.println("Imagen copiada a: " + destino);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                mostrarAlerta("Error", "No se pudo copiar la imagen.", Alert.AlertType.ERROR);
-            }
+            archivoSeleccionado = archivo;
+            lblNombreFoto.setText(archivo.getName());
         }
     }
 
@@ -103,11 +85,34 @@ public class RegistrarObjetoController {
         String aula = txtAula.getText();
         Edificio edificio = cbEdificio.getValue();
 //        Estado estado = cbEstado.getValue();
-        String fotoUrl = lblNombreFoto.getText().isEmpty() ? null : lblNombreFoto.getText();
+        String fotoUrl = null;
 
         if (titulo.isEmpty() || descripcion.isEmpty()|| edificio == null ) {
             mostrarAlerta("Campos obligatorios faltantes", "Por favor completa todos los campos obligatorios.",
                     Alert.AlertType.WARNING);
+            return;
+        }
+
+        
+        // Copiar imagen si se seleccionó
+        String foto = null;
+        try {
+            if (archivoSeleccionado != null) {
+                Files.createDirectories(IMAGENES_DIR);
+
+                String nombre = archivoSeleccionado.getName();
+                String ext = nombre.contains(".") ? nombre.substring(nombre.lastIndexOf('.')) : "";
+                String nombreUnico = System.currentTimeMillis() + "-" + UUID.randomUUID() + ext;
+
+                Path destino = IMAGENES_DIR.resolve(nombreUnico);
+                Files.copy(archivoSeleccionado.toPath(), destino);
+
+                // Guardamos solo el nombre
+                foto = nombreUnico;
+            }
+        } catch (IOException io) {
+            io.printStackTrace();
+            mostrarAlerta("Error", "No se pudo copiar la imagen.", Alert.AlertType.ERROR);
             return;
         }
 

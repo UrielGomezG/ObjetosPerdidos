@@ -29,6 +29,7 @@ public class ObjetoDAO {
                 JOIN ESTADOS s ON o.ESTADO_ID = s.ID
                 LEFT JOIN CATEGORIA_OBJETO co ON o.ID = co.OBJETO_ID
                 LEFT JOIN CATEGORIAS c ON co.CATEGORIA_ID = c.ID
+                WHERE s.ID = 1
                 ORDER BY o.FECHA_REPORTE DESC
                 """;
 

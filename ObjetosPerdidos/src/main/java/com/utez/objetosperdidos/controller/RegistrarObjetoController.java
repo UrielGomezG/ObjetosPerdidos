@@ -52,7 +52,7 @@ public class RegistrarObjetoController {
     @FXML
     public void initialize() {
         cargarEdificios();
-        cargarEstados();
+//        cargarEstados();
         cargarCategorias();
     }
 
@@ -99,35 +99,35 @@ public class RegistrarObjetoController {
         String modelo = txtModelo.getText();
         String noSerial = txtNoSerial.getText();
         String descripcion = txtDescripcion.getText();
-        LocalDate fechaReporte = dpFechaReporte.getValue();
+//        LocalDate fechaReporte = dpFechaReporte.getValue();
         String aula = txtAula.getText();
         Edificio edificio = cbEdificio.getValue();
-        Estado estado = cbEstado.getValue();
+//        Estado estado = cbEstado.getValue();
         String fotoUrl = lblNombreFoto.getText().isEmpty() ? null : lblNombreFoto.getText();
 
-        if (titulo.isEmpty() || descripcion.isEmpty() || fechaReporte == null || edificio == null || estado == null) {
+        if (titulo.isEmpty() || descripcion.isEmpty()|| edificio == null ) {
             mostrarAlerta("Campos obligatorios faltantes", "Por favor completa todos los campos obligatorios.",
                     Alert.AlertType.WARNING);
             return;
         }
 
         try (Connection conn = ConexionOracle.getConnection()) {
-            String sql = "INSERT INTO OBJETOS_PERDIDOS (NOMBRE_EN_OBJETO, DESCRIPCION, FECHA_REPORTE, FOTO_URL, AULA, EDIFICIO_ID, ESTADO_ID, MARCA, MODELO, NO_SERIAL, ADMINISTRADOR_ID) "
+            String sql = "INSERT INTO OBJETOS_PERDIDOS (NOMBRE_EN_OBJETO, DESCRIPCION, FOTO_URL, AULA, EDIFICIO_ID, MARCA, MODELO, NO_SERIAL, ADMINISTRADOR_ID) "
                     +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql, new String[] { "ID" });
             stmt.setString(1, titulo);
             stmt.setString(2, descripcion);
-            stmt.setDate(3, Date.valueOf(fechaReporte));
-            stmt.setString(4, fotoUrl);
-            stmt.setString(5, aula);
-            stmt.setInt(6, edificio.getId());
-            stmt.setInt(7, estado.getId());
-            stmt.setString(8, marca);
-            stmt.setString(9, modelo);
-            stmt.setString(10, noSerial);
-            stmt.setInt(11, 1);
+//            stmt.setDate(3, Date.valueOf(fechaReporte));
+            stmt.setString(3, fotoUrl);
+            stmt.setString(4, aula);
+            stmt.setInt(5, edificio.getId());
+//            stmt.setInt(7, estado.getId());
+            stmt.setString(6, marca);
+            stmt.setString(7, modelo);
+            stmt.setString(8, noSerial);
+            stmt.setInt(9, 1);
 
             int rows = stmt.executeUpdate();
             if (rows > 0) {
@@ -188,20 +188,20 @@ public class RegistrarObjetoController {
         }
     }
 
-    private void cargarEstados() {
-        ObservableList<Estado> lista = FXCollections.observableArrayList();
-        try (Connection conn = ConexionOracle.getConnection()) {
-            String sql = "SELECT ID, NOMBRE FROM ESTADOS";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                lista.add(new Estado(rs.getInt("ID"), rs.getString("NOMBRE")));
-            }
-            cbEstado.setItems(lista);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    private void cargarEstados() {
+//        ObservableList<Estado> lista = FXCollections.observableArrayList();
+//        try (Connection conn = ConexionOracle.getConnection()) {
+//            String sql = "SELECT ID, NOMBRE FROM ESTADOS";
+//            PreparedStatement stmt = conn.prepareStatement(sql);
+//            ResultSet rs = stmt.executeQuery();
+//            while (rs.next()) {
+//                lista.add(new Estado(rs.getInt("ID"), rs.getString("NOMBRE")));
+//            }
+//            cbEstado.setItems(lista);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void cargarCategorias() {
         ObservableList<Categoria> lista = FXCollections.observableArrayList();

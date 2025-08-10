@@ -1,0 +1,33 @@
+.background {
+    -fx-background-color: #E2E9EF;
+    -fx-min-width: 550;
+    -fx-max-width: 550;
+    -fx-min-height: 400;
+    -fx-max-height: 400;
+
+    -fx-background-radius: 15px;
+    -fx-background-radius: 15px;
+}
+.mensaje{
+    -fx-background-color: #C2CDD6;
+
+    -fx-pref-height: 200;
+    -fx-pref-width: 510;
+
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.3), 20, 0.3, 0, 5);
+    -fx-transition: -fx-background-color 0.2s, -fx-effect 0.2s;
+}.btnAceptar{
+    -fx-pref-width: 100;
+    -fx-pref-height: 35;
+
+    -fx-font-weight: bold;
+
+    -fx-background-color: #62C070;
+    -fx-text-fill: #ffffff;
+
+    -fx-background-radius: 20px;
+}
+.titulo{
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+}

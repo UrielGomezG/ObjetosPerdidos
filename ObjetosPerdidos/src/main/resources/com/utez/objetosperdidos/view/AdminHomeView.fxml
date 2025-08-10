@@ -46,12 +46,18 @@
                <graphic>
                   <FontIcon iconLiteral="fa-plus-circle" iconSize="40" />
                </graphic></Button>
-      </VBox>
-      <VBox alignment="CENTER">
+            <Region prefHeight="20.0" prefWidth="200.0" />
+            <Button mnemonicParsing="false" onAction="#abrirHistorialEntregados" styleClass="btns">
+               <graphic>
+                  <FontIcon iconLiteral="fa-history" iconSize="40" />
+               </graphic>
+            </Button>
+            <Region prefHeight="329.0" prefWidth="67.0" />
         <Button onAction="#onLogout" prefHeight="43.0" prefWidth="47.0" styleClass="btns">
                <graphic>
                   <FontIcon iconLiteral="fa-sign-out" iconSize="40" />
-               </graphic></Button>
+               </graphic>
+            </Button>
       </VBox>
     </VBox>
   </left>

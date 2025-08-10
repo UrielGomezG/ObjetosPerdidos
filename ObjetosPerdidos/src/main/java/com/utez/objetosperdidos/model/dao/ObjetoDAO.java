@@ -21,15 +21,15 @@ public class ObjetoDAO {
 
         String query = """
                 SELECT o.ID, o.NOMBRE_EN_OBJETO, o.DESCRIPCION, o.FOTO_URL, o.AULA,
-                o.MARCA, o.MODELO, o.NO_SERIAL,
-                e.NOMBRE AS edificio, s.NOMBRE AS estado,
-                c.ID AS CATEGORIA_ID, c.NOMBRE AS CATEGORIA_NOMBRE
+                       o.MARCA, o.MODELO, o.NO_SERIAL,
+                       e.NOMBRE AS edificio, s.NOMBRE AS estado,
+                       c.ID AS CATEGORIA_ID, c.NOMBRE AS CATEGORIA_NOMBRE
                 FROM OBJETOS_PERDIDOS o
                 JOIN EDIFICIOS e ON o.EDIFICIO_ID = e.ID
                 JOIN ESTADOS s ON o.ESTADO_ID = s.ID
                 LEFT JOIN CATEGORIA_OBJETO co ON o.ID = co.OBJETO_ID
                 LEFT JOIN CATEGORIAS c ON co.CATEGORIA_ID = c.ID
-                WHERE s.ID = 1
+                WHERE s.ID IN (1, 3)
                 ORDER BY o.FECHA_REPORTE DESC
                 """;
 
@@ -267,4 +267,52 @@ public boolean marcarComoEntregadoPorAlumno(int idObjeto, int idAlumno) {
             System.out.println("-----------------------------");
         }
     }
+
+    public List<ObjetoPerdido> obtenerObjetosEntregados() {
+        List<ObjetoPerdido> lista = new ArrayList<>();
+
+        String query = """
+            SELECT o.ID, o.NOMBRE_EN_OBJETO, o.DESCRIPCION, o.FOTO_URL, o.AULA,
+                   o.MARCA, o.MODELO, o.NO_SERIAL,
+                   e.NOMBRE AS edificio, s.NOMBRE AS estado,
+                   c.ID AS CATEGORIA_ID, c.NOMBRE AS CATEGORIA_NOMBRE
+            FROM OBJETOS_PERDIDOS o
+            JOIN EDIFICIOS e ON o.EDIFICIO_ID = e.ID
+            JOIN ESTADOS s ON o.ESTADO_ID = s.ID
+            LEFT JOIN CATEGORIA_OBJETO co ON o.ID = co.OBJETO_ID
+            LEFT JOIN CATEGORIAS c ON co.CATEGORIA_ID = c.ID
+            WHERE s.ID = 21
+            ORDER BY o.FECHA_REPORTE DESC
+            """;
+
+        try (Connection conn = ConexionOracle.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                ObjetoPerdido obj = new ObjetoPerdido(
+                        rs.getInt("ID"),
+                        rs.getString("NOMBRE_EN_OBJETO"),
+                        rs.getString("DESCRIPCION"),
+                        rs.getString("FOTO_URL"),
+                        rs.getString("AULA"),
+                        rs.getString("edificio"),
+                        rs.getString("estado"),
+                        rs.getString("MARCA"),
+                        rs.getString("MODELO"),
+                        rs.getString("NO_SERIAL"));
+                String categoriaNombre = rs.getString("CATEGORIA_NOMBRE");
+                int categoriaId = rs.getInt("CATEGORIA_ID");
+                if (categoriaNombre != null) {
+                    obj.setCategoria(new Categoria(categoriaId, categoriaNombre));
+                }
+                lista.add(obj);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
 }

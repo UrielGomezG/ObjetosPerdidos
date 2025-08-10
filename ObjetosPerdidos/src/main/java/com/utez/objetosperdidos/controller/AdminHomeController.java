@@ -80,5 +80,14 @@ public class AdminHomeController {
             System.out.println("Error al cargar modal Salir");
         }
     }
+    @FXML
+    private void abrirHistorialEntregados() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/Historial.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Historial de Objetos Entregados");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
 }

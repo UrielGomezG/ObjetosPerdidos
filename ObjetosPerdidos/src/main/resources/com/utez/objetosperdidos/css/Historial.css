@@ -1,0 +1,19 @@
+.text-field {
+    -fx-padding: 8;
+    -fx-font-size: 14px;
+}
+
+.list-view {
+    -fx-font-size: 14px;
+    -fx-background-color: #f4f4f4;
+}
+
+.list-cell {
+    -fx-padding: 10;
+    -fx-background-color: white;
+    -fx-border-color: #ddd;
+}
+.list-cell:filled:selected {
+    -fx-background-color: #87cefa;
+    -fx-text-fill: white;
+}

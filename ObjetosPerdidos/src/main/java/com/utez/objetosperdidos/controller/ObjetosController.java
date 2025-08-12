@@ -5,13 +5,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import com.utez.objetosperdidos.model.Categoria;
 import com.utez.objetosperdidos.model.ObjetoPerdido;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -22,8 +26,15 @@ public class ObjetosController {
 
     @FXML
     private FlowPane contenedorTarjetas;
+    @FXML
+    private ComboBox<String> cbCategoria;
+    @FXML
+    private TextField txtBuscar;
+    @FXML
+    private Button btnBuscar;
 
     private final ObjetoDAO dao = new ObjetoDAO();
+    private List<ObjetoPerdido> listaOriginal;
 
     @FXML
     public void initialize() {
@@ -33,6 +44,67 @@ public class ObjetosController {
             System.out.println("Inicializando vista de objetos perdidos para usuario...");
         }
         cargarObjetos();
+        listaOriginal = dao.obtenerObjetosConInfo(0, 100);
+        mostrarObjetos(listaOriginal);
+        cargarCategorias();
+        if (btnBuscar != null) {
+            btnBuscar.setOnAction(e -> buscarPorNombre(txtBuscar.getText()));
+        }
+
+        if (txtBuscar != null) {
+            txtBuscar.textProperty().addListener((obs, oldVal, newVal) -> buscarPorNombre(newVal));
+        }
+    }
+
+    private void cargarCategorias() {
+        cbCategoria.getItems().clear();
+        cbCategoria.getItems().add("Todas");
+        List<Categoria> categorias = dao.obtenerCategorias();
+
+        for (Categoria cat : categorias) {
+            cbCategoria.getItems().add(cat.getNombre());
+        }
+
+        cbCategoria.getSelectionModel().selectFirst();
+        cbCategoria.setOnAction(e -> filtrarPorNombreYCategoria());
+    }
+
+    private void filtrarPorNombreYCategoria() {
+        String texto = txtBuscar.getText().toLowerCase();
+        String categoriaSeleccionada = cbCategoria.getValue();
+
+        List<ObjetoPerdido> filtrados = listaOriginal.stream()
+                .filter(obj -> {
+                    boolean coincideTexto = obj.getNombreObjeto().toLowerCase().contains(texto);
+                    boolean coincideCategoria = categoriaSeleccionada == null || categoriaSeleccionada.equals("Todas")
+                            || (obj.getCategoria() != null && obj.getCategoria().getNombre().equalsIgnoreCase(categoriaSeleccionada));
+                    return coincideTexto && coincideCategoria;
+                })
+                .toList();
+
+        mostrarObjetos(filtrados);
+    }
+
+    private void buscarPorNombre(String filtro) {
+        if (filtro == null || filtro.isBlank()) {
+            mostrarObjetos(listaOriginal);
+            return;
+        }
+
+        List<ObjetoPerdido> filtrados = listaOriginal.stream()
+                .filter(obj -> obj.getNombreObjeto().toLowerCase().contains(filtro.toLowerCase()))
+                .toList();
+
+        mostrarObjetos(filtrados);
+    }
+
+    private void mostrarObjetos(List<ObjetoPerdido> objetos) {
+        contenedorTarjetas.getChildren().clear();
+
+        for (ObjetoPerdido obj : objetos) {
+            VBox tarjeta = crearTarjetaUsuario(obj);
+            contenedorTarjetas.getChildren().add(tarjeta);
+        }
     }
 
     private void cargarObjetos() {

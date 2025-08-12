@@ -2,22 +2,30 @@ package com.utez.objetosperdidos.controller;
 
 import java.io.IOException;
 
+import com.utez.objetosperdidos.util.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class HomeController {
     @FXML
+    private Label userNameLabel;
+    @FXML
     private BorderPane mainContainer;
 
     @FXML
     public void initialize() {
         mostrarVistaObjetos();
+        if (Session.currentUser != null) {
+            String nombreCompleto = Session.currentUser.getName() + " " + Session.currentUser.getApellidoPaterno();
+            userNameLabel.setText(nombreCompleto);
+        }
     }
 
     public void mostrarVistaObjetos() {

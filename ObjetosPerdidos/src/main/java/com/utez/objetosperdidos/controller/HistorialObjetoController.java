@@ -2,6 +2,7 @@ package com.utez.objetosperdidos.controller;
 
 import com.utez.objetosperdidos.model.ObjetoPerdido;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
+import com.utez.objetosperdidos.util.Session;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,7 +24,10 @@ import java.util.stream.Collectors;
 
 public class HistorialObjetoController {
 
-    @FXML private FlowPane itemsContainer;
+    @FXML
+    private FlowPane itemsContainer;
+    @FXML
+    private Label userNameLabel;
 
     private List<ObjetoPerdido> objetos;
     private final ObjetoDAO dao = new ObjetoDAO();
@@ -34,6 +38,10 @@ public class HistorialObjetoController {
                 .stream()
                 .filter(o -> "Entregado".equalsIgnoreCase(o.getEstado()))
                 .collect(Collectors.toList());
+        if (Session.currentUser != null) {
+            String nombreCompleto = Session.currentUser.getName() + " " + Session.currentUser.getApellidoPaterno();
+            userNameLabel.setText(nombreCompleto);
+        }
 
         mostrarObjetos(objetos);
     }

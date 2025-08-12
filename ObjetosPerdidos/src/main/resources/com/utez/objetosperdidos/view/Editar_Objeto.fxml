@@ -1,109 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.utez.objetosperdidos.controller.EditarObjetoController"
-            prefHeight="600.0" prefWidth="900.0"
-            style="-fx-background-color: #f9f9f9;">
-
-    <top>
-        <HBox alignment="CENTER_LEFT" spacing="12.0"
-              style="-fx-padding: 10; -fx-background-color: #2c3e50;">
-            <children>
-                <Button mnemonicParsing="false" text="🏠"
-                        style="-fx-font-size: 16px; -fx-background-color: #3498db; -fx-text-fill: white;" />
-                <Label text="Objetos Perdidos"
-                       style="-fx-text-fill: white;">
-                    <font>
-                        <Font name="System Bold" size="24.0" />
-                    </font>
-                </Label>
-                <Region HBox.hgrow="ALWAYS" />
-                <Label text="Administrador"
-                       style="-fx-text-fill: #ecf0f1;" />
-                <ImageView fx:id="adminAvatar" fitHeight="40.0" fitWidth="40.0"
-                           pickOnBounds="true" preserveRatio="true" />
-            </children>
-        </HBox>
-    </top>
+<BorderPane prefHeight="600.0" prefWidth="900.0" styleClass="background" stylesheets="@../css/EditarObjeto.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.EditarObjetoController">
 
     <center>
         <HBox spacing="20.0" style="-fx-padding: 20;">
             <children>
-                <VBox spacing="15.0" alignment="CENTER">
+                <VBox alignment="TOP_CENTER" spacing="15.0">
                     <children>
-                        <Label text="Vista previa" />
-                        <ImageView fx:id="imgPreview"
-                                   fitHeight="321.0" fitWidth="220.0"
-                                   pickOnBounds="true" preserveRatio="true"
-                                   style="-fx-border-color: #aaa;
-                                          -fx-border-width: 1;
-                                          -fx-background-color: white;
-                                          -fx-background-radius: 10;
-                                          -fx-border-radius: 10;
-                                          -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0, 2);" />
-                        <Button fx:id="btnSubirImagen" text="Subir imagen"
-                                onAction="#handleSubirImagen"
-                                style="-fx-background-color: #2980b9; -fx-text-fill: white;" />
+                  <HBox prefHeight="41.0" prefWidth="220.0">
+                     <children>
+                        <Label styleClass="titulo" text="Editar objeto" />
+                     </children>
+                  </HBox>
+                        <Label styleClass="textStyle" text="Vista previa" />
+                        <ImageView fx:id="imgPreview" fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: #aaa;                                           -fx-border-width: 1;                                           -fx-background-color: white;                                           -fx-background-radius: 10;                                           -fx-border-radius: 10;                                           -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0, 2);" />
+                        <Button fx:id="btnSubirImagen" onAction="#handleSubirImagen" style="-fx-background-color: #2980b9; -fx-text-fill: white;" text="Subir imagen" />
                     </children>
                 </VBox>
 
-                <VBox spacing="12.0" prefWidth="600.0">
+                <VBox prefWidth="600.0" spacing="12.0">
                     <children>
-                        <Label text="Editar Objeto">
-                            <font>
-                                <Font name="System Bold" size="22.0" />
-                            </font>
-                        </Label>
 
-                        <HBox spacing="10.0" alignment="CENTER_LEFT">
-                            <Label text="Título:" />
-                            <TextField fx:id="tituloField" prefWidth="450.0"
-                                       style="-fx-padding: 5; -fx-background-radius: 5; -fx-border-radius: 5;
-                                              -fx-border-color: #ccc; -fx-border-width: 1;" />
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Label styleClass="textStyle" text="Título:" />
+                     <Region prefHeight="29.0" prefWidth="60.0" />
+                            <TextField fx:id="tituloField" prefWidth="440.0" styleClass="textField" />
                         </HBox>
 
-                        <HBox spacing="10.0" alignment="CENTER_LEFT">
-                            <Label text="Aula:" />
-                            <TextField fx:id="aulaField" prefWidth="450.0"
-                                       style="-fx-padding: 5; -fx-background-radius: 5; -fx-border-radius: 5;
-                                              -fx-border-color: #ccc; -fx-border-width: 1;" />
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Label styleClass="textStyle" text="Aula:" />
+                     <Region prefHeight="29.0" prefWidth="66.0" />
+                            <TextField fx:id="aulaField" prefWidth="440.0" styleClass="textField" />
                         </HBox>
 
-                        <HBox spacing="10.0" alignment="CENTER_LEFT">
-                            <Label text="Categoría" styleClass="etiqueta-style"/>
-                            <Region prefHeight="47.0" prefWidth="60.0"/>
-                            <ComboBox fx:id="cbEdificio" prefHeight="35.0" prefWidth="410.0"/>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Label styleClass="textStyle" text="Edificio:" />
+                            <Region prefHeight="39.0" prefWidth="51.0" />
+                            <ComboBox fx:id="cbEdificio" prefHeight="35.0" prefWidth="440.0" styleClass="textField" />
                         </HBox>
 
-                        <HBox spacing="10.0" alignment="CENTER_LEFT">
-                            <Label text="Categoría" styleClass="etiqueta-style"/>
-                            <Region prefHeight="47.0" prefWidth="60.0"/>
-                            <ComboBox fx:id="cbCategoria" prefHeight="35.0" prefWidth="410.0"/>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Label styleClass="textStyle" text="Categoría" />
+                            <Region prefHeight="43.0" prefWidth="42.0" />
+                            <ComboBox fx:id="cbCategoria" prefHeight="35.0" prefWidth="440.0" styleClass="textField" />
                         </HBox>
  
-                        <HBox spacing="10.0" alignment="CENTER_LEFT">
-                            <Label text="Archivo imagen:" />
-                            <TextField fx:id="fotoUrlField" editable="false" prefWidth="450.0"
-                                       style="-fx-padding: 5; -fx-background-radius: 5; -fx-border-radius: 5;
-                                              -fx-border-color: #ccc; -fx-border-width: 1;" />
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Label styleClass="textStyle" text="Archivo imagen:" />
+                     <Region prefHeight="29.0" prefWidth="3.0" />
+                            <TextField fx:id="fotoUrlField" editable="false" prefWidth="440.0" styleClass="textField" />
                         </HBox>
 
-                        <Label text="Descripción:" />
-                        <TextArea fx:id="descripcionArea" prefHeight="150.0" prefWidth="450.0" wrapText="true"
-                                  style="-fx-padding: 5; -fx-background-radius: 5; -fx-border-radius: 5;
-                                         -fx-border-color: #ccc; -fx-border-width: 1;" />
+                        <Label styleClass="textStyle" text="Descripción:" />
+                        <TextArea fx:id="descripcionArea" prefHeight="150.0" prefWidth="450.0" styleClass="textArea" wrapText="true" />
 
-                        <HBox spacing="10.0" alignment="CENTER_RIGHT">
-                            <Button fx:id="btnCancelar" text="Cancelar" onAction="#cancelar"
-                                    style="-fx-background-color: #e74c3c; -fx-text-fill: white;" />
-                            <Button fx:id="btnGuardar" text="Guardar" onAction="#guardarCambios"
-                                    style="-fx-background-color: #27ae60; -fx-text-fill: white;" />
+                        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                            <Button fx:id="btnCancelar" onAction="#cancelar" styleClass="btnCancelar" text="Cancelar" />
+                            <Button fx:id="btnGuardar" onAction="#guardarCambios" styleClass="btnGuardar" text="Guardar" />
                         </HBox>
                     </children>
                 </VBox>

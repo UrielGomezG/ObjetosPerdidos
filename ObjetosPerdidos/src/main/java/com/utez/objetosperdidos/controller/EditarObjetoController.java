@@ -6,6 +6,7 @@ import com.utez.objetosperdidos.model.ObjetoPerdido;
 import com.utez.objetosperdidos.model.dao.CategoriaDAO;
 import com.utez.objetosperdidos.model.dao.EdificioDAO;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
+import com.utez.objetosperdidos.util.Session;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -20,6 +21,8 @@ import java.nio.file.*;
 import java.util.List;
 
 public class EditarObjetoController {
+    @FXML
+    private Label userNameLabel;
 
     @FXML
     private TextField tituloField;
@@ -65,6 +68,11 @@ public class EditarObjetoController {
         cbEdificio.setItems(FXCollections.observableArrayList(edificios));
         List<Categoria> categorias = categoriaDAO.obtenerCategorias();
         cbCategoria.setItems(FXCollections.observableArrayList(categorias));
+
+        if (Session.currentUser != null) {
+            String nombreCompleto = Session.currentUser.getName() + " " + Session.currentUser.getApellidoPaterno();
+            userNameLabel.setText(nombreCompleto);
+        }
     }
 
 

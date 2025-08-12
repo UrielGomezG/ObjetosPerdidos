@@ -9,8 +9,6 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <BorderPane fx:id="mainContainer" styleClass="background" stylesheets="@../css/AdminHomeView.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.AdminHomeController">
@@ -26,67 +24,54 @@
             </graphic></Button>
       <Region prefHeight="40.0" prefWidth="8.0" />
       <Label styleClass="Titulo-style" text="Objetos Perdidos" />
-      <Region prefHeight="40.0" prefWidth="352.0" />
-      <Label fx:id="userNameLabel" prefHeight="17.0" prefWidth="133.0" style="-fx-padding: 0 10 0 10;" />
+      <Region prefHeight="50.0" prefWidth="352.0" HBox.hgrow="ALWAYS" />
+      <Label fx:id="userNameLabel" prefHeight="30.0" prefWidth="133.0" style="-fx-padding: 0 10 0 10;" />
          <Region prefHeight="40.0" prefWidth="41.0" />
       <ImageView fitHeight="40" fitWidth="40" preserveRatio="true" />
     </HBox>
   </top>
 
-  <left>
-    <VBox prefHeight="615.0" prefWidth="69.0" spacing="450" styleClass="boxStyle" BorderPane.alignment="CENTER">
-      <VBox alignment="CENTER">
+    <left>
+        <VBox alignment="CENTER" prefHeight="615.0" prefWidth="69.0" styleClass="boxStyle">
             <Region prefHeight="20.0" prefWidth="200.0" />
-        <Button onAction="#onPerfil" prefHeight="43.0" prefWidth="47.0" styleClass="btns">
-               <graphic>
-                  <FontIcon iconLiteral="fa-user" iconSize="40" />
-               </graphic></Button>
+
+            <Button onAction="#onPerfil" prefHeight="43.0" prefWidth="47.0" styleClass="btns">
+                <graphic>
+                    <FontIcon iconLiteral="fa-user" iconSize="40" />
+                </graphic>
+            </Button>
+
             <Region prefHeight="20.0" prefWidth="200.0" />
-        <Button fx:id="btnAgregarObjeto" onAction="#onAgregarObjeto" prefHeight="43.0" prefWidth="47.0" styleClass="btns">
-               <graphic>
-                  <FontIcon iconLiteral="fa-plus-circle" iconSize="40" />
-               </graphic></Button>
+
+            <Button fx:id="btnAgregarObjeto" onAction="#onAgregarObjeto" prefHeight="43.0" prefWidth="47.0" styleClass="btns">
+                <graphic>
+                    <FontIcon iconLiteral="fa-plus-circle" iconSize="40" />
+                </graphic>
+            </Button>
+
             <Region prefHeight="20.0" prefWidth="200.0" />
+
             <Button mnemonicParsing="false" onAction="#abrirHistorialEntregados" styleClass="btns">
-               <graphic>
-                  <FontIcon iconLiteral="fa-history" iconSize="40" />
-               </graphic>
+                <graphic>
+                    <FontIcon iconLiteral="fa-history" iconSize="40" />
+                </graphic>
             </Button>
-            <Region prefHeight="329.0" prefWidth="67.0" />
-        <Button onAction="#onLogout" prefHeight="43.0" prefWidth="47.0" styleClass="btns">
-               <graphic>
-                  <FontIcon iconLiteral="fa-sign-out" iconSize="40" />
-               </graphic>
+
+            <Region minHeight="0" VBox.vgrow="ALWAYS" />
+
+            <Button onAction="#onLogout" prefHeight="43.0" prefWidth="47.0" styleClass="btns">
+                <graphic>
+                    <FontIcon iconLiteral="fa-sign-out" iconSize="40" />
+                </graphic>
             </Button>
-      </VBox>
-    </VBox>
-  </left>
+        </VBox>
+    </left>
 
   <center>
     <TilePane fx:id="objectGrid" hgap="20" prefColumns="3" vgap="20">
       <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
       </padding>
-      <children>
-        <HBox prefHeight="100.0" prefWidth="200.0">
-          <children>
-            <ImageView fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
-            <VBox prefHeight="200.0" prefWidth="100.0">
-              <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="OBJETO">
-                  <font>
-                    <Font name="System Bold" size="24.0" />
-                  </font>
-                </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Marca:" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Modelo:" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Número de serie:" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción:" />
-              </children>
-            </VBox>
-          </children>
-        </HBox>
-      </children>
     </TilePane>
   </center>
 </BorderPane>

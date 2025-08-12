@@ -102,7 +102,7 @@ public class EditarObjetoController {
                 }
             }
 
-            Path rutaImagen = Paths.get(System.getProperty("user.home"), "objetos-imagenes", objetoEditando.getFotoUrl());
+            Path rutaImagen = Paths.get(System.getProperty("user.home"), "Downloads", objetoEditando.getFotoUrl());
             if (Files.exists(rutaImagen)) {
                 Image imagen = new Image(rutaImagen.toUri().toString());
                 imgPreview.setImage(imagen);

@@ -81,7 +81,7 @@ public class EntregarObjetoController {
 
             fotoUrlField.setText(nombreArchivoImagen);
 
-            Path destino = Paths.get(System.getProperty("user.home"), "objetos-imagenes", nombreArchivoImagen);
+            Path destino = Paths.get(System.getProperty("user.home"), "Downloads", nombreArchivoImagen);
             try {
                 Files.createDirectories(destino.getParent());
                 Files.copy(archivoSeleccionado.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);

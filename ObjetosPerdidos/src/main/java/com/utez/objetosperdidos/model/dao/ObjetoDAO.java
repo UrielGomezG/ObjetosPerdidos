@@ -103,7 +103,7 @@ public class ObjetoDAO {
     e.printStackTrace(); 
 }
 
-if ("21".equals(estadoID) ){
+if ("41".equals(estadoID) ){
     
 }
 
@@ -120,22 +120,27 @@ if ("21".equals(estadoID) ){
         return false;
         }
     }
+public boolean eliminarObjeto(int idObjeto) {
+    String sql = """
+            UPDATE OBJETOS_PERDIDOS
+            SET ESTADO_ID = 41
+            WHERE ID = ?
+        """;
+    try (Connection conn = ConexionOracle.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-    public boolean eliminarObjeto(int idObjeto) {
-        String sql = "DELETE FROM OBJETOS_PERDIDOS WHERE ID = ?";
-        try (Connection conn = ConexionOracle.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, idObjeto);
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+        stmt.setInt(1, idObjeto);
+        return stmt.executeUpdate() == 1;
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
     }
+}
 public boolean marcarComoEntregadoPorAlumno(int idObjeto, int idAlumno) {
     String sql = """
                 UPDATE OBJETOS_PERDIDOS
-                SET ESTADO_ID = 21
+                SET ESTADO_ID = 41
                 WHERE ID = ?
             """;
 

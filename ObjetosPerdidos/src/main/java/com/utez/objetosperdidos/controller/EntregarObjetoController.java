@@ -10,6 +10,7 @@ import java.nio.file.StandardCopyOption;
 import com.utez.objetosperdidos.model.ObjetoPerdido;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
 
+import com.utez.objetosperdidos.util.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -20,7 +21,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class EntregarObjetoController {
-
+    @FXML
+    private Label userNameLabel;
     @FXML
     private Label lblTitulo;
     @FXML
@@ -49,6 +51,12 @@ public class EntregarObjetoController {
 
     private final ObjetoDAO dao = new ObjetoDAO();
 
+    public void initialize() {
+        if (Session.currentUser != null) {
+            String nombreCompleto = Session.currentUser.getName() + " " + Session.currentUser.getApellidoPaterno();
+            userNameLabel.setText(nombreCompleto);
+        }
+    }
     public void setObjeto(ObjetoPerdido objeto) {
         this.objeto = objeto;
         lblTitulo.setText(objeto.getNombreObjeto());

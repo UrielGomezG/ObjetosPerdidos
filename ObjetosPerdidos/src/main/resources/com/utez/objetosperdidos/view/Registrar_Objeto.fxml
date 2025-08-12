@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -9,140 +10,92 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.layout.StackPane?>
 
-<BorderPane fx:controller="com.utez.objetosperdidos.controller.RegistrarObjetoController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../css/Registrar_Objeto.css" styleClass="background">
-  <top>
-    <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="900.0" BorderPane.alignment="CENTER" styleClass="boxStyle">
-      <children>
-        <Region prefHeight="55.0" prefWidth="12.0"/>
-        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Home"/>
-        <Region prefHeight="55.0" prefWidth="22.0"/>
-        <Label text="Objetos Perdidos">
-          <font>
-            <Font name="System Bold" size="24.0"/>
-          </font>
-        </Label>
-        <Region prefHeight="43.0" prefWidth="473.0"/>
-        <Label text="Administrador"/>
-        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true"/>
-      </children>
-    </HBox>
-  </top>
-
-  <left>
-    <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="61.0" BorderPane.alignment="CENTER" styleClass="boxStyle">
-      <children>
-        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Button"/>
-        <Region prefHeight="20.0" prefWidth="50.0"/>
-        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Button"/>
-        <Region prefHeight="20.0" prefWidth="50.0"/>
-        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Button"/>
-      </children>
-    </VBox>
-  </left>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="background" stylesheets="@../css/Registrar_Objeto.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.RegistrarObjetoController">
 
   <center>
     <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
       <children>
-        <Region prefHeight="550.0" prefWidth="45.0"/>
+        <Region prefHeight="550.0" prefWidth="45.0" />
         <VBox prefHeight="550.0" prefWidth="797.0">
           <children>
-            <Label text="Agregar Objeto" styleClass="Titulo-style"/>
-            <HBox alignment="CENTER_LEFT" prefHeight="511.0" prefWidth="797.0">
+            <Label styleClass="Titulo-style" text="Agregar Objeto" />
+            <HBox alignment="CENTER_LEFT" prefHeight="527.0" prefWidth="797.0">
               <children>
-                <ImageView fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" styleClass="img-style"/>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="220.0">
+                           <children>
+                      <ImageView fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
+                   <Button onAction="#seleccionarFoto" text="Subir imagen" />
+                   <Label fx:id="lblNombreFoto" text="Ningún archivo seleccionado" />
+                           </children>
+                        </VBox>
                 <VBox prefHeight="511.0" prefWidth="578.0">
                   <children>
                     <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
                       <children>
-                        <Label text="Título:" styleClass="etiqueta-style"/>
-                        <Region prefHeight="47.0" prefWidth="65.0"/>
-                        <TextField fx:id="txtTitulo" prefHeight="35.0" prefWidth="410.0" styleClass="textField"/>
-                      </children>
-                    </HBox>
-                    <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="578.0">
-                      <children>
-                        <Label text="Marca:" styleClass="etiqueta-style"/>
-                        <Region prefHeight="62.0" prefWidth="63.0"/>
-                        <TextField fx:id="txtMarca" prefHeight="35.0" prefWidth="410.0" styleClass="textField"/>
-                      </children>
-                    </HBox>
-                    <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="578.0">
-                      <children>
-                        <Label text="Modelo:" styleClass="etiqueta-style"/>
-                        <Region prefHeight="45.0" prefWidth="51.0"/>
-                        <TextField fx:id="txtModelo" prefHeight="35.0" prefWidth="410.0" styleClass="textField"/>
+                        <Label styleClass="etiqueta-style" text="Título:" />
+                        <Region prefHeight="30.0" prefWidth="64.0" />
+                        <TextField fx:id="txtTitulo" prefHeight="57.0" prefWidth="410.0" styleClass="textField" />
                       </children>
                     </HBox>
                     <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="578.0">
                       <children>
-                        <Label text="No.Serial:" styleClass="etiqueta-style"/>
-                        <Region prefHeight="57.0" prefWidth="39.0"/>
-                        <TextField fx:id="txtNoSerial" prefHeight="35.0" prefWidth="410.0" styleClass="textField"/>
+                        <Label styleClass="etiqueta-style" text="Marca:" />
+                        <Region prefHeight="45.0" prefWidth="62.0" />
+                        <TextField fx:id="txtMarca" prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                       </children>
                     </HBox>
-                    <!-- FOTO -->
-                    <HBox alignment="CENTER_LEFT" spacing="10">
-                      <Label text="Foto del objeto:" styleClass="etiqueta-style"/>
-                      <Button text="Subir imagen" onAction="#seleccionarFoto"/>
-                      <Label fx:id="lblNombreFoto" text="Ningún archivo seleccionado"/>
+                    <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="578.0">
+                      <children>
+                        <Label styleClass="etiqueta-style" text="Modelo:" />
+                        <Region prefHeight="29.0" prefWidth="48.0" />
+                        <TextField fx:id="txtModelo" prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
+                      </children>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="578.0">
+                      <children>
+                        <Label styleClass="etiqueta-style" text="No.Serial:" />
+                        <Region prefHeight="35.0" prefWidth="37.0" />
+                        <TextField fx:id="txtNoSerial" prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
+                      </children>
                     </HBox>
                     <!-- AULA -->
-                    <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
+                    <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="578.0">
                       <children>
-                        <Label text="Aula:" styleClass="etiqueta-style"/>
-                        <Region prefHeight="47.0" prefWidth="80.0"/>
-                        <TextField fx:id="txtAula" prefHeight="35.0" prefWidth="410.0" styleClass="textField"/>
+                        <Label styleClass="etiqueta-style" text="Aula:" />
+                        <Region prefHeight="31.0" prefWidth="76.0" />
+                        <TextField fx:id="txtAula" prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                       </children>
                     </HBox>
                     <!-- EDIFICIO -->
-                    <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
+                    <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="578.0">
                       <children>
-                        <Label text="Edificio:" styleClass="etiqueta-style"/>
-                        <Region prefHeight="47.0" prefWidth="55.0"/>
-                        <ComboBox fx:id="cbEdificio" prefHeight="35.0" prefWidth="410.0"/>
+                        <Label styleClass="etiqueta-style" text="Edificio:" />
+                        <Region prefHeight="31.0" prefWidth="51.0" />
+                        <ComboBox fx:id="cbEdificio" prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                       </children>
                     </HBox>
-                    <!-- ESTADO -->
-                    <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
+                    <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="578.0">
                       <children>
-                        <Label text="Estado:" styleClass="etiqueta-style"/>
-                        <Region prefHeight="47.0" prefWidth="60.0"/>
-                        <ComboBox fx:id="cbEstado" prefHeight="35.0" prefWidth="410.0"/>
-                      </children>
-                    </HBox>
-                    <!-- FECHA REPORTE -->
-                    <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
-                      <children>
-                        <Label text="Fecha :" styleClass="etiqueta-style"/>
-                        <Region prefHeight="47.0" prefWidth="20.0"/>
-                        <DatePicker fx:id="dpFechaReporte" prefHeight="35.0" prefWidth="410.0"/>
-                      </children>
-                    </HBox>
-                    <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
-                      <children>
-                        <Label text="Categoría:" styleClass="etiqueta-style"/>
-                        <Region prefHeight="47.0" prefWidth="40.0"/>
-                        <ComboBox fx:id="comboCategoria" prefHeight="35.0" prefWidth="410.0"/>
+                        <Label styleClass="etiqueta-style" text="Categoría:" />
+                        <Region prefHeight="31.0" prefWidth="34.0" />
+                        <ComboBox fx:id="comboCategoria" prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                       </children>
                     </HBox>
                     <HBox prefHeight="228.0" prefWidth="578.0">
                       <children>
-                        <Label text="Descripción:" styleClass="etiqueta-style"/>
-                        <Region prefHeight="228.0" prefWidth="15.0"/>
-                        <TextArea fx:id="txtDescripcion" prefHeight="100.0" prefWidth="410.0" styleClass="textArea"/>
+                        <Label styleClass="etiqueta-style" text="Descripción:" />
+                        <Region prefHeight="228.0" prefWidth="15.0" />
+                        <TextArea fx:id="txtDescripcion" prefWidth="410.0" styleClass="textArea" />
                       </children>
                     </HBox>
+                              <Region prefHeight="20.0" prefWidth="200.0" />
                     <HBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="578.0">
                       <children>
-                        <Button fx:id="btnCancelar" mnemonicParsing="false" text="Cancelar" onAction="#cancelarRegistro" styleClass="btnCancelar"/>
-                        <Region prefHeight="53.0" prefWidth="20.0"/>
-                        <Button fx:id="btnGuardar" mnemonicParsing="false" text="Guardar" onAction="#guardarObjeto" styleClass="btnGuardar"/>
-                        <Region prefHeight="53.0" prefWidth="49.0"/>
+                        <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelarRegistro" styleClass="btnCancelar" text="Cancelar" />
+                        <Region prefHeight="53.0" prefWidth="20.0" />
+                        <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarObjeto" styleClass="btnGuardar" text="Guardar" />
+                        <Region prefHeight="53.0" prefWidth="49.0" />
                       </children>
                     </HBox>
                   </children>

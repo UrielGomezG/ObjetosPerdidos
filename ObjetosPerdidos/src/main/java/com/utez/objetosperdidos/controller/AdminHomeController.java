@@ -2,6 +2,7 @@ package com.utez.objetosperdidos.controller;
 
 import java.io.IOException;
 
+import com.utez.objetosperdidos.util.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,14 +12,22 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import com.utez.objetosperdidos.model.User;
 
 public class AdminHomeController {
     @FXML
     private BorderPane mainContainer;
+    @FXML
+    private Label userNameLabel;
 
     @FXML
     public void initialize() {
         mostrarVistaObjetos();
+
+        if (Session.currentUser != null) {
+            String nombreCompleto = Session.currentUser.getName() + " " + Session.currentUser.getApellidoPaterno();
+            userNameLabel.setText(nombreCompleto);
+        }
     }
 
     public void mostrarVistaObjetos() {

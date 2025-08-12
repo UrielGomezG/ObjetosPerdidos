@@ -21,8 +21,6 @@ import java.nio.file.*;
 import java.util.List;
 
 public class EditarObjetoController {
-    @FXML
-    private Label userNameLabel;
 
     @FXML
     private TextField tituloField;
@@ -69,10 +67,6 @@ public class EditarObjetoController {
         List<Categoria> categorias = categoriaDAO.obtenerCategorias();
         cbCategoria.setItems(FXCollections.observableArrayList(categorias));
 
-        if (Session.currentUser != null) {
-            String nombreCompleto = Session.currentUser.getName() + " " + Session.currentUser.getApellidoPaterno();
-            userNameLabel.setText(nombreCompleto);
-        }
     }
 
 

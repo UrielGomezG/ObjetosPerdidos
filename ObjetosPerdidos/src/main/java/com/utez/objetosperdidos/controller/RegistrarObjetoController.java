@@ -18,6 +18,8 @@ import java.nio.file.Files;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.UUID;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class RegistrarObjetoController {
 
@@ -47,11 +49,13 @@ public class RegistrarObjetoController {
     private Button btnCancelar;
     @FXML
     private Button btnGuardar;
+    @FXML
+    private ImageView imgPreview;
 
     private File archivoSeleccionado;
 
     private static final Path IMAGENES_DIR =
-        java.nio.file.Paths.get(System.getProperty("user.home"), "objetos-imagenes");
+        java.nio.file.Paths.get(System.getProperty("user.home"), "Downloads");
 
     @FXML
     public void initialize() {
@@ -71,6 +75,13 @@ public class RegistrarObjetoController {
         if (archivo != null) {
             archivoSeleccionado = archivo;
             lblNombreFoto.setText(archivo.getName());
+        }
+
+        if (archivoSeleccionado != null) {
+            Image imagen = new Image(archivoSeleccionado.toURI().toString());
+            imgPreview.setImage(imagen);
+        } else {
+            imgPreview.setImage(null);
         }
     }
 
@@ -125,7 +136,7 @@ public class RegistrarObjetoController {
             stmt.setString(1, titulo);
             stmt.setString(2, descripcion);
 //            stmt.setDate(3, Date.valueOf(fechaReporte));
-            stmt.setString(3, fotoUrl);
+            stmt.setString(3, foto);
             stmt.setString(4, aula);
             stmt.setInt(5, edificio.getId());
 //            stmt.setInt(7, estado.getId());
@@ -193,20 +204,6 @@ public class RegistrarObjetoController {
         }
     }
 
-//    private void cargarEstados() {
-//        ObservableList<Estado> lista = FXCollections.observableArrayList();
-//        try (Connection conn = ConexionOracle.getConnection()) {
-//            String sql = "SELECT ID, NOMBRE FROM ESTADOS";
-//            PreparedStatement stmt = conn.prepareStatement(sql);
-//            ResultSet rs = stmt.executeQuery();
-//            while (rs.next()) {
-//                lista.add(new Estado(rs.getInt("ID"), rs.getString("NOMBRE")));
-//            }
-//            cbEstado.setItems(lista);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     private void cargarCategorias() {
         ObservableList<Categoria> lista = FXCollections.observableArrayList();

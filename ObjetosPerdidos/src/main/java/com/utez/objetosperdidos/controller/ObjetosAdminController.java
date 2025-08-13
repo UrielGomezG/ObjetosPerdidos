@@ -29,6 +29,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 
 public class ObjetosAdminController {
@@ -131,12 +132,9 @@ public class ObjetosAdminController {
 
     private VBox crearTarjetaAdmin(ObjetoPerdido obj) {
         VBox tarjeta = new VBox(10);
-        tarjeta.setPadding(new Insets(10));
-        tarjeta.setStyle("-fx-background-color: white; -fx-background-radius: 8; -fx-border-radius: 8; "
-                + "-fx-border-color: #ccc; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.3, 0, 2);");
+        tarjeta.getStyleClass().add("card");
         tarjeta.setPrefWidth(270);
 
-        // 🔍 Imagen del objeto
         ImageView imagenObjeto = new ImageView();
         imagenObjeto.setFitWidth(80);
         imagenObjeto.setFitHeight(80);
@@ -144,48 +142,66 @@ public class ObjetosAdminController {
         imagenObjeto.setSmooth(true);
 
         if (obj.getFotoUrl() != null && !obj.getFotoUrl().trim().isEmpty()) {
-            Path rutaImagen = Paths.get(System.getProperty("user.home"),  "Downloads", obj.getFotoUrl().trim());
+            Path rutaImagen = Paths.get(System.getProperty("user.home"), "Downloads", obj.getFotoUrl().trim());
             if (Files.exists(rutaImagen)) {
                 imagenObjeto.setImage(new Image(rutaImagen.toUri().toString()));
-                System.out.println("Imagen cargada: " + rutaImagen.getFileName());
             } else {
                 System.out.println("Imagen no encontrada: " + rutaImagen.toAbsolutePath());
             }
-        } else {
-            System.out.println("ℹNo se proporcionó imagen para: " + obj.getNombreObjeto());
         }
 
-        // 📄 Información textual
+        Label nombreLabel = new Label("📦 " + obj.getNombreObjeto());
+        nombreLabel.getStyleClass().add("card-title");
+
+        Label ubicacionLabel = new Label("📍 " + obj.getEdificio() + " - Aula " + obj.getAula());
+        ubicacionLabel.getStyleClass().add("card-subtitle");
+
+        Label estadoLabel = new Label("🔖 Estado: " + obj.getEstado());
+        estadoLabel.getStyleClass().add("card-subtitle");
+
         VBox infoTexto = new VBox(4);
-        infoTexto.getChildren().addAll(
-                new Label("📦 " + obj.getNombreObjeto()),
-                new Label("📍 " + obj.getEdificio() + " - Aula " + obj.getAula()),
-                new Label("🔖 Estado: " + obj.getEstado())
-        );
+        infoTexto.getStyleClass().add("card-info-text");
+        infoTexto.getChildren().addAll(nombreLabel, ubicacionLabel, estadoLabel);
 
         HBox encabezado = new HBox(12);
+        encabezado.getStyleClass().add("card-header");
         encabezado.setAlignment(Pos.CENTER_LEFT);
         encabezado.getChildren().addAll(imagenObjeto, infoTexto);
 
         Label lblDescripcion = new Label(obj.getDescripcion());
-        lblDescripcion.setWrapText(true);
+        lblDescripcion.getStyleClass().add("card-description");
 
-        Button btnEditar = new Button("✏️ Editar");
-        Button btnEliminar = new Button("❌ Eliminar");
-        Button btnEnviarBodega = new Button("🏢 Enviar a Bodega");
-        Button btnEntregar = new Button("📦 Marcar como entregado");
+        Button btnEditar = new Button("Editar");
+        btnEditar.setGraphic(new FontIcon("fa-pencil"));
+        btnEditar.getStyleClass().add("card-button");
 
+        Button btnEliminar = new Button("Eliminar");
+        btnEliminar.setGraphic(new FontIcon("fa-trash"));
+        btnEliminar.getStyleClass().addAll("card-button", "delete-button");
+
+        Button btnEnviarBodega = new Button("Enviar a Bodega");
+        btnEnviarBodega.setGraphic(new FontIcon("fa-archive"));
+        btnEnviarBodega.getStyleClass().add("card-button");
+
+        Button btnEntregar = new Button("Marcar como entregado");
+        btnEntregar.setGraphic(new FontIcon("fa-check-circle"));
+        btnEntregar.getStyleClass().addAll("card-button", "primary-button");
+
+        // Acciones
         btnEditar.setOnAction(e -> abrirEdicion(obj));
         btnEliminar.setOnAction(e -> eliminarObjeto(obj));
         btnEnviarBodega.setOnAction(e -> enviarABodega(obj));
         btnEntregar.setOnAction(e -> abrirEntrega(obj));
 
-        VBox botones = new VBox(5, btnEditar, btnEliminar, btnEnviarBodega, btnEntregar);
-        botones.setPadding(new Insets(5, 0, 0, 0));
+        VBox botones = new VBox(5);
+        botones.getStyleClass().add("card-button-container");
+        botones.getChildren().addAll(btnEntregar, btnEditar, btnEnviarBodega, btnEliminar);
 
         tarjeta.getChildren().addAll(encabezado, lblDescripcion, botones);
+
         return tarjeta;
     }
+
 
     private void abrirEdicion(ObjetoPerdido obj) {
         try {

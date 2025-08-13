@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class LoginController {
+    private static String origen = "login";
 
     @FXML
     private TextField emailField;
@@ -90,24 +91,15 @@ public class LoginController {
                 messageLabel.setText("Inicio de sesión exitoso. Mostrando aviso...");
                 messageLabel.setStyle("-fx-text-fill: #388E3C;");
 
-                PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
-                pause.setOnFinished(event -> {
-                    try {
-                        FXMLLoader loader = new FXMLLoader(
-                                getClass().getResource("/com/utez/objetosperdidos/view/Privacy.fxml"));
-                        Parent root = loader.load();
-                        Stage modal = new Stage();
-                        modal.setTitle("Aviso de Privacidad");
-                        modal.setScene(new Scene(root));
-                        modal.initModality(Modality.APPLICATION_MODAL);
-                        modal.show();
-                    } catch (Exception ex) {
-                        messageLabel.setText("Error al mostrar aviso.");
-                        messageLabel.setStyle("-fx-text-fill: #D32F2F;");
-                        ex.printStackTrace();
+                if (Session.currentUser != null) {
+                    if (Session.currentUser.getRole() == 1) {
+                        Main.switchScene("AdminHomeView.fxml");
+                    } else {
+                        Main.switchScene("HomeView.fxml");
                     }
-                });
-                pause.play();
+                } else {
+                    Main.switchScene(origen.equals("registro") ? "Register.fxml" : "Login.fxml");
+                }
 
             } else {
                 messageLabel.setText("Credenciales inválidas. Intenta de nuevo.");
@@ -126,16 +118,11 @@ public class LoginController {
         Main.switchScene("Register.fxml");
     }
 
-    @FXML
-    public void onPrivacy() throws Exception {
-        PrivacyController.setOrigen("login");
-        Main.switchScene("Privacy.fxml");
-    }
 
     @FXML
     public void onPrivacyFake() throws Exception {
         try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/PrivacyFake.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/AvisoPrivacidad.fxml"));
         Parent root = loader.load();
 
         Stage nuevaVentana = new Stage();

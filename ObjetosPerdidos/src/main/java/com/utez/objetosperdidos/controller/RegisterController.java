@@ -1,5 +1,6 @@
 package com.utez.objetosperdidos.controller;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,10 +11,15 @@ import com.utez.objetosperdidos.util.ConexionOracle;
 
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class RegisterController {
@@ -151,7 +157,18 @@ public class RegisterController {
 
     @FXML
     public void onPrivacyLink() throws Exception {
-        PrivacyController.setOrigen("registro");
-        Main.switchScene("Privacy.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/AvisoPrivacidad.fxml"));
+            Parent root = loader.load();
+
+            Stage nuevaVentana = new Stage();
+            nuevaVentana.setTitle("Aviso de Privacidad");
+            nuevaVentana.setScene(new Scene(root));
+            nuevaVentana.setResizable(false);
+            nuevaVentana.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

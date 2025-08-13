@@ -31,15 +31,7 @@ public class PrivacyController {
         Stage currentStage = (Stage) acceptCheck.getScene().getWindow();
         currentStage.close();
 
-        if (Session.currentUser != null) {
-            if (Session.currentUser.getRole() == 1) {
-                Main.switchScene("AdminHomeView.fxml");
-            } else {
-                Main.switchScene("HomeView.fxml");
-            }
-        } else {
-            Main.switchScene(origen.equals("registro") ? "Register.fxml" : "Login.fxml");
-        }
+        Main.switchScene("Login.fxml");
     }
 
     @FXML

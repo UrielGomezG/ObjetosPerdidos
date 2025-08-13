@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane styleClass="background" stylesheets="@../css/Ver_Objeto.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane styleClass="background" stylesheets="@../css/Ver_Objeto.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.VerObjeto">
     <center>
         <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>

@@ -28,21 +28,21 @@
                 <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
                     <StackPane>
                         <TextField fx:id="nameField" promptText="Nombre(S)" styleClass="campo"/>
-                        <Label style="label" text="Nombre" StackPane.alignment="TOP_LEFT" />
+                        <Label text="Nombre" StackPane.alignment="TOP_LEFT" />
                     </StackPane>
                 </VBox>
 
                 <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
                     <StackPane>
                         <TextField fx:id="apellidoPaternoField" promptText="Apellido Paterno" styleClass="campo"/>
-                        <Label style="label" text="Apellido Paterno" StackPane.alignment="TOP_LEFT" />
+                        <Label text="Apellido Paterno" StackPane.alignment="TOP_LEFT" />
                     </StackPane>
                 </VBox>
 
                 <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
                     <StackPane>
                         <TextField fx:id="apellidoMaternoField" promptText="Apellido Materno" styleClass="campo"/>
-                        <Label style="label" text="Apellido Materno" StackPane.alignment="TOP_LEFT" />
+                        <Label text="Apellido Materno" StackPane.alignment="TOP_LEFT" />
                     </StackPane>
                 </VBox>
 
@@ -52,12 +52,12 @@
                 <HBox spacing="8">
                     <StackPane>
                         <TextField fx:id="matriculaField" promptText="Matrícula" styleClass="campo"/>
-                        <Label style="label" text="Matricula" StackPane.alignment="TOP_LEFT" />
+                        <Label text="Matricula" StackPane.alignment="TOP_LEFT" />
                     </StackPane>
 
                     <StackPane>
                         <TextField fx:id="phoneField" promptText="Teléfono" styleClass="campo"/>
-                        <Label style="label" text="Telefono" StackPane.alignment="TOP_LEFT" />
+                        <Label text="Telefono" StackPane.alignment="TOP_LEFT" />
                     </StackPane>
                 </HBox>
             </VBox>
@@ -65,21 +65,21 @@
             <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
                 <StackPane>
                     <TextField fx:id="emailField" promptText="Correo institucional" styleClass="campo"/>
-                    <Label style="label" text="Correo Institucional" StackPane.alignment="TOP_LEFT" />
+                    <Label text="Correo Institucional" StackPane.alignment="TOP_LEFT" />
                 </StackPane>
             </VBox>
 
             <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
                 <StackPane>
                     <PasswordField fx:id="passwordField" promptText="Contraseña" styleClass="campo"/>
-                    <Label style="label" text="Contraseña" StackPane.alignment="TOP_LEFT" />
+                    <Label text="Contraseña" StackPane.alignment="TOP_LEFT" />
                 </StackPane>
             </VBox>
 
             <VBox prefHeight="50.0" prefWidth="240.0" spacing="5">
                 <StackPane>
                     <PasswordField fx:id="confirmPasswordField" promptText="Confirmar contraseña" styleClass="campo"/>
-                    <Label style="label" text="Confirmar" StackPane.alignment="TOP_LEFT" />
+                    <Label text="Confirmar" StackPane.alignment="TOP_LEFT" />
                 </StackPane>
             </VBox>
 

@@ -22,7 +22,7 @@
                 </Button>
                 <Region prefHeight="60.0" prefWidth="19.0" />
                 <Label text="Objetos perdidos" />
-                <Region prefHeight="60.0" prefWidth="591.0" />
+                <Region prefHeight="60.0" prefWidth="591.0" HBox.hgrow="ALWAYS" />
                 <Label fx:id="userNameLabel" prefWidth="100.0" />
                 <Region prefHeight="60.0" prefWidth="11.0" />
                 <ImageView fitHeight="46.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" />

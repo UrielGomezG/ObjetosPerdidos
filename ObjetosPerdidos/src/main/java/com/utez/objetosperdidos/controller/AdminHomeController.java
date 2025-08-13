@@ -96,6 +96,7 @@ public class AdminHomeController {
         Stage stage = new Stage();
         stage.setTitle("Historial de Objetos Entregados");
         stage.setScene(new Scene(root));
+        stage.setMaximized(true);
         stage.show();
     }
 

@@ -26,6 +26,16 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(Main.class.getResource("/com/utez/objetosperdidos/view/" + fxmlName));
         Scene scene = new Scene(root);
         mainStage.setScene(scene);
+
+        if (fxmlName.equals("HomeView.fxml") || fxmlName.equals("AdminHomeView.fxml")) {
+            mainStage.setMaximized(true);
+            mainStage.setResizable(false);
+        } else {
+            mainStage.setFullScreen(false);
+            mainStage.setResizable(false);
+        }
+
+        mainStage.show();
     }
 
     public static void main(String[] args) {

@@ -33,7 +33,7 @@ public class HomeController {
     public void mostrarVistaObjetos() {
         try {
             FXMLLoader loader = new FXMLLoader(
-            getClass().getResource("/com/utez/objetosperdidos/view/objetos.admin.fxml"));
+            getClass().getResource("/com/utez/objetosperdidos/view/objetos.fxml"));
             Parent root = loader.load();
             mainContainer.setCenter(root);
         } catch (IOException e) {

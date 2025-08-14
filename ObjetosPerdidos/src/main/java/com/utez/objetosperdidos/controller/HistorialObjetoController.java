@@ -3,9 +3,14 @@ package com.utez.objetosperdidos.controller;
 import com.utez.objetosperdidos.model.ObjetoPerdido;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
 import com.utez.objetosperdidos.util.Session;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,7 +20,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,7 +38,6 @@ public class HistorialObjetoController {
 
     private List<ObjetoPerdido> objetos;
     private final ObjetoDAO dao = new ObjetoDAO();
-
     @FXML
     public void initialize() {
         objetos = dao.obtenerObjetosEntregados()
@@ -45,6 +51,7 @@ public class HistorialObjetoController {
 
         mostrarObjetos(objetos);
     }
+
 
     private void mostrarObjetos(List<ObjetoPerdido> lista) {
         System.out.println("Mostrando objetos: " + lista.size());
@@ -111,5 +118,30 @@ public class HistorialObjetoController {
     private void abrirDetalles(ObjetoPerdido obj) {
         System.out.println("Ver detalles de: " + obj.getNombreObjeto());
         // Aquí puedes abrir ventana o modal con detalles
+    }
+
+    @FXML
+    private void onHome(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void OnAgregarObjeto(ActionEvent event) {
+        try {
+            Stage stageActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stageActual.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/Registrar_Objeto.fxml"));
+            Parent root = loader.load();
+
+            Stage stageNuevo = new Stage();
+            stageNuevo.setScene(new Scene(root));
+            stageNuevo.setTitle("Agregar Objeto");
+            stageNuevo.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

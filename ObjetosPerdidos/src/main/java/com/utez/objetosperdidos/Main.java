@@ -31,7 +31,6 @@ public class Main extends Application {
             mainStage.setMaximized(true);
             mainStage.setResizable(false);
         } else {
-            mainStage.setFullScreen(true);
             mainStage.setResizable(false);
         }
 

@@ -78,9 +78,20 @@ public class Editar_Perfil_Controller {
             Session.currentUser.setPassword(password);
             Session.currentUser.setPhoneNumber(telefono);
             Session.currentUser.setMatricula(matricula);
+
+            mostrarInfo("Usuario actualizado exitosamente");
+            onCancel();
+
         } else {
             System.out.println("Error al actualizar.");
         }
+    }
+
+    private void mostrarInfo(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
     @FXML

@@ -12,16 +12,18 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import com.utez.objetosperdidos.model.User;
 
 public class HomeController {
     @FXML
-    private Label userNameLabel;
-    @FXML
     private BorderPane mainContainer;
+    @FXML
+    private Label userNameLabel;
 
     @FXML
     public void initialize() {
         mostrarVistaObjetos();
+
         if (Session.currentUser != null) {
             String nombreCompleto = Session.currentUser.getName() + " " + Session.currentUser.getApellidoPaterno();
             userNameLabel.setText(nombreCompleto);
@@ -30,9 +32,10 @@ public class HomeController {
 
     public void mostrarVistaObjetos() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/objetos.fxml"));
-            Parent vista = loader.load();
-            mainContainer.setCenter(vista);
+            FXMLLoader loader = new FXMLLoader(
+            getClass().getResource("/com/utez/objetosperdidos/view/objetos.admin.fxml"));
+            Parent root = loader.load();
+            mainContainer.setCenter(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,7 +44,7 @@ public class HomeController {
     public void onPerfil(ActionEvent event) throws Exception {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/utez/objetosperdidos/view/Editar_Perfil.fxml"));
+            getClass().getResource("/com/utez/objetosperdidos/view/Editar_Perfil.fxml"));
             Parent root = loader.load();
             Stage modal = new Stage();
             modal.setTitle("Editar Perfil");
@@ -53,4 +56,19 @@ public class HomeController {
         }
     }
 
+    
+    public void onLogout(ActionEvent event) throws Exception {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/LogOut.fxml"));
+            Parent root = loader.load();
+            Stage modal = new Stage();
+            modal.setTitle("¿Cerrar sesión?");
+            modal.setScene(new Scene(root));
+            modal.initModality(Modality.APPLICATION_MODAL);
+            modal.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar modal Salir");
+        }
+    }
 }

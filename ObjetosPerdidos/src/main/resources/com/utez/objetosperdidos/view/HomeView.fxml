@@ -11,54 +11,55 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane fx:id="mainContainer" prefHeight="700" prefWidth="1000" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.HomeController">
-
-    <top>
-        <HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
-            <HBox.margin>
-                <Insets bottom="10" left="10" right="10" top="10" />
-            </HBox.margin>
-         <Region prefHeight="40.0" prefWidth="7.0" />
-            <Button prefHeight="36.0" prefWidth="37.0" style="-fx-font-size: 16px;">
+<BorderPane fx:id="mainContainer" styleClass="background" stylesheets="@../css/AdminHomeView.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.HomeController">
+  <top>
+    <HBox alignment="CENTER_LEFT" spacing="10" styleClass="boxStyle" BorderPane.alignment="CENTER">
+      <HBox.margin>
+        <Insets bottom="10" left="10" right="10" top="10" />
+      </HBox.margin>
+      <Region prefHeight="40.0" prefWidth="4.0" />
+      <Button prefHeight="36.0" prefWidth="37.0" styleClass="btns" text="">
             <graphic>
                <FontIcon iconLiteral="fa-home" iconSize="40" />
             </graphic></Button>
-         <Region prefHeight="50.0" prefWidth="20.0" />
-            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Objetos Perdidos" />
-         <Region prefHeight="40.0" prefWidth="129.0" HBox.hgrow="ALWAYS" />
-            <Label fx:id="userNameLabel" style="-fx-padding: 0 10 0 10;" />
-         <Region prefHeight="50.0" prefWidth="20.0" />
-            <ImageView fitHeight="40" fitWidth="40" preserveRatio="true" />
-         <Region prefHeight="50.0" prefWidth="10.0" />
-        </HBox>
-    </top>
+      <Region prefHeight="40.0" prefWidth="8.0" />
+      <Label styleClass="Titulo-style" text="Objetos Perdidos" />
+      <Region prefHeight="50.0" prefWidth="352.0" HBox.hgrow="ALWAYS" />
+      <Label fx:id="userNameLabel" prefHeight="30.0" prefWidth="133.0" style="-fx-padding: 0 10 0 10;" />
+         <Region prefHeight="40.0" prefWidth="41.0" />
+      <ImageView fitHeight="40" fitWidth="40" preserveRatio="true" />
+    </HBox>
+  </top>
 
     <left>
-        <VBox alignment="TOP_CENTER" prefWidth="70.0" BorderPane.alignment="TOP_LEFT">
-         <Region prefHeight="20.0" prefWidth="200.0" />
-         <Button mnemonicParsing="false">
-            <graphic>
-               <FontIcon iconLiteral="fa-user" iconSize="40" />
-            </graphic>
-         </Button>
-         <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-         <Button mnemonicParsing="false">
-            <graphic>
-               <FontIcon iconLiteral="fa-sign-out" iconSize="40" />
-            </graphic>
-         </Button>
-         <Region prefHeight="10.0" prefWidth="200.0" />
-         <Region prefHeight="10.0" prefWidth="200.0" />
+        <VBox alignment="CENTER" prefHeight="615.0" prefWidth="69.0" styleClass="boxStyle">
+            <Region prefHeight="20.0" prefWidth="200.0" />
+
+            <Button onAction="#onPerfil" prefHeight="43.0" prefWidth="47.0" styleClass="btns">
+                <graphic>
+                    <FontIcon iconLiteral="fa-user" iconSize="40" />
+                </graphic>
+            </Button>
+
+            <Region prefHeight="20.0" prefWidth="200.0" />
+
+            <Region prefHeight="20.0" prefWidth="200.0" />
+
+            <Region minHeight="0" VBox.vgrow="ALWAYS" />
+
+            <Button onAction="#onLogout" prefHeight="43.0" prefWidth="47.0" styleClass="btns">
+                <graphic>
+                    <FontIcon iconLiteral="fa-sign-out" iconSize="40" />
+                </graphic>
+            </Button>
         </VBox>
     </left>
 
-
-    <center>
-        <TilePane fx:id="objectGrid" hgap="20" prefColumns="3" vgap="20">
-            <padding>
-                <Insets bottom="10" left="10" right="10" top="10" />
-            </padding>
-        </TilePane>
-    </center>
-
+  <center>
+    <TilePane fx:id="objectGrid" hgap="20" prefColumns="3" vgap="20">
+      <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+      </padding>
+    </TilePane>
+  </center>
 </BorderPane>

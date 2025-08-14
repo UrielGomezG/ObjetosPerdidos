@@ -9,10 +9,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.utez.objetosperdidos.model.dao.UserDAO;
+import com.utez.objetosperdidos.model.dao.UserAdminDAO;
 import com.utez.objetosperdidos.util.Session;
 
-public class Editar_Perfil_Controller {
+public class Editar_Perfil_Admin_Controller {
 
     @FXML
     private TextField txtNombre;
@@ -25,13 +25,9 @@ public class Editar_Perfil_Controller {
     @FXML
     private TextField txtPassword;
     @FXML
-    private TextField txtTelefono;
-    @FXML
-    private TextField txtMatricula;
-    @FXML
     private Button btnCancelar;
 
-    private final UserDAO dao = new UserDAO();
+    private final UserAdminDAO dao = new UserAdminDAO();
 
     @FXML
     private void initialize() {
@@ -41,8 +37,6 @@ public class Editar_Perfil_Controller {
             txtApellidoMaterno.setText(Session.currentUser.getApellidoMaterno());
             txtEmail.setText(Session.currentUser.getEmail());
             txtPassword.setText(Session.currentUser.getPassword());
-            txtTelefono.setText(Session.currentUser.getPhoneNumber());
-            txtMatricula.setText(Session.currentUser.getMatricula());
         }
     }
 
@@ -58,14 +52,9 @@ public class Editar_Perfil_Controller {
                 : txtApellidoMaterno.getText();
         String email = txtEmail.getText().isEmpty() ? Session.currentUser.getEmail() : txtEmail.getText();
         String password = txtPassword.getText().isEmpty() ? Session.currentUser.getPassword() : txtPassword.getText();
-        String telefono = txtTelefono.getText().isEmpty() ? Session.currentUser.getPhoneNumber()
-                : txtTelefono.getText();
-        String matricula = txtMatricula.getText().isEmpty() ? Session.currentUser.getMatricula()
-                : txtMatricula.getText();
 
         // Llamamos al método DAO para actualizar
-        boolean actualizado = dao.updateUsuario(id, nombre, apellidoPaterno, apellidoMaterno, email, password, telefono,
-                matricula);
+        boolean actualizado = dao.updateUsuario(id, nombre, apellidoPaterno, apellidoMaterno, email, password);
 
         if (actualizado) {
             System.out.println("Usuario actualizado.");
@@ -76,8 +65,6 @@ public class Editar_Perfil_Controller {
             Session.currentUser.setApellidoMaterno(apellidoMaterno);
             Session.currentUser.setEmail(email);
             Session.currentUser.setPassword(password);
-            Session.currentUser.setPhoneNumber(telefono);
-            Session.currentUser.setMatricula(matricula);
 
             mostrarInfo("Usuario actualizado exitosamente");
             onCancel();

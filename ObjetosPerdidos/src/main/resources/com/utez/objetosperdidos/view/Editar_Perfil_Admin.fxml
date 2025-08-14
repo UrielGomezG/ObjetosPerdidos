@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane styleClass="background" stylesheets="@../css/Editar_Perfil.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.Editar_Perfil_Controller">
+<BorderPane styleClass="background" stylesheets="@../css/Editar_Perfil.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.Editar_Perfil_Admin_Controller">
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -51,19 +51,6 @@
                   </HBox>
                   <HBox prefHeight="55.0" prefWidth="720.0">
                      <children>
-                        <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <TextField fx:id="txtTelefono" prefHeight="35.0" styleClass="textField" StackPane.alignment="CENTER" />
-                              <Label styleClass="textStyle" text="Teléfono" />
-                           </children>
-                        </StackPane>
-                        <Region prefHeight="200.0" prefWidth="60.0" />
-                        <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <TextField fx:id="txtMatricula" editable="false" prefHeight="35.0" styleClass="textFieldDisable" StackPane.alignment="CENTER" />
-                              <Label styleClass="textStyle" text="Matrícula" />
-                           </children>
-                        </StackPane>
                         <Region prefHeight="200.0" prefWidth="60.0" />
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>

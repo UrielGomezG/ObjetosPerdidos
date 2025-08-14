@@ -15,7 +15,7 @@
         <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="900.0" BorderPane.alignment="CENTER">
             <children>
                 <Region prefHeight="60.0" prefWidth="10.0" />
-                <Button mnemonicParsing="false" prefWidth="0.0">
+                <Button mnemonicParsing="false" prefWidth="0.0" onAction="#onHome">
                     <graphic>
                         <FontIcon iconLiteral="fa-home" iconSize="40" />
                     </graphic>
@@ -34,7 +34,7 @@
       <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="60.0" BorderPane.alignment="CENTER">
          <children>
             <Region prefHeight="20.0" prefWidth="200.0" />
-            <Button mnemonicParsing="false">
+            <Button mnemonicParsing="false" onAction="#OnAgregarObjeto">
                <graphic>
                   <FontIcon iconLiteral="fa-plus-circle" iconSize="40" />
                </graphic></Button>

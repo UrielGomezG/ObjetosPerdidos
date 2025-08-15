@@ -19,13 +19,7 @@
                     </children>
                 </HBox>
                 <Label text="Vista previa" />
-<<<<<<< HEAD
-                <ImageView fx:id="imgPreview" fitHeight="250.0" fitWidth="220.0" preserveRatio="true"
-                           style="-fx-border-color: #aaa; -fx-border-width: 1; -fx-background-color: white;
-                                -fx-border-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0, 2);" />
-=======
                 <ImageView fx:id="imgPreview" fitHeight="316.0" fitWidth="220.0" preserveRatio="true" style="-fx-border-color: #aaa; -fx-border-width: 1; -fx-background-color: white;                                   -fx-border-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0, 2);" />
->>>>>>> Cesar
             </VBox>
 
             <!-- Formulario -->
@@ -35,11 +29,7 @@
                     <Label styleClass="textStyle" text="Título:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-<<<<<<< HEAD
-                    <Label fx:id="lblTitulo" prefWidth="400" style="-fx-font-weight: bold;"/>
-=======
                     <Label fx:id="lblTitulo" prefHeight="35.0" prefWidth="400" styleClass="textField" />
->>>>>>> Cesar
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
@@ -62,14 +52,7 @@
                     </Label>
                     <Label fx:id="lblNoSerie" prefHeight="35.0" prefWidth="400" styleClass="textField" />
                 </HBox>
-
                 <HBox alignment="CENTER_LEFT" spacing="10">
-<<<<<<< HEAD
-                    <Label text="Aula:">
-                        <font><Font name="System" size="14.0" /></font>
-                    </Label>
-                    <Label fx:id="lblAula" prefWidth="400" />
-=======
                     <children>
                         <Label styleClass="textStyle" text="Aula:">
                             <font>
@@ -78,16 +61,8 @@
                         </Label>
                         <Label fx:id="lblNoSerie1" prefHeight="35.0" prefWidth="400" styleClass="textField" />
                     </children>
->>>>>>> Cesar
                 </HBox>
-
                 <HBox alignment="CENTER_LEFT" spacing="10">
-<<<<<<< HEAD
-                    <Label text="Edificio:">
-                        <font><Font name="System" size="14.0" /></font>
-                    </Label>
-                    <Label fx:id="lblEdificio" prefWidth="400" />
-=======
                     <children>
                         <Label styleClass="textStyle" text="Edificio:">
                             <font>
@@ -96,7 +71,6 @@
                         </Label>
                         <Label fx:id="lblNoSerie2" prefHeight="35.0" prefWidth="400" styleClass="textField" />
                     </children>
->>>>>>> Cesar
                 </HBox>
 
                 <HBox prefHeight="134.0" prefWidth="600.0" spacing="10">
@@ -110,27 +84,14 @@
                     <Label styleClass="textStyle" text="Alumno:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-<<<<<<< HEAD
-                    <Label fx:id="lblAlumno" prefWidth="400" />
-=======
-               <Label prefHeight="35.0" prefWidth="412.0" styleClass="textField" />
->>>>>>> Cesar
+                    <Label prefHeight="35.0" prefWidth="412.0" styleClass="textField" />
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
                     <Label styleClass="textStyle" text="Matrícula:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-<<<<<<< HEAD
-                    <Label fx:id="lblMatricula" prefWidth="400" />
-                </HBox>
-
-                <HBox alignment="CENTER_RIGHT" spacing="15" style="-fx-padding: 20 0 0 0;">
-                    <Button onAction="#cancelar" text="Cancelar" style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
-                    <Button onAction="#confirmarEntrega" text="Guardar" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
-=======
-               <Label prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
->>>>>>> Cesar
+                    <Label prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
                 </HBox>
             </VBox>
         </HBox>

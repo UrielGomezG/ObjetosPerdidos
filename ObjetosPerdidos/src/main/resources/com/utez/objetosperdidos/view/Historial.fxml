@@ -10,54 +10,61 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/Historial.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.HistorialObjetoController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/Historial.css"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.utez.objetosperdidos.controller.HistorialObjetoController">
+
+    <!-- Encabezado superior -->
     <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="900.0" styleClass="boxStyle" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER_LEFT" prefHeight="60.0" styleClass="boxStyle" BorderPane.alignment="CENTER">
             <children>
-                <Region prefHeight="60.0" prefWidth="10.0" />
-                <Button mnemonicParsing="false" onAction="#onHome" prefWidth="0.0" styleClass="btns">
+                <Region prefWidth="10.0" />
+                <Button mnemonicParsing="false" onAction="#onHome" styleClass="btns">
                     <graphic>
                         <FontIcon iconLiteral="fa-home" iconSize="40" />
                     </graphic>
                 </Button>
-                <Region prefHeight="60.0" prefWidth="19.0" />
+                <Region prefWidth="19.0" />
                 <Label styleClass="Titulo-style" text="Objetos perdidos" />
-                <Region prefHeight="57.0" prefWidth="479.0" HBox.hgrow="ALWAYS" />
+                <Region HBox.hgrow="ALWAYS" />
                 <Label fx:id="userNameLabel" prefWidth="100.0" />
-                <Region prefHeight="60.0" prefWidth="11.0" />
+                <Region prefWidth="11.0" />
                 <ImageView fitHeight="46.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" />
             </children>
         </HBox>
     </top>
 
+    <!-- Menú lateral -->
     <left>
-      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="60.0" styleClass="boxStyle" BorderPane.alignment="CENTER">
-         <children>
-            <Region prefHeight="20.0" prefWidth="200.0" />
-            <Button mnemonicParsing="false" onAction="#OnAgregarObjeto" styleClass="btns">
-               <graphic>
-                  <FontIcon iconLiteral="fa-plus-circle" iconSize="40" />
-               </graphic></Button>
-            <Region prefHeight="20.0" prefWidth="200.0" />
-            <Button mnemonicParsing="false" styleClass="btns">
-               <graphic>
-                  <FontIcon iconLiteral="fa-history" iconSize="40" />
-               </graphic></Button>
-            <Region prefHeight="367.0" prefWidth="60.0" VBox.vgrow="ALWAYS" />
-            <Button mnemonicParsing="false" styleClass="btns">
-               <graphic>
-                  <FontIcon iconLiteral="fa-sign-out" iconSize="40" />
-               </graphic></Button>
-            <Region prefHeight="10.0" prefWidth="200.0" />
-         </children>
-      </VBox>
-   </left>
+        <VBox alignment="TOP_CENTER" prefWidth="60.0" styleClass="boxStyle" BorderPane.alignment="CENTER">
+            <children>
+                <Region prefHeight="20.0" />
+                <Button mnemonicParsing="false" onAction="#OnAgregarObjeto" styleClass="btns">
+                    <graphic>
+                        <FontIcon iconLiteral="fa-plus-circle" iconSize="40" />
+                    </graphic>
+                </Button>
+                <Region prefHeight="20.0" />
+                <Button mnemonicParsing="false" styleClass="btns">
+                    <graphic>
+                        <FontIcon iconLiteral="fa-history" iconSize="40" />
+                    </graphic>
+                </Button>
+                <Region VBox.vgrow="ALWAYS" />
+                <Button mnemonicParsing="false" styleClass="btns">
+                    <graphic>
+                        <FontIcon iconLiteral="fa-sign-out" iconSize="40" />
+                    </graphic>
+                </Button>
+                <Region prefHeight="10.0" />
+            </children>
+        </VBox>
+    </left>
 
     <center>
-        <VBox spacing="10" style="-fx-padding: 10;" styleClass="background">
-            <FlowPane fx:id="itemsContainer" hgap="10" prefHeight="400" vgap="10" VBox.vgrow="ALWAYS" />
+        <VBox spacing="10" alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+            <FlowPane fx:id="itemsContainer" hgap="20" vgap="20" VBox.vgrow="ALWAYS" />
         </VBox>
     </center>
-
-
 </BorderPane>

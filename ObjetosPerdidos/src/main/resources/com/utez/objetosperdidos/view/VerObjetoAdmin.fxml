@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -34,7 +35,10 @@
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
                <Region prefHeight="35.0" prefWidth="32.0" />
-                    <Label fx:id="lblTitulo" prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+                    <Label fx:id="lblTitulo" prefHeight="35.0" prefWidth="415.0" styleClass="textField">
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding></Label>
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
@@ -42,7 +46,10 @@
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
                <Region prefHeight="35.0" prefWidth="31.0" />
-                    <Label fx:id="lblMarca" prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+                    <Label fx:id="lblMarca" prefHeight="35.0" prefWidth="415.0" styleClass="textField">
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding></Label>
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
@@ -50,7 +57,10 @@
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
                <Region prefHeight="35.0" prefWidth="19.0" />
-                    <Label fx:id="lblModelo" prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+                    <Label fx:id="lblModelo" prefHeight="35.0" prefWidth="415.0" styleClass="textField">
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding></Label>
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
@@ -58,7 +68,10 @@
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
                <Region prefHeight="35.0" prefWidth="3.0" />
-                    <Label fx:id="lblNoSerie" prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+                    <Label fx:id="lblNoSerie" prefHeight="35.0" prefWidth="415.0" styleClass="textField">
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding></Label>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10">
                     <children>
@@ -68,7 +81,10 @@
                             </font>
                         </Label>
                   <Region prefHeight="35.0" prefWidth="47.0" />
-                        <Label fx:id="lblNoSerie1" prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+                        <Label fx:id="lblNoSerie1" prefHeight="35.0" prefWidth="415.0" styleClass="textField">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding></Label>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10">
@@ -79,7 +95,10 @@
                             </font>
                         </Label>
                   <Region prefHeight="35.0" prefWidth="23.0" />
-                        <Label fx:id="lblNoSerie2" prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+                        <Label fx:id="lblNoSerie2" prefHeight="35.0" prefWidth="415.0" styleClass="textField">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding></Label>
                     </children>
                 </HBox>
 
@@ -87,7 +106,10 @@
                     <Label styleClass="textStyle" text="Descripción:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-                    <Label fx:id="lblDescripcion" prefHeight="136.0" prefWidth="415.0" styleClass="textField" wrapText="true" />
+                    <Label fx:id="lblDescripcion" prefHeight="136.0" prefWidth="415.0" styleClass="textField" wrapText="true">
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding></Label>
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
@@ -95,7 +117,10 @@
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
                <Region prefHeight="35.0" prefWidth="25.0" />
-               <Label prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+               <Label prefHeight="35.0" prefWidth="415.0" styleClass="textField">
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding></Label>
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
@@ -103,8 +128,26 @@
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
                <Region prefHeight="35.0" prefWidth="9.0" />
-               <Label prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+               <Label prefHeight="35.0" prefWidth="415.0" styleClass="textField">
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding></Label>
                 </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+               <children>
+                  <Label styleClass="textStyle" text="Fecha:">
+                     <font>
+                        <Font name="System" size="14.0" />
+                     </font>
+                  </Label>
+                  <Region prefHeight="33.0" prefWidth="40.0" />
+                  <Label prefHeight="35.0" prefWidth="415.0" styleClass="textField">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
             </VBox>
         </HBox>
     </center>

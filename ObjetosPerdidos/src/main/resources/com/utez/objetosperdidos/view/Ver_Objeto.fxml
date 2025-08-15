@@ -24,7 +24,7 @@
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Label>
-                                      <ImageView fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
+                                      <ImageView fx:id="imgObjeto" fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </VBox>
                                 <VBox prefHeight="511.0" prefWidth="578.0">
@@ -33,56 +33,56 @@
                                             <children>
                                                 <Label styleClass="textStyle" text="Titulo:" />
                                                 <Region prefHeight="39.0" prefWidth="61.0" />
-                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
+                                                <Label fx:id="lblTitulo" prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="578.0">
                                             <children>
                                                 <Label styleClass="textStyle" text="Marca:" />
                                                 <Region prefHeight="53.0" prefWidth="60.0" />
-                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
+                                                <Label fx:id="lblMarca" prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="578.0">
                                             <children>
                                                 <Label styleClass="textStyle" text="Modelo:" />
                                                 <Region prefHeight="37.0" prefWidth="48.0" />
-                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
+                                                <Label fx:id="lblModelo" prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="578.0">
                                             <children>
                                                 <Label styleClass="textStyle" text="No.Serial:" />
                                                 <Region prefHeight="49.0" prefWidth="38.0" />
-                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
+                                                <Label fx:id="lblNoSerial" prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                                             </children>
                                         </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
                                  <children>
                                     <Label styleClass="textStyle" text="Aula:" />
                                     <Region prefHeight="39.0" prefWidth="77.0" />
-                                    <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
+                                    <Label fx:id="lblAula" prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
                                  <children>
                                     <Label styleClass="textStyle" text="Edificio:" />
                                     <Region prefHeight="39.0" prefWidth="52.0" />
-                                    <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
+                                    <Label fx:id="lblEdificio" prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
                                  <children>
                                     <Label styleClass="textStyle" text="Categoría:" />
                                     <Region prefHeight="39.0" prefWidth="33.0" />
-                                    <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
+                                    <Label fx:id="lblCategoria" prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                                  </children>
                               </HBox>
                                         <HBox prefHeight="228.0" prefWidth="578.0">
                                             <children>
                                                 <Label styleClass="textStyle" text="Descripción:" />
                                                 <Region prefHeight="228.0" prefWidth="15.0" />
-                                                <Label alignment="TOP_LEFT" prefHeight="210.0" prefWidth="410.0" styleClass="textArea" />
+                                                <Label fx:id="lblDescripcion" alignment="TOP_LEFT" prefHeight="210.0" prefWidth="410.0" styleClass="textArea" />
                                             </children>
                                         </HBox>
                                     </children>

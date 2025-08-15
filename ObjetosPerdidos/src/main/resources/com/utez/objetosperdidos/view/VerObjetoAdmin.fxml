@@ -4,7 +4,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -19,10 +18,7 @@
                         <Label styleClass="titulo" text="Ver objeto" />
                     </children>
                 </HBox>
-                <Label text="Vista previa">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Label>
+                <Label text="Vista previa" />
                 <ImageView fx:id="imgPreview" fitHeight="316.0" fitWidth="220.0" preserveRatio="true" style="-fx-border-color: #aaa; -fx-border-width: 1; -fx-background-color: white;                                   -fx-border-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0, 2);" />
             </VBox>
 
@@ -33,32 +29,28 @@
                     <Label styleClass="textStyle" text="Título:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-               <Region prefHeight="35.0" prefWidth="32.0" />
-                    <Label fx:id="lblTitulo" prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+                    <Label fx:id="lblTitulo" prefHeight="35.0" prefWidth="400" styleClass="textField" />
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
                     <Label styleClass="textStyle" text="Marca:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-               <Region prefHeight="35.0" prefWidth="31.0" />
-                    <Label fx:id="lblMarca" prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+                    <Label fx:id="lblMarca" prefHeight="35.0" prefWidth="400" styleClass="textField" />
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
                     <Label styleClass="textStyle" text="Modelo:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-               <Region prefHeight="35.0" prefWidth="19.0" />
-                    <Label fx:id="lblModelo" prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+                    <Label fx:id="lblModelo" prefHeight="35.0" prefWidth="400" styleClass="textField" />
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
                     <Label styleClass="textStyle" text="No. Serial:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-               <Region prefHeight="35.0" prefWidth="3.0" />
-                    <Label fx:id="lblNoSerie" prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+                    <Label fx:id="lblNoSerie" prefHeight="35.0" prefWidth="400" styleClass="textField" />
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10">
                     <children>
@@ -67,8 +59,7 @@
                                 <Font name="System" size="14.0" />
                             </font>
                         </Label>
-                  <Region prefHeight="35.0" prefWidth="47.0" />
-                        <Label fx:id="lblNoSerie1" prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+                        <Label fx:id="lblNoSerie1" prefHeight="35.0" prefWidth="400" styleClass="textField" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10">
@@ -78,8 +69,7 @@
                                 <Font name="System" size="14.0" />
                             </font>
                         </Label>
-                  <Region prefHeight="35.0" prefWidth="23.0" />
-                        <Label fx:id="lblNoSerie2" prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+                        <Label fx:id="lblNoSerie2" prefHeight="35.0" prefWidth="400" styleClass="textField" />
                     </children>
                 </HBox>
 
@@ -87,22 +77,20 @@
                     <Label styleClass="textStyle" text="Descripción:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-                    <Label fx:id="lblDescripcion" prefHeight="136.0" prefWidth="415.0" styleClass="textField" wrapText="true" />
+                    <Label fx:id="lblDescripcion" prefHeight="136.0" prefWidth="400" styleClass="textField" wrapText="true" />
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
                     <Label styleClass="textStyle" text="Alumno:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-               <Region prefHeight="35.0" prefWidth="25.0" />
-               <Label prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+               <Label prefHeight="35.0" prefWidth="412.0" styleClass="textField" />
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
                     <Label styleClass="textStyle" text="Matrícula:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-               <Region prefHeight="35.0" prefWidth="9.0" />
                <Label prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
                 </HBox>
             </VBox>

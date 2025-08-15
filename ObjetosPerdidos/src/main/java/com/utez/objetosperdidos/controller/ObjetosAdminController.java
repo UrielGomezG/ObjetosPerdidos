@@ -173,7 +173,7 @@ public class ObjetosAdminController {
 
         tarjeta.setOnMouseClicked(event -> {
             if (!(event.getTarget() instanceof Button)) {
-                abrirEntrega(obj);
+                verObjetoDetalle(obj);
             }
         });
 
@@ -286,5 +286,25 @@ public class ObjetosAdminController {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+    private void verObjetoDetalle(ObjetoPerdido obj) {
+        try {
+            // Cargar FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/Ver_Objeto.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el controlador correctamente desde el FXMLLoader
+            VerObjeto controller = loader.getController();
+            controller.setObjeto(obj); // <-- pasar el objeto al controlador
+
+            // Crear la nueva ventana
+            Stage stage = new Stage();
+            stage.setTitle("Ver Objeto: " + obj.getNombreObjeto());
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al abrir la vista de ver objeto.");
+        }
     }
 }

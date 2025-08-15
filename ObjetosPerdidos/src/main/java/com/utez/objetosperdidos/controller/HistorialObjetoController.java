@@ -11,18 +11,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafx.scene.text.FontWeight;
-
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -60,52 +54,66 @@ public class HistorialObjetoController {
     private void mostrarObjetos(List<ObjetoPerdido> lista) {
         itemsContainer.getChildren().clear();
         for (ObjetoPerdido o : lista) {
-            Image imagen = null;
-            if (o.getFotoUrl() != null && !o.getFotoUrl().trim().isEmpty()) {
-                Path rutaImagen = Paths.get(System.getProperty("user.home"), "Downloads", o.getFotoUrl().trim());
-                if (Files.exists(rutaImagen)) {
-                    imagen = new Image(rutaImagen.toUri().toString());
-                }
-            }
-
-            VBox card = crearTarjeta(o.getNombreObjeto(), o.getDescripcion(), imagen, "Entregado".equalsIgnoreCase(o.getEstado()));
+            VBox card = crearTarjeta(o);
             itemsContainer.getChildren().add(card);
         }
     }
 
-    private VBox crearTarjeta(String titulo, String descripcion, Image imagen, boolean entregado) {
+    private VBox crearTarjeta(ObjetoPerdido objeto) {
         VBox tarjeta = new VBox(12);
         tarjeta.getStyleClass().add("card");
         tarjeta.setAlignment(Pos.TOP_LEFT);
         tarjeta.setPadding(new Insets(16));
 
-        if (imagen != null) {
-            ImageView imageView = new ImageView(imagen);
-            imageView.setFitWidth(100);
-            imageView.setFitHeight(100);
-            imageView.setPreserveRatio(true);
-            tarjeta.getChildren().add(imageView);
+        // Imagen del objeto
+        if (objeto.getFotoUrl() != null && !objeto.getFotoUrl().trim().isEmpty()) {
+            Path rutaImagen = Paths.get(System.getProperty("user.home"), "Downloads", objeto.getFotoUrl().trim());
+            if (Files.exists(rutaImagen)) {
+                ImageView imageView = new ImageView(new Image(rutaImagen.toUri().toString()));
+                imageView.setFitWidth(100);
+                imageView.setFitHeight(100);
+                imageView.setPreserveRatio(true);
+                tarjeta.getChildren().add(imageView);
+            }
         }
 
-        Label tituloLabel = new Label(titulo);
+        Label tituloLabel = new Label(objeto.getNombreObjeto());
         tituloLabel.getStyleClass().add("card-title");
 
-        Label descripcionLabel = new Label(descripcion);
+        Label descripcionLabel = new Label(objeto.getDescripcion());
         descripcionLabel.getStyleClass().add("card-description");
         descripcionLabel.setWrapText(true);
 
         tarjeta.getChildren().addAll(tituloLabel, descripcionLabel);
 
-        if (entregado) {
+        if ("Entregado".equalsIgnoreCase(objeto.getEstado())) {
             Label entregadoLabel = new Label("Entregado");
             entregadoLabel.getStyleClass().add("entregado-label");
             tarjeta.getChildren().add(entregadoLabel);
         }
 
+
+        tarjeta.setOnMouseClicked(event -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/VerObjetoAdmin.fxml"));
+                Parent root = loader.load();
+
+
+                VerObjetoAdmin controller = loader.getController();
+                controller.setObjeto(objeto);
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Detalle del Objeto");
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
         return tarjeta;
     }
-
-
 
     @FXML
     private void onHome(ActionEvent actionEvent) {

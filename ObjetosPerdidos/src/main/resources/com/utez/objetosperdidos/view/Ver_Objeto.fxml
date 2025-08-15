@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -18,71 +19,119 @@
                         <Label styleClass="titulo" text="Ver Objeto" />
                         <HBox alignment="CENTER_LEFT" prefHeight="511.0" prefWidth="797.0">
                             <children>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Label text="Vista previa">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font></Label>
-                                      <ImageView fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                        </VBox>
+                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                    <children>
+                                        <Label text="Vista previa">
+                                            <font>
+                                                <Font name="System Bold" size="12.0" />
+                                            </font></Label>
+                                        <ImageView fx:id="imgObjeto" fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
+                                    </children>
+                                </VBox>
                                 <VBox prefHeight="511.0" prefWidth="578.0">
                                     <children>
                                         <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
                                             <children>
                                                 <Label styleClass="textStyle" text="Titulo:" />
-                                                <Region prefHeight="39.0" prefWidth="61.0" />
-                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
+                                                <Region prefHeight="39.0" prefWidth="63.0" />
+                                                <Label fx:id="lblTitulo" prefHeight="35.0" prefWidth="410.0" styleClass="textField">
+                                                    <HBox.margin>
+                                                        <Insets />
+                                                    </HBox.margin>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding></Label>
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="578.0">
                                             <children>
                                                 <Label styleClass="textStyle" text="Marca:" />
-                                                <Region prefHeight="53.0" prefWidth="60.0" />
-                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
+                                                <Region prefHeight="53.0" prefWidth="59.0" />
+                                                <Label fx:id="lblMarca" prefHeight="35.0" prefWidth="410.0" styleClass="textField">
+                                                    <HBox.margin>
+                                                        <Insets />
+                                                    </HBox.margin>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding></Label>
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="578.0">
                                             <children>
                                                 <Label styleClass="textStyle" text="Modelo:" />
                                                 <Region prefHeight="37.0" prefWidth="48.0" />
-                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
+                                                <Label fx:id="lblModelo" prefHeight="35.0" prefWidth="410.0" styleClass="textField">
+                                                    <HBox.margin>
+                                                        <Insets />
+                                                    </HBox.margin>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding></Label>
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="578.0">
                                             <children>
                                                 <Label styleClass="textStyle" text="No.Serial:" />
                                                 <Region prefHeight="49.0" prefWidth="38.0" />
-                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
+                                                <Label fx:id="lblNoSerial" prefHeight="35.0" prefWidth="410.0" styleClass="textField">
+                                                    <HBox.margin>
+                                                        <Insets />
+                                                    </HBox.margin>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding></Label>
                                             </children>
                                         </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
-                                 <children>
-                                    <Label styleClass="textStyle" text="Aula:" />
-                                    <Region prefHeight="39.0" prefWidth="77.0" />
-                                    <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
-                                 <children>
-                                    <Label styleClass="textStyle" text="Edificio:" />
-                                    <Region prefHeight="39.0" prefWidth="52.0" />
-                                    <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
-                                 <children>
-                                    <Label styleClass="textStyle" text="Categoría:" />
-                                    <Region prefHeight="39.0" prefWidth="33.0" />
-                                    <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
-                                 </children>
-                              </HBox>
+                                        <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
+                                            <children>
+                                                <Label styleClass="textStyle" text="Aula:" />
+                                                <Region prefHeight="39.0" prefWidth="77.0" />
+                                                <Label fx:id="lblAula" prefHeight="35.0" prefWidth="410.0" styleClass="textField">
+                                                    <HBox.margin>
+                                                        <Insets />
+                                                    </HBox.margin>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding></Label>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
+                                            <children>
+                                                <Label styleClass="textStyle" text="Edificio:" />
+                                                <Region prefHeight="39.0" prefWidth="52.0" />
+                                                <Label fx:id="lblEdificio" prefHeight="35.0" prefWidth="410.0" styleClass="textField">
+                                                    <HBox.margin>
+                                                        <Insets />
+                                                    </HBox.margin>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding></Label>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
+                                            <children>
+                                                <Label styleClass="textStyle" text="Categoría:" />
+                                                <Region prefHeight="39.0" prefWidth="33.0" />
+                                                <Label fx:id="lblCategoria" prefHeight="35.0" prefWidth="410.0" styleClass="textField">
+                                                    <HBox.margin>
+                                                        <Insets />
+                                                    </HBox.margin>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding></Label>
+                                            </children>
+                                        </HBox>
                                         <HBox prefHeight="228.0" prefWidth="578.0">
                                             <children>
                                                 <Label styleClass="textStyle" text="Descripción:" />
                                                 <Region prefHeight="228.0" prefWidth="15.0" />
-                                                <Label alignment="TOP_LEFT" prefHeight="210.0" prefWidth="410.0" styleClass="textArea" />
+                                                <Label fx:id="lblDescripcion" alignment="TOP_LEFT" prefHeight="210.0" prefWidth="410.0" styleClass="textArea">
+                                                    <HBox.margin>
+                                                        <Insets />
+                                                    </HBox.margin>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding></Label>
                                             </children>
                                         </HBox>
                                     </children>

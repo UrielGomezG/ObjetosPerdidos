@@ -1,5 +1,6 @@
 package com.utez.objetosperdidos.controller;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,8 +11,11 @@ import com.utez.objetosperdidos.model.ObjetoPerdido;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -21,6 +25,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class ObjetosController {
 
@@ -140,6 +145,23 @@ public class ObjetosController {
                 new Label("🏷️ Categoría: " + (obj.getCategoria() != null ? obj.getCategoria().getNombre() : "Sin categoría"))
         );
 
+        tarjeta.setOnMouseClicked(event -> {
+            if (!(event.getTarget() instanceof Button)) { // Evita que botones activen esto
+                verObjetoDetalle(obj);
+            }
+        });
+
+        // 🎨 Efecto hover para la tarjeta
+        tarjeta.setOnMouseEntered(e -> tarjeta.setStyle(
+                "-fx-background-color: #f9f9f9; -fx-background-radius: 8; -fx-border-radius: 8; "
+                        + "-fx-border-color: #bbb; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0.3, 0, 2);"
+        ));
+        tarjeta.setOnMouseExited(e -> tarjeta.setStyle(
+                "-fx-background-color: white; -fx-background-radius: 8; -fx-border-radius: 8; "
+                        + "-fx-border-color: #ccc; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.3, 0, 2);"
+        ));
+
+
         HBox encabezado = new HBox(12);
         encabezado.setAlignment(Pos.CENTER_LEFT);
         encabezado.getChildren().addAll(imagenObjeto, infoTexto);
@@ -161,5 +183,28 @@ public class ObjetosController {
         return tarjeta;
     }
 
+
+
+
+    private void verObjetoDetalle(ObjetoPerdido obj) {
+        try {
+            // Cargar FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/Ver_Objeto.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el controlador correctamente desde el FXMLLoader
+            VerObjeto controller = loader.getController();
+            controller.setObjeto(obj); // <-- pasar el objeto al controlador
+
+            // Crear la nueva ventana
+            Stage stage = new Stage();
+            stage.setTitle("Ver Objeto: " + obj.getNombreObjeto());
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al abrir la vista de ver objeto.");
+        }
+    }
 
 }

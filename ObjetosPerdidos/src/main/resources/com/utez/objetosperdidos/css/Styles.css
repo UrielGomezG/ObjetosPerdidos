@@ -7,8 +7,8 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 4);
     -fx-padding: 15px;
     -fx-transition: all 0.2s ease-in-out;
-    -fx-min-height: 280px; /* ✅ Altura mínima para consistencia */
-    -fx-pref-width: 300px; /* Ancho preferido de la tarjeta */
+    -fx-min-height: 280px;
+    -fx-pref-width: 300px;
 }
 
 .card:hover {

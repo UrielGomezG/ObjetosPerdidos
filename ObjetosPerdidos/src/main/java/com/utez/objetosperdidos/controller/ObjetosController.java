@@ -43,22 +43,13 @@ public class ObjetosController {
 
     @FXML
     public void initialize() {
-        if (contenedorTarjetas == null) {
-            System.out.println("Error: contenedorTarjetas no está vinculado. Revisa el fx:id en el FXML.");
-        } else {
-            System.out.println("Inicializando vista de objetos perdidos para usuario...");
-        }
         cargarObjetos();
         listaOriginal = dao.obtenerObjetosConInfo(0, 100);
         mostrarObjetos(listaOriginal);
         cargarCategorias();
-        if (btnBuscar != null) {
-            btnBuscar.setOnAction(e -> buscarPorNombre(txtBuscar.getText()));
-        }
 
-        if (txtBuscar != null) {
-            txtBuscar.textProperty().addListener((obs, oldVal, newVal) -> buscarPorNombre(newVal));
-        }
+        btnBuscar.setOnAction(e -> buscarPorNombre(txtBuscar.getText()));
+        txtBuscar.textProperty().addListener((obs, oldVal, newVal) -> buscarPorNombre(newVal));
     }
 
     private void cargarCategorias() {
@@ -124,13 +115,16 @@ public class ObjetosController {
 
     private VBox crearTarjetaUsuario(ObjetoPerdido obj) {
         VBox tarjeta = new VBox(10);
-        tarjeta.setPadding(new Insets(10));
-        tarjeta.setStyle("-fx-background-color: white; -fx-background-radius: 8; -fx-border-radius: 8; "
-                + "-fx-border-color: #ccc; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.3, 0, 2);");
-        tarjeta.setPrefWidth(270);
+        tarjeta.getStyleClass().add("card");
+        tarjeta.setAlignment(Pos.TOP_LEFT);
+        tarjeta.setPadding(new Insets(16));
+        tarjeta.setPrefSize(300, 260);
 
-        // Imagen del objeto
+        Label titulo = new Label("Objeto perdido");
+        titulo.getStyleClass().add("card-title");
+
         ImageView imagenObjeto = new ImageView();
+        imagenObjeto.getStyleClass().add("card-image");
         imagenObjeto.setFitWidth(80);
         imagenObjeto.setFitHeight(80);
         imagenObjeto.setPreserveRatio(true);
@@ -140,20 +134,15 @@ public class ObjetosController {
             Path rutaImagen = Paths.get(System.getProperty("user.home"), "Downloads", obj.getFotoUrl().trim());
             if (Files.exists(rutaImagen)) {
                 imagenObjeto.setImage(new Image(rutaImagen.toUri().toString()));
-                System.out.println("Imagen cargada: " + rutaImagen.getFileName());
-            } else {
-                System.out.println("Imagen no encontrada: " + rutaImagen.toAbsolutePath());
             }
-        } else {
-            System.out.println("ℹNo se proporcionó imagen para: " + obj.getNombreObjeto());
         }
 
-        // Información textual
         VBox infoTexto = new VBox(4);
+        infoTexto.getStyleClass().add("card-info");
         infoTexto.getChildren().addAll(
-                new Label("📦 " + obj.getNombreObjeto()),
-                new Label("📍 " + obj.getEdificio() + " - Aula " + obj.getAula()),
-                new Label("🔖 Estado: " + obj.getEstado())
+                new Label("📦 Nombre: " + obj.getNombreObjeto()),
+                new Label("📍 Ubicación: " + obj.getEdificio() + " - Aula " + obj.getAula()),
+                new Label("🏷️ Categoría: " + (obj.getCategoria() != null ? obj.getCategoria().getNombre() : "Sin categoría"))
         );
 
         tarjeta.setOnMouseClicked(event -> {
@@ -177,13 +166,26 @@ public class ObjetosController {
         encabezado.setAlignment(Pos.CENTER_LEFT);
         encabezado.getChildren().addAll(imagenObjeto, infoTexto);
 
-        Label lblDescripcion = new Label(obj.getDescripcion());
+        Label lblDescripcion = new Label("📝 " + obj.getDescripcion());
+        lblDescripcion.getStyleClass().add("card-description");
         lblDescripcion.setWrapText(true);
 
-        // Solo mostrar la información, sin botones de modificación
-        tarjeta.getChildren().addAll(encabezado, lblDescripcion);
+        Label estadoValor = new Label(obj.getEstado().equalsIgnoreCase("Entregado") ? "Entregado" : "Activo");
+        estadoValor.getStyleClass().add(obj.getEstado().equalsIgnoreCase("Entregado") ? "entregado-label" : "activo-label");
+        estadoValor.setMaxWidth(Double.MAX_VALUE);
+        estadoValor.setAlignment(Pos.CENTER);
+
+        VBox estadoBox = new VBox(estadoValor);
+        estadoBox.setAlignment(Pos.BOTTOM_CENTER);
+        estadoBox.setPadding(new Insets(10, 0, 0, 0));
+
+        tarjeta.getChildren().addAll(titulo, encabezado, lblDescripcion, estadoBox);
         return tarjeta;
     }
+
+
+
+
     private void verObjetoDetalle(ObjetoPerdido obj) {
         try {
             // Cargar FXML
@@ -204,4 +206,5 @@ public class ObjetosController {
             System.out.println("Error al abrir la vista de ver objeto.");
         }
     }
+
 }

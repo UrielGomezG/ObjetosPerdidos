@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 
 <BorderPane prefHeight="600.0" prefWidth="900.0" styleClass="background" stylesheets="@../css/EditarObjeto.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.EditarObjetoController">
 
@@ -18,14 +11,16 @@
             <children>
                 <VBox alignment="TOP_CENTER" spacing="15.0">
                     <children>
-                  <HBox prefHeight="41.0" prefWidth="220.0">
-                     <children>
-                        <Label styleClass="titulo" text="Editar objeto" />
-                     </children>
-                  </HBox>
+                        <HBox prefHeight="41.0" prefWidth="220.0">
+                            <children>
+                                <Label styleClass="titulo" text="Editar objeto" />
+                            </children>
+                        </HBox>
                         <Label styleClass="textStyle" text="Vista previa" />
-                        <ImageView fx:id="imgPreview" fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: #aaa;                                           -fx-border-width: 1;                                           -fx-background-color: white;                                           -fx-background-radius: 10;                                           -fx-border-radius: 10;                                           -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0, 2);" />
+                        <ImageView fx:id="imgPreview" fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: #aaa; -fx-border-width: 1; -fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0, 2);" />
                         <Button fx:id="btnSubirImagen" onAction="#handleSubirImagen" style="-fx-background-color: #2980b9; -fx-text-fill: white;" text="Subir imagen" />
+
+                        <TextField fx:id="fotoUrlField" prefWidth="220.0" styleClass="textField" promptText="Nombre de la imagen" />
                     </children>
                 </VBox>
 
@@ -34,34 +29,31 @@
 
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                             <Label styleClass="textStyle" text="Título:" />
-                     <Region prefHeight="29.0" prefWidth="59.0" />
+                            <Region prefHeight="29.0" prefWidth="59.0" />
                             <TextField fx:id="tituloField" prefWidth="440.0" styleClass="textField" />
                         </HBox>
-                  <HBox alignment="CENTER_LEFT" spacing="10.0">
-                     <children>
-                        <Label styleClass="textStyle" text="Modelo:" />
-                        <Region prefHeight="29.0" prefWidth="43.0" />
-                        <TextField prefWidth="440.0" styleClass="textField" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" spacing="10.0">
-                     <children>
-                        <Label styleClass="textStyle" text="Marca:" />
-                        <Region prefHeight="29.0" prefWidth="57.0" />
-                        <TextField prefWidth="440.0" styleClass="textField" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" spacing="10.0">
-                     <children>
-                        <Label styleClass="textStyle" text="No.Serie:" />
-                        <Region prefHeight="29.0" prefWidth="36.0" />
-                        <TextField prefWidth="440.0" styleClass="textField" />
-                     </children>
-                  </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Label styleClass="textStyle" text="Modelo:" />
+                            <Region prefHeight="29.0" prefWidth="43.0" />
+                            <TextField fx:id="modeloField" prefWidth="440.0" styleClass="textField" />
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Label styleClass="textStyle" text="Marca:" />
+                            <Region prefHeight="29.0" prefWidth="57.0" />
+                            <TextField fx:id="marcaField" prefWidth="440.0" styleClass="textField" />
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Label styleClass="textStyle" text="No.Serie:" />
+                            <Region prefHeight="29.0" prefWidth="36.0" />
+                            <TextField fx:id="noSerieField" prefWidth="440.0" styleClass="textField" />
+                        </HBox>
 
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                             <Label styleClass="textStyle" text="Aula:" />
-                     <Region prefHeight="29.0" prefWidth="69.0" />
+                            <Region prefHeight="29.0" prefWidth="69.0" />
                             <TextField fx:id="aulaField" prefWidth="440.0" styleClass="textField" />
                         </HBox>
 

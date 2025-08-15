@@ -43,7 +43,6 @@ public class ObjetosAdminController {
     private TextField txtBuscar;
     @FXML
     private Button btnBuscar;
-
     private final ObjetoDAO dao = new ObjetoDAO();
     private List<ObjetoPerdido> listaOriginal;
 
@@ -66,13 +65,11 @@ public class ObjetosAdminController {
             txtBuscar.textProperty().addListener((obs, oldVal, newVal) -> filtrarPorNombreYCategoria());
         }
     }
-
     private void actualizarVista() {
         System.out.println("🔄 Actualizando vista de objetos...");
         this.listaOriginal = dao.obtenerObjetosConInfo(0, 100);
         filtrarPorNombreYCategoria();
     }
-
     private void cargarCategorias() {
         cbCategoria.getItems().clear();
         cbCategoria.getItems().add("Todas");
@@ -85,7 +82,6 @@ public class ObjetosAdminController {
         cbCategoria.getSelectionModel().selectFirst();
         cbCategoria.setOnAction(e -> filtrarPorNombreYCategoria());
     }
-
     private void filtrarPorNombreYCategoria() {
         String texto = txtBuscar.getText().toLowerCase();
         String categoriaSeleccionada = cbCategoria.getValue();
@@ -101,7 +97,6 @@ public class ObjetosAdminController {
 
         mostrarObjetos(filtrados);
     }
-
     private void mostrarObjetos(List<ObjetoPerdido> objetos) {
         contenedorTarjetas.getChildren().clear();
 
@@ -110,7 +105,6 @@ public class ObjetosAdminController {
             contenedorTarjetas.getChildren().add(tarjeta);
         }
     }
-
     private VBox crearTarjetaAdmin(ObjetoPerdido obj) {
         VBox tarjeta = new VBox(10);
         tarjeta.getStyleClass().add("card");
@@ -177,13 +171,11 @@ public class ObjetosAdminController {
         botones.getStyleClass().add("card-button-container");
         botones.getChildren().addAll(btnEntregar, btnEditar, btnEnviarBodega, btnEliminar);
 
-        //CLICABLE
         tarjeta.setOnMouseClicked(event -> {
             if (!(event.getTarget() instanceof Button)) {
-                abrirEdicion(obj);
+                abrirEntrega(obj);
             }
         });
-
 
         tarjeta.setOnMouseEntered(e -> tarjeta.setStyle(
                 "-fx-background-color: #f9f9f9; -fx-background-radius: 8; -fx-border-radius: 8; "
@@ -201,7 +193,6 @@ public class ObjetosAdminController {
 
         return tarjeta;
     }
-
     private void abrirEdicion(ObjetoPerdido obj) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/Editar_Objeto.fxml"));
@@ -221,7 +212,6 @@ public class ObjetosAdminController {
             e.printStackTrace();
         }
     }
-
     private void eliminarObjeto(ObjetoPerdido obj) {
         if ("Archivado".equalsIgnoreCase(obj.getEstado())) {
             mostrarError("No se puede eliminar un objeto archivado.");
@@ -229,7 +219,6 @@ public class ObjetosAdminController {
         }
 
         boolean confirmado = mostrarConfirmacion("¿Eliminar el objeto '" + obj.getNombreObjeto() + "'?");
-
         if (confirmado) {
             boolean relacionesEliminadas = dao.eliminarRelacionesCategoriaObjeto(obj.getId());
 
@@ -237,7 +226,6 @@ public class ObjetosAdminController {
                 mostrarError("No se pudieron eliminar las relaciones del objeto con sus categorías.");
                 return;
             }
-
             boolean objetoEliminado = dao.eliminarObjeto(obj.getId());
             if (objetoEliminado) {
                 mostrarInfo("Objeto eliminado correctamente.");
@@ -247,7 +235,6 @@ public class ObjetosAdminController {
             }
         }
     }
-
     private void abrirEntrega(ObjetoPerdido obj) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/Entregar_Objeto.fxml"));
@@ -265,6 +252,7 @@ public class ObjetosAdminController {
             actualizarVista();
         } catch (IOException e) {
             e.printStackTrace();
+            mostrarError("No se pudo abrir la ventana de entrega.");
         }
     }
 
@@ -279,7 +267,6 @@ public class ObjetosAdminController {
             }
         }
     }
-
     private boolean mostrarConfirmacion(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmación");
@@ -287,14 +274,12 @@ public class ObjetosAdminController {
         alert.setContentText(mensaje);
         return alert.showAndWait().filter(btn -> btn == ButtonType.OK).isPresent();
     }
-
     private void mostrarInfo(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

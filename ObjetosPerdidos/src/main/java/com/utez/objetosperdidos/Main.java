@@ -28,13 +28,24 @@ public class Main extends Application {
         mainStage.setScene(scene);
 
         if (fxmlName.equals("HomeView.fxml") || fxmlName.equals("AdminHomeView.fxml")) {
+            mainStage.setResizable(true);
+            mainStage.show();
             mainStage.setMaximized(true);
             mainStage.setResizable(false);
-        } else {
+        }
+        else if (fxmlName.equals("Login.fxml")) {
+            mainStage.setResizable(true);
+            mainStage.setFullScreen(false);
+            mainStage.setWidth(900);
+            mainStage.setHeight(600);
+            mainStage.centerOnScreen();
+            mainStage.show();
             mainStage.setResizable(false);
         }
-
-        mainStage.show();
+        else {
+            mainStage.setResizable(true);
+            mainStage.show();
+        }
     }
 
     public static void main(String[] args) {

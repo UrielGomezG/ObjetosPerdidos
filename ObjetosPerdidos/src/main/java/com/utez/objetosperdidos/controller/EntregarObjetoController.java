@@ -38,12 +38,10 @@ public class EntregarObjetoController {
     private TextField txtAlumno;
     @FXML
     private TextField txtMatricula;
-    @FXML
-    private Label lblAula;
-    @FXML
-    private Label lblEdificio;
+
     @FXML
     private Label lblNombreFoto;
+
     @FXML
     private TextField fotoUrlField;
     @FXML
@@ -60,6 +58,7 @@ public class EntregarObjetoController {
     public void setObjeto(ObjetoPerdido objeto) {
         this.objeto = objeto;
 
+<<<<<<< HEAD
         lblTitulo.setText(objeto.getNombreObjeto());
         lblMarca.setText(objeto.getMarca());
         lblModelo.setText(objeto.getModelo());
@@ -68,6 +67,17 @@ public class EntregarObjetoController {
         lblDescripcion.setText(objeto.getDescripcion());
         lblAula.setText(objeto.getAula());
         lblEdificio.setText(objeto.getEdificio());
+=======
+        if(objeto != null){
+            lblTitulo.setText(objeto.getNombreObjeto());
+            lblMarca.setText(objeto.getMarca());
+            lblModelo.setText(objeto.getModelo());
+            fotoUrlField.setText(objeto.getFotoUrl());
+            lblNoSerie.setText(objeto.getNo_serial());
+            lblDescripcion.setText(objeto.getDescripcion());
+        }
+        
+>>>>>>> Cesar
     }
 
     @FXML

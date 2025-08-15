@@ -21,8 +21,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafx.scene.text.FontWeight;
-
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -38,17 +36,14 @@ public class HistorialObjetoController {
     @FXML
     private Label userNameLabel;
 
+    private List<ObjetoPerdido> objetos;
     private final ObjetoDAO dao = new ObjetoDAO();
-
     @FXML
     public void initialize() {
-        itemsContainer.prefWrapLengthProperty().bind(itemsContainer.widthProperty());
-
-        List<ObjetoPerdido> objetos = dao.obtenerObjetosEntregados()
+        objetos = dao.obtenerObjetosEntregados()
                 .stream()
                 .filter(o -> "Entregado".equalsIgnoreCase(o.getEstado()))
                 .collect(Collectors.toList());
-
         if (Session.currentUser != null) {
             String nombreCompleto = Session.currentUser.getName() + " " + Session.currentUser.getApellidoPaterno();
             userNameLabel.setText(nombreCompleto);
@@ -57,55 +52,73 @@ public class HistorialObjetoController {
         mostrarObjetos(objetos);
     }
 
+
     private void mostrarObjetos(List<ObjetoPerdido> lista) {
+        System.out.println("Mostrando objetos: " + lista.size());
         itemsContainer.getChildren().clear();
         for (ObjetoPerdido o : lista) {
-            Image imagen = null;
-            if (o.getFotoUrl() != null && !o.getFotoUrl().trim().isEmpty()) {
-                Path rutaImagen = Paths.get(System.getProperty("user.home"), "Downloads", o.getFotoUrl().trim());
-                if (Files.exists(rutaImagen)) {
-                    imagen = new Image(rutaImagen.toUri().toString());
-                }
-            }
-
-            VBox card = crearTarjeta(o.getNombreObjeto(), o.getDescripcion(), imagen, "Entregado".equalsIgnoreCase(o.getEstado()));
+            VBox card = crearTarjetaHistorial(o);
+            System.out.println("Agregando tarjeta para: " + o.getNombreObjeto());
             itemsContainer.getChildren().add(card);
         }
     }
 
-    private VBox crearTarjeta(String titulo, String descripcion, Image imagen, boolean entregado) {
-        VBox tarjeta = new VBox(12);
-        tarjeta.getStyleClass().add("card");
-        tarjeta.setAlignment(Pos.TOP_LEFT);
-        tarjeta.setPadding(new Insets(16));
+    private VBox crearTarjetaHistorial(ObjetoPerdido obj) {
+        VBox tarjeta = new VBox(10);
+        tarjeta.setPadding(new Insets(10));
+        tarjeta.setStyle("-fx-background-color: white; -fx-background-radius: 8; -fx-border-radius: 8; "
+                + "-fx-border-color: #ccc; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.3, 0, 2);");
+        tarjeta.setPrefWidth(270);
 
-        if (imagen != null) {
-            ImageView imageView = new ImageView(imagen);
-            imageView.setFitWidth(100);
-            imageView.setFitHeight(100);
-            imageView.setPreserveRatio(true);
-            tarjeta.getChildren().add(imageView);
+        // 🔍 Imagen del objeto
+        ImageView imagenObjeto = new ImageView();
+        imagenObjeto.setFitWidth(80);
+        imagenObjeto.setFitHeight(80);
+        imagenObjeto.setPreserveRatio(true);
+        imagenObjeto.setSmooth(true);
+
+        if (obj.getFotoUrl() != null && !obj.getFotoUrl().trim().isEmpty()) {
+            Path rutaImagen = Paths.get(System.getProperty("user.home"),  "Downloads", obj.getFotoUrl().trim());
+            if (Files.exists(rutaImagen)) {
+                imagenObjeto.setImage(new Image(rutaImagen.toUri().toString()));
+                System.out.println("Imagen cargada: " + rutaImagen.getFileName());
+            } else {
+                System.out.println("Imagen no encontrada: " + rutaImagen.toAbsolutePath());
+            }
+        } else {
+            System.out.println("ℹNo se proporcionó imagen para: " + obj.getNombreObjeto());
         }
 
-        Label tituloLabel = new Label(titulo);
-        tituloLabel.getStyleClass().add("card-title");
+        // 📄 Información textual
+        VBox infoTexto = new VBox(4);
+        infoTexto.getChildren().addAll(
+                new Label("📦 " + obj.getNombreObjeto()),
+                new Label("📍 " + obj.getEdificio() + " - Aula " + obj.getAula()),
+                new Label("🔖 Estado: " + obj.getEstado())
+        );
 
-        Label descripcionLabel = new Label(descripcion);
-        descripcionLabel.getStyleClass().add("card-description");
-        descripcionLabel.setWrapText(true);
+        HBox encabezado = new HBox(12);
+        encabezado.setAlignment(Pos.CENTER_LEFT);
+        encabezado.getChildren().addAll(imagenObjeto, infoTexto);
 
-        tarjeta.getChildren().addAll(tituloLabel, descripcionLabel);
+        Label lblDescripcion = new Label(obj.getDescripcion());
+        lblDescripcion.setWrapText(true);
 
-        if (entregado) {
-            Label entregadoLabel = new Label("Entregado");
-            entregadoLabel.getStyleClass().add("entregado-label");
-            tarjeta.getChildren().add(entregadoLabel);
-        }
+        Button btnVer = new Button("👁️ Ver");
 
+
+
+        VBox botones = new VBox(5, btnVer);
+        botones.setPadding(new Insets(5, 0, 0, 0));
+
+        tarjeta.getChildren().addAll(encabezado, lblDescripcion, botones);
         return tarjeta;
     }
 
-
+    private void abrirDetalles(ObjetoPerdido obj) {
+        System.out.println("Ver detalles de: " + obj.getNombreObjeto());
+        // Aquí puedes abrir ventana o modal con detalles
+    }
 
     @FXML
     private void onHome(ActionEvent actionEvent) {

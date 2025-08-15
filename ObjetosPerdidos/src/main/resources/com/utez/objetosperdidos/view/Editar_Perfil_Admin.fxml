@@ -49,19 +49,15 @@
                         </StackPane>
                      </children>
                   </HBox>
-                  <HBox prefHeight="55.0" prefWidth="720.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="720.0">
                      <children>
-                        <Region prefHeight="200.0" prefWidth="60.0" />
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <TextField fx:id="txtEmail" prefHeight="35.0" styleClass="textField" StackPane.alignment="CENTER" />
                               <Label styleClass="textStyle" text="Correo" />
                            </children>
                         </StackPane>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="55.0" prefWidth="720.0">
-                     <children>
+                        <Region prefHeight="200.0" prefWidth="60.0" />
                         <StackPane alignment="TOP_LEFT" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <TextField fx:id="txtPassword" prefHeight="35.0" styleClass="textField" StackPane.alignment="CENTER" />
@@ -70,6 +66,7 @@
                         </StackPane>
                      </children>
                   </HBox>
+                  <HBox prefHeight="55.0" prefWidth="720.0" />
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onCancel" styleClass="btnCancelar" text="Cancelar" />

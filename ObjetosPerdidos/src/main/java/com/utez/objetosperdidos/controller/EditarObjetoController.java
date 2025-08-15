@@ -6,7 +6,6 @@ import com.utez.objetosperdidos.model.ObjetoPerdido;
 import com.utez.objetosperdidos.model.dao.CategoriaDAO;
 import com.utez.objetosperdidos.model.dao.EdificioDAO;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
-import com.utez.objetosperdidos.util.Session;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -22,38 +21,20 @@ import java.util.List;
 
 public class EditarObjetoController {
 
-    @FXML
-    private TextField tituloField;
-
-    @FXML
-    private TextField aulaField;
-
-    @FXML
-    private TextField fotoUrlField;
-
-    @FXML
-    private ComboBox<Categoria> cbCategoria;
-
-    @FXML
-    private ComboBox<Edificio> cbEdificio;
-
-    //@FXML
-    //private ComboBox<Estado> cbEstado;
-
-    @FXML
-    private TextArea descripcionArea;
-
-    @FXML
-    private Button btnGuardar;
-
-    @FXML
-    private Button btnCancelar;
-
-    @FXML
-    private ImageView imgPreview;
+    @FXML private TextField tituloField;
+    @FXML private TextField modeloField;
+    @FXML private TextField marcaField;
+    @FXML private TextField noSerieField;
+    @FXML private TextField aulaField;
+    @FXML private TextField fotoUrlField;
+    @FXML private ComboBox<Categoria> cbCategoria;
+    @FXML private ComboBox<Edificio> cbEdificio;
+    @FXML private TextArea descripcionArea;
+    @FXML private Button btnGuardar;
+    @FXML private Button btnCancelar;
+    @FXML private ImageView imgPreview;
 
     private final CategoriaDAO categoriaDAO = new CategoriaDAO();
-    //private final EstadoDAO estadoDAO = new EstadoDAO();
     private final EdificioDAO edificioDAO = new EdificioDAO();
     private final ObjetoDAO objetoDAO = new ObjetoDAO();
 
@@ -62,52 +43,36 @@ public class EditarObjetoController {
 
     @FXML
     public void initialize() {
-        List<Edificio> edificios = edificioDAO.obtenerTodos();
-        cbEdificio.setItems(FXCollections.observableArrayList(edificios));
-        List<Categoria> categorias = categoriaDAO.obtenerCategorias();
-        cbCategoria.setItems(FXCollections.observableArrayList(categorias));
-
+        cbEdificio.setItems(FXCollections.observableArrayList(edificioDAO.obtenerTodos()));
+        cbCategoria.setItems(FXCollections.observableArrayList(categoriaDAO.obtenerCategorias()));
     }
-
 
     public void setObjetoEditando(ObjetoPerdido objeto) {
         this.objetoEditando = objeto;
 
-        if (objetoEditando != null) {
-            tituloField.setText(objetoEditando.getNombreObjeto());
-            aulaField.setText(objetoEditando.getAula());
-            fotoUrlField.setText(objetoEditando.getFotoUrl());
-            descripcionArea.setText(objetoEditando.getDescripcion());
-            List<Categoria> categorias = categoriaDAO.obtenerCategorias();
-            cbCategoria.setItems(FXCollections.observableArrayList(categorias));
-            cbCategoria.setValue(objetoEditando.getCategoria());
+        if (objeto != null) {
+            tituloField.setText(objeto.getNombreObjeto());
+            modeloField.setText(objeto.getModelo());
+            marcaField.setText(objeto.getMarca());
+            noSerieField.setText(objeto.getNo_serial());
+            aulaField.setText(objeto.getAula());
+            fotoUrlField.setText(objeto.getFotoUrl());
+            descripcionArea.setText(objeto.getDescripcion());
 
-            //List<Estado> estados = estadoDAO.obtenerTodos();
-            //cbEstado.setItems(FXCollections.observableArrayList(estados));
+            cbCategoria.setItems(FXCollections.observableArrayList(categoriaDAO.obtenerCategorias()));
+            cbCategoria.setValue(objeto.getCategoria());
 
-            List<Edificio> edificios = edificioDAO.obtenerTodos();
-            cbEdificio.setItems(FXCollections.observableArrayList(edificios));
-
-           /*  for (Estado e : estados) {
-                if (e.getId() == objetoEditando.getEstadoId()) {
-                    cbEstado.setValue(e);
-                    break;
-                }
-            }*/
-
-            for (Edificio e : edificios) {
-                if (e.getId() == objetoEditando.getEdificioId()) {
+            cbEdificio.setItems(FXCollections.observableArrayList(edificioDAO.obtenerTodos()));
+            for (Edificio e : edificioDAO.obtenerTodos()) {
+                if (e.getId() == objeto.getEdificioId()) {
                     cbEdificio.setValue(e);
                     break;
                 }
             }
 
-            Path rutaImagen = Paths.get(System.getProperty("user.home"), "Downloads", objetoEditando.getFotoUrl());
+            Path rutaImagen = Paths.get(System.getProperty("user.home"), "Downloads", objeto.getFotoUrl());
             if (Files.exists(rutaImagen)) {
-                Image imagen = new Image(rutaImagen.toUri().toString());
-                imgPreview.setImage(imagen);
-            } else {
-                System.out.println("No se encontró imagen: " + rutaImagen.toAbsolutePath());
+                imgPreview.setImage(new Image(rutaImagen.toUri().toString()));
             }
         }
     }
@@ -116,13 +81,11 @@ public class EditarObjetoController {
     public void handleSubirImagen() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar imagen");
-        fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg"));
 
         File archivoSeleccionado = fileChooser.showOpenDialog(new Stage());
         if (archivoSeleccionado != null) {
             nombreArchivoImagen = archivoSeleccionado.getName();
-
             String nombre = nombreArchivoImagen.toLowerCase();
             if (!(nombre.endsWith(".png") || nombre.endsWith(".jpg") || nombre.endsWith(".jpeg"))) {
                 mostrarAlerta("El archivo seleccionado no es una imagen válida.");
@@ -130,15 +93,11 @@ public class EditarObjetoController {
             }
 
             fotoUrlField.setText(nombreArchivoImagen);
-
             Path destino = Paths.get(System.getProperty("user.home"), "objetos-imagenes", nombreArchivoImagen);
             try {
                 Files.createDirectories(destino.getParent());
                 Files.copy(archivoSeleccionado.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Imagen copiada: " + destino);
-
-                Image imagen = new Image(destino.toUri().toString());
-                imgPreview.setImage(imagen);
+                imgPreview.setImage(new Image(destino.toUri().toString()));
             } catch (IOException e) {
                 e.printStackTrace();
                 mostrarAlerta("Ocurrió un error al copiar la imagen.");
@@ -148,37 +107,34 @@ public class EditarObjetoController {
 
     @FXML
     public void cancelar() {
-        Stage stage = (Stage) btnCancelar.getScene().getWindow();
-        stage.close();
+        ((Stage) btnCancelar.getScene().getWindow()).close();
     }
 
     @FXML
     public void guardarCambios() {
         Categoria categoriaSelect = cbCategoria.getValue();
-        //Estado estadoSeleccionado = cbEstado.getValue();
         Edificio edificioSeleccionado = cbEdificio.getValue();
 
-        if (tituloField.getText().isEmpty() || aulaField.getText().isEmpty()
+        if (tituloField.getText().isEmpty() || modeloField.getText().isEmpty() || marcaField.getText().isEmpty()
+                || noSerieField.getText().isEmpty() || aulaField.getText().isEmpty()
                 || descripcionArea.getText().isEmpty() || categoriaSelect == null || edificioSeleccionado == null) {
             mostrarAlerta("Por favor completa todos los campos antes de guardar.");
             return;
         }
 
         objetoEditando.setNombreObjeto(tituloField.getText());
+        objetoEditando.setModelo(modeloField.getText());
+        objetoEditando.setMarca(marcaField.getText());
+        objetoEditando.setNo_serial(noSerieField.getText());
         objetoEditando.setAula(aulaField.getText());
         objetoEditando.setDescripcion(descripcionArea.getText());
         objetoEditando.setFotoUrl(fotoUrlField.getText());
         objetoEditando.setCategoria(categoriaSelect);
-        //objetoEditando.setEstadoId(estadoSeleccionado.getId());
-        //objetoEditando.setEstado(estadoSeleccionado.getNombre());
         objetoEditando.setEdificioId(edificioSeleccionado.getId());
         objetoEditando.setEdificio(edificioSeleccionado.getNombre());
-        
-        boolean actualizado = objetoDAO.actualizarObjeto(objetoEditando);
-        if (actualizado) {
-            System.out.println("Cambios guardados en objeto: " + objetoEditando.getNombreObjeto());
-            Stage stage = (Stage) btnGuardar.getScene().getWindow();
-            stage.close();
+
+        if (objetoDAO.actualizarObjeto(objetoEditando)) {
+            ((Stage) btnGuardar.getScene().getWindow()).close();
         } else {
             mostrarAlerta("No se pudo actualizar el objeto.");
         }

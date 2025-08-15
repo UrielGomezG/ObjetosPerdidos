@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane styleClass="background" stylesheets="@../css/Ver_Objeto.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.VerObjeto">
     <center>
@@ -19,7 +20,10 @@
                             <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Label text="Vista previa" />
+                              <Label text="Vista previa">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
                                       <ImageView fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </VBox>

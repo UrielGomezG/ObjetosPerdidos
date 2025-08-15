@@ -34,32 +34,47 @@
 
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                             <Label styleClass="textStyle" text="Título:" />
-                     <Region prefHeight="29.0" prefWidth="60.0" />
+                     <Region prefHeight="29.0" prefWidth="59.0" />
                             <TextField fx:id="tituloField" prefWidth="440.0" styleClass="textField" />
                         </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label styleClass="textStyle" text="Modelo:" />
+                        <Region prefHeight="29.0" prefWidth="43.0" />
+                        <TextField prefWidth="440.0" styleClass="textField" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label styleClass="textStyle" text="Marca:" />
+                        <Region prefHeight="29.0" prefWidth="57.0" />
+                        <TextField prefWidth="440.0" styleClass="textField" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label styleClass="textStyle" text="No.Serie:" />
+                        <Region prefHeight="29.0" prefWidth="36.0" />
+                        <TextField prefWidth="440.0" styleClass="textField" />
+                     </children>
+                  </HBox>
 
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                             <Label styleClass="textStyle" text="Aula:" />
-                     <Region prefHeight="29.0" prefWidth="66.0" />
+                     <Region prefHeight="29.0" prefWidth="69.0" />
                             <TextField fx:id="aulaField" prefWidth="440.0" styleClass="textField" />
                         </HBox>
 
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                             <Label styleClass="textStyle" text="Edificio:" />
-                            <Region prefHeight="39.0" prefWidth="51.0" />
+                            <Region prefHeight="39.0" prefWidth="43.0" />
                             <ComboBox fx:id="cbEdificio" prefHeight="35.0" prefWidth="440.0" styleClass="textField" />
                         </HBox>
 
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                             <Label styleClass="textStyle" text="Categoría" />
-                            <Region prefHeight="43.0" prefWidth="42.0" />
+                            <Region prefHeight="43.0" prefWidth="29.0" />
                             <ComboBox fx:id="cbCategoria" prefHeight="35.0" prefWidth="440.0" styleClass="textField" />
-                        </HBox>
- 
-                        <HBox alignment="CENTER_LEFT" spacing="10.0">
-                            <Label styleClass="textStyle" text="Archivo imagen:" />
-                     <Region prefHeight="29.0" prefWidth="3.0" />
-                            <TextField fx:id="fotoUrlField" editable="false" prefWidth="440.0" styleClass="textField" />
                         </HBox>
 
                         <Label styleClass="textStyle" text="Descripción:" />

@@ -6,13 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Date;
 
-import com.utez.objetosperdidos.model.EntregaObjeto;
 import com.utez.objetosperdidos.model.ObjetoPerdido;
-import com.utez.objetosperdidos.model.dao.EntregarObjetoDao;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
 
+import com.utez.objetosperdidos.util.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -38,27 +36,27 @@ public class EntregarObjetoController {
     private TextField txtAlumno;
     @FXML
     private TextField txtMatricula;
-
+    @FXML
+    private Label lblAula;
+    @FXML
+    private Label lblEdificio;
     @FXML
     private Label lblNombreFoto;
-
     @FXML
     private TextField fotoUrlField;
+
     @FXML
     private ImageView imgPreview;
-
     private String nombreArchivoImagen;
     private ObjetoPerdido objeto;
 
     private final ObjetoDAO dao = new ObjetoDAO();
-    private final EntregarObjetoDao entregaDao = new EntregarObjetoDao();
 
-    public void initialize() {}
-
+    public void initialize() {
+    }
     public void setObjeto(ObjetoPerdido objeto) {
         this.objeto = objeto;
 
-<<<<<<< HEAD
         lblTitulo.setText(objeto.getNombreObjeto());
         lblMarca.setText(objeto.getMarca());
         lblModelo.setText(objeto.getModelo());
@@ -67,7 +65,8 @@ public class EntregarObjetoController {
         lblDescripcion.setText(objeto.getDescripcion());
         lblAula.setText(objeto.getAula());
         lblEdificio.setText(objeto.getEdificio());
-=======
+
+
         if(objeto != null){
             lblTitulo.setText(objeto.getNombreObjeto());
             lblMarca.setText(objeto.getMarca());
@@ -76,8 +75,7 @@ public class EntregarObjetoController {
             lblNoSerie.setText(objeto.getNo_serial());
             lblDescripcion.setText(objeto.getDescripcion());
         }
-        
->>>>>>> Cesar
+
     }
 
     @FXML
@@ -91,7 +89,8 @@ public class EntregarObjetoController {
         if (archivoSeleccionado != null) {
             nombreArchivoImagen = archivoSeleccionado.getName();
 
-            if (!nombreArchivoImagen.toLowerCase().matches(".*\\.(png|jpg|jpeg)$")) {
+            String nombre = nombreArchivoImagen.toLowerCase();
+            if (!(nombre.endsWith(".png") || nombre.endsWith(".jpg") || nombre.endsWith(".jpeg"))) {
                 mostrarAlerta("El archivo seleccionado no es una imagen válida.");
                 return;
             }
@@ -102,6 +101,7 @@ public class EntregarObjetoController {
             try {
                 Files.createDirectories(destino.getParent());
                 Files.copy(archivoSeleccionado.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Imagen copiada: " + destino);
 
                 Image imagen = new Image(destino.toUri().toString());
                 imgPreview.setImage(imagen);
@@ -114,48 +114,47 @@ public class EntregarObjetoController {
 
     @FXML
     public void confirmarEntrega() {
+        // Validar que se ingresen los datos del alumno
         String nombreIngresado = txtAlumno.getText().trim();
         String matriculaIngresada = txtMatricula.getText().trim();
 
         if (nombreIngresado.isEmpty() || matriculaIngresada.isEmpty()) {
-            mostrarAlerta("Por favor, complete todos los campos del alumno.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error");
+            alert.setContentText("Por favor, complete todos los campos del alumno.");
+            alert.showAndWait();
             return;
         }
 
-        if (!nombreIngresado.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]+")) {
-            mostrarAlerta("El nombre solo debe contener letras y espacios.");
+        // Validar que el nombre solo contenga letras (puede incluir espacios y acentos)
+        if (!nombreIngresado.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error");
+            alert.setContentText("El nombre solo debe contener letras y espacios, sin caracteres especiales ni números.");
+            alert.showAndWait();
             return;
         }
 
+        // Validar que la matrícula solo contenga letras y números
         if (!matriculaIngresada.matches("[a-zA-Z0-9]+")) {
-            mostrarAlerta("La matrícula solo debe contener letras y números.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error");
+            alert.setContentText("La matrícula solo debe contener letras y números, sin caracteres especiales.");
+            alert.showAndWait();
             return;
         }
 
+        // Marcar el objeto como entregado (cambiando el estado a 21)
         boolean ok = dao.cambiarEstadoObjeto(objeto.getId(), 21);
-        if (!ok) {
-            mostrarAlerta("No se pudo actualizar el estado del objeto.");
-            return;
-        }
 
-        EntregaObjeto entrega = new EntregaObjeto(
-                objeto.getId(),
-                fotoUrlField.getText().trim(),
-                new Date()
-        );
-
-        boolean guardado = entregaDao.registrarEntrega(entrega);
-        if (!guardado) {
-            mostrarAlerta("La entrega no pudo guardarse en la base de datos.");
-            return;
-        }
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(ok ? Alert.AlertType.INFORMATION : Alert.AlertType.ERROR);
         alert.setHeaderText(null);
-        alert.setContentText("Objeto entregado correctamente.");
+        alert.setContentText(ok ? "Objeto marcado como entregado al alumno: " + nombreIngresado + " (Matrícula: " + matriculaIngresada + ")" : "No se pudo registrar la entrega.");
         alert.showAndWait();
 
-        ((Stage) lblTitulo.getScene().getWindow()).close();
+        if (ok) {
+            ((Stage) lblTitulo.getScene().getWindow()).close();
+        }
     }
 
     @FXML

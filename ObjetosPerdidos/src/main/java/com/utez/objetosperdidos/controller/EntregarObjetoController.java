@@ -6,11 +6,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Date;
 
 import com.utez.objetosperdidos.model.ObjetoPerdido;
+import com.utez.objetosperdidos.model.EntregaObjeto;
 import com.utez.objetosperdidos.model.dao.ObjetoDAO;
+import com.utez.objetosperdidos.model.dao.EntregarObjetoDao;
 
-import com.utez.objetosperdidos.util.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -22,51 +24,27 @@ import javafx.stage.Stage;
 
 public class EntregarObjetoController {
 
-    @FXML
-    private Label lblTitulo;
-    @FXML
-    private Label lblMarca;
-    @FXML
-    private Label lblModelo;
-    @FXML
-    private Label lblNoSerie;
-    @FXML
-    private Label lblDescripcion;
-    @FXML
-    private TextField txtAlumno;
-    @FXML
-    private TextField txtMatricula;
-    @FXML
-    private Label lblAula;
-    @FXML
-    private Label lblEdificio;
-    @FXML
-    private Label lblNombreFoto;
-    @FXML
-    private TextField fotoUrlField;
+    @FXML private Label lblTitulo;
+    @FXML private Label lblMarca;
+    @FXML private Label lblModelo;
+    @FXML private Label lblNoSerie;
+    @FXML private Label lblDescripcion;
+    @FXML private TextField txtAlumno;
+    @FXML private TextField txtMatricula;
+    @FXML private Label lblAula;
+    @FXML private Label lblEdificio;
+    @FXML private Label lblNombreFoto;
+    @FXML private TextField fotoUrlField;
+    @FXML private ImageView imgPreview;
 
-    @FXML
-    private ImageView imgPreview;
     private String nombreArchivoImagen;
     private ObjetoPerdido objeto;
-
     private final ObjetoDAO dao = new ObjetoDAO();
 
-    public void initialize() {
-    }
+    public void initialize() { }
+
     public void setObjeto(ObjetoPerdido objeto) {
         this.objeto = objeto;
-
-        lblTitulo.setText(objeto.getNombreObjeto());
-        lblMarca.setText(objeto.getMarca());
-        lblModelo.setText(objeto.getModelo());
-        fotoUrlField.setText(objeto.getFotoUrl());
-        lblNoSerie.setText(objeto.getNo_serial());
-        lblDescripcion.setText(objeto.getDescripcion());
-        lblAula.setText(objeto.getAula());
-        lblEdificio.setText(objeto.getEdificio());
-
-
         if(objeto != null){
             lblTitulo.setText(objeto.getNombreObjeto());
             lblMarca.setText(objeto.getMarca());
@@ -74,8 +52,9 @@ public class EntregarObjetoController {
             fotoUrlField.setText(objeto.getFotoUrl());
             lblNoSerie.setText(objeto.getNo_serial());
             lblDescripcion.setText(objeto.getDescripcion());
+            lblAula.setText(objeto.getAula());
+            lblEdificio.setText(objeto.getEdificio());
         }
-
     }
 
     @FXML
@@ -84,11 +63,9 @@ public class EntregarObjetoController {
         fileChooser.setTitle("Seleccionar imagen");
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg"));
-
         File archivoSeleccionado = fileChooser.showOpenDialog(new Stage());
         if (archivoSeleccionado != null) {
             nombreArchivoImagen = archivoSeleccionado.getName();
-
             String nombre = nombreArchivoImagen.toLowerCase();
             if (!(nombre.endsWith(".png") || nombre.endsWith(".jpg") || nombre.endsWith(".jpeg"))) {
                 mostrarAlerta("El archivo seleccionado no es una imagen válida.");
@@ -96,13 +73,10 @@ public class EntregarObjetoController {
             }
 
             fotoUrlField.setText(nombreArchivoImagen);
-
             Path destino = Paths.get(System.getProperty("user.home"), "Downloads", nombreArchivoImagen);
             try {
                 Files.createDirectories(destino.getParent());
                 Files.copy(archivoSeleccionado.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Imagen copiada: " + destino);
-
                 Image imagen = new Image(destino.toUri().toString());
                 imgPreview.setImage(imagen);
             } catch (IOException e) {
@@ -114,46 +88,51 @@ public class EntregarObjetoController {
 
     @FXML
     public void confirmarEntrega() {
-        // Validar que se ingresen los datos del alumno
         String nombreIngresado = txtAlumno.getText().trim();
         String matriculaIngresada = txtMatricula.getText().trim();
 
         if (nombreIngresado.isEmpty() || matriculaIngresada.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error");
-            alert.setContentText("Por favor, complete todos los campos del alumno.");
-            alert.showAndWait();
+            mostrarAlerta("Por favor, complete todos los campos del alumno.");
             return;
         }
-
-        // Validar que el nombre solo contenga letras (puede incluir espacios y acentos)
-        if (!nombreIngresado.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error");
-            alert.setContentText("El nombre solo debe contener letras y espacios, sin caracteres especiales ni números.");
-            alert.showAndWait();
+        if (!nombreIngresado.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]+")) {
+            mostrarAlerta("El nombre solo debe contener letras y espacios.");
             return;
         }
-
-        // Validar que la matrícula solo contenga letras y números
         if (!matriculaIngresada.matches("[a-zA-Z0-9]+")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error");
-            alert.setContentText("La matrícula solo debe contener letras y números, sin caracteres especiales.");
-            alert.showAndWait();
+            mostrarAlerta("La matrícula solo debe contener letras y números.");
             return;
         }
 
-        // Marcar el objeto como entregado (cambiando el estado a 21)
-        boolean ok = dao.cambiarEstadoObjeto(objeto.getId(), 21);
+        // 1️⃣ Crear objeto de entrega
+        EntregaObjeto entrega = new EntregaObjeto(
+                objeto.getId(),
+                fotoUrlField.getText().trim(),
+                new Date(),
+                nombreIngresado,
+                matriculaIngresada
+        );
 
-        Alert alert = new Alert(ok ? Alert.AlertType.INFORMATION : Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setContentText(ok ? "Objeto marcado como entregado al alumno: " + nombreIngresado + " (Matrícula: " + matriculaIngresada + ")" : "No se pudo registrar la entrega.");
-        alert.showAndWait();
+        // 2️⃣ Registrar entrega en la tabla ENTREGAS_OBJETO
+        EntregarObjetoDao entregaDao = new EntregarObjetoDao();
+        boolean entregaOk = entregaDao.registrarEntrega(entrega);
 
-        if (ok) {
+        // 3️⃣ Marcar objeto como entregado (estado 21)
+        boolean estadoOk = dao.cambiarEstadoObjeto(objeto.getId(), 21);
+
+        Alert alert;
+        if (entregaOk && estadoOk) {
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("Entrega registrada correctamente al alumno: "
+                    + nombreIngresado + " (Matrícula: " + matriculaIngresada + ")");
+            alert.showAndWait();
             ((Stage) lblTitulo.getScene().getWindow()).close();
+        } else {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error");
+            alert.setContentText("No se pudo registrar la entrega correctamente.");
+            alert.showAndWait();
         }
     }
 

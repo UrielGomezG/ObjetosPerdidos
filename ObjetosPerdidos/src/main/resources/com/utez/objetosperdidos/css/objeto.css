@@ -1,0 +1,70 @@
+.card {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 16;
+    -fx-spacing: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 6, 0.3, 0, 2);
+    -fx-pref-width: 300;
+    -fx-pref-height: 260;
+}
+
+.card:hover {
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.4, 0, 3);
+}
+
+.card-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222222;
+    -fx-padding: 0 0 8 0;
+}
+
+.card-image {
+    -fx-fit-width: 80;
+    -fx-fit-height: 80;
+    -fx-background-radius: 8;
+}
+
+.card-info {
+    -fx-spacing: 4;
+}
+
+.card-info Label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+.card-description {
+    -fx-font-size: 13px;
+    -fx-text-fill: #555555;
+    -fx-wrap-text: true;
+}
+
+.estado-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #444444;
+    -fx-font-size: 13px;
+}
+
+.entregado-label {
+    -fx-background-color: #e0f2f1;
+    -fx-text-fill: #00796b;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 6 12;
+    -fx-background-radius: 6;
+}
+
+.activo-label {
+    -fx-background-color: #e3f2fd;
+    -fx-text-fill: #2e7d32;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 6 12;
+    -fx-background-radius: 6;
+}

@@ -15,7 +15,6 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.utez.objetosperdidos.controller.HistorialObjetoController">
 
-    <!-- Encabezado superior -->
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="60.0" styleClass="boxStyle" BorderPane.alignment="CENTER">
             <children>
@@ -34,8 +33,7 @@
             </children>
         </HBox>
     </top>
-
-    <!-- Menú lateral -->
+    
     <left>
         <VBox alignment="TOP_CENTER" prefWidth="60.0" styleClass="boxStyle" BorderPane.alignment="CENTER">
             <children>

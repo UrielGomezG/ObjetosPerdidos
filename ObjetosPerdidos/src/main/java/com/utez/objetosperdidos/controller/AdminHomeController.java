@@ -30,6 +30,8 @@ public class AdminHomeController {
         }
     }
 
+    private static Stage historialStage;
+
     public void mostrarVistaObjetos() {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -91,12 +93,22 @@ public class AdminHomeController {
     }
     @FXML
     private void abrirHistorialEntregados() throws IOException {
+        if (historialStage != null && historialStage.isShowing()) {
+            historialStage.toFront();
+            return;
+        }
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/utez/objetosperdidos/view/Historial.fxml"));
         Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setTitle("Historial de Objetos Entregados");
-        stage.setScene(new Scene(root));
-        stage.show();
+
+        historialStage = new Stage();
+        historialStage.setTitle("Historial de Objetos Entregados");
+        historialStage.setScene(new Scene(root));
+        historialStage.setMaximized(true);
+
+        historialStage.setOnHidden(e -> historialStage = null);
+
+        historialStage.show();
     }
 
 }

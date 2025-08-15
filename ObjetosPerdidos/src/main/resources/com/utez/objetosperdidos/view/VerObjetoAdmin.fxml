@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -8,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.VerObjetoAdmin">
+<BorderPane prefHeight="600.0" prefWidth="900.0" styleClass="background" stylesheets="@../css/VerObjetoAdmin.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.VerObjetoAdmin">
 
     <center>
         <HBox alignment="CENTER" spacing="30" style="-fx-padding: 20;">
@@ -16,88 +15,122 @@
             <VBox alignment="TOP_CENTER" spacing="15">
                 <HBox prefHeight="43.0" prefWidth="220.0">
                     <children>
-                        <Label text="Ver objeto">
-                            <font>
-                                <Font name="System Bold" size="24.0" />
-                            </font>
-                        </Label>
+                        <Label styleClass="titulo" text="Ver objeto" />
                     </children>
                 </HBox>
                 <Label text="Vista previa" />
+<<<<<<< HEAD
                 <ImageView fx:id="imgPreview" fitHeight="250.0" fitWidth="220.0" preserveRatio="true"
                            style="-fx-border-color: #aaa; -fx-border-width: 1; -fx-background-color: white;
                                 -fx-border-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0, 2);" />
+=======
+                <ImageView fx:id="imgPreview" fitHeight="316.0" fitWidth="220.0" preserveRatio="true" style="-fx-border-color: #aaa; -fx-border-width: 1; -fx-background-color: white;                                   -fx-border-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0, 2);" />
+>>>>>>> Cesar
             </VBox>
 
             <!-- Formulario -->
             <VBox prefWidth="600" spacing="15">
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Label text="Título:">
+                    <Label styleClass="textStyle" text="Título:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
+<<<<<<< HEAD
                     <Label fx:id="lblTitulo" prefWidth="400" style="-fx-font-weight: bold;"/>
+=======
+                    <Label fx:id="lblTitulo" prefHeight="35.0" prefWidth="400" styleClass="textField" />
+>>>>>>> Cesar
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Label text="Marca:">
+                    <Label styleClass="textStyle" text="Marca:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-                    <Label fx:id="lblMarca" prefWidth="400" />
+                    <Label fx:id="lblMarca" prefHeight="35.0" prefWidth="400" styleClass="textField" />
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Label text="Modelo:">
+                    <Label styleClass="textStyle" text="Modelo:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-                    <Label fx:id="lblModelo" prefWidth="400" />
+                    <Label fx:id="lblModelo" prefHeight="35.0" prefWidth="400" styleClass="textField" />
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Label text="No. Serial:">
+                    <Label styleClass="textStyle" text="No. Serial:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-                    <Label fx:id="lblNoSerie" prefWidth="400" />
+                    <Label fx:id="lblNoSerie" prefHeight="35.0" prefWidth="400" styleClass="textField" />
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
+<<<<<<< HEAD
                     <Label text="Aula:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
                     <Label fx:id="lblAula" prefWidth="400" />
+=======
+                    <children>
+                        <Label styleClass="textStyle" text="Aula:">
+                            <font>
+                                <Font name="System" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lblNoSerie1" prefHeight="35.0" prefWidth="400" styleClass="textField" />
+                    </children>
+>>>>>>> Cesar
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
+<<<<<<< HEAD
                     <Label text="Edificio:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
                     <Label fx:id="lblEdificio" prefWidth="400" />
+=======
+                    <children>
+                        <Label styleClass="textStyle" text="Edificio:">
+                            <font>
+                                <Font name="System" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lblNoSerie2" prefHeight="35.0" prefWidth="400" styleClass="textField" />
+                    </children>
+>>>>>>> Cesar
+                </HBox>
+
+                <HBox prefHeight="134.0" prefWidth="600.0" spacing="10">
+                    <Label styleClass="textStyle" text="Descripción:">
+                        <font><Font name="System" size="14.0" /></font>
+                    </Label>
+                    <Label fx:id="lblDescripcion" prefHeight="136.0" prefWidth="400" styleClass="textField" wrapText="true" />
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Label text="Descripción:">
+                    <Label styleClass="textStyle" text="Alumno:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-                    <Label fx:id="lblDescripcion" prefWidth="400" wrapText="true" />
-                </HBox>
-
-                <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Label text="Alumno:">
-                        <font><Font name="System" size="14.0" /></font>
-                    </Label>
+<<<<<<< HEAD
                     <Label fx:id="lblAlumno" prefWidth="400" />
+=======
+               <Label prefHeight="35.0" prefWidth="412.0" styleClass="textField" />
+>>>>>>> Cesar
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Label text="Matrícula:">
+                    <Label styleClass="textStyle" text="Matrícula:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
+<<<<<<< HEAD
                     <Label fx:id="lblMatricula" prefWidth="400" />
                 </HBox>
 
                 <HBox alignment="CENTER_RIGHT" spacing="15" style="-fx-padding: 20 0 0 0;">
                     <Button onAction="#cancelar" text="Cancelar" style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
                     <Button onAction="#confirmarEntrega" text="Guardar" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+=======
+               <Label prefHeight="35.0" prefWidth="415.0" styleClass="textField" />
+>>>>>>> Cesar
                 </HBox>
             </VBox>
         </HBox>

@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane styleClass="background" stylesheets="@../css/Ver_Objeto.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.utez.objetosperdidos.controller.VerObjeto">
     <center>
@@ -15,102 +14,71 @@
                 <Region prefHeight="550.0" prefWidth="45.0" />
                 <VBox prefHeight="550.0" prefWidth="797.0">
                     <children>
-                        <Label text="Ver Objeto">
-                            <font>
-                                <Font name="System Bold" size="24.0" />
-                            </font>
-                        </Label>
+                        <Label styleClass="titulo" text="Ver Objeto" />
                         <HBox alignment="CENTER_LEFT" prefHeight="511.0" prefWidth="797.0">
                             <children>
-                                <ImageView fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Vista previa" />
+                                      <ImageView fitHeight="321.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </VBox>
                                 <VBox prefHeight="511.0" prefWidth="578.0">
                                     <children>
                                         <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
                                             <children>
-                                                <Label text="Titulo:">
-                                                    <font>
-                                                        <Font name="System Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Region prefHeight="47.0" prefWidth="65.0" />
-                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="labelStyle" />
+                                                <Label styleClass="textStyle" text="Titulo:" />
+                                                <Region prefHeight="39.0" prefWidth="61.0" />
+                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="578.0">
                                             <children>
-                                                <Label text="Marca:">
-                                                    <font>
-                                                        <Font name="System Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Region prefHeight="62.0" prefWidth="63.0" />
-                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="labelStyle" />
+                                                <Label styleClass="textStyle" text="Marca:" />
+                                                <Region prefHeight="53.0" prefWidth="60.0" />
+                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="578.0">
                                             <children>
-                                                <Label text="Modelo:">
-                                                    <font>
-                                                        <Font name="System Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Region prefHeight="45.0" prefWidth="51.0" />
-                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="labelStyle" />
+                                                <Label styleClass="textStyle" text="Modelo:" />
+                                                <Region prefHeight="37.0" prefWidth="48.0" />
+                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="578.0">
                                             <children>
-                                                <Label text="No.Serial:">
-                                                    <font>
-                                                        <Font name="System Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Region prefHeight="57.0" prefWidth="39.0" />
-                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="labelStyle" />
+                                                <Label styleClass="textStyle" text="No.Serial:" />
+                                                <Region prefHeight="49.0" prefWidth="38.0" />
+                                                <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                                             </children>
                                         </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
                                  <children>
-                                    <Label text="Aula:">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Region prefHeight="39.0" prefWidth="78.0" />
-                                    <Label prefHeight="35.0" prefWidth="410.0" styleClass="labelStyle" />
+                                    <Label styleClass="textStyle" text="Aula:" />
+                                    <Region prefHeight="39.0" prefWidth="77.0" />
+                                    <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
                                  <children>
-                                    <Label text="Edificio:">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Region prefHeight="39.0" prefWidth="53.0" />
-                                    <Label prefHeight="35.0" prefWidth="410.0" styleClass="labelStyle" />
+                                    <Label styleClass="textStyle" text="Edificio:" />
+                                    <Region prefHeight="39.0" prefWidth="52.0" />
+                                    <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="578.0">
                                  <children>
-                                    <Label text="Categoría:">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
+                                    <Label styleClass="textStyle" text="Categoría:" />
                                     <Region prefHeight="39.0" prefWidth="33.0" />
-                                    <Label prefHeight="35.0" prefWidth="410.0" styleClass="labelStyle" />
+                                    <Label prefHeight="35.0" prefWidth="410.0" styleClass="textField" />
                                  </children>
                               </HBox>
                                         <HBox prefHeight="228.0" prefWidth="578.0">
                                             <children>
-                                                <Label text="Descripción:">
-                                                    <font>
-                                                        <Font name="System Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
+                                                <Label styleClass="textStyle" text="Descripción:" />
                                                 <Region prefHeight="228.0" prefWidth="15.0" />
-                                                <Label alignment="TOP_LEFT" prefHeight="210.0" prefWidth="410.0" styleClass="labelStyle" />
+                                                <Label alignment="TOP_LEFT" prefHeight="210.0" prefWidth="410.0" styleClass="textArea" />
                                             </children>
                                         </HBox>
                                     </children>

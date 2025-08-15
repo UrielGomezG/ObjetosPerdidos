@@ -24,7 +24,9 @@
                     </children>
                 </HBox>
                 <Label text="Vista previa" />
-                <ImageView fx:id="imgPreview" fitHeight="250.0" fitWidth="220.0" preserveRatio="true" style="-fx-border-color: #aaa; -fx-border-width: 1; -fx-background-color: white;                                   -fx-border-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0, 2);" />
+                <ImageView fx:id="imgPreview" fitHeight="250.0" fitWidth="220.0" preserveRatio="true"
+                           style="-fx-border-color: #aaa; -fx-border-width: 1; -fx-background-color: white;
+                                -fx-border-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0, 2);" />
             </VBox>
 
             <!-- Formulario -->
@@ -34,7 +36,7 @@
                     <Label text="Título:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-                    <Label fx:id="lblTitulo" prefWidth="400" />
+                    <Label fx:id="lblTitulo" prefWidth="400" style="-fx-font-weight: bold;"/>
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
@@ -57,25 +59,19 @@
                     </Label>
                     <Label fx:id="lblNoSerie" prefWidth="400" />
                 </HBox>
+
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <children>
-                        <Label text="Aula:">
-                            <font>
-                                <Font name="System" size="14.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="lblNoSerie1" prefWidth="400" />
-                    </children>
+                    <Label text="Aula:">
+                        <font><Font name="System" size="14.0" /></font>
+                    </Label>
+                    <Label fx:id="lblAula" prefWidth="400" />
                 </HBox>
+
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <children>
-                        <Label text="Edificio:">
-                            <font>
-                                <Font name="System" size="14.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="lblNoSerie2" prefWidth="400" />
-                    </children>
+                    <Label text="Edificio:">
+                        <font><Font name="System" size="14.0" /></font>
+                    </Label>
+                    <Label fx:id="lblEdificio" prefWidth="400" />
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
@@ -89,19 +85,19 @@
                     <Label text="Alumno:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-               <Label text="Label" />
+                    <Label fx:id="lblAlumno" prefWidth="400" />
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" spacing="10">
                     <Label text="Matrícula:">
                         <font><Font name="System" size="14.0" /></font>
                     </Label>
-               <Label text="Label" />
+                    <Label fx:id="lblMatricula" prefWidth="400" />
                 </HBox>
 
-                <HBox alignment="CENTER_RIGHT" spacing="15">
-                    <Button onAction="#cancelar" text="Cancelar" />
-                    <Button onAction="#confirmarEntrega" text="Guardar" />
+                <HBox alignment="CENTER_RIGHT" spacing="15" style="-fx-padding: 20 0 0 0;">
+                    <Button onAction="#cancelar" text="Cancelar" style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+                    <Button onAction="#confirmarEntrega" text="Guardar" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
                 </HBox>
             </VBox>
         </HBox>

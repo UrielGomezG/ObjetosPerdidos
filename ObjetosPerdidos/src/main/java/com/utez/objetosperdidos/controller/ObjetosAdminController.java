@@ -177,10 +177,9 @@ public class ObjetosAdminController {
         botones.getStyleClass().add("card-button-container");
         botones.getChildren().addAll(btnEntregar, btnEditar, btnEnviarBodega, btnEliminar);
 
-        //CLICABLE
         tarjeta.setOnMouseClicked(event -> {
             if (!(event.getTarget() instanceof Button)) {
-                abrirEdicion(obj);
+                abrirEntrega(obj);
             }
         });
 
@@ -302,4 +301,6 @@ public class ObjetosAdminController {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+
+
 }

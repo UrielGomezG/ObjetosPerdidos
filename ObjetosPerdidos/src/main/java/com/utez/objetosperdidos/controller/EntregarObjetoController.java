@@ -36,10 +36,12 @@ public class EntregarObjetoController {
     private TextField txtAlumno;
     @FXML
     private TextField txtMatricula;
-
+    @FXML
+    private Label lblAula;
+    @FXML
+    private Label lblEdificio;
     @FXML
     private Label lblNombreFoto;
-
     @FXML
     private TextField fotoUrlField;
 
@@ -60,6 +62,8 @@ public class EntregarObjetoController {
         fotoUrlField.setText(objeto.getFotoUrl());
         lblNoSerie.setText(objeto.getNo_serial());
         lblDescripcion.setText(objeto.getDescripcion());
+        lblAula.setText(objeto.getAula());
+        lblEdificio.setText(objeto.getEdificio());
     }
 
     @FXML

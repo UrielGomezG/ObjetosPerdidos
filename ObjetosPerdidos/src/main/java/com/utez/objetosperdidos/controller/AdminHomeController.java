@@ -44,7 +44,7 @@ public class AdminHomeController {
     public void onPerfil(ActionEvent event) throws Exception {
         try {
             FXMLLoader loader = new FXMLLoader(
-            getClass().getResource("/com/utez/objetosperdidos/view/Editar_Perfil.fxml"));
+            getClass().getResource("/com/utez/objetosperdidos/view/Editar_Perfil_Admin.fxml"));
             Parent root = loader.load();
             Stage modal = new Stage();
             modal.setTitle("Editar Perfil");

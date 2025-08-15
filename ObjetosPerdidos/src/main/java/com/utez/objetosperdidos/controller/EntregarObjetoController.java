@@ -56,6 +56,7 @@ public class EntregarObjetoController {
     }
     public void setObjeto(ObjetoPerdido objeto) {
         this.objeto = objeto;
+<<<<<<< HEAD
         lblTitulo.setText(objeto.getNombreObjeto());
         lblMarca.setText(objeto.getMarca());
         lblModelo.setText(objeto.getModelo());
@@ -64,6 +65,18 @@ public class EntregarObjetoController {
         lblDescripcion.setText(objeto.getDescripcion());
         lblAula.setText(objeto.getAula());
         lblEdificio.setText(objeto.getEdificio());
+=======
+
+        if(objeto != null){
+            lblTitulo.setText(objeto.getNombreObjeto());
+            lblMarca.setText(objeto.getMarca());
+            lblModelo.setText(objeto.getModelo());
+            fotoUrlField.setText(objeto.getFotoUrl());
+            lblNoSerie.setText(objeto.getNo_serial());
+            lblDescripcion.setText(objeto.getDescripcion());
+        }
+        
+>>>>>>> 1022ea5afa61c0677c5269dcdcd1f1648560d689
     }
 
     @FXML

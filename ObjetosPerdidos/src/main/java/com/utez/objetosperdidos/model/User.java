@@ -34,6 +34,8 @@ public class User {
         this.rol = rol;
     }
 
+    
+
     public int getId() {
         return id;
     }
